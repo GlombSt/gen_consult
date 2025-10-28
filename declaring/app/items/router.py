@@ -68,7 +68,12 @@ async def search_items(
     Search items with query parameters.
     Example: /items/search/query?name=laptop&min_price=100&max_price=1000&available_only=true
     """
-    items = await service.search_items(name=name, min_price=min_price, max_price=max_price, available_only=available_only)
+    items = await service.search_items(
+        name=name,
+        min_price=min_price,
+        max_price=max_price,
+        available_only=available_only
+    )
     return [_to_response(item) for item in items]
 
 

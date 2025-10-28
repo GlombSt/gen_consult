@@ -90,7 +90,10 @@ async def create_item(request: ItemCreateRequest) -> Item:
         )
     )
 
-    logger.info("Item created successfully", extra={"item_id": created_item.id, "item_name": created_item.name})
+    logger.info(
+        "Item created successfully",
+        extra={"item_id": created_item.id, "item_name": created_item.name}
+    )
 
     return created_item
 
@@ -200,7 +203,12 @@ async def search_items(
         },
     )
 
-    results = await item_repository.search(name=name, min_price=min_price, max_price=max_price, available_only=available_only)
+    results = await item_repository.search(
+        name=name,
+        min_price=min_price,
+        max_price=max_price,
+        available_only=available_only
+    )
 
     logger.info("Search completed", extra={"results_count": len(results)})
     return results
