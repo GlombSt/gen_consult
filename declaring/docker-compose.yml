@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    environment:
+      # Enable unbuffered Python output for real-time logs
+      - PYTHONUNBUFFERED=1
+      # Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+      - LOG_LEVEL=INFO
+      # Environment name
+      - ENVIRONMENT=development
+      # CORS origins (comma-separated)
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+    # Auto-restart on failure
+    restart: unless-stopped
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    # Show logs with timestamps
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Add a database service later
+  # db:
+  #   image: postgres:15
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: fastapi_db
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   postgres_data:
+

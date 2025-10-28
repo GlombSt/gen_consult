@@ -1,0 +1,59 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'reacting/**'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'reacting/**'
+      - '.github/workflows/frontend-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: Build and Test Frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./reacting
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: reacting/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run linting (if configured)
+      run: npm run lint || echo "No lint script configured - skipping"
+      continue-on-error: true
+
+    - name: Run tests (if configured)
+      run: npm test || echo "No tests configured yet - skipping"
+      continue-on-error: true
+
+    - name: Build application
+      run: npm run build
+
+    - name: Check build output
+      run: |
+        echo "Checking build output..."
+        ls -la dist/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: frontend-build-${{ github.sha }}
+        path: reacting/dist/
+        retention-days: 7

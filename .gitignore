@@ -1,0 +1,158 @@
+# Gen Consult - Multi-Project Repository
+# This gitignore covers both backend (Python) and frontend (Node.js)
+
+# ===================================
+# Backend (declaring/) - Python
+# ===================================
+
+# Virtual environments
+declaring/venv/
+declaring/env/
+declaring/.venv/
+declaring/ENV/
+
+# Python
+declaring/__pycache__/
+declaring/**/__pycache__/
+declaring/*.py[cod]
+declaring/*$py.class
+declaring/*.so
+declaring/.Python
+
+# Testing
+declaring/.pytest_cache/
+declaring/.coverage
+declaring/htmlcov/
+declaring/.tox/
+declaring/coverage.xml
+declaring/*.cover
+
+# Distribution / packaging
+declaring/.Python
+declaring/build/
+declaring/develop-eggs/
+declaring/dist/
+declaring/downloads/
+declaring/eggs/
+declaring/.eggs/
+declaring/lib/
+declaring/lib64/
+declaring/parts/
+declaring/sdist/
+declaring/var/
+declaring/wheels/
+declaring/*.egg-info/
+declaring/.installed.cfg
+declaring/*.egg
+
+# ===================================
+# Frontend (reacting/) - Node.js
+# ===================================
+
+# Dependencies
+reacting/node_modules/
+reacting/.pnp
+reacting/.pnp.js
+
+# Testing
+reacting/coverage/
+
+# Production build
+reacting/dist/
+reacting/build/
+
+# Environment files (local only)
+reacting/.env.local
+reacting/.env.development.local
+reacting/.env.test.local
+reacting/.env.production.local
+
+# Logs
+reacting/npm-debug.log*
+reacting/yarn-debug.log*
+reacting/yarn-error.log*
+reacting/pnpm-debug.log*
+reacting/lerna-debug.log*
+
+# Vite
+reacting/.vite/
+
+# ===================================
+# IDEs and Editors
+# ===================================
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ===================================
+# Operating System
+# ===================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# ===================================
+# Logs
+# ===================================
+*.log
+logs/
+*.log.*
+
+# ===================================
+# Environment Variables
+# ===================================
+.env
+.env.local
+.env.*.local
+
+# But keep example files
+!.env.example
+!.env.template
+
+# ===================================
+# Temporary Files
+# ===================================
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ===================================
+# Database
+# ===================================
+*.db
+*.sqlite
+*.sqlite3

@@ -1,0 +1,314 @@
+# Architecture Standards
+
+**Version:** 1.0  
+**Last Updated:** October 28, 2025  
+**Status:** MANDATORY - All code changes must follow these standards  
+**Audience:** Experts familiar with domain-driven design and layered architecture
+
+For detailed examples and explanations, see [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md)
+
+---
+
+## Core Principles
+
+1. **Domain-First Organization** - Organize by business domain/feature, not technical layer
+2. **High Cohesion, Low Coupling** - Related code together, domains independent
+3. **Explicit Boundaries** - Service layer as public API between domains
+4. **Event-Driven Analytics** - All significant business actions publish events
+5. **Separation of Concerns** - Separate models for DB, domain, and API layers
+
+---
+
+## Required Structure
+
+```
+app/
+├── {domain}/                     # One folder per business domain
+│   ├── __init__.py              # Exports public API only
+│   ├── models.py                # Domain/business models
+│   ├── schemas.py               # API DTOs (request/response)
+│   ├── db_models.py             # Database models (ORM)
+│   ├── service.py               # Business logic & public API
+│   ├── repository.py            # Data access layer
+│   ├── router.py                # HTTP endpoints
+│   └── events.py                # Domain event definitions
+│
+├── shared/                       # Cross-cutting concerns only
+│   ├── __init__.py
+│   ├── value_objects.py         # Shared value objects (Money, Address)
+│   ├── events.py                # Event bus and base types
+│   ├── middleware.py
+│   ├── exception_handlers.py
+│   └── logging_config.py
+│
+└── main.py                       # Application entry point
+```
+
+---
+
+## Layer Responsibilities
+
+### Router Layer (`router.py`)
+- Define HTTP endpoints
+- Validate requests using DTOs
+- Call service layer
+- Serialize responses using DTOs
+- **Must NOT:** contain business logic, access repository/DB, publish events
+
+### Service Layer (`service.py`)
+- Implement business logic
+- Orchestrate operations
+- Validate business rules
+- **Publish domain events (MANDATORY)**
+- Serve as public API for other domains
+- **Must NOT:** know about HTTP, use DTOs, construct SQL
+
+### Repository Layer (`repository.py`)
+- Data access operations (CRUD)
+- Convert DB models ↔ Domain models
+- Build queries
+- Transaction management
+- **Must NOT:** contain business logic, publish events, know about HTTP
+
+---
+
+## Model Types
+
+| Type | File | Purpose | Used By | Exposed Outside Domain |
+|------|------|---------|---------|----------------------|
+| **DB Models** | `db_models.py` | Database schema with ORM | Repository only | ❌ Never |
+| **Domain Models** | `models.py` | Business entities with logic | Service layer | ❌ Never |
+| **DTOs/Schemas** | `schemas.py` | API request/response | Router layer | ✅ Yes (API contract) |
+| **Value Objects** | `shared/value_objects.py` | Common concepts (Money, Address) | Multiple domains | ✅ Yes |
+
+**Key Rules:**
+- DB models include ALL database fields (audit, soft delete, internal)
+- Domain models contain business logic and validation
+- DTOs define API contract, exclude sensitive data
+- Value objects are immutable, defined by values not identity
+
+---
+
+## Inter-Domain Communication
+
+### Communication Rules
+
+✅ **Allowed:**
+- `domain_a/router.py` → `domain_a/service.py` → `domain_b/service.py`
+- Any domain → `shared/`
+
+❌ **Forbidden:**
+- `domain_a/service.py` → `domain_b/repository.py`
+- `domain_a/router.py` → `domain_b/router.py`
+- `domain_a/models.py` → `domain_b/models.py`
+- `shared/` → any domain
+
+### Public API Export
+
+Each domain **MUST** export its public interface in `__init__.py`:
+
+```python
+# app/items/__init__.py
+from .service import get_item, create_item, update_item, delete_item
+from .schemas import ItemResponse, ItemCreateRequest
+
+__all__ = ["get_item", "create_item", "update_item", "delete_item",
+           "ItemResponse", "ItemCreateRequest"]
+```
+
+### Cross-Domain Usage
+
+```python
+# app/orders/service.py
+from app.users import service as user_service
+from app.items import service as item_service
+
+async def create_order(user_id: int, item_id: int):
+    user = await user_service.get_user(user_id)  # ✅ Through service API
+    item = await item_service.get_item(item_id)  # ✅ Through service API
+    # ... order logic
+```
+
+---
+
+## Event-Driven Analytics
+
+### Requirements
+
+**MANDATORY:** Every significant business action **MUST** publish a domain event.
+
+✅ **Requires events:**
+- Create operations (user created, item created, order placed)
+- Update operations (item updated, profile changed)
+- Delete operations (item deleted, user deactivated)
+- State changes (order shipped, payment processed)
+- Business actions (login, search, item viewed)
+
+❌ **No events:**
+- Simple read operations (get, list)
+- Health checks
+- Internal operations
+
+### Event Structure
+
+```python
+# app/shared/events.py
+from dataclasses import dataclass
+from datetime import datetime
+from abc import ABC
+
+@dataclass
+class DomainEvent(ABC):
+    timestamp: datetime
+    event_type: str
+    
+    def to_dict(self) -> dict:
+        return {'timestamp': self.timestamp.isoformat(), 
+                'event_type': self.event_type, **self.__dict__}
+
+class EventBus:
+    def subscribe(self, event_type: str, handler: Callable): ...
+    async def publish(self, event: DomainEvent): ...
+
+event_bus = EventBus()
+```
+
+### Domain Event Definition
+
+```python
+# app/items/events.py
+from dataclasses import dataclass
+from app.shared.events import DomainEvent
+
+@dataclass
+class ItemCreatedEvent(DomainEvent):
+    item_id: int
+    name: str
+    price: Decimal
+    created_at: datetime
+    
+    def __init__(self, item_id: int, name: str, price: Decimal, created_at: datetime):
+        self.event_type = "item.created"
+        self.timestamp = datetime.utcnow()
+        self.item_id = item_id
+        self.name = name
+        self.price = price
+        self.created_at = created_at
+```
+
+### Event Publishing
+
+```python
+# app/items/service.py
+from app.shared.events import event_bus
+from .events import ItemCreatedEvent
+
+async def create_item(request: ItemCreateRequest) -> Item:
+    item = await item_repository.create(item)
+    
+    # ✅ MANDATORY
+    await event_bus.publish(ItemCreatedEvent(
+        item_id=item.id, name=item.name, 
+        price=item.price, created_at=datetime.utcnow()
+    ))
+    
+    return item
+```
+
+---
+
+## Code Change Checklist
+
+### New Feature
+
+- [ ] Created domain folder with all required files
+- [ ] Separated models: `db_models.py`, `models.py`, `schemas.py`
+- [ ] Created service layer with public API
+- [ ] Updated `__init__.py` with public exports
+- [ ] Created domain events in `events.py`
+- [ ] Service publishes events for all business actions
+- [ ] Router uses DTOs from `schemas.py`
+- [ ] Service uses domain models from `models.py`
+- [ ] Repository converts DB ↔ domain models
+- [ ] No cross-domain imports of internals
+- [ ] Updated `main.py` to include router
+
+### Modifying Existing Feature
+
+- [ ] Maintained layer separation (router → service → repository)
+- [ ] Used correct model type in each layer
+- [ ] Published domain event if business action changed
+- [ ] No business logic in router
+- [ ] No HTTP concerns in service
+- [ ] No direct DB access from router
+- [ ] Cross-domain calls through service layer only
+
+### Code Review
+
+- [ ] Code in correct domain folder
+- [ ] Layers properly separated
+- [ ] Correct model types per layer
+- [ ] Events published for business actions
+- [ ] No sensitive data in DTOs
+- [ ] No cross-domain internal imports
+- [ ] Service functions exported in `__init__.py`
+- [ ] Structured logging with context
+
+---
+
+## Quick Reference
+
+### Data Flow
+
+```
+Client 
+  ↓ JSON
+Router (schemas.py - DTOs)
+  ↓ DTOs
+Service (models.py - Domain Models, events.py - Events)
+  ↓ Domain Models
+Repository (db_models.py - DB Models)
+  ↓ SQL/ORM
+Database
+```
+
+### Import Rules
+
+```python
+# ✅ ALLOWED
+from app.shared.events import event_bus                    # Any domain → shared
+from app.users import service as user_service              # Domain → other domain's service
+from .models import User                                    # Within same domain
+from .repository import user_repository                     # Service → repository
+
+# ❌ FORBIDDEN
+from app.users.repository import user_repository           # Cross-domain repository
+from app.users.models import User                          # Cross-domain domain model
+from app.items import router                               # Cross-domain router
+```
+
+### Dependency Direction
+
+```
+Allowed:  Domain → shared
+Allowed:  Domain A Service → Domain B Service
+Forbidden: shared → Domain
+Forbidden: Domain A Internal → Domain B Internal
+```
+
+---
+
+## For Detailed Guidance
+
+See [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md) for:
+- Complete code examples
+- Step-by-step migration guide
+- Detailed explanations
+- Common patterns
+- Full domain implementation example
+
+---
+
+**Document Status:** ACTIVE  
+**Enforcement:** MANDATORY for all code changes
+

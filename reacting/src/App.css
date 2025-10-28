@@ -1,0 +1,24 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.app h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.app p {
+  font-size: 1.25rem;
+  text-align: center;
+  opacity: 0.9;
+}
+
