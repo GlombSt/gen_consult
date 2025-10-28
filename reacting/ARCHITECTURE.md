@@ -1,34 +1,52 @@
-# Architecture Guidelines
+# Frontend Architecture Guidelines
 
-## Overview
+**Related Documentation:**
+- [Backend Architecture Standards](../declaring/ARCHITECTURE_STANDARDS.md) - The hexagon's mandatory rules
+- [Backend Architecture Guide](../declaring/ARCHITECTURE_GUIDE.md) - Detailed backend patterns
+- [Root CLAUDE.md](../CLAUDE.md) - Full-stack architecture overview
 
-This React application is a **primary adapter** to the backend's hexagonal architecture. The backend contains the true domain model, business rules, and core logic. Our UI is thin and focused on presentation.
+---
 
-## Core Understanding: The UI's Role
+## Hexagonal Architecture: Frontend's Role
+
+**This React application IS a primary adapter** - NOT part of the hexagon.
+
+The backend IS the hexagon (business core). This frontend drives the hexagon through its ports (HTTP API).
+
+## Core Understanding: Frontend as Primary Adapter
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    BACKEND SYSTEM                       │
-│              (True Hexagonal Architecture)              │
+│               BACKEND = THE HEXAGON                     │
+│               (Business Core)                           │
 │                                                         │
 │  ┌──────────────────────────────────────────────────┐ │
-│  │            DOMAIN CORE                           │ │
+│  │            DOMAIN MODELS & BUSINESS LOGIC        │ │
 │  │   - Entities (Item, User, Order)                 │ │
 │  │   - Business Rules & Validation                  │ │
 │  │   - Domain Events                                │ │
 │  └──────────────────────────────────────────────────┘ │
-│                                                         │
+│                      ▲                                  │
+│                      │                                  │
 │  ┌──────────────────────────────────────────────────┐ │
-│  │      API LAYER (Primary Adapter/Port)            │ │
-│  │   - REST/GraphQL Endpoints                       │ │
-│  │   - DTOs for data transfer                       │ │
+│  │      SERVICE LAYER = PORTS                       │ │
+│  │   - Public API of each domain                    │ │
+│  │   - Business operations                          │ │
 │  └──────────────────────────────────────────────────┘ │
-└────────────────────┬────────────────────────────────────┘
-                     │ HTTP/WebSocket
-                     ▼
+│                      │                                  │
+└──────────────────────┼──────────────────────────────────┘
+                       │
+                       ▼ HTTP API (Port)
+              ┌────────────────┐
+              │  HTTP Router   │
+              │ (Adapter in    │
+              │   Backend)     │
+              └────────────────┘
+                       │
+                       ▼ HTTP Request/Response
 ┌─────────────────────────────────────────────────────────┐
-│                 REACT UI APPLICATION                    │
-│                  (This Codebase)                        │
+│      THIS FRONTEND = PRIMARY ADAPTER                    │
+│      (Drives the hexagon via HTTP)                      │
 │                                                         │
 │  ┌──────────────────────────────────────────────────┐ │
 │  │      PRESENTATION LAYER                          │ │
@@ -41,22 +59,22 @@ This React application is a **primary adapter** to the backend's hexagonal archi
 │  ┌──────────────────────────────────────────────────┐ │
 │  │      APPLICATION LAYER                           │ │
 │  │   - Feature Hooks (orchestration)                │ │
-│  │   - View Models (shape data for UI)             │ │
+│  │   - View Models (shape DTOs for display)        │ │
 │  │   - Client-side state management                 │ │
 │  └──────────────────────────────────────────────────┘ │
 │                     │                                   │
 │                     ▼                                   │
 │  ┌──────────────────────────────────────────────────┐ │
 │  │      INFRASTRUCTURE LAYER                        │ │
-│  │   - API Client (abstraction over HTTP)           │ │
+│  │   - API Client (HTTP abstraction)                │ │
 │  │   - LocalStorage/SessionStorage                  │ │
-│  │   - WebSocket clients                            │ │
+│  │   - WebSocket clients (future)                   │ │
 │  │   - Browser APIs                                 │ │
 │  └──────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Key Insight**: We're not building a full hexagonal architecture on the client. We're building a well-organized adapter (the UI) that talks to the backend's hexagonal architecture. The internal layering helps keep the UI maintainable, but the business logic stays in the backend.
+**Key Insight**: We're NOT building a hexagon in the frontend. We're building a well-organized **primary adapter** that drives the backend hexagon through its HTTP port. The internal layering keeps the UI maintainable, but ALL business logic stays in the backend hexagon.
 
 ## Responsibility Boundaries
 

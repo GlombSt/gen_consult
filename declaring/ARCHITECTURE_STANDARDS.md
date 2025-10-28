@@ -1,21 +1,67 @@
 # Architecture Standards
 
-**Version:** 1.0  
-**Last Updated:** October 28, 2025  
-**Status:** MANDATORY - All code changes must follow these standards  
-**Audience:** Experts familiar with domain-driven design and layered architecture
+**Version:** 1.0
+**Last Updated:** October 28, 2025
+**Status:** MANDATORY - All code changes must follow these standards
+**Audience:** Experts familiar with domain-driven design and hexagonal architecture
 
 For detailed examples and explanations, see [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md)
+
+**Related Documentation:**
+- [Frontend Architecture](../../reacting/ARCHITECTURE.md) - How the React frontend acts as a primary adapter
+- [Root CLAUDE.md](../../CLAUDE.md) - Full-stack architecture overview
+
+---
+
+## Hexagonal Architecture Overview
+
+**This backend IS the hexagon (the business core).**
+
+```
+┌─────────────────────────────────────────────┐
+│    THIS BACKEND = THE HEXAGON               │
+│    (Business Core)                          │
+│                                             │
+│  ┌──────────────────────────────────────┐  │
+│  │  Domain Models & Business Logic      │  │
+│  │  Service Layer = PORTS               │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+└─────────────────────────────────────────────┘
+         │              │              │
+         ▼              ▼              ▼
+   ┌──────────┐  ┌──────────┐  ┌──────────┐
+   │  HTTP    │  │ Database │  │  Events  │
+   │ (Router) │  │  (Repo)  │  │  (Bus)   │
+   │ PRIMARY  │  │SECONDARY │  │SECONDARY │
+   │ ADAPTER  │  │ ADAPTER  │  │ ADAPTER  │
+   └──────────┘  └──────────┘  └──────────┘
+         │
+         ▼
+   ┌──────────────┐
+   │   React      │
+   │   Frontend   │
+   │ (External    │
+   │  Adapter)    │
+   └──────────────┘
+```
+
+**Key Terminology:**
+- **Hexagon (Core):** Domain models and business logic (this backend)
+- **Ports:** Service layer functions - the public API of each domain
+- **Primary Adapters:** Drive the application (HTTP routers, CLI, GraphQL)
+- **Secondary Adapters:** Driven by the application (database, event bus, external APIs)
 
 ---
 
 ## Core Principles
 
-1. **Domain-First Organization** - Organize by business domain/feature, not technical layer
-2. **High Cohesion, Low Coupling** - Related code together, domains independent
-3. **Explicit Boundaries** - Service layer as public API between domains
-4. **Event-Driven Analytics** - All significant business actions publish events
-5. **Separation of Concerns** - Separate models for DB, domain, and API layers
+1. **Hexagonal Architecture** - Business logic in the core, infrastructure at the edges
+2. **Domain-First Organization** - Organize by business domain/feature, not technical layer
+3. **Ports as Boundaries** - Service layer functions are the ports between domains
+4. **High Cohesion, Low Coupling** - Related code together, domains independent
+5. **Event-Driven Analytics** - All significant business actions publish events
+6. **Separation of Concerns** - Separate models for DB, domain, and API layers
 
 ---
 
@@ -46,24 +92,30 @@ app/
 
 ---
 
-## Layer Responsibilities
+## Layer Responsibilities (Hexagonal View)
 
-### Router Layer (`router.py`)
-- Define HTTP endpoints
-- Validate requests using DTOs
-- Call service layer
-- Serialize responses using DTOs
-- **Must NOT:** contain business logic, access repository/DB, publish events
+### Service Layer (`service.py`) - THE PORTS
+**This is the boundary of the hexagon - the public API.**
 
-### Service Layer (`service.py`)
 - Implement business logic
 - Orchestrate operations
 - Validate business rules
 - **Publish domain events (MANDATORY)**
-- Serve as public API for other domains
-- **Must NOT:** know about HTTP, use DTOs, construct SQL
+- Serve as public API (port) for other domains
+- **Must NOT:** know about HTTP, use DTOs directly, construct SQL
 
-### Repository Layer (`repository.py`)
+### Router Layer (`router.py`) - PRIMARY ADAPTER
+**HTTP adapter that drives the hexagon through its ports.**
+
+- Define HTTP endpoints
+- Validate requests using DTOs (schemas.py)
+- Call service layer ports
+- Serialize responses using DTOs
+- **Must NOT:** contain business logic, access repository/DB, publish events
+
+### Repository Layer (`repository.py`) - SECONDARY ADAPTER
+**Database adapter driven by the hexagon.**
+
 - Data access operations (CRUD)
 - Convert DB models ↔ Domain models
 - Build queries

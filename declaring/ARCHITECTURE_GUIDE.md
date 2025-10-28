@@ -1,11 +1,70 @@
 # Architecture Guide
 
-**Companion to:** [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md)  
-**Version:** 1.0  
-**Last Updated:** October 28, 2025  
-**Audience:** Developers implementing domain-driven architecture
+**Companion to:** [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md)
+**Version:** 1.0
+**Last Updated:** October 28, 2025
+**Audience:** Developers implementing hexagonal domain-driven architecture
 
-This guide provides detailed explanations, complete code examples, and step-by-step guidance for implementing the architecture defined in `ARCHITECTURE_STANDARDS.md`.
+**Related Documentation:**
+- [Architecture Standards](./ARCHITECTURE_STANDARDS.md) - Mandatory rules (read first!)
+- [Frontend Architecture](../../reacting/ARCHITECTURE.md) - How React acts as a primary adapter
+- [Root CLAUDE.md](../../CLAUDE.md) - Full-stack overview
+
+---
+
+## Understanding Hexagonal Architecture
+
+**This backend IS the hexagon** - the business core of the application.
+
+Everything else (HTTP, database, event bus, React frontend) are **adapters** that connect to the hexagon through **ports**.
+
+```
+┌─────────────────────────────────────────────────────┐
+│              THIS BACKEND = THE HEXAGON             │
+│                  (Business Core)                    │
+│                                                     │
+│  ┌──────────────────────────────────────────────┐  │
+│  │        DOMAIN MODELS & BUSINESS LOGIC        │  │
+│  │  - Domain entities (models.py)               │  │
+│  │  - Business rules & validation               │  │
+│  │  - Domain events                             │  │
+│  └──────────────────────────────────────────────┘  │
+│                      ▲                              │
+│                      │                              │
+│  ┌──────────────────────────────────────────────┐  │
+│  │         SERVICE LAYER = PORTS                │  │
+│  │  Public API for each domain                  │  │
+│  │  (exported in __init__.py)                   │  │
+│  └──────────────────────────────────────────────┘  │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+             │                  │                  │
+             ▼                  ▼                  ▼
+     ┌────────────┐     ┌────────────┐    ┌────────────┐
+     │   Router   │     │ Repository │    │ Event Bus  │
+     │   (HTTP)   │     │    (DB)    │    │(Analytics) │
+     │  PRIMARY   │     │ SECONDARY  │    │ SECONDARY  │
+     │  ADAPTER   │     │  ADAPTER   │    │  ADAPTER   │
+     └────────────┘     └────────────┘    └────────────┘
+             │
+             ▼
+     ┌────────────────┐
+     │ React Frontend │
+     │  (External     │
+     │   Primary      │
+     │   Adapter)     │
+     └────────────────┘
+```
+
+**Key Concepts:**
+- **Hexagon:** Contains domain models and business logic (this backend)
+- **Ports:** Service layer functions - the public interface of each domain
+- **Primary Adapters:** Drive the application (routers, CLI, frontend)
+- **Secondary Adapters:** Driven by the application (database, external APIs)
+
+---
+
+This guide provides detailed explanations, complete code examples, and step-by-step guidance for implementing the hexagonal architecture defined in `ARCHITECTURE_STANDARDS.md`.
 
 ---
 
