@@ -109,6 +109,7 @@ docker-compose up --build
 
 ## 📚 Documentation
 
+- **[DOCUMENTATION_ORGANIZATION.md](./DOCUMENTATION_ORGANIZATION.md)** - How documentation is organized and where to create new documents
 - **[CLAUDE.md](./CLAUDE.md)** - Complete architecture guidance and development workflows
 - **[TODO.md](./TODO.md)** - Current tasks and architectural decisions needed
 - **[Backend Docs](./declaring/)** - FastAPI backend documentation
