@@ -312,6 +312,7 @@ await event_bus.publish(ItemCreatedEvent(...))
 ### Backend Documentation
 - `declaring/ARCHITECTURE_STANDARDS.md` - Mandatory rules
 - `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
+- `declaring/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
 - `declaring/TESTING_STANDARDS.md` - Testing requirements
 
 ### Frontend Documentation

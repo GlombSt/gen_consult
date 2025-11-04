@@ -115,6 +115,7 @@ docker-compose up --build
 - **[Backend Docs](./declaring/)** - FastAPI backend documentation
   - [Architecture Standards](./declaring/ARCHITECTURE_STANDARDS.md)
   - [Architecture Guide](./declaring/ARCHITECTURE_GUIDE.md)
+  - [Backend Development Standards](./declaring/DEVELOPMENT_STANDARDS.md)
   - [Testing Standards](./declaring/TESTING_STANDARDS.md)
 - **[Frontend Docs](./reacting/)** - React frontend documentation
   - [Architecture](./reacting/ARCHITECTURE.md)
