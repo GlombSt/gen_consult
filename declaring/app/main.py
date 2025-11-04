@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.intents.router import router as intents_router
 from app.items.router import router as items_router
 from app.shared.exception_handlers import validation_exception_handler
 from app.shared.logging_config import logger
@@ -64,6 +65,7 @@ def create_application() -> FastAPI:
     # Include routers
     app.include_router(items_router)
     app.include_router(users_router)
+    app.include_router(intents_router)
 
     return app
 

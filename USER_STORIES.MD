@@ -2,6 +2,7 @@ User stories build on the domain concepts described in the ./declaring/app/* dir
 
 
 Increment 1: Declaration
+US-000: User creates new intent.
 US-001: User edits the intent name.
 US-002: User edits the intent description.
 US-003: User edits the intent output format.
