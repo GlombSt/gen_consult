@@ -19,11 +19,11 @@ declaring/
 ├── .dockerignore                  # Files to exclude from Docker build
 ├── README.md                       # This file (start here!)
 ├── QUICK_REFERENCE.md             # ⭐ Quick reference card
-├── LINTING_GUIDE.md               # Code quality and linting guide
+├── LINTING_STANDARDS.md          # Linting rules and requirements
+├── LINTING_GUIDE.md              # Linting implementation guide
 ├── DEBUGGING.md                   # Debugging guide for React + FastAPI
-├── LOGGING_ARCHITECTURE.md        # Deep dive into logging system
-├── CLOUD_NATIVE_LOGGING.md        # Cloud & container deployment guide
-├── STRUCTURED_LOGGING_EXAMPLES.md # Structured logging output examples
+├── LOGGING_STANDARDS.md           # Logging rules and requirements
+├── LOGGING_GUIDE.md               # Logging implementation guide
 ├── PII_PRIVACY_GUIDE.md           # PII protection and privacy compliance
 └── react-example.jsx              # Example React components
 ```
@@ -287,11 +287,10 @@ uvicorn main:app --reload | jq '.'
 docker-compose logs -f api | jq '.'
 ```
 
-See **`STRUCTURED_LOGGING_EXAMPLES.md`** for:
+See **`LOGGING_GUIDE.md`** for:
 - Complete log output examples
+- Structured logging implementation
 - How to query logs in CloudWatch, Kibana, Datadog
-- Filtering and searching techniques
-- Creating dashboards and alerts
 
 ### PII Protection
 
@@ -362,7 +361,7 @@ pip install -e '.[dev]'
 - **Flake8** - Code quality and style checks
 - **mypy** - Static type checking
 
-All linting rules are configured in `pyproject.toml`. For detailed guidance, see **`LINTING_GUIDE.md`**.
+All linting rules are configured in `pyproject.toml`. For mandatory rules, see **`LINTING_STANDARDS.md`**. For detailed guidance, see **`LINTING_GUIDE.md`**.
 
 ### CI/CD
 

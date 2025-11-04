@@ -237,7 +237,7 @@ You should see structured JSON logs with validation error details when sending i
 ## Questions?
 
 - See `README.md` for general application documentation
-- See `LOGGING_ARCHITECTURE.md` for logging details
+- See `LOGGING_STANDARDS.md` and `LOGGING_GUIDE.md` for logging details
 - See `DEBUGGING.md` for troubleshooting tips
 - Check `/docs` endpoint for interactive API documentation
 

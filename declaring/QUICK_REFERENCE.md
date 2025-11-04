@@ -10,11 +10,6 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-### Docker
-```bash
-docker-compose up --build
-```
-
 ### Access
 - **API**: http://localhost:8000
 - **Docs**: http://localhost:8000/docs
@@ -57,23 +52,19 @@ logger.info(f"User {user.email} updated")  # Will be sanitized anyway
 
 ### Pretty-Print (Development)
 ```bash
-# Local
 uvicorn main:app --reload | jq '.'
-
-# Docker
-docker-compose logs -f api | jq '.'
 ```
 
 ### Filter Logs
 ```bash
 # Show only errors
-docker-compose logs -f api | jq 'select(.level == "ERROR")'
+uvicorn main:app --reload 2>&1 | jq 'select(.level == "ERROR")'
 
 # Show slow requests (> 0.1s)
-docker-compose logs -f api | jq 'select(.duration > 0.1)'
+uvicorn main:app --reload 2>&1 | jq 'select(.duration > 0.1)'
 
 # Show specific fields
-docker-compose logs -f api | jq -r '[.timestamp, .method, .path, .status_code] | @tsv'
+uvicorn main:app --reload 2>&1 | jq -r '[.timestamp, .method, .path, .status_code] | @tsv'
 ```
 
 ## 🌐 CORS Configuration
@@ -133,31 +124,9 @@ curl -X POST http://localhost:8000/items \
 curl http://localhost:8000/items
 ```
 
-## 🐳 Docker Commands
-
-```bash
-# Build and run
-docker-compose up --build
-
-# Run in background
-docker-compose up -d
-
-# View logs
-docker-compose logs -f api
-
-# Stop
-docker-compose down
-
-# Restart
-docker-compose restart api
-
-# Rebuild after code changes
-docker-compose up --build
-```
-
 ## ⚙️ Environment Variables
 
-Set in `docker-compose.yml` or `.env`:
+Set in `.env`:
 
 ```bash
 LOG_LEVEL=INFO              # DEBUG, INFO, WARNING, ERROR
@@ -209,12 +178,10 @@ pip install -r requirements.txt
 | File | Purpose |
 |------|---------|
 | `README.md` | Main documentation |
-| `LOGGING_ARCHITECTURE.md` | How logging works |
-| `CLOUD_NATIVE_LOGGING.md` | Cloud deployment |
-| `STRUCTURED_LOGGING_EXAMPLES.md` | Log examples |
+| `LOGGING_STANDARDS.md` | Logging rules and requirements |
+| `LOGGING_GUIDE.md` | Logging implementation guide |
 | `PII_PRIVACY_GUIDE.md` | PII protection guide |
 | `DEBUGGING.md` | Debugging with React |
-| `react-example.jsx` | React code examples |
 
 ## 🌩️ Cloud Deployment
 
@@ -258,7 +225,6 @@ fields @timestamp, method, path, duration, status_code
 
 - [FastAPI Docs](https://fastapi.tiangolo.com/)
 - [Python Logging](https://docs.python.org/3/library/logging.html)
-- [Docker Docs](https://docs.docker.com/)
 - [GDPR Compliance](https://gdpr.eu/)
 
 ## 💡 Tips

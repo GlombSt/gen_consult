@@ -8,20 +8,30 @@
 
 ## Priority 1: Quick Fixes (High Impact, Low Effort)
 
-### ✅ Task 1: Align Terminology in Both Docs
+### ✅ Task 1: Align Terminology in Both Docs ✅ COMPLETED
 **Files to update:**
 - `declaring/ARCHITECTURE_STANDARDS.md`
 - `declaring/ARCHITECTURE_GUIDE.md`
 - `reacting/ARCHITECTURE.md`
 
 **Changes:**
-- [ ] Use "hexagonal architecture" consistently in both projects
-- [ ] Backend docs should explicitly state: "Backend IS the hexagon (business core)"
-- [ ] Frontend docs should explicitly state: "Frontend IS a primary adapter (not part of hexagon)"
-- [ ] Add cross-references between docs
-- [ ] Ensure both use same vocabulary (ports, adapters, domain, service layer)
+- [x] Use "hexagonal architecture" consistently in both projects
+- [x] Backend docs should explicitly state: "Backend IS the hexagon (business core)"
+- [x] Frontend docs should explicitly state: "Frontend IS a primary adapter (not part of hexagon)"
+- [x] Add cross-references between docs
+- [x] Ensure both use same vocabulary (ports, adapters, domain, service layer)
 
 **Estimated effort:** 30 minutes
+**Actual effort:** ~30 minutes
+
+**Summary of Changes:**
+- Added hexagonal architecture overview diagrams to all three docs
+- Explicitly labeled service layer as "PORTS"
+- Explicitly labeled router as "PRIMARY ADAPTER"
+- Explicitly labeled repository as "SECONDARY ADAPTER"
+- Added cross-references between backend and frontend docs
+- Updated frontend diagram to show it's outside the hexagon
+- Consistent terminology: hexagon, ports, adapters throughout
 
 ---
 
