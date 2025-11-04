@@ -139,6 +139,27 @@ app/
 - DTOs define API contract, exclude sensitive data
 - Value objects are immutable, defined by values not identity
 
+### Schema Documentation Requirements
+
+**MANDATORY:** All `Field` descriptions in `schemas.py` **MUST** match the detailed descriptions from the corresponding `*_DOMAIN.md` file.
+
+- **Domain model documentation (`*_DOMAIN.md`) is the source of truth** for field meanings and descriptions
+- FastAPI's auto-generated OpenAPI documentation uses Pydantic `Field` descriptions
+- Schema field descriptions must be comprehensive and include examples, constraints, and business context from the domain model
+- Brief or generic descriptions (e.g., "Intent name", "Output structure") are **NOT** acceptable if the domain model provides detailed explanations
+
+**Example:**
+```python
+# ✅ CORRECT - Detailed description from domain model
+output_structure: Optional[str] = Field(
+    None, 
+    description="The organization and composition of the result's content, independent of its technical format (e.g., bullet points vs. paragraphs, table with specific columns, sections with headers, or a custom template with particular fields and their arrangement). The structure is maintained as text."
+)
+
+# ❌ INCORRECT - Generic description
+output_structure: Optional[str] = Field(None, description="Output structure")
+```
+
 ---
 
 ## Inter-Domain Communication
@@ -282,6 +303,7 @@ async def create_item(request: ItemCreateRequest) -> Item:
 - [ ] Router uses DTOs from `schemas.py`
 - [ ] Service uses domain models from `models.py`
 - [ ] Repository converts DB ↔ domain models
+- [ ] Schema field descriptions match `*_DOMAIN.md` documentation
 - [ ] No cross-domain imports of internals
 - [ ] Updated `main.py` to include router
 
@@ -301,6 +323,7 @@ async def create_item(request: ItemCreateRequest) -> Item:
 - [ ] Layers properly separated
 - [ ] Correct model types per layer
 - [ ] Events published for business actions
+- [ ] Schema field descriptions match `*_DOMAIN.md` documentation
 - [ ] No sensitive data in DTOs
 - [ ] No cross-domain internal imports
 - [ ] Service functions exported in `__init__.py`

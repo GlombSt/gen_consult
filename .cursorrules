@@ -1,0 +1,5 @@
+# Cursor Rules for Gen Consult
+
+When the user is asking a question in a chat, answer that question, don't start to generate any artifacts.
+
+Claude.md as the main entry file into this project, follow the references in this document

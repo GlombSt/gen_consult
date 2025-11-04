@@ -201,6 +201,7 @@ class ItemCreateRequest(BaseModel):
                 "is_available": True
             }
         }
+```
 
 class ItemUpdateRequest(BaseModel):
     """What client sends to update (all fields optional)"""
@@ -247,6 +248,56 @@ class ItemListResponse(BaseModel):
     page: int
     page_size: int
 ```
+
+#### Schema Documentation Requirements
+
+**MANDATORY:** Schema field descriptions must match the detailed descriptions from the corresponding `*_DOMAIN.md` file.
+
+FastAPI automatically generates OpenAPI documentation from Pydantic `Field` descriptions. These descriptions become the API specification that users see, so they must be comprehensive and match the domain model documentation.
+
+**Why This Matters:**
+- The domain model (`*_DOMAIN.md`) is the source of truth for field meanings
+- FastAPI's `/docs` endpoint uses `Field` descriptions for the API specification
+- Brief descriptions lose important context that exists in the domain model
+- Comprehensive descriptions help API consumers understand the field's purpose and constraints
+
+**Example: Matching Domain Model to Schema**
+
+```python
+# declaring/app/intents/INTENTS_DOMAIN.md defines:
+# output_structure (string, optional): The organization and composition 
+# of the result's content, independent of its technical format 
+# (e.g., bullet points vs. paragraphs, table with specific columns, 
+# sections with headers, or a custom template with particular fields 
+# and their arrangement). The structure is maintained as text.
+
+# ✅ CORRECT - Schema matches domain model description
+class IntentCreateRequest(BaseModel):
+    output_structure: Optional[str] = Field(
+        None,
+        description="The organization and composition of the result's content, independent of its technical format (e.g., bullet points vs. paragraphs, table with specific columns, sections with headers, or a custom template with particular fields and their arrangement). The structure is maintained as text."
+    )
+    context: Optional[str] = Field(
+        None,
+        description="Broader, dynamic information that may be retrieved from systems or external sources to inform prompt generation (e.g., user's role and permissions, recent project activity, organizational policies, current system state, or relevant historical interactions). Context is typically more fluid and situational than facts."
+    )
+    constraints: Optional[str] = Field(
+        None,
+        description="Conditions that further describe how the intent must be achieved (e.g., word limits, tone requirements, format specifications, excluded topics, or quality criteria)"
+    )
+
+# ❌ INCORRECT - Generic descriptions that lose domain context
+class IntentCreateRequest(BaseModel):
+    output_structure: Optional[str] = Field(None, description="Output structure")
+    context: Optional[str] = Field(None, description="Intent context")
+    constraints: Optional[str] = Field(None, description="Intent constraints")
+```
+
+**Best Practices:**
+1. Always reference `*_DOMAIN.md` when creating or updating schema fields
+2. Copy the full description from the domain model, including examples and explanations
+3. If the domain model doesn't have a detailed description, add one there first
+4. Review the generated API docs at `/docs` to verify descriptions are comprehensive
 
 ### Shared Value Objects (`shared/value_objects.py`)
 

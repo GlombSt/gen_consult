@@ -48,6 +48,24 @@ gen_consult/
 └── CLAUDE.md          # This file
 ```
 
+## Important Reference Files
+
+### Backend Documentation
+- `declaring/ARCHITECTURE_STANDARDS.md` - Mandatory rules
+- `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
+- `declaring/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
+- `declaring/TESTING_STANDARDS.md` - Testing requirements
+
+### Frontend Documentation
+- `reacting/ARCHITECTURE.md` - Frontend architecture guide
+- `reacting/README.md` - Getting started
+
+### Project Documentation
+- `TODO.md` - Current architecture alignment tasks
+- `README.md` - Project overview
+
+
+
 ## Backend (`declaring/`) - The Hexagon
 
 ### Tech Stack
@@ -271,6 +289,7 @@ await event_bus.publish(ItemCreatedEvent(...))
 
 ### Adding a New Feature (Full Stack)
 
+**MANDATORY: Read `declaring/DEVELOPMENT_STANDARDS.md` first **
 **Backend:**
 1. Create domain folder: `app/new_domain/`
 2. Define domain model with business logic: `models.py`
@@ -307,21 +326,6 @@ await event_bus.publish(ItemCreatedEvent(...))
 - ❌ Business rule validation (UX validation only)
 - ❌ Assuming client validation is sufficient
 
-## Important Reference Files
-
-### Backend Documentation
-- `declaring/ARCHITECTURE_STANDARDS.md` - Mandatory rules
-- `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
-- `declaring/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
-- `declaring/TESTING_STANDARDS.md` - Testing requirements
-
-### Frontend Documentation
-- `reacting/ARCHITECTURE.md` - Frontend architecture guide
-- `reacting/README.md` - Getting started
-
-### Project Documentation
-- `TODO.md` - Current architecture alignment tasks
-- `README.md` - Project overview
 
 ## API Integration
 
@@ -350,6 +354,7 @@ If frontend runs on different port, update `declaring/app/main.py` CORS_ORIGINS 
 6. **Check TODO.md** - Some decisions are pending, check before implementing
 7. **Follow the layers** - Router → Service → Repository, no shortcuts
 8. **Test thoroughly** - 80%+ coverage required
+9. **TDD is mandatory** - Read `DEVELOPMENT_STANDARDS.md`
 
 ### Before Making Changes
 
