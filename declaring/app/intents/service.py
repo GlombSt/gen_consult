@@ -149,7 +149,10 @@ async def update_intent_output_format(intent_id: int, output_format: str) -> Opt
         Updated intent if found, None otherwise
     """
     logger.info("Updating intent output format", extra={"intent_id": intent_id})
-    return await _update_intent_field(intent_id, "output_format", lambda intent: setattr(intent, "output_format", output_format))
+    return await _update_intent_field(
+        intent_id, "output_format",
+        lambda intent: setattr(intent, "output_format", output_format)
+    )
 
 
 async def update_intent_output_structure(intent_id: int, output_structure: Optional[str]) -> Optional[Intent]:
@@ -164,7 +167,10 @@ async def update_intent_output_structure(intent_id: int, output_structure: Optio
         Updated intent if found, None otherwise
     """
     logger.info("Updating intent output structure", extra={"intent_id": intent_id})
-    return await _update_intent_field(intent_id, "output_structure", lambda intent: setattr(intent, "output_structure", output_structure))
+    return await _update_intent_field(
+        intent_id, "output_structure",
+        lambda intent: setattr(intent, "output_structure", output_structure)
+    )
 
 
 async def update_intent_context(intent_id: int, context: Optional[str]) -> Optional[Intent]:
@@ -338,4 +344,3 @@ async def remove_fact_from_intent(intent_id: int, fact_id: int) -> bool:
         logger.info("Fact removed successfully", extra={"intent_id": intent_id, "fact_id": fact_id})
 
     return removed
-
