@@ -184,35 +184,15 @@ Start with what you need:
 - **[CLAUDE.md](../CLAUDE.md)** - Architecture guidance for AI assistants
 - **[Frontend README](../reacting/README.md)** - React frontend documentation
 
-## Development Best Practices
+## Development Workflow
 
-### Before Writing Code
-1. **Read DEVELOPMENT_STANDARDS.md** - Understand TDD workflow
-2. **Check TODO.md** - Review pending architectural decisions
-3. **Review existing domain** - Follow established patterns
+**Before writing code:** Read [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) for the mandatory TDD workflow, code quality checklist, and validation steps.
 
-### TDD Workflow (MANDATORY)
-1. Write failing test (Red)
-2. Write minimal code to pass (Green)
-3. Refactor while keeping tests green
-4. Run `./lint.sh --fix` and `pytest` before committing
-
-### Code Quality Checklist
-- [ ] Tests written first and passing
-- [ ] Coverage meets requirements (80%+ overall)
-- [ ] Linting passes (`./lint.sh`)
-- [ ] Business logic in service layer only
-- [ ] Domain events published for business actions
-- [ ] No sensitive data in schemas/logs
-- [ ] Documentation updated
-
-### Common Anti-Patterns to Avoid
-- ❌ Business logic in routers
-- ❌ Direct cross-domain repository access
-- ❌ Forgetting to publish domain events
-- ❌ Mixing domain models and API DTOs
-- ❌ Exposing sensitive fields in schemas
-- ❌ Service layer knowing about HTTP details
+**Key reminders:**
+- This project uses **Test-Driven Development (TDD)** - write tests first
+- Run `./lint.sh --fix` and `pytest` before committing
+- Refer to [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) for architectural rules
+- Check [TODO.md](../TODO.md) for pending architectural decisions
 
 ## Contributing
 
