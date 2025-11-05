@@ -9,7 +9,6 @@ from unittest.mock import patch
 import pytest
 
 from app.items.events import ItemCreatedEvent
-from app.items.repository import ItemRepository
 from app.items.service import (
     create_item,
     delete_item,

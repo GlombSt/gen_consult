@@ -50,9 +50,7 @@ class ItemRepository:
         Returns:
             Domain model item if found, None otherwise
         """
-        result = await self.db.execute(
-            select(ItemDBModel).where(ItemDBModel.id == item_id)
-        )
+        result = await self.db.execute(select(ItemDBModel).where(ItemDBModel.id == item_id))
         db_item = result.scalar_one_or_none()
         if db_item:
             return self._to_domain_model(db_item)
@@ -85,11 +83,9 @@ class ItemRepository:
         Returns:
             Updated domain model item if found, None otherwise
         """
-        result = await self.db.execute(
-            select(ItemDBModel).where(ItemDBModel.id == item_id)
-        )
+        result = await self.db.execute(select(ItemDBModel).where(ItemDBModel.id == item_id))
         db_item = result.scalar_one_or_none()
-        
+
         if not db_item:
             return None
 
@@ -116,10 +112,8 @@ class ItemRepository:
             True if deleted, False if not found
         """
         from sqlalchemy import delete as sql_delete
-        
-        result = await self.db.execute(
-            sql_delete(ItemDBModel).where(ItemDBModel.id == item_id)
-        )
+
+        result = await self.db.execute(sql_delete(ItemDBModel).where(ItemDBModel.id == item_id))
         await self.db.flush()
         return result.rowcount > 0
 
@@ -154,7 +148,7 @@ class ItemRepository:
             query = query.where(ItemDBModel.price <= max_price)
 
         if available_only:
-            query = query.where(ItemDBModel.is_available == True)
+            query = query.where(ItemDBModel.is_available.is_(True))
 
         result = await self.db.execute(query)
         db_items = result.scalars().all()
