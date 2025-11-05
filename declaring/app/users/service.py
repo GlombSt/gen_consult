@@ -90,10 +90,7 @@ async def create_user(request: UserCreateRequest, db: AsyncSession) -> User:
         )
     )
 
-    logger.info(
-        "User created successfully",
-        extra={"user_id": created_user.id, "username": created_user.username}
-    )
+    logger.info("User created successfully", extra={"user_id": created_user.id, "username": created_user.username})
 
     return created_user
 

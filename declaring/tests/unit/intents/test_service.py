@@ -13,24 +13,23 @@ from app.intents.events import (
     FactRemovedEvent,
     FactUpdatedEvent,
     IntentCreatedEvent,
-    IntentDeletedEvent,
     IntentUpdatedEvent,
 )
+from app.intents.schemas import IntentCreateRequest
 from app.intents.service import (
     add_fact_to_intent,
     create_intent,
     get_all_intents,
     get_intent,
     remove_fact_from_intent,
+    update_fact_value,
     update_intent_constraints,
     update_intent_context,
     update_intent_description,
     update_intent_name,
     update_intent_output_format,
     update_intent_output_structure,
-    update_fact_value,
 )
-from app.intents.schemas import IntentCreateRequest
 from tests.fixtures.intents import create_test_fact, create_test_intent
 
 
@@ -51,7 +50,10 @@ class TestCreateIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.create = AsyncMock(return_value=created_intent)
             mock_bus.publish = AsyncMock()
 
@@ -78,7 +80,10 @@ class TestCreateIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.create = AsyncMock(return_value=created_intent)
             mock_bus.publish = AsyncMock()
 
@@ -119,7 +124,10 @@ class TestCreateIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.create = AsyncMock(return_value=created_intent)
             mock_bus.publish = AsyncMock()
 
@@ -215,7 +223,10 @@ class TestUpdateIntentName:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -238,7 +249,10 @@ class TestUpdateIntentName:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -267,7 +281,10 @@ class TestUpdateIntentDescription:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -295,7 +312,10 @@ class TestUpdateIntentOutputFormat:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -323,7 +343,10 @@ class TestUpdateIntentOutputStructure:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -351,7 +374,10 @@ class TestUpdateIntentContext:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -379,7 +405,10 @@ class TestUpdateIntentConstraints:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.update = AsyncMock(return_value=updated_intent)
             mock_bus.publish = AsyncMock()
@@ -407,7 +436,10 @@ class TestAddFactToIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.add_fact = AsyncMock(return_value=new_fact)
             mock_bus.publish = AsyncMock()
@@ -430,7 +462,10 @@ class TestAddFactToIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.add_fact = AsyncMock(return_value=new_fact)
             mock_bus.publish = AsyncMock()
@@ -461,7 +496,10 @@ class TestUpdateFactValue:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.find_fact_by_id = AsyncMock(return_value=existing_fact)
             mock_repo.update_fact = AsyncMock(return_value=updated_fact)
@@ -486,7 +524,10 @@ class TestUpdateFactValue:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.find_fact_by_id = AsyncMock(return_value=existing_fact)
             mock_repo.update_fact = AsyncMock(return_value=updated_fact)
@@ -516,7 +557,10 @@ class TestRemoveFactFromIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.find_fact_by_id = AsyncMock(return_value=existing_fact)
             mock_repo.remove_fact = AsyncMock(return_value=True)
@@ -539,7 +583,10 @@ class TestRemoveFactFromIntent:
 
         mock_db = MagicMock()
         mock_repo = MagicMock()
-        with patch("app.intents.service.IntentRepository", return_value=mock_repo), patch("app.intents.service.event_bus") as mock_bus:
+        with (
+            patch("app.intents.service.IntentRepository", return_value=mock_repo),
+            patch("app.intents.service.event_bus") as mock_bus,
+        ):
             mock_repo.find_by_id = AsyncMock(return_value=existing_intent)
             mock_repo.find_fact_by_id = AsyncMock(return_value=existing_fact)
             mock_repo.remove_fact = AsyncMock(return_value=True)
@@ -554,4 +601,3 @@ class TestRemoveFactFromIntent:
             assert isinstance(published_event, FactRemovedEvent)
             assert published_event.intent_id == 1
             assert published_event.fact_id == 1
-
