@@ -47,8 +47,9 @@ c. **Implement Incrementally**
    - Refactor only when tests pass
 
 d. **Validate Before Commit**
-   - All tests pass
-   - Code is formatted and linted
+   - Run `./lint.sh --fix` then `./lint.sh` (all checks pass)
+   - Run `pytest` (all tests pass)
+   - Code is properly formatted, no unused imports, no trailing whitespace
    - Type checking passes
    - No sensitive data in code
    - Documentation updated

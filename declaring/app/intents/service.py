@@ -14,7 +14,6 @@ from .events import (
     FactRemovedEvent,
     FactUpdatedEvent,
     IntentCreatedEvent,
-    IntentDeletedEvent,
     IntentUpdatedEvent,
 )
 from .models import Fact, Intent
@@ -118,7 +117,9 @@ async def update_intent_name(intent_id: int, name: str) -> Optional[Intent]:
         Updated intent if found, None otherwise
     """
     logger.info("Updating intent name", extra={"intent_id": intent_id})
-    return await _update_intent_field(intent_id, "name", lambda intent: setattr(intent, "name", name))
+    return await _update_intent_field(
+        intent_id, "name", lambda intent: setattr(intent, "name", name)
+    )
 
 
 async def update_intent_description(intent_id: int, description: str) -> Optional[Intent]:
