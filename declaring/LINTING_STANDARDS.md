@@ -5,9 +5,10 @@
 **Status:** MANDATORY - All code must pass linting before merging
 **Audience:** Experts familiar with Python linting tools
 
-For detailed examples and explanations, see [LINTING_GUIDE.md](./LINTING_GUIDE.md)
+**Companion to:** [LINTING_GUIDE.md](./LINTING_GUIDE.md) - Detailed examples and implementation
 
 **Related Documentation:**
+- [LINTING_GUIDE.md](./LINTING_GUIDE.md) - Implementation guide with examples
 - [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) - Code organization rules
 
 ---
@@ -144,6 +145,8 @@ max-complexity = 10
 - ✅ Fix all auto-fixable issues with `./lint.sh --fix`
 - ✅ Fix all manual issues before committing
 - ❌ Never commit code that fails linting checks
+
+**Note:** For setting up pre-commit hooks, see [LINTING_GUIDE.md](./LINTING_GUIDE.md#pre-commit-hooks).
 
 ---
 

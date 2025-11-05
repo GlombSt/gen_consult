@@ -83,7 +83,7 @@ mypy --version
 
 ### 1. Black - Code Formatting
 
-Black enforces consistent code formatting across the entire codebase.
+Black enforces consistent code formatting across the entire codebase. See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#code-formatting-black) for requirements.
 
 **Check formatting:**
 ```bash
@@ -100,7 +100,7 @@ black app/ tests/
 black app/items/service.py
 ```
 
-**What Black formats:**
+**What Black formats:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#code-formatting-black) for requirements)
 - Line length (127 characters max)
 - Indentation (4 spaces)
 - Quote style (double quotes preferred)
@@ -132,7 +132,7 @@ isort --check-only app/ tests/
 isort app/ tests/
 ```
 
-**Import order:**
+**Import order:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#import-organization-isort) for requirements)
 1. Future imports (`from __future__ import ...`)
 2. Standard library imports (`import os, sys, ...`)
 3. Third-party imports (`import fastapi, pydantic, ...`)
@@ -161,7 +161,7 @@ from .schemas import ItemCreate
 
 ### 3. Flake8 - Code Quality Linting
 
-Flake8 checks for code quality issues, style problems, and potential bugs.
+Flake8 checks for code quality issues, style problems, and potential bugs. See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#code-quality-flake8) for requirements.
 
 **Run all checks:**
 ```bash
@@ -173,15 +173,15 @@ flake8 app/ tests/ --max-complexity=10 --max-line-length=127
 flake8 app/ tests/ --select=E9,F63,F7,F82
 ```
 
-**Common error codes:**
-- `E9xx` - Runtime errors (syntax errors)
-- `F63x` - Invalid assert or print statements
-- `F7xx` - Syntax errors in type comments
-- `F82x` - Undefined names in `__all__`
-- `E501` - Line too long (> 127 chars)
-- `F401` - Imported but unused
-- `F841` - Local variable assigned but never used
-- `C901` - Function too complex (cyclomatic complexity > 10)
+**Common error codes:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#code-quality-flake8) for complete list)
+- `E9xx` - Runtime errors (syntax errors) - **Critical (blocks merging)**
+- `F63x` - Invalid assert or print statements - **Critical (blocks merging)**
+- `F7xx` - Syntax errors in type comments - **Critical (blocks merging)**
+- `F82x` - Undefined names in `__all__` - **Critical (blocks merging)**
+- `E501` - Line too long (> 127 chars) - **Warning**
+- `F401` - Imported but unused - **Warning**
+- `F841` - Local variable assigned but never used - **Warning**
+- `C901` - Function too complex (cyclomatic complexity > 10) - **Warning**
 
 **Fix common issues:**
 - **Remove unused imports:** Delete the unused import lines
@@ -190,7 +190,7 @@ flake8 app/ tests/ --select=E9,F63,F7,F82
 
 ### 4. mypy - Type Checking
 
-mypy performs static type analysis to catch type-related bugs.
+mypy performs static type analysis to catch type-related bugs. See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#type-checking-mypy) for requirements.
 
 **Run type checking:**
 ```bash
@@ -202,7 +202,7 @@ mypy app/ --ignore-missing-imports
 mypy app/items/
 ```
 
-**Type hints example:**
+**Type hints example:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#type-checking-mypy) for requirements)
 ```python
 from typing import Optional, List
 
@@ -220,33 +220,11 @@ async def get_items(limit: Optional[int] = None) -> List[Item]:
 
 ## Configuration Details
 
-All linting rules are configured in `pyproject.toml` at the project root.
+All linting rules are configured in `pyproject.toml` at the project root. For the complete configuration requirements, see [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#configuration-requirements).
 
-### Black Configuration
+### Configuration Location
 
-```toml
-[tool.black]
-line-length = 127
-target-version = ['py314']
-exclude = ['.venv', 'venv', 'htmlcov', '__pycache__']
-```
-
-### isort Configuration
-
-```toml
-[tool.isort]
-profile = "black"
-line_length = 127
-known_first_party = ["app", "tests"]
-```
-
-### Flake8 Configuration
-
-```toml
-[tool.flake8]
-max-line-length = 127
-max-complexity = 10
-```
+Configuration is stored in `pyproject.toml` at the project root. The Standards document defines the exact requirements for each tool.
 
 ### mypy Configuration
 
@@ -257,6 +235,8 @@ strict_equality = true
 warn_unused_configs = true
 ignore_missing_imports = true
 ```
+
+**Note:** Black, isort, and Flake8 configurations are defined in [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#configuration-requirements).
 
 ---
 
@@ -398,7 +378,7 @@ def calculate_total(items: List[Item]) -> float:
 
 ## Pre-commit Hooks
 
-For automatic linting before every commit, install pre-commit hooks:
+For automatic linting before every commit, install pre-commit hooks. See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#pre-commit-requirements) for requirements.
 
 **1. Install pre-commit:**
 ```bash
