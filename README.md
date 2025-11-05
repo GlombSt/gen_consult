@@ -87,18 +87,13 @@ Backend runs at: `http://localhost:8000`
 
 ```bash
 cd reacting
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
 ```
 
 Frontend runs at: `http://localhost:5173`
+
+**See [reacting/README.md](./reacting/README.md) for complete setup, configuration, and development workflow.**
 
 ### Docker Setup (Optional)
 
@@ -118,7 +113,8 @@ docker-compose up --build
   - [Backend Development Standards](./declaring/DEVELOPMENT_STANDARDS.md)
   - [Testing Standards](./declaring/TESTING_STANDARDS.md)
 - **[Frontend Docs](./reacting/)** - React frontend documentation
-  - [Architecture](./reacting/ARCHITECTURE.md)
+  - [README](./reacting/README.md) - Getting started and quick reference
+  - [Architecture](./reacting/ARCHITECTURE.md) - Comprehensive architectural guidelines
 
 ## 🧪 Testing
 
@@ -141,34 +137,24 @@ pytest --cov=app --cov-report=html
 ### Frontend Tests
 ```bash
 cd reacting
-
-# Tests (when configured)
-npm test
-
-# E2E tests (when configured)
-npm run test:e2e
+npm test              # Unit tests (when configured)
+npm run test:e2e      # E2E tests (when configured)
 ```
+
+See [reacting/README.md](./reacting/README.md) for development workflow details.
 
 ## 🛠️ Development Workflow
 
 ### Adding a New Feature
 
-1. **Backend (create domain)**
-   - Create domain folder in `declaring/app/`
-   - Define models, schemas, service, repository
-   - Add tests (unit, integration, API)
-   - Register router in `main.py`
+1. **Backend** - Create domain in `declaring/app/` (models, service, repository, tests)
+2. **Frontend** - Create feature in `reacting/src/features/` (API client, hooks, components)
+3. **Integration** - Test end-to-end flow and update documentation
 
-2. **Frontend (create feature)**
-   - Create feature folder in `reacting/src/features/`
-   - Build API client, hooks, components
-   - Keep thin - delegate to backend
-
-3. **Integration**
-   - Test end-to-end flow
-   - Update documentation
-
-See [CLAUDE.md](./CLAUDE.md) for detailed workflows.
+**Detailed guides:**
+- Backend: [declaring/DEVELOPMENT_STANDARDS.md](./declaring/DEVELOPMENT_STANDARDS.md)
+- Frontend: [reacting/README.md](./reacting/README.md)
+- Full-stack: [CLAUDE.md](./CLAUDE.md)
 
 ## 🔑 Key Principles
 
