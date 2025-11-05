@@ -244,4 +244,3 @@ class IntentRepository:
 
 # Global repository instance
 intent_repository = IntentRepository()
-

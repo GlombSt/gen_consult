@@ -96,4 +96,3 @@ class FactRemovedEvent(DomainEvent):
         self.timestamp = datetime.utcnow()
         self.intent_id = intent_id
         self.fact_id = fact_id
-

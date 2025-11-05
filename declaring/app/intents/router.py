@@ -33,11 +33,11 @@ router = APIRouter(
 async def create_intent(request: IntentCreateRequest):
     """Create a new intent (US-000)."""
     intent = await service.create_intent(request)
-    
+
     # Get facts for this intent (will be empty for new intent)
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent.id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -56,11 +56,11 @@ async def get_intent(
     intent = await service.get_intent(intent_id)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -73,11 +73,11 @@ async def update_intent_name(
     intent = await service.update_intent_name(intent_id, request.name)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -90,11 +90,11 @@ async def update_intent_description(
     intent = await service.update_intent_description(intent_id, request.description)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -107,11 +107,11 @@ async def update_intent_output_format(
     intent = await service.update_intent_output_format(intent_id, request.output_format)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -124,11 +124,11 @@ async def update_intent_output_structure(
     intent = await service.update_intent_output_structure(intent_id, request.output_structure)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -141,11 +141,11 @@ async def update_intent_context(
     intent = await service.update_intent_context(intent_id, request.context)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -158,11 +158,11 @@ async def update_intent_constraints(
     intent = await service.update_intent_constraints(intent_id, request.constraints)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-    
+
     # Get facts for this intent
     from .repository import intent_repository
     facts = await intent_repository.find_facts_by_intent_id(intent_id)
-    
+
     return _to_intent_response(intent, facts)
 
 
@@ -229,4 +229,3 @@ def _to_fact_response(fact) -> FactResponse:
         created_at=fact.created_at,
         updated_at=fact.updated_at,
     )
-

@@ -18,7 +18,13 @@ class FactResponse(BaseModel):
     intent_id: int
     value: str = Field(
         ...,
-        description="The actual fact content or data point. Critical, specific information that needs to be used for generating the prompt (e.g., particular data points, explicit requirements, key details that must be incorporated, or concrete values). Facts are typically more static and explicit than context."
+        description=(
+            "The actual fact content or data point. Critical, specific "
+            "information that needs to be used for generating the prompt "
+            "(e.g., particular data points, explicit requirements, key details "
+            "that must be incorporated, or concrete values). Facts are "
+            "typically more static and explicit than context."
+        )
     )
     created_at: datetime
     updated_at: datetime
@@ -42,29 +48,60 @@ class IntentCreateRequest(BaseModel):
     name: str = Field(
         ...,
         min_length=1,
-        description="Name of the intent. Used to identify the work that the user wants to accomplish through AI interaction."
+        description=(
+            "Name of the intent. Used to identify the work that the user "
+            "wants to accomplish through AI interaction."
+        )
     )
     description: str = Field(
         ...,
         min_length=1,
-        description="A textual description of what is to be accomplished. Work that the user wants to accomplish through AI interaction (e.g., 'summarize this document,' 'extract key dates,' 'generate creative alternatives'). The intent is most often used on multiple instances and situations. It is not a one-off but the starting point of what might be called a programme in software engineering."
+        description=(
+            "A textual description of what is to be accomplished. Work that "
+            "the user wants to accomplish through AI interaction (e.g., "
+            "'summarize this document,' 'extract key dates,' 'generate "
+            "creative alternatives'). The intent is most often used on "
+            "multiple instances and situations. It is not a one-off but the "
+            "starting point of what might be called a programme in software "
+            "engineering."
+        )
     )
     output_format: str = Field(
         ...,
         min_length=1,
-        description="The technical representation or encoding of the AI's response (e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        description=(
+            "The technical representation or encoding of the AI's response "
+            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        )
     )
     output_structure: Optional[str] = Field(
         None,
-        description="The organization and composition of the result's content, independent of its technical format (e.g., bullet points vs. paragraphs, table with specific columns, sections with headers, or a custom template with particular fields and their arrangement). The structure is maintained as text."
+        description=(
+            "The organization and composition of the result's content, "
+            "independent of its technical format (e.g., bullet points vs. "
+            "paragraphs, table with specific columns, sections with headers, "
+            "or a custom template with particular fields and their "
+            "arrangement). The structure is maintained as text."
+        )
     )
     context: Optional[str] = Field(
         None,
-        description="Broader, dynamic information that may be retrieved from systems or external sources to inform prompt generation (e.g., user's role and permissions, recent project activity, organizational policies, current system state, or relevant historical interactions). Context is typically more fluid and situational than facts."
+        description=(
+            "Broader, dynamic information that may be retrieved from systems "
+            "or external sources to inform prompt generation (e.g., user's "
+            "role and permissions, recent project activity, organizational "
+            "policies, current system state, or relevant historical "
+            "interactions). Context is typically more fluid and situational "
+            "than facts."
+        )
     )
     constraints: Optional[str] = Field(
         None,
-        description="Conditions that further describe how the intent must be achieved (e.g., word limits, tone requirements, format specifications, excluded topics, or quality criteria)"
+        description=(
+            "Conditions that further describe how the intent must be achieved "
+            "(e.g., word limits, tone requirements, format specifications, "
+            "excluded topics, or quality criteria)"
+        )
     )
 
     model_config = {
@@ -87,27 +124,58 @@ class IntentResponse(BaseModel):
     id: int
     name: str = Field(
         ...,
-        description="Name of the intent. Used to identify the work that the user wants to accomplish through AI interaction."
+        description=(
+            "Name of the intent. Used to identify the work that the user "
+            "wants to accomplish through AI interaction."
+        )
     )
     description: str = Field(
         ...,
-        description="A textual description of what is to be accomplished. Work that the user wants to accomplish through AI interaction (e.g., 'summarize this document,' 'extract key dates,' 'generate creative alternatives'). The intent is most often used on multiple instances and situations. It is not a one-off but the starting point of what might be called a programme in software engineering."
+        description=(
+            "A textual description of what is to be accomplished. Work that "
+            "the user wants to accomplish through AI interaction (e.g., "
+            "'summarize this document,' 'extract key dates,' 'generate "
+            "creative alternatives'). The intent is most often used on "
+            "multiple instances and situations. It is not a one-off but the "
+            "starting point of what might be called a programme in software "
+            "engineering."
+        )
     )
     output_format: str = Field(
         ...,
-        description="The technical representation or encoding of the AI's response (e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        description=(
+            "The technical representation or encoding of the AI's response "
+            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        )
     )
     output_structure: Optional[str] = Field(
         None,
-        description="The organization and composition of the result's content, independent of its technical format (e.g., bullet points vs. paragraphs, table with specific columns, sections with headers, or a custom template with particular fields and their arrangement). The structure is maintained as text."
+        description=(
+            "The organization and composition of the result's content, "
+            "independent of its technical format (e.g., bullet points vs. "
+            "paragraphs, table with specific columns, sections with headers, "
+            "or a custom template with particular fields and their "
+            "arrangement). The structure is maintained as text."
+        )
     )
     context: Optional[str] = Field(
         None,
-        description="Broader, dynamic information that may be retrieved from systems or external sources to inform prompt generation (e.g., user's role and permissions, recent project activity, organizational policies, current system state, or relevant historical interactions). Context is typically more fluid and situational than facts."
+        description=(
+            "Broader, dynamic information that may be retrieved from systems "
+            "or external sources to inform prompt generation (e.g., user's "
+            "role and permissions, recent project activity, organizational "
+            "policies, current system state, or relevant historical "
+            "interactions). Context is typically more fluid and situational "
+            "than facts."
+        )
     )
     constraints: Optional[str] = Field(
         None,
-        description="Conditions that further describe how the intent must be achieved (e.g., word limits, tone requirements, format specifications, excluded topics, or quality criteria)"
+        description=(
+            "Conditions that further describe how the intent must be achieved "
+            "(e.g., word limits, tone requirements, format specifications, "
+            "excluded topics, or quality criteria)"
+        )
     )
     created_at: datetime
     updated_at: datetime
@@ -137,7 +205,10 @@ class IntentUpdateNameRequest(BaseModel):
     name: str = Field(
         ...,
         min_length=1,
-        description="Name of the intent. Used to identify the work that the user wants to accomplish through AI interaction."
+        description=(
+            "Name of the intent. Used to identify the work that the user "
+            "wants to accomplish through AI interaction."
+        )
     )
 
 
@@ -147,7 +218,15 @@ class IntentUpdateDescriptionRequest(BaseModel):
     description: str = Field(
         ...,
         min_length=1,
-        description="A textual description of what is to be accomplished. Work that the user wants to accomplish through AI interaction (e.g., 'summarize this document,' 'extract key dates,' 'generate creative alternatives'). The intent is most often used on multiple instances and situations. It is not a one-off but the starting point of what might be called a programme in software engineering."
+        description=(
+            "A textual description of what is to be accomplished. Work that "
+            "the user wants to accomplish through AI interaction (e.g., "
+            "'summarize this document,' 'extract key dates,' 'generate "
+            "creative alternatives'). The intent is most often used on "
+            "multiple instances and situations. It is not a one-off but the "
+            "starting point of what might be called a programme in software "
+            "engineering."
+        )
     )
 
 
@@ -157,7 +236,10 @@ class IntentUpdateOutputFormatRequest(BaseModel):
     output_format: str = Field(
         ...,
         min_length=1,
-        description="The technical representation or encoding of the AI's response (e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        description=(
+            "The technical representation or encoding of the AI's response "
+            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
+        )
     )
 
 
@@ -166,7 +248,13 @@ class IntentUpdateOutputStructureRequest(BaseModel):
 
     output_structure: Optional[str] = Field(
         None,
-        description="The organization and composition of the result's content, independent of its technical format (e.g., bullet points vs. paragraphs, table with specific columns, sections with headers, or a custom template with particular fields and their arrangement). The structure is maintained as text."
+        description=(
+            "The organization and composition of the result's content, "
+            "independent of its technical format (e.g., bullet points vs. "
+            "paragraphs, table with specific columns, sections with headers, "
+            "or a custom template with particular fields and their "
+            "arrangement). The structure is maintained as text."
+        )
     )
 
 
@@ -175,7 +263,14 @@ class IntentUpdateContextRequest(BaseModel):
 
     context: Optional[str] = Field(
         None,
-        description="Broader, dynamic information that may be retrieved from systems or external sources to inform prompt generation (e.g., user's role and permissions, recent project activity, organizational policies, current system state, or relevant historical interactions). Context is typically more fluid and situational than facts."
+        description=(
+            "Broader, dynamic information that may be retrieved from systems "
+            "or external sources to inform prompt generation (e.g., user's "
+            "role and permissions, recent project activity, organizational "
+            "policies, current system state, or relevant historical "
+            "interactions). Context is typically more fluid and situational "
+            "than facts."
+        )
     )
 
 
@@ -184,7 +279,11 @@ class IntentUpdateConstraintsRequest(BaseModel):
 
     constraints: Optional[str] = Field(
         None,
-        description="Conditions that further describe how the intent must be achieved (e.g., word limits, tone requirements, format specifications, excluded topics, or quality criteria)"
+        description=(
+            "Conditions that further describe how the intent must be achieved "
+            "(e.g., word limits, tone requirements, format specifications, "
+            "excluded topics, or quality criteria)"
+        )
     )
 
 
@@ -194,7 +293,13 @@ class FactAddRequest(BaseModel):
     value: str = Field(
         ...,
         min_length=1,
-        description="The actual fact content or data point. Critical, specific information that needs to be used for generating the prompt (e.g., particular data points, explicit requirements, key details that must be incorporated, or concrete values). Facts are typically more static and explicit than context."
+        description=(
+            "The actual fact content or data point. Critical, specific "
+            "information that needs to be used for generating the prompt "
+            "(e.g., particular data points, explicit requirements, key details "
+            "that must be incorporated, or concrete values). Facts are "
+            "typically more static and explicit than context."
+        )
     )
 
 
@@ -204,6 +309,11 @@ class FactUpdateValueRequest(BaseModel):
     value: str = Field(
         ...,
         min_length=1,
-        description="The actual fact content or data point. Critical, specific information that needs to be used for generating the prompt (e.g., particular data points, explicit requirements, key details that must be incorporated, or concrete values). Facts are typically more static and explicit than context."
+        description=(
+            "The actual fact content or data point. Critical, specific "
+            "information that needs to be used for generating the prompt "
+            "(e.g., particular data points, explicit requirements, key details "
+            "that must be incorporated, or concrete values). Facts are "
+            "typically more static and explicit than context."
+        )
     )
-

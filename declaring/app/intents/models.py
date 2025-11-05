@@ -76,4 +76,3 @@ class Fact:
         now = datetime.utcnow()
         self.created_at = created_at or now
         self.updated_at = updated_at or now
-
