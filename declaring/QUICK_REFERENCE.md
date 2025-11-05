@@ -1,19 +1,6 @@
 # Quick Reference Card
 
-## 🚀 Getting Started
-
-### Local Development
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-### Access
-- **API**: http://localhost:8000
-- **Docs**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+> **New to this project?** Start with [README.md](./README.md) for setup and overview.
 
 ## 📝 Logging Quick Reference
 
@@ -177,7 +164,11 @@ pip install -r requirements.txt
 
 | File | Purpose |
 |------|---------|
-| `README.md` | Main documentation |
+| `README.md` | Getting started, project overview, documentation guide |
+| `ARCHITECTURE_STANDARDS.md` | Mandatory architecture rules |
+| `ARCHITECTURE_GUIDE.md` | Detailed examples and patterns |
+| `DEVELOPMENT_STANDARDS.md` | TDD workflow and checklist |
+| `TESTING_STANDARDS.md` | Coverage requirements and test patterns |
 | `LOGGING_STANDARDS.md` | Logging rules and requirements |
 | `LOGGING_GUIDE.md` | Logging implementation guide |
 | `PII_PRIVACY_GUIDE.md` | PII protection guide |
