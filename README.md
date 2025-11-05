@@ -85,22 +85,7 @@ Backend runs at: `http://localhost:8000`
 
 ### Frontend Setup
 
-```bash
-cd reacting
-npm install
-npm run dev
-```
-
-Frontend runs at: `http://localhost:5173`
-
-**See [reacting/README.md](./reacting/README.md) for complete setup, configuration, and development workflow.**
-
-### Docker Setup (Optional)
-
-```bash
-cd declaring
-docker-compose up --build
-```
+**See [reacting/README.md](./reacting/README.md) for complete frontend setup, configuration, and development workflow.**
 
 ## 📚 Documentation
 
