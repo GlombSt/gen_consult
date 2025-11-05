@@ -56,7 +56,7 @@ gen_consult/
 
 ### Prerequisites
 
-- **Backend:** Python 3.8+
+- **Backend:** Python 3.14+
 - **Frontend:** Node.js 18+
 - **Tools:** Git, Docker (optional)
 

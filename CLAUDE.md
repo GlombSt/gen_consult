@@ -69,7 +69,7 @@ gen_consult/
 ## Backend (`declaring/`) - The Hexagon
 
 ### Tech Stack
-- FastAPI (Python 3.8+)
+- FastAPI (Python 3.14+)
 - Pydantic for validation
 - Structured JSON logging with PII protection
 - Event-driven domain architecture

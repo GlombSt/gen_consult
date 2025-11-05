@@ -227,7 +227,7 @@ All linting rules are configured in `pyproject.toml` at the project root.
 ```toml
 [tool.black]
 line-length = 127
-target-version = ['py311', 'py312', 'py313']
+target-version = ['py314']
 exclude = ['.venv', 'venv', 'htmlcov', '__pycache__']
 ```
 
@@ -252,7 +252,7 @@ max-complexity = 10
 
 ```toml
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.14"
 strict_equality = true
 warn_unused_configs = true
 ignore_missing_imports = true
@@ -412,7 +412,7 @@ repos:
     rev: 24.1.0
     hooks:
       - id: black
-        language_version: python3.11
+        language_version: python3.14
 
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
