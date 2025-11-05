@@ -4,11 +4,10 @@ Repository layer for intents domain.
 Handles data access and conversion between DB models and domain models using SQLAlchemy.
 """
 
-from typing import Optional
+from typing import List, Optional
 
-from sqlalchemy import inspect, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import joinedload
 
 from .db_models import FactDBModel, IntentDBModel
 from .models import Fact, Intent
@@ -31,9 +30,20 @@ class IntentRepository:
         """
         self.db = db
 
+    async def find_all(self) -> List[Intent]:
+        """
+        Get all intents.
+
+        Returns:
+            List of domain model intents
+        """
+        result = await self.db.execute(select(IntentDBModel))
+        db_intents = result.scalars().all()
+        return [self._to_intent_domain_model(db_intent) for db_intent in db_intents]
+
     async def find_by_id(self, intent_id: int) -> Optional[Intent]:
         """
-        Find an intent by ID with facts eagerly loaded.
+        Find an intent by ID.
 
         Args:
             intent_id: The intent ID
@@ -42,11 +52,9 @@ class IntentRepository:
             Domain model intent if found, None otherwise
         """
         result = await self.db.execute(
-            select(IntentDBModel)
-            .where(IntentDBModel.id == intent_id)
-            .options(joinedload(IntentDBModel.facts))
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
         )
-        db_intent = result.unique().scalar_one_or_none()
+        db_intent = result.scalar_one_or_none()
         if db_intent:
             return self._to_intent_domain_model(db_intent)
         return None
@@ -65,7 +73,6 @@ class IntentRepository:
         self.db.add(db_intent)
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_intent)  # Refresh to get all fields
-        # Facts will be empty for a new intent, which is correct
         return self._to_intent_domain_model(db_intent)
 
     async def update(self, intent_id: int, intent: Intent) -> Optional[Intent]:
@@ -80,12 +87,10 @@ class IntentRepository:
             Updated domain model intent if found, None otherwise
         """
         result = await self.db.execute(
-            select(IntentDBModel)
-            .where(IntentDBModel.id == intent_id)
-            .options(joinedload(IntentDBModel.facts))
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
         )
-        db_intent = result.unique().scalar_one_or_none()
-
+        db_intent = result.scalar_one_or_none()
+        
         if not db_intent:
             return None
 
@@ -100,7 +105,7 @@ class IntentRepository:
         # updated_at is automatically updated by SQLAlchemy
 
         await self.db.flush()
-        # Facts are already loaded via joinedload, no need to refresh again
+        await self.db.refresh(db_intent)
         return self._to_intent_domain_model(db_intent)
 
     async def delete(self, intent_id: int) -> bool:
@@ -114,8 +119,10 @@ class IntentRepository:
             True if deleted, False if not found
         """
         from sqlalchemy import delete as sql_delete
-
-        result = await self.db.execute(sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id))
+        
+        result = await self.db.execute(
+            sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         await self.db.flush()
         return result.rowcount > 0
 
@@ -134,7 +141,9 @@ class IntentRepository:
             ValueError: If intent not found
         """
         # Verify intent exists
-        intent_result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        intent_result = await self.db.execute(
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         db_intent = intent_result.scalar_one_or_none()
         if not db_intent:
             raise ValueError(f"Intent with id {intent_id} not found")
@@ -145,6 +154,22 @@ class IntentRepository:
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_fact)  # Refresh to get all fields
         return self._to_fact_domain_model(db_fact)
+
+    async def find_facts_by_intent_id(self, intent_id: int) -> List[Fact]:
+        """
+        Find all facts for an intent.
+
+        Args:
+            intent_id: The intent ID
+
+        Returns:
+            List of domain model facts for the intent
+        """
+        result = await self.db.execute(
+            select(FactDBModel).where(FactDBModel.intent_id == intent_id)
+        )
+        db_facts = result.scalars().all()
+        return [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
 
     async def find_fact_by_id(self, intent_id: int, fact_id: int) -> Optional[Fact]:
         """
@@ -158,7 +183,9 @@ class IntentRepository:
             Domain model fact if found, None otherwise
         """
         result = await self.db.execute(
-            select(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            select(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         db_fact = result.scalar_one_or_none()
         if db_fact:
@@ -178,10 +205,12 @@ class IntentRepository:
             Updated domain model fact if found, None otherwise
         """
         result = await self.db.execute(
-            select(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            select(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         db_fact = result.scalar_one_or_none()
-
+        
         if not db_fact:
             return None
 
@@ -207,26 +236,17 @@ class IntentRepository:
             True if removed, False if not found
         """
         from sqlalchemy import delete as sql_delete
-
+        
         result = await self.db.execute(
-            sql_delete(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            sql_delete(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         await self.db.flush()
         return result.rowcount > 0
 
     def _to_intent_domain_model(self, db_intent: IntentDBModel) -> Intent:
         """Convert DB model to domain model."""
-        # Convert facts if they are loaded (via relationship)
-        # Check if the relationship is loaded to avoid lazy loading
-        facts = []
-        # Use inspect to check if the relationship is loaded without triggering lazy load
-        state = inspect(db_intent)
-        if "facts" not in state.unloaded:
-            # Relationship is loaded, safe to access
-            if db_intent.facts is not None:
-                facts = [self._to_fact_domain_model(db_fact) for db_fact in db_intent.facts]
-        # If relationship is not loaded, facts remains empty list
-
         return Intent(
             id=db_intent.id,
             name=db_intent.name,
@@ -237,7 +257,6 @@ class IntentRepository:
             constraints=db_intent.constraints,
             created_at=db_intent.created_at,
             updated_at=db_intent.updated_at,
-            facts=facts,
         )
 
     def _to_intent_db_model(self, intent: Intent) -> IntentDBModel:

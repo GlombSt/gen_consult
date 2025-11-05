@@ -13,6 +13,42 @@ from tests.fixtures.intents import create_test_fact, create_test_intent
 
 
 @pytest.mark.unit
+class TestIntentRepositoryFindAll:
+    """Test IntentRepository.find_all method."""
+
+    @pytest.mark.asyncio
+    async def test_find_all_with_intents_returns_all_intents(self, test_db_session):
+        """Test finding all intents when intents exist."""
+        # Arrange
+        repo = IntentRepository(test_db_session)
+        intent1 = create_test_intent(id=None, name="Intent 1")
+        intent2 = create_test_intent(id=None, name="Intent 2")
+        await repo.create(intent1)
+        await repo.create(intent2)
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.find_all()
+
+        # Assert
+        assert len(result) == 2
+        assert result[0].name == "Intent 1"
+        assert result[1].name == "Intent 2"
+
+    @pytest.mark.asyncio
+    async def test_find_all_with_empty_storage_returns_empty_list(self, test_db_session):
+        """Test finding all intents when storage is empty."""
+        # Arrange
+        repo = IntentRepository(test_db_session)
+
+        # Act
+        result = await repo.find_all()
+
+        # Assert
+        assert result == []
+
+
+@pytest.mark.unit
 class TestIntentRepositoryFindById:
     """Test IntentRepository.find_by_id method."""
 
@@ -213,8 +249,8 @@ class TestFactRepository:
         assert result.value == "Test fact"
 
     @pytest.mark.asyncio
-    async def test_find_by_id_loads_facts(self, test_db_session):
-        """Test finding intent by ID loads facts via relationship."""
+    async def test_find_facts_by_intent_id_returns_all_facts(self, test_db_session):
+        """Test finding facts by intent ID returns all facts for that intent."""
         # Arrange
         repo = IntentRepository(test_db_session)
         intent = create_test_intent(id=None, name="Test Intent")
@@ -227,17 +263,16 @@ class TestFactRepository:
         await test_db_session.commit()
 
         # Act
-        retrieved_intent = await repo.find_by_id(created_intent.id)
+        result = await repo.find_facts_by_intent_id(created_intent.id)
 
         # Assert
-        assert retrieved_intent is not None
-        assert len(retrieved_intent.facts) == 2
-        assert any(f.value == "Fact 1" for f in retrieved_intent.facts)
-        assert any(f.value == "Fact 2" for f in retrieved_intent.facts)
+        assert len(result) == 2
+        assert any(f.value == "Fact 1" for f in result)
+        assert any(f.value == "Fact 2" for f in result)
 
     @pytest.mark.asyncio
-    async def test_find_by_id_when_no_facts_returns_empty_facts_list(self, test_db_session):
-        """Test finding intent with no facts returns empty facts list."""
+    async def test_find_facts_by_intent_id_when_no_facts_returns_empty_list(self, test_db_session):
+        """Test finding facts for an intent with no facts returns empty list."""
         # Arrange
         repo = IntentRepository(test_db_session)
         intent = create_test_intent(id=None, name="Test Intent")
@@ -245,11 +280,10 @@ class TestFactRepository:
         await test_db_session.commit()
 
         # Act
-        retrieved_intent = await repo.find_by_id(created_intent.id)
+        result = await repo.find_facts_by_intent_id(created_intent.id)
 
         # Assert
-        assert retrieved_intent is not None
-        assert retrieved_intent.facts == []
+        assert result == []
 
     @pytest.mark.asyncio
     async def test_find_fact_by_id_when_exists_returns_fact(self, test_db_session):
@@ -362,3 +396,4 @@ class TestFactRepository:
 
         # Assert
         assert result is False
+

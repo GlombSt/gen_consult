@@ -8,6 +8,7 @@ Supports SQLite (in-memory) for development and PostgreSQL for production.
 import os
 from typing import AsyncGenerator
 
+from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.pool import StaticPool
@@ -112,18 +113,6 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
     Dependency function for FastAPI to get database session.
 
-    **Transaction Management:**
-    - This function automatically commits transactions on successful completion
-    - If an exception occurs, the transaction is automatically rolled back
-    - The session is closed after the request completes
-    - For complex operations requiring multiple operations in a single transaction,
-      all operations within a single request will share the same session and transaction
-
-    **Note:** The auto-commit behavior means that each HTTP request gets its own
-    transaction boundary. If you need to perform multiple operations atomically
-    across multiple requests, you'll need to implement a different transaction
-    management strategy.
-
     Yields:
         AsyncSession instance
     """
@@ -155,7 +144,9 @@ async def init_db() -> None:
             await conn.run_sync(Base.metadata.create_all)
         logger.info("Database tables created (SQLite)")
     else:
-        logger.info("Database tables should be created via Alembic migrations (PostgreSQL)")
+        logger.info(
+            "Database tables should be created via Alembic migrations (PostgreSQL)"
+        )
 
 
 async def close_db() -> None:

@@ -4,13 +4,14 @@ FastAPI Application Entry Point
 
 import os
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
-from app.shared.exception_handlers import validation_exception_handler
+from app.shared.dependencies import verify_api_key
+from app.shared.exception_handlers import authentication_exception_handler, validation_exception_handler
 from app.shared.logging_config import logger
 from app.shared.middleware import log_requests_middleware
 from app.users.router import router as users_router
@@ -18,6 +19,7 @@ from app.users.router import router as users_router
 # Get configuration from environment
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG").upper()
+ENABLE_API_KEY_AUTH = os.getenv("ENABLE_API_KEY_AUTH", "false").lower() == "true"
 
 # CORS origins configuration
 CORS_ORIGINS = [
@@ -57,10 +59,17 @@ def create_application() -> FastAPI:
 
     # Add exception handlers
     app.add_exception_handler(RequestValidationError, validation_exception_handler)
+    app.add_exception_handler(HTTPException, authentication_exception_handler)
 
-    # Include routers
-    app.include_router(users_router)
-    app.include_router(intents_router)
+    # Include routers with API key authentication if enabled
+    # Public endpoints (/, /health, /docs, /redoc, /openapi.json) are defined directly
+    # and will not require authentication
+    router_dependencies = []
+    if ENABLE_API_KEY_AUTH:
+        router_dependencies = [Depends(verify_api_key)]
+
+    app.include_router(users_router, dependencies=router_dependencies)
+    app.include_router(intents_router, dependencies=router_dependencies)
 
     return app
 
