@@ -51,7 +51,9 @@ class IntentRepository:
         Returns:
             Domain model intent if found, None otherwise
         """
-        result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        result = await self.db.execute(
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         db_intent = result.scalar_one_or_none()
         if db_intent:
             return self._to_intent_domain_model(db_intent)
@@ -84,9 +86,11 @@ class IntentRepository:
         Returns:
             Updated domain model intent if found, None otherwise
         """
-        result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        result = await self.db.execute(
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         db_intent = result.scalar_one_or_none()
-
+        
         if not db_intent:
             return None
 
@@ -115,8 +119,10 @@ class IntentRepository:
             True if deleted, False if not found
         """
         from sqlalchemy import delete as sql_delete
-
-        result = await self.db.execute(sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id))
+        
+        result = await self.db.execute(
+            sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         await self.db.flush()
         return result.rowcount > 0
 
@@ -135,7 +141,9 @@ class IntentRepository:
             ValueError: If intent not found
         """
         # Verify intent exists
-        intent_result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        intent_result = await self.db.execute(
+            select(IntentDBModel).where(IntentDBModel.id == intent_id)
+        )
         db_intent = intent_result.scalar_one_or_none()
         if not db_intent:
             raise ValueError(f"Intent with id {intent_id} not found")
@@ -157,7 +165,9 @@ class IntentRepository:
         Returns:
             List of domain model facts for the intent
         """
-        result = await self.db.execute(select(FactDBModel).where(FactDBModel.intent_id == intent_id))
+        result = await self.db.execute(
+            select(FactDBModel).where(FactDBModel.intent_id == intent_id)
+        )
         db_facts = result.scalars().all()
         return [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
 
@@ -173,7 +183,9 @@ class IntentRepository:
             Domain model fact if found, None otherwise
         """
         result = await self.db.execute(
-            select(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            select(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         db_fact = result.scalar_one_or_none()
         if db_fact:
@@ -193,10 +205,12 @@ class IntentRepository:
             Updated domain model fact if found, None otherwise
         """
         result = await self.db.execute(
-            select(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            select(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         db_fact = result.scalar_one_or_none()
-
+        
         if not db_fact:
             return None
 
@@ -222,9 +236,11 @@ class IntentRepository:
             True if removed, False if not found
         """
         from sqlalchemy import delete as sql_delete
-
+        
         result = await self.db.execute(
-            sql_delete(FactDBModel).where(FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id)
+            sql_delete(FactDBModel).where(
+                FactDBModel.id == fact_id, FactDBModel.intent_id == intent_id
+            )
         )
         await self.db.flush()
         return result.rowcount > 0

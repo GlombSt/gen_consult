@@ -7,9 +7,9 @@ Defines HTTP endpoints and handles request/response serialization.
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, Path, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.shared.dependencies import get_intent_repository
-
+from app.shared.database import get_db
 from . import service
 from .repository import IntentRepository
 from .schemas import (
@@ -33,34 +33,36 @@ router = APIRouter(
 
 
 @router.post("", response_model=IntentResponse, status_code=status.HTTP_201_CREATED)
-async def create_intent(request: IntentCreateRequest, repository: IntentRepository = Depends(get_intent_repository)):
+async def create_intent(request: IntentCreateRequest, db: AsyncSession = Depends(get_db)):
     """Create a new intent (US-000)."""
-    intent = await service.create_intent(request, repository)
+    intent = await service.create_intent(request, db)
 
     # Get facts for this intent (will be empty for new intent)
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent.id)
 
     return _to_intent_response(intent, facts)
 
 
 @router.get("", response_model=List[IntentResponse])
-async def get_intents(repository: IntentRepository = Depends(get_intent_repository)):
+async def get_intents(db: AsyncSession = Depends(get_db)):
     """Get all intents."""
-    intents = await service.get_all_intents(repository)
+    intents = await service.get_all_intents(db)
     return [_to_intent_response(intent) for intent in intents]
 
 
 @router.get("/{intent_id}", response_model=IntentResponse)
 async def get_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent to retrieve"),
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Get a specific intent by ID (US-010)."""
-    intent = await service.get_intent(intent_id, repository)
+    intent = await service.get_intent(intent_id, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -70,14 +72,15 @@ async def get_intent(
 async def update_intent_name(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateNameRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's name (US-001)."""
-    intent = await service.update_intent_name(intent_id, request.name, repository)
+    intent = await service.update_intent_name(intent_id, request.name, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -87,14 +90,15 @@ async def update_intent_name(
 async def update_intent_description(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateDescriptionRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's description (US-002)."""
-    intent = await service.update_intent_description(intent_id, request.description, repository)
+    intent = await service.update_intent_description(intent_id, request.description, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -104,14 +108,15 @@ async def update_intent_description(
 async def update_intent_output_format(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateOutputFormatRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's output format (US-003)."""
-    intent = await service.update_intent_output_format(intent_id, request.output_format, repository)
+    intent = await service.update_intent_output_format(intent_id, request.output_format, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -121,14 +126,15 @@ async def update_intent_output_format(
 async def update_intent_output_structure(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateOutputStructureRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's output structure (US-004)."""
-    intent = await service.update_intent_output_structure(intent_id, request.output_structure, repository)
+    intent = await service.update_intent_output_structure(intent_id, request.output_structure, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -138,14 +144,15 @@ async def update_intent_output_structure(
 async def update_intent_context(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateContextRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's context (US-005)."""
-    intent = await service.update_intent_context(intent_id, request.context, repository)
+    intent = await service.update_intent_context(intent_id, request.context, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -155,14 +162,15 @@ async def update_intent_context(
 async def update_intent_constraints(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateConstraintsRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update an intent's constraints (US-006)."""
-    intent = await service.update_intent_constraints(intent_id, request.constraints, repository)
+    intent = await service.update_intent_constraints(intent_id, request.constraints, db)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
     # Get facts for this intent
+    repository = IntentRepository(db)
     facts = await repository.find_facts_by_intent_id(intent_id)
 
     return _to_intent_response(intent, facts)
@@ -172,10 +180,10 @@ async def update_intent_constraints(
 async def add_fact_to_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent to add the fact to"),
     request: FactAddRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Add a new fact to an intent (US-008)."""
-    fact = await service.add_fact_to_intent(intent_id, request.value, repository)
+    fact = await service.add_fact_to_intent(intent_id, request.value, db)
     if not fact:
         raise HTTPException(status_code=404, detail="Intent not found")
     return _to_fact_response(fact)
@@ -186,10 +194,10 @@ async def update_fact_value(
     intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
     fact_id: int = Path(..., description="The unique identifier of the fact to update"),
     request: FactUpdateValueRequest = ...,
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Update a fact's value (US-007)."""
-    fact = await service.update_fact_value(intent_id, fact_id, request.value, repository)
+    fact = await service.update_fact_value(intent_id, fact_id, request.value, db)
     if not fact:
         raise HTTPException(status_code=404, detail="Fact not found")
     return _to_fact_response(fact)
@@ -199,10 +207,10 @@ async def update_fact_value(
 async def remove_fact_from_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
     fact_id: int = Path(..., description="The unique identifier of the fact to remove"),
-    repository: IntentRepository = Depends(get_intent_repository),
+    db: AsyncSession = Depends(get_db),
 ):
     """Remove a fact from an intent (US-009)."""
-    removed = await service.remove_fact_from_intent(intent_id, fact_id, repository)
+    removed = await service.remove_fact_from_intent(intent_id, fact_id, db)
     if not removed:
         raise HTTPException(status_code=404, detail="Fact not found")
 

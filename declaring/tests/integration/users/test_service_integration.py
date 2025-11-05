@@ -10,7 +10,6 @@ import pytest
 
 from app.shared.events import EventBus
 from app.users.events import UserCreatedEvent
-from app.users.repository import UserRepository
 from app.users.service import (
     create_user,
     delete_user,
@@ -33,15 +32,14 @@ class TestUserServiceIntegration:
         """Test creating and retrieving a user end-to-end."""
         # Arrange
         request = create_test_user_create_request(username="testuser", email="test@example.com")
-        repository = UserRepository(test_db_session)
 
         with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(request, repository=repository)
+            created_user = await create_user(request, test_db_session)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id, repository=repository)
+            retrieved_user = await get_user(created_user.id, test_db_session)
 
             # Assert
             assert retrieved_user is not None
@@ -55,19 +53,18 @@ class TestUserServiceIntegration:
         # Arrange
         create_request = create_test_user_create_request(username="oldname", email="old@example.com")
         update_request = create_test_user_update_request(username="newname", email="new@example.com")
-        repository = UserRepository(test_db_session)
 
         with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(create_request, repository=repository)
+            created_user = await create_user(create_request, test_db_session)
             await test_db_session.commit()
 
             # Act - Update
-            await update_user(created_user.id, update_request, repository=repository)
+            await update_user(created_user.id, update_request, test_db_session)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id, repository=repository)
+            retrieved_user = await get_user(created_user.id, test_db_session)
 
             # Assert
             assert retrieved_user is not None
@@ -79,19 +76,18 @@ class TestUserServiceIntegration:
         """Test creating, deleting, and attempting to retrieve a user."""
         # Arrange
         request = create_test_user_create_request(username="todelete", email="delete@example.com")
-        repository = UserRepository(test_db_session)
 
         with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(request, repository=repository)
+            created_user = await create_user(request, test_db_session)
             await test_db_session.commit()
 
             # Act - Delete
-            deleted = await delete_user(created_user.id, repository=repository)
+            deleted = await delete_user(created_user.id, test_db_session)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id, repository=repository)
+            retrieved_user = await get_user(created_user.id, test_db_session)
 
             # Assert
             assert deleted is True
@@ -103,17 +99,16 @@ class TestUserServiceIntegration:
         # Arrange
         request1 = create_test_user_create_request(username="user1", email="user1@example.com")
         request2 = create_test_user_create_request(username="user2", email="user2@example.com")
-        repository = UserRepository(test_db_session)
 
         with patch("app.users.service.event_bus", EventBus()):
             # Act - Create multiple
-            await create_user(request1, repository=repository)
+            await create_user(request1, test_db_session)
             await test_db_session.commit()
-            await create_user(request2, repository=repository)
+            await create_user(request2, test_db_session)
             await test_db_session.commit()
 
             # Act - Get all
-            all_users = await get_all_users(repository=repository)
+            all_users = await get_all_users(test_db_session)
 
             # Assert
             assert len(all_users) == 2
@@ -133,11 +128,9 @@ class TestUserServiceIntegration:
 
         event_bus.subscribe("user.created", capture_event)
 
-        repository = UserRepository(test_db_session)
-
         with patch("app.users.service.event_bus", event_bus):
             # Act
-            created_user = await create_user(request, repository=repository)
+            created_user = await create_user(request, test_db_session)
             await test_db_session.commit()
 
             # Assert

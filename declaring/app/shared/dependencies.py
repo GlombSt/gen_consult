@@ -15,23 +15,7 @@ from .database import get_db
 
 if TYPE_CHECKING:
     from app.intents.repository import IntentRepository
-    from app.items.repository import ItemRepository
     from app.users.repository import UserRepository
-
-
-def get_item_repository(db: AsyncSession = Depends(get_db)) -> "ItemRepository":
-    """
-    Dependency function to get ItemRepository instance.
-
-    Args:
-        db: Database session (injected by FastAPI)
-
-    Returns:
-        ItemRepository instance configured with the database session
-    """
-    from app.items.repository import ItemRepository
-
-    return ItemRepository(db)
 
 
 def get_user_repository(db: AsyncSession = Depends(get_db)) -> "UserRepository":
