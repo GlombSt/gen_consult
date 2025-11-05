@@ -4,22 +4,22 @@ API tests for items endpoints.
 Tests full HTTP stack with TestClient.
 """
 
+from unittest.mock import AsyncMock
+
 import pytest
 from fastapi.testclient import TestClient
 
-from app.items.repository import ItemRepository
 from app.main import app
-from app.shared.dependencies import get_item_repository
+from app.shared.database import get_db
 
 
 @pytest.fixture
 def client(test_db_session):
     """Create a test client with test database session."""
-
-    def override_get_item_repository():
-        return ItemRepository(test_db_session)
-
-    app.dependency_overrides[get_item_repository] = override_get_item_repository
+    async def override_get_db():
+        yield test_db_session
+    
+    app.dependency_overrides[get_db] = override_get_db
     yield TestClient(app)
     app.dependency_overrides.clear()
 

@@ -6,6 +6,8 @@ Contains business logic and serves as the public API for this domain.
 
 from typing import List, Optional
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.shared.events import event_bus
 from app.shared.logging_config import logger
 
@@ -15,34 +17,36 @@ from .repository import ItemRepository
 from .schemas import ItemCreateRequest, ItemUpdateRequest
 
 
-async def get_all_items(repository: ItemRepository) -> List[Item]:
+async def get_all_items(db: AsyncSession) -> List[Item]:
     """
     Get all items.
 
     Args:
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         List of all items
     """
     logger.info("Fetching all items")
+    repository = ItemRepository(db)
     items = await repository.find_all()
     logger.info("Items fetched", extra={"total_items": len(items)})
     return items
 
 
-async def get_item(item_id: int, repository: ItemRepository) -> Optional[Item]:
+async def get_item(item_id: int, db: AsyncSession) -> Optional[Item]:
     """
     Get a specific item by ID.
 
     Args:
         item_id: The item ID
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         Item if found, None otherwise
     """
     logger.info("Looking for item", extra={"item_id": item_id})
+    repository = ItemRepository(db)
     item = await repository.find_by_id(item_id)
 
     if item:
@@ -53,13 +57,13 @@ async def get_item(item_id: int, repository: ItemRepository) -> Optional[Item]:
     return item
 
 
-async def create_item(request: ItemCreateRequest, repository: ItemRepository) -> Item:
+async def create_item(request: ItemCreateRequest, db: AsyncSession) -> Item:
     """
     Create a new item.
 
     Args:
         request: Item creation request
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         Created item
@@ -83,6 +87,7 @@ async def create_item(request: ItemCreateRequest, repository: ItemRepository) ->
     )
 
     # Persist
+    repository = ItemRepository(db)
     created_item = await repository.create(item)
 
     # Publish domain event (MANDATORY)
@@ -95,25 +100,29 @@ async def create_item(request: ItemCreateRequest, repository: ItemRepository) ->
         )
     )
 
-    logger.info("Item created successfully", extra={"item_id": created_item.id, "item_name": created_item.name})
+    logger.info(
+        "Item created successfully",
+        extra={"item_id": created_item.id, "item_name": created_item.name}
+    )
 
     return created_item
 
 
-async def update_item(item_id: int, request: ItemUpdateRequest, repository: ItemRepository) -> Optional[Item]:
+async def update_item(item_id: int, request: ItemUpdateRequest, db: AsyncSession) -> Optional[Item]:
     """
     Update an existing item.
 
     Args:
         item_id: The item ID to update
         request: Item update request
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         Updated item if found, None otherwise
     """
     logger.info("Updating item", extra={"item_id": item_id})
 
+    repository = ItemRepository(db)
     # Get existing item
     existing_item = await repository.find_by_id(item_id)
     if not existing_item:
@@ -149,19 +158,20 @@ async def update_item(item_id: int, request: ItemUpdateRequest, repository: Item
     return updated_item
 
 
-async def delete_item(item_id: int, repository: ItemRepository) -> bool:
+async def delete_item(item_id: int, db: AsyncSession) -> bool:
     """
     Delete an item.
 
     Args:
         item_id: The item ID to delete
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         True if deleted, False if not found
     """
     logger.info("Deleting item", extra={"item_id": item_id})
 
+    repository = ItemRepository(db)
     # Check if item exists before deleting
     existing_item = await repository.find_by_id(item_id)
     if not existing_item:
@@ -184,7 +194,7 @@ async def search_items(
     min_price: Optional[float] = None,
     max_price: Optional[float] = None,
     available_only: bool = False,
-    repository: ItemRepository = ...,
+    db: AsyncSession = None,
 ) -> List[Item]:
     """
     Search items with filters.
@@ -194,7 +204,7 @@ async def search_items(
         min_price: Minimum price filter
         max_price: Maximum price filter
         available_only: Filter for available items only
-        repository: Item repository instance
+        db: Database session
 
     Returns:
         List of matching items
@@ -209,7 +219,13 @@ async def search_items(
         },
     )
 
-    results = await repository.search(name=name, min_price=min_price, max_price=max_price, available_only=available_only)
+    repository = ItemRepository(db)
+    results = await repository.search(
+        name=name,
+        min_price=min_price,
+        max_price=max_price,
+        available_only=available_only
+    )
 
     logger.info("Search completed", extra={"results_count": len(results)})
     return results
