@@ -396,4 +396,3 @@ class TestFactRepository:
 
         # Assert
         assert result is False
-

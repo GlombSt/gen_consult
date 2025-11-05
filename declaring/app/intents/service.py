@@ -66,10 +66,7 @@ async def create_intent(request: IntentCreateRequest, db: AsyncSession) -> Inten
         )
     )
 
-    logger.info(
-        "Intent created successfully",
-        extra={"intent_id": created_intent.id, "intent_name": created_intent.name}
-    )
+    logger.info("Intent created successfully", extra={"intent_id": created_intent.id, "intent_name": created_intent.name})
 
     return created_intent
 
@@ -127,9 +124,7 @@ async def update_intent_name(intent_id: int, name: str, db: AsyncSession) -> Opt
         Updated intent if found, None otherwise
     """
     logger.info("Updating intent name", extra={"intent_id": intent_id})
-    return await _update_intent_field(
-        intent_id, "name", lambda intent: setattr(intent, "name", name), db
-    )
+    return await _update_intent_field(intent_id, "name", lambda intent: setattr(intent, "name", name), db)
 
 
 async def update_intent_description(intent_id: int, description: str, db: AsyncSession) -> Optional[Intent]:
@@ -162,12 +157,13 @@ async def update_intent_output_format(intent_id: int, output_format: str, db: As
     """
     logger.info("Updating intent output format", extra={"intent_id": intent_id})
     return await _update_intent_field(
-        intent_id, "output_format",
-        lambda intent: setattr(intent, "output_format", output_format), db
+        intent_id, "output_format", lambda intent: setattr(intent, "output_format", output_format), db
     )
 
 
-async def update_intent_output_structure(intent_id: int, output_structure: Optional[str], db: AsyncSession) -> Optional[Intent]:
+async def update_intent_output_structure(
+    intent_id: int, output_structure: Optional[str], db: AsyncSession
+) -> Optional[Intent]:
     """
     Update an intent's output structure (US-004).
 
@@ -181,8 +177,7 @@ async def update_intent_output_structure(intent_id: int, output_structure: Optio
     """
     logger.info("Updating intent output structure", extra={"intent_id": intent_id})
     return await _update_intent_field(
-        intent_id, "output_structure",
-        lambda intent: setattr(intent, "output_structure", output_structure), db
+        intent_id, "output_structure", lambda intent: setattr(intent, "output_structure", output_structure), db
     )
 
 
@@ -280,9 +275,7 @@ async def add_fact_to_intent(intent_id: int, value: str, db: AsyncSession) -> Op
     created_fact = await repository.add_fact(intent_id, fact)
 
     # Publish domain event (MANDATORY)
-    await event_bus.publish(
-        FactAddedEvent(intent_id=intent_id, fact_id=created_fact.id, value=created_fact.value)
-    )
+    await event_bus.publish(FactAddedEvent(intent_id=intent_id, fact_id=created_fact.id, value=created_fact.value))
 
     logger.info("Fact added successfully", extra={"intent_id": intent_id, "fact_id": created_fact.id})
 

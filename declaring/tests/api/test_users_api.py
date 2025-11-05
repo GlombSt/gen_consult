@@ -14,9 +14,10 @@ from app.shared.database import get_db
 @pytest.fixture
 def client(test_db_session):
     """Create a test client with test database session."""
+
     async def override_get_db():
         yield test_db_session
-    
+
     app.dependency_overrides[get_db] = override_get_db
     yield TestClient(app)
     app.dependency_overrides.clear()

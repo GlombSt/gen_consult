@@ -15,24 +15,22 @@ from app.intents.events import (
     IntentCreatedEvent,
     IntentUpdatedEvent,
 )
-from app.intents.repository import IntentRepository
+from app.intents.schemas import IntentCreateRequest
 from app.intents.service import (
     add_fact_to_intent,
     create_intent,
     get_all_intents,
     get_intent,
     remove_fact_from_intent,
+    update_fact_value,
     update_intent_constraints,
     update_intent_context,
     update_intent_description,
     update_intent_name,
     update_intent_output_format,
     update_intent_output_structure,
-    update_fact_value,
 )
-from app.intents.schemas import IntentCreateRequest
 from app.shared.events import EventBus
-from tests.fixtures.intents import create_test_intent
 
 
 @pytest.mark.integration
@@ -202,7 +200,9 @@ class TestIntentServiceIntegration:
         """Test updating intent output structure end-to-end."""
         # Arrange
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON", output_structure="Old structure")
+            request = IntentCreateRequest(
+                name="Test Intent", description="Test description", output_format="JSON", output_structure="Old structure"
+            )
             created = await create_intent(request, db=test_db_session)
             await test_db_session.commit()
 
@@ -223,7 +223,9 @@ class TestIntentServiceIntegration:
         """Test updating intent context end-to-end."""
         # Arrange
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON", context="Old context")
+            request = IntentCreateRequest(
+                name="Test Intent", description="Test description", output_format="JSON", context="Old context"
+            )
             created = await create_intent(request, db=test_db_session)
             await test_db_session.commit()
 
@@ -244,7 +246,9 @@ class TestIntentServiceIntegration:
         """Test updating intent constraints end-to-end."""
         # Arrange
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON", constraints="Old constraints")
+            request = IntentCreateRequest(
+                name="Test Intent", description="Test description", output_format="JSON", constraints="Old constraints"
+            )
             created = await create_intent(request, db=test_db_session)
             await test_db_session.commit()
 
@@ -309,6 +313,7 @@ class TestFactServiceIntegration:
             # Verify persistence
             # Get facts via repository
             from app.intents.repository import IntentRepository
+
             repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             assert len(facts) == 1
@@ -336,6 +341,7 @@ class TestFactServiceIntegration:
             # Verify persistence
             # Get facts via repository
             from app.intents.repository import IntentRepository
+
             repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
@@ -362,6 +368,7 @@ class TestFactServiceIntegration:
 
             # Verify fact is removed
             from app.intents.repository import IntentRepository
+
             repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
@@ -377,16 +384,17 @@ class TestFactServiceIntegration:
             await test_db_session.commit()
 
             # Act - Add multiple facts
-            fact1 = await add_fact_to_intent(created_intent.id, "Fact 1", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 1", db=test_db_session)
             await test_db_session.commit()
-            fact2 = await add_fact_to_intent(created_intent.id, "Fact 2", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 2", db=test_db_session)
             await test_db_session.commit()
-            fact3 = await add_fact_to_intent(created_intent.id, "Fact 3", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 3", db=test_db_session)
             await test_db_session.commit()
 
             # Assert
             # Get facts via repository
             from app.intents.repository import IntentRepository
+
             repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             assert len(facts) == 3
@@ -417,6 +425,7 @@ class TestFactServiceIntegration:
 
             # Get facts via repository
             from app.intents.repository import IntentRepository
+
             repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
@@ -571,4 +580,3 @@ class TestEventPublishingIntegration:
             assert isinstance(published_events[0], FactRemovedEvent)
             assert published_events[0].intent_id == created_intent.id
             assert published_events[0].fact_id == fact.id
-

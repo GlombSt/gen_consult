@@ -10,6 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException, Path, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.shared.database import get_db
+
 from . import service
 from .repository import IntentRepository
 from .schemas import (
