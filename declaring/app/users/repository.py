@@ -1,10 +1,13 @@
 """
 Repository layer for users domain.
 
-Handles data access and conversion between DB models and domain models.
+Handles data access and conversion between DB models and domain models using SQLAlchemy.
 """
 
 from typing import List, Optional
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from .db_models import UserDBModel
 from .models import User
@@ -12,15 +15,19 @@ from .models import User
 
 class UserRepository:
     """
-    Repository for user data access.
+    Repository for user data access using SQLAlchemy.
 
-    In a real application, this would interact with a database using SQLAlchemy or similar.
-    For now, it uses in-memory storage.
+    Uses hard deletes only (no soft delete).
     """
 
-    def __init__(self):
-        self._storage: List[UserDBModel] = []
-        self._id_counter = 1
+    def __init__(self, db: AsyncSession):
+        """
+        Initialize repository with database session.
+
+        Args:
+            db: AsyncSession instance for database operations
+        """
+        self.db = db
 
     async def find_all(self) -> List[User]:
         """
@@ -29,7 +36,9 @@ class UserRepository:
         Returns:
             List of domain model users
         """
-        return [self._to_domain_model(db_user) for db_user in self._storage]
+        result = await self.db.execute(select(UserDBModel))
+        db_users = result.scalars().all()
+        return [self._to_domain_model(db_user) for db_user in db_users]
 
     async def find_by_id(self, user_id: int) -> Optional[User]:
         """
@@ -41,9 +50,12 @@ class UserRepository:
         Returns:
             Domain model user if found, None otherwise
         """
-        for db_user in self._storage:
-            if db_user.id == user_id:
-                return self._to_domain_model(db_user)
+        result = await self.db.execute(
+            select(UserDBModel).where(UserDBModel.id == user_id)
+        )
+        db_user = result.scalar_one_or_none()
+        if db_user:
+            return self._to_domain_model(db_user)
         return None
 
     async def create(self, user: User) -> User:
@@ -57,9 +69,9 @@ class UserRepository:
             Created domain model user with assigned ID
         """
         db_user = self._to_db_model(user)
-        db_user.id = self._id_counter
-        self._id_counter += 1
-        self._storage.append(db_user)
+        self.db.add(db_user)
+        await self.db.flush()  # Flush to get the ID
+        await self.db.refresh(db_user)  # Refresh to get all fields
         return self._to_domain_model(db_user)
 
     async def update(self, user_id: int, user: User) -> Optional[User]:
@@ -73,18 +85,27 @@ class UserRepository:
         Returns:
             Updated domain model user if found, None otherwise
         """
-        for index, db_user in enumerate(self._storage):
-            if db_user.id == user_id:
-                updated_db_user = self._to_db_model(user)
-                updated_db_user.id = user_id
-                updated_db_user.created_at = db_user.created_at
-                self._storage[index] = updated_db_user
-                return self._to_domain_model(updated_db_user)
-        return None
+        result = await self.db.execute(
+            select(UserDBModel).where(UserDBModel.id == user_id)
+        )
+        db_user = result.scalar_one_or_none()
+        
+        if not db_user:
+            return None
+
+        # Update fields (preserve created_at)
+        db_user.username = user.username
+        db_user.email = user.email
+        # created_at remains unchanged
+        # updated_at is automatically updated by SQLAlchemy
+
+        await self.db.flush()
+        await self.db.refresh(db_user)
+        return self._to_domain_model(db_user)
 
     async def delete(self, user_id: int) -> bool:
         """
-        Delete a user.
+        Hard delete a user.
 
         Args:
             user_id: The user ID to delete
@@ -92,11 +113,13 @@ class UserRepository:
         Returns:
             True if deleted, False if not found
         """
-        for index, db_user in enumerate(self._storage):
-            if db_user.id == user_id:
-                self._storage.pop(index)
-                return True
-        return False
+        from sqlalchemy import delete as sql_delete
+        
+        result = await self.db.execute(
+            sql_delete(UserDBModel).where(UserDBModel.id == user_id)
+        )
+        await self.db.flush()
+        return result.rowcount > 0
 
     def _to_domain_model(self, db_user: UserDBModel) -> User:
         """Convert DB model to domain model."""
@@ -115,7 +138,3 @@ class UserRepository:
             email=user.email,
             created_at=user.created_at,
         )
-
-
-# Global repository instance
-user_repository = UserRepository()

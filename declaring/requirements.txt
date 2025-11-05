@@ -3,6 +3,13 @@ uvicorn[standard]==0.31.0
 pydantic==2.9.2
 python-multipart==0.0.12
 
+# Database dependencies
+sqlalchemy>=2.0.0
+asyncpg>=0.29.0
+aiosqlite>=0.19.0
+alembic>=1.13.0
+greenlet>=3.0.0
+
 # Testing dependencies
 pytest==8.3.3
 pytest-asyncio==0.24.0

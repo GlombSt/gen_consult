@@ -1,34 +1,30 @@
 """
 Database models for users domain.
 
-These models represent the database schema and include all database-specific fields.
+These models represent the database schema using SQLAlchemy ORM.
 Used exclusively by the repository layer.
 """
 
 from datetime import datetime
-from typing import Optional
+
+from sqlalchemy import Column, Integer, String, DateTime
+
+from app.shared.database import Base
 
 
-class UserDBModel:
+class UserDBModel(Base):
     """
-    Database model for users.
+    SQLAlchemy ORM model for users table.
 
-    In a real application, this would use SQLAlchemy or similar ORM.
-    For now, it's a simple class that represents the database schema.
+    Represents the database schema for users.
+    Includes audit fields (created_at, updated_at) but no soft delete.
+    Uses hard deletes only.
     """
 
-    def __init__(
-        self,
-        id: Optional[int] = None,
-        username: str = "",
-        email: str = "",
-        created_at: Optional[datetime] = None,
-        updated_at: Optional[datetime] = None,
-        deleted_at: Optional[datetime] = None,  # Soft delete
-    ):
-        self.id = id
-        self.username = username
-        self.email = email
-        self.created_at = created_at or datetime.utcnow()
-        self.updated_at = updated_at or datetime.utcnow()
-        self.deleted_at = deleted_at
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, nullable=False, unique=True, index=True)
+    email = Column(String, nullable=False, unique=True, index=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)

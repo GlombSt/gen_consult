@@ -4,27 +4,22 @@ API tests for intents endpoints.
 Tests full HTTP stack with TestClient.
 """
 
-from unittest.mock import patch
-
 import pytest
 from fastapi.testclient import TestClient
 
-from app.intents.repository import IntentRepository
 from app.main import app
-from app.shared.events import EventBus
+from app.shared.database import get_db
 
 
 @pytest.fixture
-def client():
-    """Create a test client with fresh repository and event bus for each test."""
-    repo = IntentRepository()
-    event_bus = EventBus()
-    with (
-        patch("app.intents.service.intent_repository", repo),
-        patch("app.intents.service.event_bus", event_bus),
-        patch("app.intents.repository.intent_repository", repo),
-    ):
-        yield TestClient(app)
+def client(test_db_session):
+    """Create a test client with test database session."""
+    async def override_get_db():
+        yield test_db_session
+    
+    app.dependency_overrides[get_db] = override_get_db
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 

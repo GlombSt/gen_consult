@@ -4,7 +4,7 @@ Unit tests for users service layer.
 Tests business logic with mocked dependencies.
 """
 
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -23,11 +23,13 @@ class TestGetAllUsers:
         # Arrange
         mock_users = [create_test_user(id=1, username="user1"), create_test_user(id=2, username="user2")]
 
-        with patch("app.users.service.user_repository") as mock_repo:
-            mock_repo.find_all = AsyncMock(return_value=mock_users)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_all = AsyncMock(return_value=mock_users)
 
+        with patch("app.users.service.UserRepository", return_value=mock_repo):
             # Act
-            result = await get_all_users()
+            result = await get_all_users(mock_db)
 
             # Assert
             assert len(result) == 2
@@ -39,11 +41,13 @@ class TestGetAllUsers:
     async def test_get_all_users_with_empty_repository_returns_empty_list(self):
         """Test getting all users from empty repository."""
         # Arrange
-        with patch("app.users.service.user_repository") as mock_repo:
-            mock_repo.find_all = AsyncMock(return_value=[])
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_all = AsyncMock(return_value=[])
 
+        with patch("app.users.service.UserRepository", return_value=mock_repo):
             # Act
-            result = await get_all_users()
+            result = await get_all_users(mock_db)
 
             # Assert
             assert result == []
@@ -60,11 +64,13 @@ class TestGetUser:
         # Arrange
         mock_user = create_test_user(id=1, username="testuser")
 
-        with patch("app.users.service.user_repository") as mock_repo:
-            mock_repo.find_by_id = AsyncMock(return_value=mock_user)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=mock_user)
 
+        with patch("app.users.service.UserRepository", return_value=mock_repo):
             # Act
-            result = await get_user(1)
+            result = await get_user(1, mock_db)
 
             # Assert
             assert result is not None
@@ -76,11 +82,13 @@ class TestGetUser:
     async def test_get_user_when_not_found_returns_none(self):
         """Test getting a user that doesn't exist."""
         # Arrange
-        with patch("app.users.service.user_repository") as mock_repo:
-            mock_repo.find_by_id = AsyncMock(return_value=None)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
 
+        with patch("app.users.service.UserRepository", return_value=mock_repo):
             # Act
-            result = await get_user(999)
+            result = await get_user(999, mock_db)
 
             # Assert
             assert result is None
@@ -98,12 +106,15 @@ class TestCreateUser:
         request = create_test_user_create_request(username="newuser", email="new@example.com")
         created_user = create_test_user(id=1, username="newuser", email="new@example.com")
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.create = AsyncMock(return_value=created_user)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.create = AsyncMock(return_value=created_user)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await create_user(request)
+            result = await create_user(request, mock_db)
 
             # Assert
             assert result.id == 1
@@ -118,12 +129,15 @@ class TestCreateUser:
         request = create_test_user_create_request(username="newuser", email="new@example.com")
         created_user = create_test_user(id=1, username="newuser", email="new@example.com")
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.create = AsyncMock(return_value=created_user)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.create = AsyncMock(return_value=created_user)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await create_user(request)
+            await create_user(request, mock_db)
 
             # Assert
             mock_bus.publish.assert_called_once()
@@ -147,13 +161,16 @@ class TestUpdateUser:
         updated_user = create_test_user(id=1, username="newname")
         request = create_test_user_update_request(username="newname")
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=existing_user)
-            mock_repo.update = AsyncMock(return_value=updated_user)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_user)
+        mock_repo.update = AsyncMock(return_value=updated_user)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await update_user(1, request)
+            result = await update_user(1, request, mock_db)
 
             # Assert
             assert result is not None
@@ -167,12 +184,15 @@ class TestUpdateUser:
         # Arrange
         request = create_test_user_update_request(username="newname")
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=None)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await update_user(999, request)
+            result = await update_user(999, request, mock_db)
 
             # Assert
             assert result is None
@@ -187,13 +207,16 @@ class TestUpdateUser:
         updated_user = create_test_user(id=1, username="newname")
         request = create_test_user_update_request(username="newname")
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=existing_user)
-            mock_repo.update = AsyncMock(return_value=updated_user)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_user)
+        mock_repo.update = AsyncMock(return_value=updated_user)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await update_user(1, request)
+            await update_user(1, request, mock_db)
 
             # Assert
             mock_bus.publish.assert_called_once()
@@ -213,13 +236,16 @@ class TestDeleteUser:
         # Arrange
         existing_user = create_test_user(id=1)
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=existing_user)
-            mock_repo.delete = AsyncMock(return_value=True)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_user)
+        mock_repo.delete = AsyncMock(return_value=True)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await delete_user(1)
+            result = await delete_user(1, mock_db)
 
             # Assert
             assert result is True
@@ -230,12 +256,15 @@ class TestDeleteUser:
     async def test_delete_user_when_not_found_returns_false(self):
         """Test deleting a non-existent user."""
         # Arrange
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=None)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await delete_user(999)
+            result = await delete_user(999, mock_db)
 
             # Assert
             assert result is False
@@ -248,13 +277,16 @@ class TestDeleteUser:
         # Arrange
         existing_user = create_test_user(id=1)
 
-        with patch("app.users.service.user_repository") as mock_repo, patch("app.users.service.event_bus") as mock_bus:
-            mock_repo.find_by_id = AsyncMock(return_value=existing_user)
-            mock_repo.delete = AsyncMock(return_value=True)
+        mock_db = MagicMock()
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_user)
+        mock_repo.delete = AsyncMock(return_value=True)
+
+        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await delete_user(1)
+            await delete_user(1, mock_db)
 
             # Assert
             mock_bus.publish.assert_called_once()

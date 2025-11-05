@@ -4,21 +4,24 @@ API tests for items endpoints.
 Tests full HTTP stack with TestClient.
 """
 
-from unittest.mock import patch
+from unittest.mock import AsyncMock
 
 import pytest
 from fastapi.testclient import TestClient
 
-from app.items.repository import ItemRepository
 from app.main import app
-from app.shared.events import EventBus
+from app.shared.database import get_db
 
 
 @pytest.fixture
-def client():
-    """Create a test client with fresh repository and event bus for each test."""
-    with patch("app.items.service.item_repository", ItemRepository()), patch("app.items.service.event_bus", EventBus()):
-        yield TestClient(app)
+def client(test_db_session):
+    """Create a test client with test database session."""
+    async def override_get_db():
+        yield test_db_session
+    
+    app.dependency_overrides[get_db] = override_get_db
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 @pytest.mark.api

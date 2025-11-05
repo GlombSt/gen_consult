@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents.router import router as intents_router
 from app.items.router import router as items_router
+from app.shared.database import close_db, get_db, init_db
 from app.shared.exception_handlers import validation_exception_handler
 from app.shared.logging_config import logger
 from app.shared.middleware import log_requests_middleware
@@ -76,7 +77,7 @@ app = create_application()
 
 @app.on_event("startup")
 async def startup_event():
-    """Log when the application starts"""
+    """Initialize application on startup"""
     logger.info(
         "Application starting",
         extra={
@@ -85,6 +86,16 @@ async def startup_event():
             "cors_origins_count": len(CORS_ORIGINS),
         },
     )
+    # Initialize database (create tables for SQLite)
+    await init_db()
+    logger.info("Database initialized")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up on application shutdown"""
+    await close_db()
+    logger.info("Application shutting down")
 
 
 @app.get("/")
