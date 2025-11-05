@@ -1,408 +1,368 @@
-# My First FastAPI Backend
+# Declaring - Backend (The Hexagon)
 
-A simple FastAPI backend project to help you get started with Python backend development!
+FastAPI backend implementing hexagonal architecture with domain-driven design, event-driven communication, and structured logging.
 
-## What is FastAPI?
+## Architecture Role
 
-FastAPI is a modern, fast (high-performance) web framework for building APIs with Python. It's easy to learn, fast to code, and production-ready.
+**This backend IS the hexagon** - the business core of the application. All business logic, domain models, and rules live here. The frontend and other clients are external adapters that interact with this core through its ports (service layer APIs).
+
+```
+┌─────────────────────────────────────────────┐
+│    THIS BACKEND = THE HEXAGON               │
+│    (Business Core)                          │
+│                                             │
+│  ┌──────────────────────────────────────┐  │
+│  │  Domain Models & Business Logic      │  │
+│  │  Service Layer = PORTS               │  │
+│  └──────────────────────────────────────┘  │
+│                                             │
+└─────────────────────────────────────────────┘
+         │              │              │
+         ▼              ▼              ▼
+   ┌──────────┐  ┌──────────┐  ┌──────────┐
+   │  HTTP    │  │ Database │  │  Events  │
+   │ (Router) │  │  (Repo)  │  │  (Bus)   │
+   │ PRIMARY  │  │SECONDARY │  │SECONDARY │
+   │ ADAPTER  │  │ ADAPTER  │  │ ADAPTER  │
+   └──────────┘  └──────────┘  └──────────┘
+```
+
+For complete architecture overview, see:
+- [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) - Mandatory architectural rules
+- [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md) - Detailed patterns and examples
+- [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) - TDD workflow and development practices
+- [Root CLAUDE.md](../CLAUDE.md) - Full-stack architecture overview
 
 ## Project Structure
 
 ```
 declaring/
-├── main.py                         # Main application file with API endpoints
+├── app/
+│   ├── intents/                    # Domain: Intent management
+│   ├── items/                      # Domain: Items
+│   ├── users/                      # Domain: Users
+│   ├── shared/                     # Cross-cutting concerns
+│   │   ├── events.py               # Event bus system
+│   │   ├── logging_config.py       # Structured logging with PII protection
+│   │   └── value_objects.py        # Shared domain concepts
+│   └── main.py                     # Application entry point
+│
+├── tests/                          # Test suite (unit, integration, API)
 ├── requirements.txt                # Python dependencies
 ├── pyproject.toml                  # Project config & linting rules
-├── lint.sh                         # Linting script (./lint.sh --fix)
-├── Dockerfile                      # Docker container configuration
-├── docker-compose.yml              # Docker Compose for easy deployment
-├── .dockerignore                  # Files to exclude from Docker build
-├── README.md                       # This file (start here!)
-├── QUICK_REFERENCE.md             # ⭐ Quick reference card
-├── LINTING_STANDARDS.md          # Linting rules and requirements
-├── LINTING_GUIDE.md              # Linting implementation guide
-├── DEBUGGING.md                   # Debugging guide for React + FastAPI
-├── LOGGING_STANDARDS.md           # Logging rules and requirements
-├── LOGGING_GUIDE.md               # Logging implementation guide
-├── PII_PRIVACY_GUIDE.md           # PII protection and privacy compliance
-└── react-example.jsx              # Example React components
+├── lint.sh                         # Linting script
+├── Dockerfile                      # Docker container
+├── docker-compose.yml              # Docker Compose
+│
+├── README.md                       # This file
+├── QUICK_REFERENCE.md              # ⭐ Quick reference card
+│
+├── ARCHITECTURE_STANDARDS.md       # Mandatory architectural rules
+├── ARCHITECTURE_GUIDE.md           # Detailed patterns and examples
+├── DEVELOPMENT_STANDARDS.md        # TDD workflow and development practices
+├── TESTING_STANDARDS.md            # Testing requirements (80%+ coverage)
+├── REFACTORING_GUIDE.md            # Safe refactoring patterns
+│
+├── LOGGING_STANDARDS.md            # Logging rules
+├── LOGGING_GUIDE.md                # Logging implementation
+├── PII_PRIVACY_GUIDE.md            # PII protection and compliance
+│
+├── LINTING_STANDARDS.md            # Code quality rules
+├── LINTING_GUIDE.md                # Linting implementation
+├── EXCEPTION_HANDLING_STANDARDS.md # Error handling rules
+├── EXCEPTION_HANDLING_GUIDE.md     # Error handling patterns
+│
+└── DEBUGGING.md                    # Troubleshooting guide
 ```
 
-## Setup Instructions
+### Domain Organization
 
-You can run this application in two ways:
-1. **Local development** (with Python directly)
-2. **Docker container** (recommended for production)
+Each domain follows hexagonal architecture:
 
-### Option A: Local Development
-
-#### 1. Install Python
-
-Make sure you have Python 3.8 or higher installed. Check your version:
-
-```bash
-python3 --version
+```
+app/{domain}/
+├── __init__.py              # Exports public service API only
+├── models.py                # Domain models with business logic
+├── schemas.py               # API DTOs (request/response)
+├── db_models.py             # Database models (ORM)
+├── service.py               # Business logic & orchestration (PORTS)
+├── repository.py            # Data access layer (SECONDARY ADAPTER)
+├── router.py                # HTTP endpoints (PRIMARY ADAPTER)
+└── events.py                # Domain event definitions
 ```
 
-#### 2. Create a Virtual Environment (Recommended)
+**Critical Layer Rules:**
+- **Service layer** = Ports (public API, business orchestration)
+- **Router** = Primary adapter (HTTP → domain)
+- **Repository** = Secondary adapter (domain → database)
+- **Event bus** = Secondary adapter (domain → analytics/notifications)
 
-A virtual environment keeps your project dependencies isolated:
+Cross-domain communication goes through service layer APIs only.
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.8+
+- pip
+- Virtual environment (recommended)
+
+### Local Development
 
 ```bash
-# Create virtual environment
+cd declaring
+
+# Create and activate virtual environment
 python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Activate it
-# On macOS/Linux:
-source venv/bin/activate
-# On Windows:
-# venv\Scripts\activate
-```
-
-You'll see `(venv)` in your terminal when it's activated.
-
-#### 3. Install Dependencies
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-This installs:
-- **FastAPI**: The web framework
-- **Uvicorn**: The server to run your app
-- **Pydantic**: For data validation
-- **Python-multipart**: For handling form data
-
-#### 4. Run the Application
-
-```bash
+# Run development server
 uvicorn main:app --reload
+
+# Run on different port
+uvicorn main:app --reload --port 8001
 ```
 
-The `--reload` flag makes the server restart when you change the code (great for development!).
+**Server runs at:** `http://localhost:8000`
 
-You should see:
-```
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process
-```
+**API Documentation:**
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+- Health check: http://localhost:8000/health
 
-### Option B: Docker (Recommended for Production)
-
-#### Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) installed on your machine
-- [Docker Compose](https://docs.docker.com/compose/install/) (usually included with Docker Desktop)
-
-#### Quick Start with Docker Compose
+### Docker (Production)
 
 ```bash
-# Build and run the container
+cd declaring
+
+# Build and run with Docker Compose
 docker-compose up --build
 
-# Or run in detached mode (background)
+# Run in background
 docker-compose up -d
 
 # View logs
 docker-compose logs -f
 
-# Stop the container
+# Stop
 docker-compose down
 ```
 
-The API will be available at `http://localhost:8000`
+## Testing
 
-#### Manual Docker Commands
+This project follows **Test-Driven Development (TDD)** practices. See [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) for the mandatory workflow.
+
+### Run Tests
 
 ```bash
-# Build the Docker image
-docker build -t fastapi-app .
+# All tests
+pytest
 
-# Run the container
-docker run -p 8000:8000 fastapi-app
+# Unit tests only
+pytest tests/unit -m unit
 
-# Run with environment variables
-docker run -p 8000:8000 \
-  -e LOG_LEVEL=INFO \
-  -e ENVIRONMENT=production \
-  fastapi-app
+# Integration tests
+pytest tests/integration -m integration
 
-# View logs
-docker logs -f <container-id>
+# API tests
+pytest tests/api -m api
 
-# Stop the container
-docker stop <container-id>
+# With coverage (80%+ required)
+pytest --cov=app --cov-report=html --cov-fail-under=80
+
+# View coverage report
+open htmlcov/index.html
 ```
 
-#### Why Use Docker?
+### Coverage Requirements
 
-✅ **Consistent environment** - Works the same everywhere  
-✅ **Easy deployment** - Deploy to any cloud platform  
-✅ **Isolation** - Doesn't interfere with other projects  
-✅ **Production-ready** - Same setup for dev and production  
-✅ **Cloud-native** - Ready for Kubernetes, AWS, GCP, Azure  
+- **Models:** 90%+ coverage
+- **Service layer:** 85%+ coverage
+- **Repository:** 80%+ coverage
+- **Overall:** 80%+ coverage
 
-See **`CLOUD_NATIVE_LOGGING.md`** for detailed deployment guides for:
-- AWS (ECS, EKS, Fargate)
-- Google Cloud (Cloud Run, GKE)
-- Azure (Container Apps, AKS)
-- Kubernetes
+All business actions must test event publishing.
 
-## Using Your API
+## Architecture Principles
 
-### Interactive API Documentation
+### 1. Hexagonal Architecture
 
-FastAPI automatically generates interactive API documentation! Open your browser and visit:
+Business logic lives in the core (domain models + service layer). Infrastructure adapters connect at the boundaries.
 
-- **Swagger UI**: http://127.0.0.1:8000/docs
-- **ReDoc**: http://127.0.0.1:8000/redoc
+### 2. Domain-Driven Design
 
-You can test all your endpoints directly from the browser!
+Code is organized by business domains (intents, items, users), not technical layers.
 
-### Example API Calls
+### 3. Event-Driven Communication
 
-#### 1. Check if the API is running
+All significant business actions publish domain events for analytics, logging, and cross-domain decoupling.
+
+### 4. Model Separation
+
+Three distinct model types:
+- **DB models** (`db_models.py`) - Database schema with audit fields
+- **Domain models** (`models.py`) - Business entities with validation and logic
+- **API DTOs** (`schemas.py`) - Request/response contracts (no sensitive data)
+
+### 5. Ports & Adapters
+
+**Ports (Service layer functions):**
+```python
+# Other domains call through service ports
+from app.items import service as item_service
+item = await item_service.get_item(item_id)
+```
+
+**Primary Adapters (drive the core):**
+- HTTP routers
+- CLI tools (future)
+- GraphQL API (future)
+
+**Secondary Adapters (driven by core):**
+- Database repository
+- Event bus
+- External APIs (future)
+
+## Key Features
+
+### Structured Logging with PII Protection
+
+- JSON format for easy parsing by CloudWatch, Datadog, Kibana
+- Automatic PII redaction (emails, phones, credit cards, SSNs)
+- Hash-based user correlation without exposing PII
+- GDPR, CCPA, HIPAA compliance support
+
 ```bash
-curl http://127.0.0.1:8000/health
-```
-
-#### 2. Create a new item
-```bash
-curl -X POST "http://127.0.0.1:8000/items" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Laptop",
-    "description": "A powerful laptop",
-    "price": 999.99,
-    "is_available": true
-  }'
-```
-
-#### 3. Get all items
-```bash
-curl http://127.0.0.1:8000/items
-```
-
-#### 4. Get a specific item (replace 1 with the item ID)
-```bash
-curl http://127.0.0.1:8000/items/1
-```
-
-#### 5. Search items with filters
-```bash
-curl "http://127.0.0.1:8000/search?name=laptop&min_price=500&available_only=true"
-```
-
-#### 6. Create a user
-```bash
-curl -X POST "http://127.0.0.1:8000/users" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "john_doe",
-    "email": "john@example.com"
-  }'
-```
-
-## Available Endpoints
-
-### General
-- `GET /` - Welcome message
-- `GET /health` - Health check
-
-### Items
-- `GET /items` - Get all items
-- `GET /items/{item_id}` - Get a specific item
-- `POST /items` - Create a new item
-- `PUT /items/{item_id}` - Update an item
-- `DELETE /items/{item_id}` - Delete an item
-
-### Users
-- `GET /users` - Get all users
-- `POST /users` - Create a new user
-
-### Search
-- `GET /search` - Search items with filters (name, min_price, max_price, available_only)
-
-## Understanding the Code
-
-### main.py Structure
-
-1. **Imports**: Import FastAPI and other necessary modules
-2. **App Creation**: Create the FastAPI application instance
-3. **Data Models**: Define Pydantic models for data validation
-4. **In-memory Storage**: Simple lists to store data (in production, you'd use a database)
-5. **Endpoints**: Functions decorated with `@app.get()`, `@app.post()`, etc.
-
-### Key Concepts
-
-- **Path Parameters**: `/items/{item_id}` - Dynamic values in the URL
-- **Query Parameters**: `/search?name=laptop` - Optional filters
-- **Request Body**: Data sent with POST/PUT requests
-- **Response Models**: Automatic validation and documentation of responses
-- **HTTP Status Codes**: 200 (OK), 201 (Created), 404 (Not Found), etc.
-
-## Logging & Debugging
-
-This FastAPI backend includes **comprehensive structured logging** to help you debug and monitor your application:
-
-### Structured Logging (JSON Format) with PII Protection
-
-The application uses **structured logging** with automatic **PII (Personally Identifiable Information) protection**:
-- ✅ **Structured JSON format** - Easy to parse by log aggregation tools (CloudWatch, Datadog, Kibana)
-- ✅ **Automatic PII redaction** - Emails, phone numbers, credit cards, SSNs automatically redacted
-- ✅ **Compliance-ready** - Helps with GDPR, CCPA, HIPAA compliance
-- ✅ **Searchable and filterable** by any field
-- ✅ **Hash-based correlation** - Track users without logging PII
-- ✅ **Perfect for cloud environments** and production monitoring
-- ✅ **Zero external dependencies** - Uses Python's built-in libraries
-
-### What's Logged
-- ✅ All incoming HTTP requests (method, path, client IP, user agent, origin)
-- ✅ Response status codes and processing time
-- ✅ Endpoint-specific actions with relevant data
-- ✅ Errors with full exception details and stack traces
-- ✅ Application startup information
-
-### View Logs
-When you run the server, you'll see JSON logs in your terminal:
-```bash
-uvicorn main:app --reload
-```
-
-Example output:
-```json
-{"timestamp":"2025-10-27T14:30:45.123456Z","level":"INFO","logger":"fastapi_app","message":"Application starting","environment":"development","log_level":"INFO","cors_origins_count":9}
-{"timestamp":"2025-10-27T14:30:50.789012Z","level":"INFO","logger":"fastapi_app","message":"Incoming request","method":"GET","path":"/items","client_ip":"127.0.0.1","user_agent":"curl/7.81.0","origin":null}
-{"timestamp":"2025-10-27T14:30:50.790123Z","level":"INFO","logger":"fastapi_app","message":"Fetching all items","total_items":5}
-{"timestamp":"2025-10-27T14:30:50.795678Z","level":"INFO","logger":"fastapi_app","message":"Request completed","method":"GET","path":"/items","status_code":200,"duration":0.006}
-```
-
-### Pretty-Print Logs (Development)
-
-For better readability during development, pipe logs through `jq`:
-```bash
-# Local development
+# Pretty-print logs during development
 uvicorn main:app --reload | jq '.'
-
-# Docker
-docker-compose logs -f api | jq '.'
 ```
 
-See **`LOGGING_GUIDE.md`** for:
-- Complete log output examples
-- Structured logging implementation
-- How to query logs in CloudWatch, Kibana, Datadog
+See [LOGGING_GUIDE.md](./LOGGING_GUIDE.md) for details.
 
-### PII Protection
+### Code Quality & Linting
 
-The application automatically protects sensitive data in logs:
-
-**What's automatically redacted:**
-- 📧 Email addresses → `[EMAIL_REDACTED]`
-- 📱 Phone numbers → `[PHONE_REDACTED]`
-- 💳 Credit card numbers → `[CC_REDACTED]`
-- 🔐 Passwords, API keys, tokens → `[REDACTED]`
-- 🆔 SSNs and sensitive IDs → `[SSN_REDACTED]`
-
-**Example:**
-```python
-# If you accidentally try to log PII:
-logger.info("Contact john.doe@example.com or call 555-123-4567")
-
-# It gets automatically sanitized:
-{"message": "Contact [EMAIL_REDACTED] or call [PHONE_REDACTED]"}
-```
-
-**For user correlation without exposing PII:**
-```python
-# Use hash-based identifiers
-email_hash = PIISanitizer.hash_identifier(user.email)
-logger.info("User action", extra={'email_hash': email_hash})
-```
-
-See **`PII_PRIVACY_GUIDE.md`** for:
-- Complete PII protection guide
-- What to log and what not to log
-- Compliance requirements (GDPR, CCPA, HIPAA)
-- Best practices and examples
-
-### Connecting from React
-If you're building a React frontend:
-1. Check **`DEBUGGING.md`** for a complete troubleshooting guide
-2. See **`react-example.jsx`** for working React component examples
-3. Make sure your React app's origin is in the CORS allowed list
-4. Watch the logs to see if requests are reaching your backend
-
-Common issues:
-- **CORS errors**: Add your React app's URL to the `origins` list in `main.py`
-- **404 errors**: Make sure the URL path matches (e.g., `/items` not `/api/items`)
-- **Network errors**: Verify FastAPI is running and the port is correct
-
-## Code Quality & Linting
-
-This project uses automated linting tools to maintain code quality:
-
-### Quick Start
+Automated linting with Black, isort, Flake8, and mypy:
 
 ```bash
-# Install linting tools
+# Install dev tools
 pip install -e '.[dev]'
 
-# Check all linting rules
+# Check code quality
 ./lint.sh
 
-# Fix auto-fixable issues
+# Auto-fix issues
 ./lint.sh --fix
 ```
 
-### Linting Tools
+See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md) for mandatory rules.
 
-- **Black** - Automatic code formatting
-- **isort** - Import sorting and organization  
-- **Flake8** - Code quality and style checks
-- **mypy** - Static type checking
+### Exception Handling
 
-All linting rules are configured in `pyproject.toml`. For mandatory rules, see **`LINTING_STANDARDS.md`**. For detailed guidance, see **`LINTING_GUIDE.md`**.
+Standardized error handling with proper HTTP status codes:
 
-### CI/CD
+- `400` - Validation errors
+- `404` - Resource not found
+- `422` - Unprocessable entity
+- `500` - Internal server error
 
-Linting runs automatically on every push and pull request via GitHub Actions. Code must pass all checks before merging.
+See [EXCEPTION_HANDLING_GUIDE.md](./EXCEPTION_HANDLING_GUIDE.md) for patterns.
 
-## Next Steps
+## Adding New Features
 
-Here are some ideas to extend your backend:
+### Create a New Domain
 
-1. **Add a Database**: Replace in-memory storage with SQLite, PostgreSQL, or MongoDB
-2. **Authentication**: Add user login and JWT tokens
-3. **Environment Variables**: Use `.env` files for configuration
-4. **Testing**: Add unit tests with pytest
-5. **Deployment**: Deploy to platforms like Heroku, Railway, or AWS
+Follow TDD workflow from [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md):
 
-## Learning Resources
+1. **Plan** - Define domain model and contracts
+2. **Test First** - Write failing tests
+3. **Implement** - Make tests pass
+4. **Events** - Publish domain events
+5. **Integration** - Test cross-domain scenarios
+6. **Documentation** - Update domain docs
 
-- [FastAPI Official Documentation](https://fastapi.tiangolo.com/)
-- [FastAPI Tutorial](https://fastapi.tiangolo.com/tutorial/)
-- [Python Official Tutorial](https://docs.python.org/3/tutorial/)
+**Essential checklist:**
+- [ ] Domain models with business logic (`models.py`)
+- [ ] API DTOs excluding sensitive data (`schemas.py`)
+- [ ] Service layer with business orchestration (`service.py`)
+- [ ] Repository for data access (`repository.py`)
+- [ ] HTTP router (`router.py`)
+- [ ] Domain events (`events.py`)
+- [ ] Export service API in `__init__.py`
+- [ ] Tests with 80%+ coverage
+- [ ] Domain documentation (`{DOMAIN}_DOMAIN.md`)
+
+See [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md) for detailed examples.
+
+## Frontend Integration
+
+The React frontend (at `../reacting/`) is a **primary adapter** that consumes this backend's HTTP API.
+
+**Key points:**
+- Frontend has NO business logic (presentation only)
+- All business rules live in this backend
+- Frontend types mirror `schemas.py` (API DTOs), not `models.py`
+- CORS is configured for common dev ports (3000, 5173, 8080)
+
+See [DEBUGGING.md](./DEBUGGING.md) for troubleshooting frontend-backend integration.
+
+## Documentation Index
+
+### Architecture
+- [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) - Mandatory rules
+- [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md) - Detailed patterns
+- [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) - Quick lookup
+
+### Development
+- [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) - TDD workflow (MANDATORY)
+- [TESTING_STANDARDS.md](./TESTING_STANDARDS.md) - Testing requirements
+- [REFACTORING_GUIDE.md](./REFACTORING_GUIDE.md) - Safe refactoring
+
+### Code Quality
+- [LINTING_STANDARDS.md](./LINTING_STANDARDS.md) - Linting rules
+- [LINTING_GUIDE.md](./LINTING_GUIDE.md) - Implementation guide
+- [EXCEPTION_HANDLING_STANDARDS.md](./EXCEPTION_HANDLING_STANDARDS.md) - Error handling rules
+- [EXCEPTION_HANDLING_GUIDE.md](./EXCEPTION_HANDLING_GUIDE.md) - Error patterns
+
+### Operations
+- [LOGGING_STANDARDS.md](./LOGGING_STANDARDS.md) - Logging requirements
+- [LOGGING_GUIDE.md](./LOGGING_GUIDE.md) - Structured logging
+- [PII_PRIVACY_GUIDE.md](./PII_PRIVACY_GUIDE.md) - Privacy compliance
+- [DEBUGGING.md](./DEBUGGING.md) - Troubleshooting
 
 ## Troubleshooting
 
-### Port already in use?
+### Port already in use
 ```bash
-# Use a different port
 uvicorn main:app --reload --port 8001
 ```
 
-### Module not found?
-Make sure your virtual environment is activated and dependencies are installed:
+### Module not found
 ```bash
-source venv/bin/activate  # macOS/Linux
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### CORS errors from frontend
+Add frontend URL to `origins` list in `app/main.py`.
+
+### Tests failing
+Ensure 80%+ coverage and all event publishing is tested.
+
+See [DEBUGGING.md](./DEBUGGING.md) for complete troubleshooting guide.
+
+## Learning Resources
+
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Hexagonal Architecture (Ports and Adapters)](https://alistair.cockburn.us/hexagonal-architecture/)
+- [Domain-Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html)
+- [Event-Driven Architecture](https://martinfowler.com/articles/201701-event-driven.html)
+
 ## Need Help?
 
-- Check the interactive docs at `/docs`
-- Read the FastAPI documentation
-- Look at the code comments in `main.py`
-
-Happy coding! 🚀
-
+1. Check [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for common patterns
+2. Read relevant STANDARDS.md and GUIDE.md files
+3. Review [CLAUDE.md](../CLAUDE.md) for full-stack context
+4. Explore API docs at `/docs`
