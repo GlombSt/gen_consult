@@ -25,10 +25,29 @@ class StructuredFormatter(logging.Formatter):
 
         # Standard logging attributes to exclude from extra fields
         standard_attrs = {
-            "name", "msg", "args", "created", "filename", "funcName", "levelname",
-            "levelno", "lineno", "module", "msecs", "message", "pathname", "process",
-            "processName", "relativeCreated", "thread", "threadName", "exc_info",
-            "exc_text", "stack_info", "getMessage", "asctime"
+            "name",
+            "msg",
+            "args",
+            "created",
+            "filename",
+            "funcName",
+            "levelname",
+            "levelno",
+            "lineno",
+            "module",
+            "msecs",
+            "message",
+            "pathname",
+            "process",
+            "processName",
+            "relativeCreated",
+            "thread",
+            "threadName",
+            "exc_info",
+            "exc_text",
+            "stack_info",
+            "getMessage",
+            "asctime",
         }
 
         # Add all extra fields from the record (anything not in standard attributes)

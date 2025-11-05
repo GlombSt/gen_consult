@@ -4,8 +4,9 @@ Unit tests for intents domain models.
 Tests business logic and validation rules for Intent and Fact domain models.
 """
 
-import pytest
 from datetime import datetime
+
+import pytest
 
 
 @pytest.mark.unit
@@ -17,7 +18,7 @@ class TestIntent:
         # This test will fail until we implement the Intent model
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act
         intent = Intent(
             id=None,
@@ -26,7 +27,7 @@ class TestIntent:
             output_format="plain text",
             created_at=datetime(2025, 1, 1, 12, 0, 0),
         )
-        
+
         # Assert
         assert intent.id is None
         assert intent.name == "Summarize document"
@@ -41,7 +42,7 @@ class TestIntent:
         """Test creating an intent with all fields including optional ones."""
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act
         intent = Intent(
             id=1,
@@ -54,7 +55,7 @@ class TestIntent:
             created_at=datetime(2025, 1, 1, 12, 0, 0),
             updated_at=datetime(2025, 1, 2, 12, 0, 0),
         )
-        
+
         # Assert
         assert intent.id == 1
         assert intent.name == "Extract dates"
@@ -70,7 +71,7 @@ class TestIntent:
         """Test that creating an intent with empty name raises validation error."""
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act & Assert
         with pytest.raises(ValueError, match="Name cannot be empty"):
             Intent(
@@ -84,7 +85,7 @@ class TestIntent:
         """Test that creating an intent with empty description raises validation error."""
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act & Assert
         with pytest.raises(ValueError, match="Description cannot be empty"):
             Intent(
@@ -98,7 +99,7 @@ class TestIntent:
         """Test that creating an intent with empty output format raises validation error."""
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act & Assert
         with pytest.raises(ValueError, match="Output format cannot be empty"):
             Intent(
@@ -112,7 +113,7 @@ class TestIntent:
         """Test that creating an intent auto-sets created_at and updated_at if not provided."""
         # Arrange
         from app.intents.models import Intent
-        
+
         # Act
         intent = Intent(
             id=None,
@@ -120,7 +121,7 @@ class TestIntent:
             description="Test description",
             output_format="plain text",
         )
-        
+
         # Assert
         assert intent.created_at is not None
         assert isinstance(intent.created_at, datetime)
@@ -137,7 +138,7 @@ class TestFact:
         """Test creating a fact with all required fields."""
         # Arrange
         from app.intents.models import Fact
-        
+
         # Act
         fact = Fact(
             id=None,
@@ -145,7 +146,7 @@ class TestFact:
             value="The document is from 2023",
             created_at=datetime(2025, 1, 1, 12, 0, 0),
         )
-        
+
         # Assert
         assert fact.id is None
         assert fact.intent_id == 1
@@ -156,7 +157,7 @@ class TestFact:
         """Test creating a fact with updated_at timestamp."""
         # Arrange
         from app.intents.models import Fact
-        
+
         # Act
         fact = Fact(
             id=1,
@@ -165,7 +166,7 @@ class TestFact:
             created_at=datetime(2025, 1, 1, 12, 0, 0),
             updated_at=datetime(2025, 1, 2, 12, 0, 0),
         )
-        
+
         # Assert
         assert fact.id == 1
         assert fact.intent_id == 1
@@ -177,7 +178,7 @@ class TestFact:
         """Test that creating a fact with empty value raises validation error."""
         # Arrange
         from app.intents.models import Fact
-        
+
         # Act & Assert
         with pytest.raises(ValueError, match="Value cannot be empty"):
             Fact(
@@ -190,18 +191,17 @@ class TestFact:
         """Test that creating a fact auto-sets created_at and updated_at if not provided."""
         # Arrange
         from app.intents.models import Fact
-        
+
         # Act
         fact = Fact(
             id=None,
             intent_id=1,
             value="Test fact value",
         )
-        
+
         # Assert
         assert fact.created_at is not None
         assert isinstance(fact.created_at, datetime)
         assert fact.updated_at is not None
         assert isinstance(fact.updated_at, datetime)
         assert fact.updated_at >= fact.created_at
-

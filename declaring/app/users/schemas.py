@@ -16,11 +16,7 @@ class UserCreateRequest(BaseModel):
     username: str
     email: str
 
-    model_config = {
-        "json_schema_extra": {
-            "examples": [{"username": "john_doe", "email": "john.doe@example.com"}]
-        }
-    }
+    model_config = {"json_schema_extra": {"examples": [{"username": "john_doe", "email": "john.doe@example.com"}]}}
 
 
 class UserUpdateRequest(BaseModel):
@@ -37,8 +33,4 @@ class UserResponse(BaseModel):
     username: str
     email: str
 
-    model_config = {
-        "json_schema_extra": {
-            "examples": [{"id": 1, "username": "john_doe", "email": "john.doe@example.com"}]
-        }
-    }
+    model_config = {"json_schema_extra": {"examples": [{"id": 1, "username": "john_doe", "email": "john.doe@example.com"}]}}

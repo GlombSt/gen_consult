@@ -8,7 +8,6 @@ Supports SQLite (in-memory) for development and PostgreSQL for production.
 import os
 from typing import AsyncGenerator
 
-from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.pool import StaticPool
@@ -144,9 +143,7 @@ async def init_db() -> None:
             await conn.run_sync(Base.metadata.create_all)
         logger.info("Database tables created (SQLite)")
     else:
-        logger.info(
-            "Database tables should be created via Alembic migrations (PostgreSQL)"
-        )
+        logger.info("Database tables should be created via Alembic migrations (PostgreSQL)")
 
 
 async def close_db() -> None:

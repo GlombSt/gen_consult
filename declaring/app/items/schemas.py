@@ -20,12 +20,7 @@ class ItemCreateRequest(BaseModel):
 
     model_config = {
         "json_schema_extra": {
-            "examples": [{
-                "name": "Laptop",
-                "description": "High-performance laptop",
-                "price": 999.99,
-                "is_available": True
-            }]
+            "examples": [{"name": "Laptop", "description": "High-performance laptop", "price": 999.99, "is_available": True}]
         }
     }
 
@@ -50,12 +45,8 @@ class ItemResponse(BaseModel):
 
     model_config = {
         "json_schema_extra": {
-            "examples": [{
-                "id": 1,
-                "name": "Laptop",
-                "description": "High-performance laptop",
-                "price": 999.99,
-                "is_available": True
-            }]
+            "examples": [
+                {"id": 1, "name": "Laptop", "description": "High-performance laptop", "price": 999.99, "is_available": True}
+            ]
         }
     }
