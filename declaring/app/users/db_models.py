@@ -7,7 +7,7 @@ Used exclusively by the repository layer.
 
 from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
 
 from app.shared.database import Base
 
