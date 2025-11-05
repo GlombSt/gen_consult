@@ -41,11 +41,7 @@ def create_application() -> FastAPI:
     Returns:
         Configured FastAPI application instance
     """
-    app = FastAPI(
-        title="My First FastAPI App",
-        description="A simple FastAPI backend for learning",
-        version="1.0.0"
-    )
+    app = FastAPI(title="My First FastAPI App", description="A simple FastAPI backend for learning", version="1.0.0")
 
     # Configure CORS
     app.add_middleware(

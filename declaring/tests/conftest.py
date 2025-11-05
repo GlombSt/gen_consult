@@ -32,7 +32,7 @@ def test_client(test_app):
 async def test_db_session():
     """
     Provide a database session for testing.
-    
+
     Creates an in-memory SQLite database, creates all tables,
     and yields a session. After the test, rolls back all changes
     and drops tables.
@@ -44,35 +44,35 @@ async def test_db_session():
         poolclass=StaticPool,
         connect_args={"check_same_thread": False},
     )
-    
+
     # Create all tables synchronously
     def create_tables(conn):
         Base.metadata.create_all(bind=conn)
-    
+
     def drop_tables(conn):
         Base.metadata.drop_all(bind=conn)
-    
+
     # Create session factory
     async_session_maker = async_sessionmaker(
         engine,
         class_=AsyncSession,
         expire_on_commit=False,
     )
-    
+
     # Create all tables
     async with engine.begin() as conn:
         await conn.run_sync(create_tables)
-    
+
     # Create session for test
     async with async_session_maker() as session:
         yield session
         # Rollback any uncommitted changes
         await session.rollback()
-    
+
     # Drop all tables after test
     async with engine.begin() as conn:
         await conn.run_sync(drop_tables)
-    
+
     # Close engine
     await engine.dispose()
 
@@ -81,11 +81,12 @@ async def test_db_session():
 async def mock_user_repository(test_db_session):
     """
     Provide a fresh user repository for each test.
-    
+
     Note: This fixture requires test_db_session, which is async.
     Use this in async tests.
     """
     from app.users.repository import UserRepository
+
     return UserRepository(test_db_session)
 
 
@@ -93,11 +94,12 @@ async def mock_user_repository(test_db_session):
 async def mock_intent_repository(test_db_session):
     """
     Provide a fresh intent repository for each test.
-    
+
     Note: This fixture requires test_db_session, which is async.
     Use this in async tests.
     """
     from app.intents.repository import IntentRepository
+
     return IntentRepository(test_db_session)
 
 

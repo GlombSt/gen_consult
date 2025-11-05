@@ -50,9 +50,7 @@ class UserRepository:
         Returns:
             Domain model user if found, None otherwise
         """
-        result = await self.db.execute(
-            select(UserDBModel).where(UserDBModel.id == user_id)
-        )
+        result = await self.db.execute(select(UserDBModel).where(UserDBModel.id == user_id))
         db_user = result.scalar_one_or_none()
         if db_user:
             return self._to_domain_model(db_user)
@@ -85,11 +83,9 @@ class UserRepository:
         Returns:
             Updated domain model user if found, None otherwise
         """
-        result = await self.db.execute(
-            select(UserDBModel).where(UserDBModel.id == user_id)
-        )
+        result = await self.db.execute(select(UserDBModel).where(UserDBModel.id == user_id))
         db_user = result.scalar_one_or_none()
-        
+
         if not db_user:
             return None
 
@@ -114,10 +110,8 @@ class UserRepository:
             True if deleted, False if not found
         """
         from sqlalchemy import delete as sql_delete
-        
-        result = await self.db.execute(
-            sql_delete(UserDBModel).where(UserDBModel.id == user_id)
-        )
+
+        result = await self.db.execute(sql_delete(UserDBModel).where(UserDBModel.id == user_id))
         await self.db.flush()
         return result.rowcount > 0
 

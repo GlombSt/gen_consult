@@ -110,7 +110,10 @@ class TestCreateUser:
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_user)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -133,7 +136,10 @@ class TestCreateUser:
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_user)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -166,7 +172,10 @@ class TestUpdateUser:
         mock_repo.find_by_id = AsyncMock(return_value=existing_user)
         mock_repo.update = AsyncMock(return_value=updated_user)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -188,7 +197,10 @@ class TestUpdateUser:
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -212,7 +224,10 @@ class TestUpdateUser:
         mock_repo.find_by_id = AsyncMock(return_value=existing_user)
         mock_repo.update = AsyncMock(return_value=updated_user)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -241,7 +256,10 @@ class TestDeleteUser:
         mock_repo.find_by_id = AsyncMock(return_value=existing_user)
         mock_repo.delete = AsyncMock(return_value=True)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -260,7 +278,10 @@ class TestDeleteUser:
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
@@ -282,7 +303,10 @@ class TestDeleteUser:
         mock_repo.find_by_id = AsyncMock(return_value=existing_user)
         mock_repo.delete = AsyncMock(return_value=True)
 
-        with patch("app.users.service.UserRepository", return_value=mock_repo), patch("app.users.service.event_bus") as mock_bus:
+        with (
+            patch("app.users.service.UserRepository", return_value=mock_repo),
+            patch("app.users.service.event_bus") as mock_bus,
+        ):
             mock_bus.publish = AsyncMock()
 
             # Act
