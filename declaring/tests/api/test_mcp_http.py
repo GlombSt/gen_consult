@@ -5,10 +5,12 @@ Tests the MCP server HTTP transport integration at /mcp endpoint.
 """
 
 import json
+from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
 
+from app.intents.mcp_server import _get_repository
 from app.intents.repository import IntentRepository
 from app.main import app
 from app.shared.dependencies import get_intent_repository
@@ -21,8 +23,14 @@ def client(test_db_session):
     def override_get_intent_repository():
         return IntentRepository(test_db_session)
 
+    # Patch MCP server's _get_repository to use test session
+    async def mock_get_repository():
+        repository = IntentRepository(test_db_session)
+        return repository, test_db_session
+
     app.dependency_overrides[get_intent_repository] = override_get_intent_repository
-    yield TestClient(app)
+    with patch("app.intents.mcp_server._get_repository", side_effect=mock_get_repository):
+        yield TestClient(app)
     app.dependency_overrides.clear()
 
 
