@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents.router import router as intents_router
 from app.items.router import router as items_router
+from app.mcp.router import router as mcp_router
 from app.shared.database import close_db, init_db
 from app.shared.exception_handlers import validation_exception_handler
 from app.shared.logging_config import logger
@@ -21,18 +22,23 @@ ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG").upper()
 
 # CORS origins configuration
-CORS_ORIGINS = [
-    "http://localhost",
-    "http://localhost:3000",  # Common React/Next.js port
-    "http://localhost:3001",
-    "http://localhost:5173",  # Common Vite port
-    "http://localhost:5174",
-    "http://localhost:8080",  # Common Vue/general dev port
-    "http://localhost:8081",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:8080",
-]
+# NOTE: In development, we allow all origins for MCP client connections
+# In production, restrict this to specific domains
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*").split(",") if ENVIRONMENT == "production" else ["*"]
+
+# Development origins (commented out, using "*" instead)
+# CORS_ORIGINS = [
+#     "http://localhost",
+#     "http://localhost:3000",  # Common React/Next.js port
+#     "http://localhost:3001",
+#     "http://localhost:5173",  # Common Vite port
+#     "http://localhost:5174",
+#     "http://localhost:8080",  # Common Vue/general dev port
+#     "http://localhost:8081",
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:5173",
+#     "http://127.0.0.1:8080",
+# ]
 
 
 def create_application() -> FastAPI:
@@ -63,6 +69,7 @@ def create_application() -> FastAPI:
     app.include_router(items_router)
     app.include_router(users_router)
     app.include_router(intents_router)
+    app.include_router(mcp_router)  # MCP server endpoints
 
     return app
 
@@ -74,12 +81,13 @@ app = create_application()
 @app.on_event("startup")
 async def startup_event():
     """Initialize application on startup"""
+    cors_info = "all (*)" if CORS_ORIGINS == ["*"] else f"{len(CORS_ORIGINS)} specific origins"
     logger.info(
         "Application starting",
         extra={
             "environment": ENVIRONMENT,
             "log_level": LOG_LEVEL,
-            "cors_origins_count": len(CORS_ORIGINS),
+            "cors_origins": cors_info,
         },
     )
     # Initialize database (create tables for SQLite)
