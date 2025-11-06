@@ -1,0 +1,114 @@
+"""
+Unit tests for {domain} domain models.
+
+Tests domain logic and validation rules.
+
+USAGE:
+1. Copy this file to tests/unit/{domain}/test_models.py
+2. Replace {Domain} with capitalized domain name (e.g., Item)
+3. Replace {domain} with lowercase domain name (e.g., item)
+4. Replace {entity} with entity name (e.g., item)
+5. Add/remove tests as needed for your domain model
+"""
+
+from datetime import datetime
+
+import pytest
+
+from app.{domain}.models import {Domain}
+
+
+@pytest.mark.unit
+class Test{Domain}:
+    """Test {Domain} domain model."""
+
+    def test_create_{entity}_with_valid_data_creates_instance(self):
+        """Test creating a {entity} with valid data."""
+        # Arrange & Act
+        {entity} = {Domain}(
+            id=1,
+            name="Test {Domain}",
+            # Add other required fields here
+        )
+
+        # Assert
+        assert {entity}.id == 1
+        assert {entity}.name == "Test {Domain}"
+        assert isinstance({entity}.created_at, datetime)
+        # Add other assertions
+
+    def test_create_{entity}_without_id_sets_none(self):
+        """Test creating a {entity} without ID sets it to None."""
+        # Arrange & Act
+        {entity} = {Domain}(id=None, name="Test {Domain}")
+
+        # Assert
+        assert {entity}.id is None
+
+    def test_create_{entity}_without_created_at_sets_default(self):
+        """Test creating a {entity} without created_at sets default."""
+        # Arrange & Act
+        before = datetime.utcnow()
+        {entity} = {Domain}(id=1, name="Test {Domain}")
+        after = datetime.utcnow()
+
+        # Assert
+        assert before <= {entity}.created_at <= after
+
+    def test_create_{entity}_with_created_at_uses_provided_value(self):
+        """Test creating a {entity} with provided created_at."""
+        # Arrange
+        custom_date = datetime(2025, 1, 1, 12, 0, 0)
+
+        # Act
+        {entity} = {Domain}(id=1, name="Test {Domain}", created_at=custom_date)
+
+        # Assert
+        assert {entity}.created_at == custom_date
+
+    # Test defaults
+    def test_create_{entity}_with_defaults_sets_expected_values(self):
+        """Test creating a {entity} with default values."""
+        # Arrange & Act
+        {entity} = {Domain}(id=1, name="Test {Domain}")
+
+        # Assert
+        # Add assertions for default values
+        pass
+
+    # Test edge cases
+    def test_create_{entity}_with_none_optional_field_accepts_none(self):
+        """Test creating a {entity} with None for optional field."""
+        # Arrange & Act
+        {entity} = {Domain}(id=1, name="Test {Domain}", description=None)
+
+        # Assert
+        assert {entity}.description is None
+
+    # Add validation tests if your model has validators
+    def test_create_{entity}_with_invalid_data_raises_error(self):
+        """Test creating a {entity} with invalid data."""
+        # Arrange & Act & Assert
+        with pytest.raises(ValueError) as exc_info:
+            {Domain}(id=1, name="", price=-10.0)  # Example invalid data
+
+        assert "validation error message" in str(exc_info.value)
+
+
+# If your model has business logic methods, add tests here
+@pytest.mark.unit
+class Test{Domain}BusinessLogic:
+    """Test {Domain} business logic methods."""
+
+    def test_some_business_method_performs_expected_action(self):
+        """Test business logic method."""
+        # Arrange
+        {entity} = {Domain}(id=1, name="Test {Domain}")
+
+        # Act
+        result = {entity}.some_business_method()
+
+        # Assert
+        assert result == expected_value
+
+    # Add more business logic tests as needed

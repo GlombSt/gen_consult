@@ -1,0 +1,182 @@
+"""
+Test data fixtures for {domain} domain.
+
+USAGE:
+1. Copy this file to tests/fixtures/{domain}s.py (note the plural)
+2. Replace {Domain} with capitalized domain name (e.g., Item)
+3. Replace {domain} with lowercase domain name (e.g., item)
+4. Replace {entity} with entity name (e.g., item)
+5. Add/remove fields based on your domain model
+"""
+
+from datetime import datetime
+
+from app.{domain}.models import {Domain}
+from app.{domain}.schemas import {Domain}CreateRequest, {Domain}UpdateRequest
+
+
+def create_test_{entity}(
+    id: int = 1,
+    name: str = "Test {Domain}",
+    description: str = "Test description",
+    # Add other fields with defaults here
+    created_at: datetime = None,
+) -> {Domain}:
+    """
+    Create a test {entity} domain model.
+
+    Args:
+        id: {Domain} ID (None for new {domain})
+        name: {Domain} name
+        description: {Domain} description
+        created_at: Creation timestamp
+
+    Returns:
+        {Domain} domain model instance
+    """
+    return {Domain}(
+        id=id,
+        name=name,
+        description=description,
+        # Add other fields
+        created_at=created_at or datetime(2025, 1, 1, 12, 0, 0),
+    )
+
+
+def create_test_{entity}_create_request(
+    name: str = "New {Domain}",
+    description: str = "New description",
+    # Add other fields with defaults
+) -> {Domain}CreateRequest:
+    """
+    Create a test {entity} create request.
+
+    Args:
+        name: {Domain} name
+        description: {Domain} description
+
+    Returns:
+        {Domain}CreateRequest instance
+    """
+    return {Domain}CreateRequest(
+        name=name,
+        description=description,
+        # Add other fields
+    )
+
+
+def create_test_{entity}_update_request(
+    name: str = None,
+    description: str = None,
+    # Add other optional fields
+) -> {Domain}UpdateRequest:
+    """
+    Create a test {entity} update request.
+
+    All fields are optional for partial updates.
+
+    Args:
+        name: Optional new name
+        description: Optional new description
+
+    Returns:
+        {Domain}UpdateRequest instance
+    """
+    return {Domain}UpdateRequest(
+        name=name,
+        description=description,
+        # Add other fields
+    )
+
+
+# Optional: Builder pattern for complex objects
+class {Domain}Builder:
+    """
+    Builder for creating test {domain}s with fluent interface.
+
+    Example:
+        {entity} = {Domain}Builder() \\
+            .with_name("Custom Name") \\
+            .with_id(42) \\
+            .build()
+    """
+
+    def __init__(self):
+        """Initialize builder with default values."""
+        self.id = 1
+        self.name = "Test {Domain}"
+        self.description = "Test description"
+        # Add other fields with defaults
+        self.created_at = datetime(2025, 1, 1, 12, 0, 0)
+
+    def with_id(self, id: int):
+        """Set the ID."""
+        self.id = id
+        return self
+
+    def with_name(self, name: str):
+        """Set the name."""
+        self.name = name
+        return self
+
+    def with_description(self, description: str):
+        """Set the description."""
+        self.description = description
+        return self
+
+    def with_created_at(self, created_at: datetime):
+        """Set the created_at timestamp."""
+        self.created_at = created_at
+        return self
+
+    # Add more with_* methods for other fields
+
+    def build(self) -> {Domain}:
+        """
+        Build the {Domain} instance.
+
+        Returns:
+            {Domain} domain model instance
+        """
+        return {Domain}(
+            id=self.id,
+            name=self.name,
+            description=self.description,
+            # Add other fields
+            created_at=self.created_at,
+        )
+
+
+# Optional: Factory functions for common test scenarios
+def create_minimal_{entity}() -> {Domain}:
+    """Create a {entity} with minimal required fields."""
+    return {Domain}(
+        id=1,
+        name="Minimal {Domain}",
+        # Only required fields
+    )
+
+
+def create_complete_{entity}() -> {Domain}:
+    """Create a {entity} with all fields populated."""
+    return {Domain}(
+        id=1,
+        name="Complete {Domain}",
+        description="Full description",
+        # All fields populated
+        created_at=datetime(2025, 1, 1, 12, 0, 0),
+    )
+
+
+def create_{entity}_with_invalid_data() -> dict:
+    """
+    Create invalid {entity} data for validation testing.
+
+    Returns:
+        Dict with invalid field values
+    """
+    return {
+        "name": "",  # Empty name
+        "price": -10.0,  # Negative price
+        # Add other invalid scenarios
+    }
