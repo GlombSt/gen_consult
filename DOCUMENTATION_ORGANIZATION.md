@@ -20,7 +20,7 @@ Documentation lives where the code lives:
 
 ```
 gen_consult/
-├── [root]/                    # Project-wide docs (README.md, SETUP.md, TODO.md, CLAUDE.md)
+├── [root]/                    # Project-wide docs (README.md, TODO.md, CLAUDE.md)
 ├── declaring/                 # Backend docs
 │   ├── *_STANDARDS.md         # Mandatory rules
 │   ├── *_GUIDE.md             # Detailed explanations

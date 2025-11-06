@@ -120,6 +120,16 @@ Place in `src/shared/components/[ComponentName]/` if it's used across multiple f
 
 Place in `features/[domain]/utils/` (e.g., formatters, validators for that feature only).
 
+## Testing
+
+```bash
+# Unit tests (when configured)
+npm test
+
+# E2E tests (when configured)
+npm run test:e2e
+```
+
 ## Troubleshooting
 
 **CORS errors:**
