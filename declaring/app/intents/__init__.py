@@ -22,7 +22,6 @@ from .schemas import (
 from .service import (
     add_fact_to_intent,
     create_intent,
-    get_all_intents,
     get_intent,
     remove_fact_from_intent,
     update_fact_value,
@@ -37,7 +36,6 @@ from .service import (
 __all__ = [
     # Service functions (public API)
     "create_intent",
-    "get_all_intents",
     "get_intent",
     "update_intent_name",
     "update_intent_description",

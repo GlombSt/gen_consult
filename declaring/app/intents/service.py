@@ -69,22 +69,6 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     return created_intent
 
 
-async def get_all_intents(repository: IntentRepository) -> List[Intent]:
-    """
-    Get all intents.
-
-    Args:
-        repository: Intent repository instance
-
-    Returns:
-        List of all intents
-    """
-    logger.info("Fetching all intents")
-    intents = await repository.find_all()
-    logger.info("Intents fetched", extra={"total_intents": len(intents)})
-    return intents
-
-
 async def get_intent(intent_id: int, repository: IntentRepository) -> Optional[Intent]:
     """
     Get a specific intent by ID.
