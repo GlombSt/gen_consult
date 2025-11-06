@@ -54,6 +54,7 @@ gen_consult/
 - `declaring/ARCHITECTURE_STANDARDS.md` - Mandatory rules
 - `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
 - `declaring/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
+- `declaring/AGENT_WORKFLOW.md` - **MANDATORY for coding agents** - Completion criteria and workflow
 - `declaring/TESTING_STANDARDS.md` - Testing requirements
 
 ### Frontend Documentation
@@ -355,6 +356,7 @@ If frontend runs on different port, update `declaring/app/main.py` CORS_ORIGINS 
 7. **Follow the layers** - Router → Service → Repository, no shortcuts
 8. **Test thoroughly** - 80%+ coverage required
 9. **TDD is mandatory** - Read `DEVELOPMENT_STANDARDS.md`
+10. **Complete workflow** - Read `AGENT_WORKFLOW.md` - MUST push code and verify CI passes before completion
 
 ### Before Making Changes
 

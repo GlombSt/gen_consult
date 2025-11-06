@@ -56,3 +56,32 @@ d. **Validate Before Commit**
    - Error handling is comprehensive
    - Logs are meaningful
 
+e. **Commit and Push**
+   - Stage all changes: `git add .`
+   - Commit with descriptive message: `git commit -m "Description"`
+   - Push to branch: `git push origin branch-name`
+   - **CRITICAL:** Code MUST be pushed to a branch (not just committed locally)
+
+f. **Verify CI Passes**
+   - Check GitHub Actions workflow status
+   - Verify all checks are GREEN (✅)
+   - If CI fails, fix issues and push again
+   - **CRITICAL:** Do NOT mark work as complete until CI passes
+
+## 4. Agent-Specific Workflow
+
+**For AI coding agents (Cursor, Claude Code, etc.):**
+
+**MANDATORY:** Read [AGENT_WORKFLOW.md](./AGENT_WORKFLOW.md) before starting work.
+
+**Completion Criteria:**
+1. ✅ All code committed and pushed to a branch
+2. ✅ Local linting passes (`./lint.sh` exits 0)
+3. ✅ Local tests pass (`pytest` exits 0)
+4. ✅ CI GitHub Actions workflow is GREEN
+5. ✅ All CI checks passed (linting, tests, coverage)
+
+**The agent MUST NOT say work is finished until ALL criteria are met.**
+
+See [AGENT_WORKFLOW.md](./AGENT_WORKFLOW.md) for detailed step-by-step instructions.
+

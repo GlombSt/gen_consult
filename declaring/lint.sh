@@ -2,7 +2,8 @@
 # Linting and formatting script
 # Usage: ./lint.sh [--fix]
 
-set -e
+# Don't use set -e here because we want to check exit codes manually
+# set -e
 
 # Colors for output
 RED='\033[0;31m'
@@ -82,7 +83,7 @@ fi
 
 # 3. Flake8 - Linting (Critical errors only)
 print_section "3. Flake8 (Critical Errors)"
-if flake8 app/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics; then
+if flake8 app/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics 2>&1; then
     echo -e "${GREEN}✓ No critical flake8 errors${NC}"
 else
     echo -e "${RED}✗ Critical flake8 errors found${NC}"
@@ -91,9 +92,13 @@ fi
 
 # 4. Flake8 - Full check (warnings)
 print_section "4. Flake8 (Full Check - Warnings)"
-if flake8 app/ tests/ --count --max-complexity=10 --max-line-length=127 --statistics; then
+# Note: We ignore exit code for warnings check since warnings are non-critical
+# Run flake8 and capture output, but ignore exit code with || true
+FLAKE8_OUTPUT=$(flake8 app/ tests/ --count --max-complexity=10 --max-line-length=127 --statistics 2>&1 || true)
+if [ -z "$FLAKE8_OUTPUT" ] || echo "$FLAKE8_OUTPUT" | grep -q "^0"; then
     echo -e "${GREEN}✓ No flake8 warnings${NC}"
 else
+    echo "$FLAKE8_OUTPUT"
     echo -e "${YELLOW}⚠ Flake8 warnings found (non-critical)${NC}"
 fi
 
