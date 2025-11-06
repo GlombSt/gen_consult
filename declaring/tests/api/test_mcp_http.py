@@ -81,22 +81,19 @@ class TestMCPHTTPEndpoint:
         assert "get_intent" in tool_names
         assert "add_fact_to_intent" in tool_names
 
-    @pytest.mark.asyncio
-    async def test_tools_call_request(self, client, test_db_session):
+    def test_tools_call_request(self, client):
         """Test MCP tools/call request."""
-        # Arrange - first create an intent via service
-        from app.intents import service
-        from app.intents.repository import IntentRepository
-        from app.intents.schemas import IntentCreateRequest
-
-        repository = IntentRepository(test_db_session)
-        create_request = IntentCreateRequest(
-            name="Test Intent",
-            description="Test description",
-            output_format="JSON",
+        # Arrange - first create an intent via API
+        create_response = client.post(
+            "/intents",
+            json={
+                "name": "Test Intent",
+                "description": "Test description",
+                "output_format": "JSON",
+            },
         )
-        intent = await service.create_intent(create_request, repository)
-        await test_db_session.commit()
+        assert create_response.status_code == 201
+        created_intent = create_response.json()
 
         request_data = {
             "jsonrpc": "2.0",
@@ -104,7 +101,7 @@ class TestMCPHTTPEndpoint:
             "method": "tools/call",
             "params": {
                 "name": "get_intent",
-                "arguments": {"intent_id": intent.id},
+                "arguments": {"intent_id": created_intent["id"]},
             },
         }
 
@@ -123,7 +120,7 @@ class TestMCPHTTPEndpoint:
 
         # Verify intent data in response
         intent_data = json.loads(data["result"]["content"][0]["text"])
-        assert intent_data["id"] == intent.id
+        assert intent_data["id"] == created_intent["id"]
         assert intent_data["name"] == "Test Intent"
 
     def test_notification_request(self, client):
