@@ -10,7 +10,6 @@ from sqlalchemy.pool import StaticPool
 from app.intents.db_models import FactDBModel, IntentDBModel  # noqa: F401
 
 # Import all DB models so Base.metadata knows about them
-from app.items.db_models import ItemDBModel  # noqa: F401
 from app.main import app
 from app.shared.database import Base
 from app.shared.events import EventBus
@@ -76,19 +75,6 @@ async def test_db_session():
 
     # Close engine
     await engine.dispose()
-
-
-@pytest.fixture
-async def mock_item_repository(test_db_session):
-    """
-    Provide a fresh item repository for each test.
-
-    Note: This fixture requires test_db_session, which is async.
-    Use this in async tests.
-    """
-    from app.items.repository import ItemRepository
-
-    return ItemRepository(test_db_session)
 
 
 @pytest.fixture
