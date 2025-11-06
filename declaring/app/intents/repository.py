@@ -219,7 +219,12 @@ class IntentRepository:
     def _to_intent_domain_model(self, db_intent: IntentDBModel) -> Intent:
         """Convert DB model to domain model."""
         # Convert facts from DB models to domain models
-        facts = [self._to_fact_domain_model(db_fact) for db_fact in (db_intent.facts or [])]
+        # Safely access facts - use getattr to handle cases where relationship isn't loaded
+        db_facts = getattr(db_intent, "facts", None)
+        if db_facts is None:
+            facts = []
+        else:
+            facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
         return Intent(
             id=db_intent.id,
             name=db_intent.name,
