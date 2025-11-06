@@ -4,7 +4,7 @@ Repository layer for intents domain.
 Handles data access and conversion between DB models and domain models using SQLAlchemy.
 """
 
-from typing import List, Optional
+from typing import Optional
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -220,7 +220,7 @@ class IntentRepository:
         facts = []
         if hasattr(db_intent, "facts") and db_intent.facts is not None:
             facts = [self._to_fact_domain_model(db_fact) for db_fact in db_intent.facts]
-        
+
         return Intent(
             id=db_intent.id,
             name=db_intent.name,
