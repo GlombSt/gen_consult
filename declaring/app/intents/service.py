@@ -4,7 +4,7 @@ Service layer for intents domain.
 Contains business logic and serves as the public API for this domain.
 """
 
-from typing import List, Optional
+from typing import Optional
 
 from app.shared.events import event_bus
 from app.shared.logging_config import logger
