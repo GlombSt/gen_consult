@@ -6,8 +6,6 @@ Contains business logic and serves as the public API for this domain.
 
 from typing import List, Optional
 
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.shared.events import event_bus
 from app.shared.logging_config import logger
 
@@ -17,36 +15,34 @@ from .repository import UserRepository
 from .schemas import UserCreateRequest, UserUpdateRequest
 
 
-async def get_all_users(db: AsyncSession) -> List[User]:
+async def get_all_users(repository: UserRepository) -> List[User]:
     """
     Get all users.
 
     Args:
-        db: Database session
+        repository: User repository instance
 
     Returns:
         List of all users
     """
     logger.info("Fetching all users")
-    repository = UserRepository(db)
     users = await repository.find_all()
     logger.info("Users fetched", extra={"total_users": len(users)})
     return users
 
 
-async def get_user(user_id: int, db: AsyncSession) -> Optional[User]:
+async def get_user(user_id: int, repository: UserRepository) -> Optional[User]:
     """
     Get a specific user by ID.
 
     Args:
         user_id: The user ID
-        db: Database session
+        repository: User repository instance
 
     Returns:
         User if found, None otherwise
     """
     logger.info("Looking for user", extra={"user_id": user_id})
-    repository = UserRepository(db)
     user = await repository.find_by_id(user_id)
 
     if user:
@@ -57,13 +53,13 @@ async def get_user(user_id: int, db: AsyncSession) -> Optional[User]:
     return user
 
 
-async def create_user(request: UserCreateRequest, db: AsyncSession) -> User:
+async def create_user(request: UserCreateRequest, repository: UserRepository) -> User:
     """
     Create a new user.
 
     Args:
         request: User creation request
-        db: Database session
+        repository: User repository instance
 
     Returns:
         Created user
@@ -78,7 +74,6 @@ async def create_user(request: UserCreateRequest, db: AsyncSession) -> User:
     )
 
     # Persist
-    repository = UserRepository(db)
     created_user = await repository.create(user)
 
     # Publish domain event (MANDATORY)
@@ -95,21 +90,20 @@ async def create_user(request: UserCreateRequest, db: AsyncSession) -> User:
     return created_user
 
 
-async def update_user(user_id: int, request: UserUpdateRequest, db: AsyncSession) -> Optional[User]:
+async def update_user(user_id: int, request: UserUpdateRequest, repository: UserRepository) -> Optional[User]:
     """
     Update an existing user.
 
     Args:
         user_id: The user ID to update
         request: User update request
-        db: Database session
+        repository: User repository instance
 
     Returns:
         Updated user if found, None otherwise
     """
     logger.info("Updating user", extra={"user_id": user_id})
 
-    repository = UserRepository(db)
     # Get existing user
     existing_user = await repository.find_by_id(user_id)
     if not existing_user:
@@ -140,20 +134,19 @@ async def update_user(user_id: int, request: UserUpdateRequest, db: AsyncSession
     return updated_user
 
 
-async def delete_user(user_id: int, db: AsyncSession) -> bool:
+async def delete_user(user_id: int, repository: UserRepository) -> bool:
     """
     Delete a user.
 
     Args:
         user_id: The user ID to delete
-        db: Database session
+        repository: User repository instance
 
     Returns:
         True if deleted, False if not found
     """
     logger.info("Deleting user", extra={"user_id": user_id})
 
-    repository = UserRepository(db)
     # Check if user exists before deleting
     existing_user = await repository.find_by_id(user_id)
     if not existing_user:
