@@ -9,6 +9,7 @@ from typing import List, Optional
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
+from sqlalchemy import inspect
 
 from .db_models import FactDBModel, IntentDBModel
 from .models import Fact, Intent
@@ -65,8 +66,13 @@ class IntentRepository:
         self.db.add(db_intent)
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_intent)  # Refresh to get all fields
-        # For new intents, facts will be empty, so we can use the domain model's facts
-        # or load them if needed. Since new intents have no facts, empty list is correct.
+        # Load facts relationship (will be empty for new intents)
+        await self.db.execute(
+            select(IntentDBModel)
+            .options(selectinload(IntentDBModel.facts))
+            .where(IntentDBModel.id == db_intent.id)
+        )
+        await self.db.refresh(db_intent)
         return self._to_intent_domain_model(db_intent)
 
     async def update(self, intent_id: int, intent: Intent) -> Optional[Intent]:
@@ -219,12 +225,23 @@ class IntentRepository:
     def _to_intent_domain_model(self, db_intent: IntentDBModel) -> Intent:
         """Convert DB model to domain model."""
         # Convert facts from DB models to domain models
-        # Safely access facts - use getattr to handle cases where relationship isn't loaded
-        db_facts = getattr(db_intent, "facts", None)
-        if db_facts is None:
+        # Safely access facts - check if relationship is loaded using SQLAlchemy inspect
+        facts = []
+        try:
+            # Check if facts relationship is loaded
+            state = inspect(db_intent)
+            if hasattr(state, "unloaded") and "facts" in state.unloaded:
+                # Relationship not loaded, use empty list
+                facts = []
+            else:
+                # Relationship is loaded (or doesn't exist), try to access it
+                db_facts = db_intent.facts
+                if db_facts is not None:
+                    facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
+        except (AttributeError, KeyError, Exception):
+            # If inspection or access fails, use empty list
             facts = []
-        else:
-            facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
+        
         return Intent(
             id=db_intent.id,
             name=db_intent.name,
