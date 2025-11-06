@@ -13,42 +13,6 @@ from tests.fixtures.intents import create_test_fact, create_test_intent
 
 
 @pytest.mark.unit
-class TestIntentRepositoryFindAll:
-    """Test IntentRepository.find_all method."""
-
-    @pytest.mark.asyncio
-    async def test_find_all_with_intents_returns_all_intents(self, test_db_session):
-        """Test finding all intents when intents exist."""
-        # Arrange
-        repo = IntentRepository(test_db_session)
-        intent1 = create_test_intent(id=None, name="Intent 1")
-        intent2 = create_test_intent(id=None, name="Intent 2")
-        await repo.create(intent1)
-        await repo.create(intent2)
-        await test_db_session.commit()
-
-        # Act
-        result = await repo.find_all()
-
-        # Assert
-        assert len(result) == 2
-        assert result[0].name == "Intent 1"
-        assert result[1].name == "Intent 2"
-
-    @pytest.mark.asyncio
-    async def test_find_all_with_empty_storage_returns_empty_list(self, test_db_session):
-        """Test finding all intents when storage is empty."""
-        # Arrange
-        repo = IntentRepository(test_db_session)
-
-        # Act
-        result = await repo.find_all()
-
-        # Assert
-        assert result == []
-
-
-@pytest.mark.unit
 class TestIntentRepositoryFindById:
     """Test IntentRepository.find_by_id method."""
 

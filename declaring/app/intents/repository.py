@@ -30,17 +30,6 @@ class IntentRepository:
         """
         self.db = db
 
-    async def find_all(self) -> List[Intent]:
-        """
-        Get all intents.
-
-        Returns:
-            List of domain model intents
-        """
-        result = await self.db.execute(select(IntentDBModel))
-        db_intents = result.scalars().all()
-        return [self._to_intent_domain_model(db_intent) for db_intent in db_intents]
-
     async def find_by_id(self, intent_id: int) -> Optional[Intent]:
         """
         Find an intent by ID.

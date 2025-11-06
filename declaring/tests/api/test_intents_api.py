@@ -132,36 +132,6 @@ class TestCreateIntentEndpoint:
 
 
 @pytest.mark.api
-class TestGetIntentsEndpoint:
-    """Test GET /intents endpoint."""
-
-    def test_get_intents_when_empty_returns_empty_list(self, client):
-        """Test getting intents when none exist."""
-        # Act
-        response = client.get("/intents")
-
-        # Assert
-        assert response.status_code == 200
-        assert response.json() == []
-
-    def test_get_intents_returns_all_intents(self, client):
-        """Test getting all intents."""
-        # Arrange - Create intents via API
-        client.post("/intents", json={"name": "Intent 1", "description": "Desc 1", "output_format": "JSON"})
-        client.post("/intents", json={"name": "Intent 2", "description": "Desc 2", "output_format": "XML"})
-
-        # Act
-        response = client.get("/intents")
-
-        # Assert
-        assert response.status_code == 200
-        data = response.json()
-        assert len(data) == 2
-        assert any(item["name"] == "Intent 1" for item in data)
-        assert any(item["name"] == "Intent 2" for item in data)
-
-
-@pytest.mark.api
 class TestGetIntentByIdEndpoint:
     """Test GET /intents/{intent_id} endpoint."""
 

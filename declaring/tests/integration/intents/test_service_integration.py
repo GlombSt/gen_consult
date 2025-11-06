@@ -20,7 +20,6 @@ from app.intents.schemas import IntentCreateRequest
 from app.intents.service import (
     add_fact_to_intent,
     create_intent,
-    get_all_intents,
     get_intent,
     remove_fact_from_intent,
     update_fact_value,
@@ -91,29 +90,6 @@ class TestIntentServiceIntegration:
             assert retrieved_intent.name == "Test Intent"
             assert retrieved_intent.description == "Test description"
             assert retrieved_intent.output_format == "plain text"
-
-    @pytest.mark.asyncio
-    async def test_get_all_intents_integration(self, test_db_session):
-        """Test getting all intents end-to-end."""
-        # Arrange
-        request1 = IntentCreateRequest(name="Intent 1", description="Desc 1", output_format="JSON")
-        request2 = IntentCreateRequest(name="Intent 2", description="Desc 2", output_format="XML")
-        repository = IntentRepository(test_db_session)
-
-        with patch("app.intents.service.event_bus", EventBus()):
-            # Create intents via service
-            await create_intent(request1, repository=repository)
-            await test_db_session.commit()
-            await create_intent(request2, repository=repository)
-            await test_db_session.commit()
-
-            # Act
-            all_intents = await get_all_intents(repository=repository)
-
-            # Assert
-            assert len(all_intents) == 2
-            assert any(i.name == "Intent 1" for i in all_intents)
-            assert any(i.name == "Intent 2" for i in all_intents)
 
     @pytest.mark.asyncio
     async def test_get_intent_integration(self, test_db_session):
