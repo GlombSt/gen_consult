@@ -6,7 +6,7 @@ Used by the service layer.
 """
 
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 
 class Intent:
@@ -27,6 +27,7 @@ class Intent:
         constraints: Optional[str] = None,
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
+        facts: List["Fact"] = None,
     ):
         # Validation
         if not name or not name.strip():
@@ -47,6 +48,7 @@ class Intent:
         now = datetime.utcnow()
         self.created_at = created_at or now
         self.updated_at = updated_at or now
+        self.facts = facts if facts is not None else []
 
 
 class Fact:

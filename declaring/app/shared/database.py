@@ -112,6 +112,18 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
     Dependency function for FastAPI to get database session.
 
+    **Transaction Management:**
+    - This function automatically commits transactions on successful completion
+    - If an exception occurs, the transaction is automatically rolled back
+    - The session is closed after the request completes
+    - For complex operations requiring multiple operations in a single transaction,
+      all operations within a single request will share the same session and transaction
+
+    **Note:** The auto-commit behavior means that each HTTP request gets its own
+    transaction boundary. If you need to perform multiple operations atomically
+    across multiple requests, you'll need to implement a different transaction
+    management strategy.
+
     Yields:
         AsyncSession instance
     """
