@@ -3,6 +3,7 @@ Test data fixtures for intents domain.
 """
 
 from datetime import datetime
+from typing import List
 
 from app.intents.models import Fact, Intent
 
@@ -17,6 +18,7 @@ def create_test_intent(
     constraints: str = None,
     created_at: datetime = None,
     updated_at: datetime = None,
+    facts: List[Fact] = None,
 ) -> Intent:
     """Create a test intent domain model."""
     return Intent(
@@ -29,6 +31,7 @@ def create_test_intent(
         constraints=constraints,
         created_at=created_at or datetime(2025, 1, 1, 12, 0, 0),
         updated_at=updated_at or datetime(2025, 1, 1, 12, 0, 0),
+        facts=facts or [],
     )
 
 
