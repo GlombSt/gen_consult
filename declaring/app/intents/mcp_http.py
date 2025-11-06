@@ -13,6 +13,7 @@ from fastapi import APIRouter, HTTPException, Request, Response, status
 from fastapi.responses import JSONResponse
 from mcp.server.lowlevel import NotificationOptions
 from mcp.server.models import InitializationOptions
+from pydantic import ValidationError
 
 from app.shared.logging_config import logger
 
@@ -33,13 +34,20 @@ def _validate_origin(origin: str | None, allowed_origins: list[str]) -> bool:
 
     Args:
         origin: Origin header value
-        allowed_origins: List of allowed origins
+        allowed_origins: List of allowed origins (["*"] means allow all)
 
     Returns:
         True if origin is valid, False otherwise
     """
+    # If "*" is in allowed origins, allow all requests
+    if "*" in allowed_origins:
+        return True
+
+    # If no origin header and not allowing all, reject
+    # (Protects against DNS rebinding where attacker controls origin)
     if origin is None:
         return False
+
     return origin in allowed_origins
 
 
@@ -105,36 +113,56 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
             tool_arguments = params.get("arguments", {})
 
             if not tool_name:
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Tool name is required",
-                )
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "error": {
+                        "code": -32602,  # Invalid params
+                        "message": "Tool name is required",
+                    },
+                }
 
-            result_contents = await call_tool(tool_name, tool_arguments)
-            return {
-                "jsonrpc": "2.0",
-                "id": request_id,
-                "result": {
-                    "content": [
-                        {
-                            "type": content.type,
-                            "text": content.text,
-                        }
-                        for content in result_contents
-                    ],
-                    "isError": False,
-                },
-            }
+            try:
+                result_contents = await call_tool(tool_name, tool_arguments)
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": {
+                        "content": [
+                            {
+                                "type": content.type,
+                                "text": content.text,
+                            }
+                            for content in result_contents
+                        ],
+                        "isError": False,
+                    },
+                }
+            except ValidationError as e:
+                logger.error(f"Invalid arguments for {tool_name}", extra={"tool_name": tool_name, "errors": e.errors()})
+                return {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "error": {
+                        "code": -32602,  # Invalid params
+                        "message": f"Invalid arguments for tool {tool_name}",
+                        "data": e.errors(),
+                    },
+                }
 
         elif method == "notifications/initialized":
             # Notification - no response needed
             return None
 
         else:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Unknown method: {method}",
-            )
+            return {
+                "jsonrpc": "2.0",
+                "id": request_id,
+                "error": {
+                    "code": -32601,  # Method not found
+                    "message": f"Unknown method: {method}",
+                },
+            }
 
     except HTTPException:
         raise
@@ -144,7 +172,7 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
             "jsonrpc": "2.0",
             "id": request_id,
             "error": {
-                "code": -32603,
+                "code": -32603,  # Internal error
                 "message": "Internal error",
                 "data": str(e),
             },
@@ -168,7 +196,7 @@ async def mcp_endpoint(request: Request) -> Response:
     """
     # Validate Origin header to prevent DNS rebinding attacks
     origin = request.headers.get("Origin")
-    if ALLOWED_ORIGINS != ["*"] and not _validate_origin(origin, ALLOWED_ORIGINS):
+    if not _validate_origin(origin, ALLOWED_ORIGINS):
         logger.warning(f"Invalid origin: {origin}", extra={"origin": origin, "allowed_origins": ALLOWED_ORIGINS})
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,

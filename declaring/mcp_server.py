@@ -12,8 +12,15 @@ This file is kept for backwards compatibility with stdio-based clients.
 """
 
 import asyncio
+import warnings
 
 import mcp.server.stdio
+
+warnings.warn(
+    "stdio transport is deprecated. Use HTTP transport: uvicorn app.main:app --reload",
+    DeprecationWarning,
+    stacklevel=2,
+)
 from mcp.server.lowlevel import NotificationOptions
 from mcp.server.models import InitializationOptions
 

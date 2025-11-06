@@ -556,7 +556,29 @@ Database
 
 ### Security Considerations
 
-The MCP HTTP endpoint includes Origin header validation to prevent DNS rebinding attacks. In production, configure allowed origins via environment variables. The endpoint does not require API key authentication by default, as MCP clients handle their own authentication if needed.
+**IMPORTANT**: The MCP endpoint (`/mcp`) does NOT require API key authentication.
+
+**Origin Validation:**
+The MCP HTTP endpoint includes Origin header validation to prevent DNS rebinding attacks. Configure allowed origins via the `MCP_ALLOWED_ORIGINS` environment variable.
+
+**Production Deployment Options:**
+1. **Network-level protection** - Use firewall rules to restrict access to the MCP endpoint
+2. **Reverse proxy authentication** - Use nginx/Caddy with authentication in front of FastAPI
+3. **Origin restrictions** - Set `MCP_ALLOWED_ORIGINS` to specific trusted origins (comma-separated)
+4. **API key authentication** - Add MCP-specific authentication if needed (future enhancement)
+
+**Local Development:**
+- Default `MCP_ALLOWED_ORIGINS=*` is safe (only accessible from localhost)
+- When exposing with ngrok or similar tools, **change to specific origins**:
+  ```bash
+  export MCP_ALLOWED_ORIGINS="https://your-domain.ngrok.io"
+  ```
+
+**Example Production Configuration:**
+```bash
+# Restrict to specific origins
+export MCP_ALLOWED_ORIGINS="https://app.example.com,https://admin.example.com"
+```
 
 See [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) for documentation standards.
 

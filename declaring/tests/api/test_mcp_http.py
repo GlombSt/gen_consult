@@ -5,10 +5,12 @@ Tests the MCP server HTTP transport integration at /mcp endpoint.
 """
 
 import json
+from typing import Any
 from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.intents.mcp_server import _get_repository
 from app.intents.repository import IntentRepository
@@ -17,14 +19,14 @@ from app.shared.dependencies import get_intent_repository
 
 
 @pytest.fixture
-def client(test_db_session):
+def client(test_db_session: AsyncSession) -> TestClient:
     """Create a test client with test database session."""
 
-    def override_get_intent_repository():
+    def override_get_intent_repository() -> IntentRepository:
         return IntentRepository(test_db_session)
 
     # Patch MCP server's _get_repository to use test session
-    async def mock_get_repository():
+    async def mock_get_repository() -> tuple[IntentRepository, AsyncSession]:
         repository = IntentRepository(test_db_session)
         return repository, test_db_session
 
@@ -38,7 +40,7 @@ def client(test_db_session):
 class TestMCPHTTPEndpoint:
     """Test MCP HTTP transport endpoint."""
 
-    def test_initialize_request(self, client):
+    def test_initialize_request(self, client: TestClient) -> None:
         """Test MCP initialize request."""
         # Arrange
         request_data = {
@@ -61,7 +63,7 @@ class TestMCPHTTPEndpoint:
         assert data["result"]["serverInfo"]["name"] == "intents-mcp-server"
         assert data["result"]["serverInfo"]["version"] == "1.0.0"
 
-    def test_tools_list_request(self, client):
+    def test_tools_list_request(self, client: TestClient) -> None:
         """Test MCP tools/list request."""
         # Arrange
         request_data = {
@@ -89,7 +91,7 @@ class TestMCPHTTPEndpoint:
         assert "get_intent" in tool_names
         assert "add_fact_to_intent" in tool_names
 
-    def test_tools_call_request(self, client):
+    def test_tools_call_request(self, client: TestClient) -> None:
         """Test MCP tools/call request."""
         # Arrange - first create an intent via API
         create_response = client.post(
@@ -131,7 +133,7 @@ class TestMCPHTTPEndpoint:
         assert intent_data["id"] == created_intent["id"]
         assert intent_data["name"] == "Test Intent"
 
-    def test_notification_request(self, client):
+    def test_notification_request(self, client: TestClient) -> None:
         """Test MCP notification request (no response)."""
         # Arrange
         request_data = {
@@ -146,7 +148,7 @@ class TestMCPHTTPEndpoint:
         # Assert - notifications return 204 No Content
         assert response.status_code == 204
 
-    def test_invalid_json_rpc_version(self, client):
+    def test_invalid_json_rpc_version(self, client: TestClient) -> None:
         """Test request with invalid JSON-RPC version."""
         # Arrange
         request_data = {
@@ -163,7 +165,7 @@ class TestMCPHTTPEndpoint:
         assert response.status_code == 400
         assert "Invalid JSON-RPC request" in response.json()["detail"]
 
-    def test_invalid_method(self, client):
+    def test_invalid_method(self, client: TestClient) -> None:
         """Test request with invalid method."""
         # Arrange
         request_data = {
@@ -176,11 +178,16 @@ class TestMCPHTTPEndpoint:
         # Act
         response = client.post("/mcp", json=request_data)
 
-        # Assert
-        assert response.status_code == 400
-        assert "Unknown method" in response.json()["detail"]
+        # Assert - should return JSON-RPC error response
+        assert response.status_code == 200
+        data = response.json()
+        assert data["jsonrpc"] == "2.0"
+        assert data["id"] == 1
+        assert "error" in data
+        assert data["error"]["code"] == -32601  # Method not found
+        assert "Unknown method" in data["error"]["message"]
 
-    def test_invalid_json(self, client):
+    def test_invalid_json(self, client: TestClient) -> None:
         """Test request with invalid JSON."""
         # Act
         response = client.post(
@@ -193,7 +200,7 @@ class TestMCPHTTPEndpoint:
         assert response.status_code == 400
         assert "Invalid JSON" in response.json()["detail"]
 
-    def test_tools_call_missing_tool_name(self, client):
+    def test_tools_call_missing_tool_name(self, client: TestClient) -> None:
         """Test tools/call request with missing tool name."""
         # Arrange
         request_data = {
