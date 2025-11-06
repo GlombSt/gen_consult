@@ -215,7 +215,12 @@ class TestMCPHTTPEndpoint:
         # Act
         response = client.post("/mcp", json=request_data)
 
-        # Assert
-        assert response.status_code == 400
-        assert "Tool name is required" in response.json()["detail"]
+        # Assert - should return JSON-RPC error response
+        assert response.status_code == 200
+        data = response.json()
+        assert data["jsonrpc"] == "2.0"
+        assert data["id"] == 1
+        assert "error" in data
+        assert data["error"]["code"] == -32602  # Invalid params
+        assert "Tool name is required" in data["error"]["message"]
 
