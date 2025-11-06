@@ -7,13 +7,13 @@ from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import StaticPool
 
-# Import all DB models so Base.metadata knows about them
-from app.users.db_models import UserDBModel  # noqa: F401
 from app.intents.db_models import FactDBModel, IntentDBModel  # noqa: F401
-
 from app.main import app
 from app.shared.database import Base
 from app.shared.events import EventBus
+
+# Import all DB models so Base.metadata knows about them
+from app.users.db_models import UserDBModel  # noqa: F401
 
 
 @pytest.fixture

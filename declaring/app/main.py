@@ -9,7 +9,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents.router import router as intents_router
-from app.shared.database import close_db, get_db, init_db
+from app.shared.database import close_db, init_db
 from app.shared.exception_handlers import validation_exception_handler
 from app.shared.logging_config import logger
 from app.shared.middleware import log_requests_middleware
