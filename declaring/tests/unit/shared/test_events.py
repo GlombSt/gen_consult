@@ -8,7 +8,6 @@ from datetime import datetime
 
 import pytest
 
-from app.items.events import ItemCreatedEvent
 from app.shared.events import EventBus
 from app.users.events import UserCreatedEvent
 
@@ -20,7 +19,7 @@ class TestDomainEvent:
     def test_to_dict_includes_timestamp_and_event_type(self):
         """Test to_dict includes timestamp and event_type."""
         # Arrange
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         result = event.to_dict()
@@ -28,26 +27,25 @@ class TestDomainEvent:
         # Assert
         assert "timestamp" in result
         assert "event_type" in result
-        assert result["event_type"] == "item.created"
+        assert result["event_type"] == "user.created"
 
     def test_to_dict_includes_all_event_attributes(self):
         """Test to_dict includes all event-specific attributes."""
         # Arrange
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         result = event.to_dict()
 
         # Assert
-        assert result["item_id"] == 1
-        assert result["name"] == "Test Item"
-        assert result["price"] == 99.99
-        assert result["is_available"] is True
+        assert result["user_id"] == 1
+        assert result["username"] == "testuser"
+        assert result["email"] == "test@example.com"
 
     def test_to_dict_converts_datetime_to_isoformat(self):
         """Test to_dict converts datetime fields to ISO format."""
         # Arrange
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         result = event.to_dict()
@@ -89,8 +87,8 @@ class TestEventBus:
         async def handler(event):
             handler_called.append(event)
 
-        event_bus.subscribe("item.created", handler)
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event_bus.subscribe("user.created", handler)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         await event_bus.publish(event)
@@ -113,9 +111,9 @@ class TestEventBus:
         async def handler2(event):
             handler2_called.append(event)
 
-        event_bus.subscribe("item.created", handler1)
-        event_bus.subscribe("item.created", handler2)
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event_bus.subscribe("user.created", handler1)
+        event_bus.subscribe("user.created", handler2)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         await event_bus.publish(event)
@@ -129,7 +127,7 @@ class TestEventBus:
         """Test publishing an event with no handlers doesn't raise error."""
         # Arrange
         event_bus = EventBus()
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act & Assert - should not raise
         await event_bus.publish(event)
@@ -147,9 +145,9 @@ class TestEventBus:
         async def successful_handler(event):
             handler_called.append(event)
 
-        event_bus.subscribe("item.created", failing_handler)
-        event_bus.subscribe("item.created", successful_handler)
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event_bus.subscribe("user.created", failing_handler)
+        event_bus.subscribe("user.created", successful_handler)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         await event_bus.publish(event)
@@ -167,28 +165,14 @@ class TestEventBus:
         def sync_handler(event):
             handler_called.append(event)
 
-        event_bus.subscribe("item.created", sync_handler)
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
+        event_bus.subscribe("user.created", sync_handler)
+        event = UserCreatedEvent(user_id=1, username="testuser", email="test@example.com")
 
         # Act
         await event_bus.publish(event)
 
         # Assert
         assert len(handler_called) == 1
-
-
-@pytest.mark.unit
-class TestItemEvents:
-    """Test item domain events."""
-
-    def test_item_created_event_has_correct_type(self):
-        """Test ItemCreatedEvent has correct event type."""
-        # Arrange & Act
-        event = ItemCreatedEvent(item_id=1, name="Test Item", price=99.99, is_available=True)
-
-        # Assert
-        assert event.event_type == "item.created"
-        assert isinstance(event.timestamp, datetime)
 
 
 @pytest.mark.unit
