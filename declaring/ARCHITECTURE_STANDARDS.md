@@ -181,12 +181,12 @@ output_structure: Optional[str] = Field(None, description="Output structure")
 Each domain **MUST** export its public interface in `__init__.py`:
 
 ```python
-# app/items/__init__.py
-from .service import get_item, create_item, update_item, delete_item
-from .schemas import ItemResponse, ItemCreateRequest
+# app/intents/__init__.py
+from .service import get_intent, create_intent, update_intent, delete_intent
+from .schemas import IntentResponse, IntentCreateRequest
 
-__all__ = ["get_item", "create_item", "update_item", "delete_item",
-           "ItemResponse", "ItemCreateRequest"]
+__all__ = ["get_intent", "create_intent", "update_intent", "delete_intent",
+           "IntentResponse", "IntentCreateRequest"]
 ```
 
 ### Cross-Domain Usage
@@ -194,11 +194,11 @@ __all__ = ["get_item", "create_item", "update_item", "delete_item",
 ```python
 # app/orders/service.py
 from app.users import service as user_service
-from app.items import service as item_service
+from app.intents import service as intent_service
 
-async def create_order(user_id: int, item_id: int):
+async def create_order(user_id: int, intent_id: int):
     user = await user_service.get_user(user_id)  # ✅ Through service API
-    item = await item_service.get_item(item_id)  # ✅ Through service API
+    intent = await intent_service.get_intent(intent_id)  # ✅ Through service API
     # ... order logic
 ```
 
@@ -211,11 +211,11 @@ async def create_order(user_id: int, item_id: int):
 **MANDATORY:** Every significant business action **MUST** publish a domain event.
 
 ✅ **Requires events:**
-- Create operations (user created, item created, order placed)
-- Update operations (item updated, profile changed)
-- Delete operations (item deleted, user deactivated)
+- Create operations (user created, intent created, order placed)
+- Update operations (intent updated, profile changed)
+- Delete operations (intent deleted, user deactivated)
 - State changes (order shipped, payment processed)
-- Business actions (login, search, item viewed)
+- Business actions (login, search, intent viewed)
 
 ❌ **No events:**
 - Simple read operations (get, list)
@@ -249,43 +249,43 @@ event_bus = EventBus()
 ### Domain Event Definition
 
 ```python
-# app/items/events.py
+# app/intents/events.py
 from dataclasses import dataclass
 from app.shared.events import DomainEvent
 
 @dataclass
-class ItemCreatedEvent(DomainEvent):
-    item_id: int
+class IntentCreatedEvent(DomainEvent):
+    intent_id: int
     name: str
-    price: Decimal
+    output_format: str
     created_at: datetime
     
-    def __init__(self, item_id: int, name: str, price: Decimal, created_at: datetime):
-        self.event_type = "item.created"
+    def __init__(self, intent_id: int, name: str, output_format: str, created_at: datetime):
+        self.event_type = "intent.created"
         self.timestamp = datetime.utcnow()
-        self.item_id = item_id
+        self.intent_id = intent_id
         self.name = name
-        self.price = price
+        self.output_format = output_format
         self.created_at = created_at
 ```
 
 ### Event Publishing
 
 ```python
-# app/items/service.py
+# app/intents/service.py
 from app.shared.events import event_bus
-from .events import ItemCreatedEvent
+from .events import IntentCreatedEvent
 
-async def create_item(request: ItemCreateRequest) -> Item:
-    item = await item_repository.create(item)
+async def create_intent(request: IntentCreateRequest) -> Intent:
+    intent = await intent_repository.create(intent)
     
     # ✅ MANDATORY
-    await event_bus.publish(ItemCreatedEvent(
-        item_id=item.id, name=item.name, 
-        price=item.price, created_at=datetime.utcnow()
+    await event_bus.publish(IntentCreatedEvent(
+        intent_id=intent.id, name=intent.name, 
+        output_format=intent.output_format, created_at=datetime.utcnow()
     ))
     
-    return item
+    return intent
 ```
 
 ---
@@ -359,7 +359,7 @@ from .repository import user_repository                     # Service → reposi
 # ❌ FORBIDDEN
 from app.users.repository import user_repository           # Cross-domain repository
 from app.users.models import User                          # Cross-domain domain model
-from app.items import router                               # Cross-domain router
+from app.intents import router                             # Cross-domain router
 ```
 
 ### Dependency Direction

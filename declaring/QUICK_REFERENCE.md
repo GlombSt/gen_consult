@@ -78,19 +78,19 @@ origins = [
 - `GET /` - Welcome message
 - `GET /health` - Health check
 
-### Items
-- `GET /items` - List all items
-- `GET /items/{id}` - Get specific item
-- `POST /items` - Create item
-- `PUT /items/{id}` - Update item
-- `DELETE /items/{id}` - Delete item
+### Intents
+- `GET /intents` - List all intents
+- `GET /intents/{id}` - Get specific intent
+- `POST /intents` - Create intent
+- `PUT /intents/{id}` - Update intent
+- `DELETE /intents/{id}` - Delete intent
 
 ### Users
 - `GET /users` - List users
 - `POST /users` - Create user
 
 ### Search
-- `GET /search?name=laptop&min_price=100` - Search items
+- `GET /search?name=summary&output_format=json` - Search intents
 
 ## 🧪 Testing
 
@@ -99,16 +99,16 @@ origins = [
 curl http://localhost:8000/health
 ```
 
-### Create Item
+### Create Intent
 ```bash
-curl -X POST http://localhost:8000/items \
+curl -X POST http://localhost:8000/intents \
   -H "Content-Type: application/json" \
-  -d '{"name":"Test","price":99.99,"is_available":true}'
+  -d '{"name":"Summarize Document","description":"Create a summary","output_format":"markdown"}'
 ```
 
-### Get All Items
+### Get All Intents
 ```bash
-curl http://localhost:8000/items
+curl http://localhost:8000/intents
 ```
 
 ## ⚙️ Environment Variables
