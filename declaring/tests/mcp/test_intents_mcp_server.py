@@ -5,7 +5,7 @@ Tests MCP server functionality with real database and service layer.
 """
 
 import json
-from unittest.mock import AsyncMock, patch
+from unittest.mock import patch
 
 import pytest
 from mcp.types import TextContent
@@ -17,7 +17,6 @@ from app.intents.mcp_server import (
     _pydantic_to_json_schema,
     call_tool,
     list_tools,
-    server,
 )
 from app.intents.repository import IntentRepository
 from app.intents.schemas import IntentCreateRequest
@@ -372,4 +371,3 @@ class TestIntentsMCPServer:
         retrieved_intent = await new_repository.find_by_id(intent_id)
         assert retrieved_intent is not None
         assert retrieved_intent.name == "Session Test Intent"
-
