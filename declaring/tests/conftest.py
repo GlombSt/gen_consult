@@ -8,11 +8,11 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from sqlalchemy.pool import StaticPool
 
 from app.intents.db_models import FactDBModel, IntentDBModel  # noqa: F401
+
+# Import all DB models so Base.metadata knows about them
 from app.main import app
 from app.shared.database import Base
 from app.shared.events import EventBus
-
-# Import all DB models so Base.metadata knows about them
 from app.users.db_models import UserDBModel  # noqa: F401
 
 

@@ -2,7 +2,7 @@
 Custom exception handlers for the FastAPI application.
 """
 
-from fastapi import Request
+from fastapi import HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -61,4 +61,47 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     return JSONResponse(
         status_code=422,
         content={"detail": exc.errors()},
+    )
+
+
+async def authentication_exception_handler(request: Request, exc: HTTPException):
+    """
+    Custom handler for authentication errors (401).
+
+    Logs authentication failures and returns a consistent error response.
+    Only handles 401 Unauthorized errors; other HTTPExceptions return default FastAPI response.
+
+    Args:
+        request: The FastAPI request object
+        exc: The HTTPException
+
+    Returns:
+        JSONResponse with authentication error details (only for 401 errors)
+    """
+    # Only handle 401 Unauthorized errors
+    if exc.status_code != 401:
+        # For non-401 errors, return default FastAPI HTTPException response
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"detail": exc.detail},
+            headers=exc.headers if hasattr(exc, "headers") and exc.headers else None,
+        )
+
+    # Log the authentication failure with structured data
+    logger.warning(
+        "Authentication failed",
+        extra={
+            "method": request.method,
+            "path": str(request.url.path),
+            "client_ip": request.client.host if request.client else "unknown",
+            "user_agent": request.headers.get("user-agent", "unknown"),
+            "error_detail": exc.detail,
+        },
+    )
+
+    # Return consistent error response format for 401 errors
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.detail, "details": {"path": str(request.url.path)}},
+        headers=exc.headers if hasattr(exc, "headers") and exc.headers else None,
     )

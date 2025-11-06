@@ -4,7 +4,7 @@ Service layer for intents domain.
 Contains business logic and serves as the public API for this domain.
 """
 
-from typing import Optional
+from typing import List, Optional
 
 from app.shared.events import event_bus
 from app.shared.logging_config import logger
@@ -67,6 +67,22 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     logger.info("Intent created successfully", extra={"intent_id": created_intent.id, "intent_name": created_intent.name})
 
     return created_intent
+
+
+async def get_all_intents(repository: IntentRepository) -> List[Intent]:
+    """
+    Get all intents.
+
+    Args:
+        repository: Intent repository instance
+
+    Returns:
+        List of all intents
+    """
+    logger.info("Fetching all intents")
+    intents = await repository.find_all()
+    logger.info("Intents fetched", extra={"total_intents": len(intents)})
+    return intents
 
 
 async def get_intent(intent_id: int, repository: IntentRepository) -> Optional[Intent]:
