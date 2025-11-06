@@ -7,18 +7,19 @@ Tests full HTTP stack with TestClient.
 import pytest
 from fastapi.testclient import TestClient
 
+from app.items.repository import ItemRepository
 from app.main import app
-from app.shared.database import get_db
+from app.shared.dependencies import get_item_repository
 
 
 @pytest.fixture
 def client(test_db_session):
     """Create a test client with test database session."""
 
-    async def override_get_db():
-        yield test_db_session
+    def override_get_item_repository():
+        return ItemRepository(test_db_session)
 
-    app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[get_item_repository] = override_get_item_repository
     yield TestClient(app)
     app.dependency_overrides.clear()
 
