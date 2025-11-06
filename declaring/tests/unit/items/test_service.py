@@ -22,35 +22,31 @@ class TestGetAllItems:
         """Test getting all items returns repository results."""
         # Arrange
         mock_items = [create_test_item(id=1, name="Item 1"), create_test_item(id=2, name="Item 2")]
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_all = AsyncMock(return_value=mock_items)
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await get_all_items(mock_db)
+        # Act
+        result = await get_all_items(mock_repo)
 
-            # Assert
-            assert len(result) == 2
-            assert result[0].name == "Item 1"
-            assert result[1].name == "Item 2"
-            mock_repo.find_all.assert_called_once()
+        # Assert
+        assert len(result) == 2
+        assert result[0].name == "Item 1"
+        assert result[1].name == "Item 2"
+        mock_repo.find_all.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_get_all_items_with_empty_repository_returns_empty_list(self):
         """Test getting all items from empty repository."""
         # Arrange
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_all = AsyncMock(return_value=[])
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await get_all_items(mock_db)
+        # Act
+        result = await get_all_items(mock_repo)
 
-            # Assert
-            assert result == []
-            mock_repo.find_all.assert_called_once()
+        # Assert
+        assert result == []
+        mock_repo.find_all.assert_called_once()
 
 
 @pytest.mark.unit
@@ -62,35 +58,31 @@ class TestGetItem:
         """Test getting an item that exists."""
         # Arrange
         mock_item = create_test_item(id=1, name="Test Item")
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=mock_item)
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await get_item(1, mock_db)
+        # Act
+        result = await get_item(1, mock_repo)
 
-            # Assert
-            assert result is not None
-            assert result.id == 1
-            assert result.name == "Test Item"
-            mock_repo.find_by_id.assert_called_once_with(1)
+        # Assert
+        assert result is not None
+        assert result.id == 1
+        assert result.name == "Test Item"
+        mock_repo.find_by_id.assert_called_once_with(1)
 
     @pytest.mark.asyncio
     async def test_get_item_when_not_found_returns_none(self):
         """Test getting an item that doesn't exist."""
         # Arrange
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await get_item(999, mock_db)
+        # Act
+        result = await get_item(999, mock_repo)
 
-            # Assert
-            assert result is None
-            mock_repo.find_by_id.assert_called_once_with(999)
+        # Assert
+        assert result is None
+        mock_repo.find_by_id.assert_called_once_with(999)
 
 
 @pytest.mark.unit
@@ -103,18 +95,14 @@ class TestCreateItem:
         # Arrange
         request = create_test_item_create_request(name="New Item", price=199.99)
         created_item = create_test_item(id=1, name="New Item", price=199.99)
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_item)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await create_item(request, mock_db)
+            result = await create_item(request, mock_repo)
 
             # Assert
             assert result.id == 1
@@ -128,18 +116,14 @@ class TestCreateItem:
         # Arrange
         request = create_test_item_create_request(name="New Item", price=199.99)
         created_item = create_test_item(id=1, name="New Item", price=199.99)
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_item)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await create_item(request, mock_db)
+            await create_item(request, mock_repo)
 
             # Assert
             mock_bus.publish.assert_called_once()
@@ -162,19 +146,15 @@ class TestUpdateItem:
         existing_item = create_test_item(id=1, name="Old Name", price=99.99)
         updated_item = create_test_item(id=1, name="New Name", price=99.99)
         request = create_test_item_update_request(name="New Name")
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=existing_item)
         mock_repo.update = AsyncMock(return_value=updated_item)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await update_item(1, request, mock_db)
+            result = await update_item(1, request, mock_repo)
 
             # Assert
             assert result is not None
@@ -187,18 +167,14 @@ class TestUpdateItem:
         """Test updating a non-existent item."""
         # Arrange
         request = create_test_item_update_request(name="New Name")
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await update_item(999, request, mock_db)
+            result = await update_item(999, request, mock_repo)
 
             # Assert
             assert result is None
@@ -212,19 +188,15 @@ class TestUpdateItem:
         existing_item = create_test_item(id=1, name="Old Name")
         updated_item = create_test_item(id=1, name="New Name")
         request = create_test_item_update_request(name="New Name")
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=existing_item)
         mock_repo.update = AsyncMock(return_value=updated_item)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await update_item(1, request, mock_db)
+            await update_item(1, request, mock_repo)
 
             # Assert
             mock_bus.publish.assert_called_once()
@@ -243,19 +215,15 @@ class TestDeleteItem:
         """Test deleting an existing item."""
         # Arrange
         existing_item = create_test_item(id=1)
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=existing_item)
         mock_repo.delete = AsyncMock(return_value=True)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await delete_item(1, mock_db)
+            result = await delete_item(1, mock_repo)
 
             # Assert
             assert result is True
@@ -266,18 +234,14 @@ class TestDeleteItem:
     async def test_delete_item_when_not_found_returns_false(self):
         """Test deleting a non-existent item."""
         # Arrange
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            result = await delete_item(999, mock_db)
+            result = await delete_item(999, mock_repo)
 
             # Assert
             assert result is False
@@ -289,19 +253,15 @@ class TestDeleteItem:
         """Test deleting an item publishes ItemDeletedEvent."""
         # Arrange
         existing_item = create_test_item(id=1)
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=existing_item)
         mock_repo.delete = AsyncMock(return_value=True)
 
-        with (
-            patch("app.items.service.ItemRepository", return_value=mock_repo),
-            patch("app.items.service.event_bus") as mock_bus,
-        ):
+        with patch("app.items.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
             # Act
-            await delete_item(1, mock_db)
+            await delete_item(1, mock_repo)
 
             # Assert
             mock_bus.publish.assert_called_once()
@@ -320,30 +280,28 @@ class TestSearchItems:
         """Test searching items with filters."""
         # Arrange
         mock_items = [create_test_item(id=1, name="Laptop")]
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.search = AsyncMock(return_value=mock_items)
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await search_items(name="Laptop", min_price=100.0, max_price=2000.0, available_only=True, db=mock_db)
+        # Act
+        result = await search_items(
+            name="Laptop", min_price=100.0, max_price=2000.0, available_only=True, repository=mock_repo
+        )
 
-            # Assert
-            assert len(result) == 1
-            assert result[0].name == "Laptop"
-            mock_repo.search.assert_called_once_with(name="Laptop", min_price=100.0, max_price=2000.0, available_only=True)
+        # Assert
+        assert len(result) == 1
+        assert result[0].name == "Laptop"
+        mock_repo.search.assert_called_once_with(name="Laptop", min_price=100.0, max_price=2000.0, available_only=True)
 
     @pytest.mark.asyncio
     async def test_search_items_with_no_results_returns_empty_list(self):
         """Test searching items with no results."""
         # Arrange
-        mock_db = MagicMock()
         mock_repo = MagicMock()
         mock_repo.search = AsyncMock(return_value=[])
 
-        with patch("app.items.service.ItemRepository", return_value=mock_repo):
-            # Act
-            result = await search_items(name="Nonexistent", db=mock_db)
+        # Act
+        result = await search_items(name="Nonexistent", repository=mock_repo)
 
-            # Assert
-            assert result == []
+        # Assert
+        assert result == []

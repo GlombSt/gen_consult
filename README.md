@@ -83,6 +83,41 @@ Backend runs at: `http://localhost:8000`
 - API docs: `http://localhost:8000/docs`
 - Alternative docs: `http://localhost:8000/redoc`
 
+#### Database Configuration
+
+The backend uses **SQLAlchemy** with async support. Database configuration is environment-based:
+
+**Development (Default):**
+- Uses **in-memory SQLite** - no setup required
+- Tables are auto-created on startup
+- Perfect for local development and testing
+
+**Production:**
+- Uses **PostgreSQL** (configured via environment variables)
+- Requires Alembic migrations for schema management
+- Set the following environment variables:
+
+```bash
+export DATABASE_TYPE=postgresql
+export DATABASE_URL=postgresql://user:password@localhost/dbname
+```
+
+**Environment Variables:**
+- `DATABASE_TYPE`: Database type (`sqlite` or `postgresql`, default: `sqlite`)
+- `DATABASE_URL`: Full database connection URL (required for PostgreSQL)
+
+**Testing:**
+- Tests use in-memory SQLite automatically
+- No external database required for running tests
+- Each test gets a fresh database instance
+
+**Transaction Management:**
+- Each HTTP request gets its own transaction boundary
+- Transactions auto-commit on success, auto-rollback on error
+- For complex multi-step operations, all operations within a single request share the same transaction
+
+See [Database Configuration](./declaring/app/shared/database.py) for implementation details.
+
 ### Frontend Setup
 
 ```bash

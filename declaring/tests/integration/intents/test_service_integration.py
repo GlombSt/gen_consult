@@ -15,6 +15,7 @@ from app.intents.events import (
     IntentCreatedEvent,
     IntentUpdatedEvent,
 )
+from app.intents.repository import IntentRepository
 from app.intents.schemas import IntentCreateRequest
 from app.intents.service import (
     add_fact_to_intent,
@@ -41,15 +42,16 @@ class TestIntentServiceIntegration:
     async def test_create_intent_integration(self, test_db_session):
         """Test creating an intent end-to-end."""
         # Arrange
-        with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(
-                name="Integration Test Intent",
-                description="Test description",
-                output_format="JSON",
-            )
+        request = IntentCreateRequest(
+            name="Integration Test Intent",
+            description="Test description",
+            output_format="JSON",
+        )
+        repository = IntentRepository(test_db_session)
 
+        with patch("app.intents.service.event_bus", EventBus()):
             # Act
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -59,7 +61,7 @@ class TestIntentServiceIntegration:
             assert created_intent.output_format == "JSON"
 
             # Verify persistence
-            retrieved = await get_intent(created_intent.id, db=test_db_session)
+            retrieved = await get_intent(created_intent.id, repository=repository)
             assert retrieved is not None
             assert retrieved.id == created_intent.id
             assert retrieved.name == "Integration Test Intent"
@@ -68,19 +70,20 @@ class TestIntentServiceIntegration:
     async def test_create_and_get_intent_integration(self, test_db_session):
         """Test creating and retrieving an intent end-to-end."""
         # Arrange
-        with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(
-                name="Test Intent",
-                description="Test description",
-                output_format="plain text",
-            )
+        request = IntentCreateRequest(
+            name="Test Intent",
+            description="Test description",
+            output_format="plain text",
+        )
+        repository = IntentRepository(test_db_session)
 
+        with patch("app.intents.service.event_bus", EventBus()):
             # Act - Create
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_intent = await get_intent(created_intent.id, db=test_db_session)
+            retrieved_intent = await get_intent(created_intent.id, repository=repository)
 
             # Assert
             assert retrieved_intent is not None
@@ -93,17 +96,19 @@ class TestIntentServiceIntegration:
     async def test_get_all_intents_integration(self, test_db_session):
         """Test getting all intents end-to-end."""
         # Arrange
+        request1 = IntentCreateRequest(name="Intent 1", description="Desc 1", output_format="JSON")
+        request2 = IntentCreateRequest(name="Intent 2", description="Desc 2", output_format="XML")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
             # Create intents via service
-            request1 = IntentCreateRequest(name="Intent 1", description="Desc 1", output_format="JSON")
-            request2 = IntentCreateRequest(name="Intent 2", description="Desc 2", output_format="XML")
-            await create_intent(request1, db=test_db_session)
+            await create_intent(request1, repository=repository)
             await test_db_session.commit()
-            await create_intent(request2, db=test_db_session)
+            await create_intent(request2, repository=repository)
             await test_db_session.commit()
 
             # Act
-            all_intents = await get_all_intents(db=test_db_session)
+            all_intents = await get_all_intents(repository=repository)
 
             # Assert
             assert len(all_intents) == 2
@@ -114,14 +119,16 @@ class TestIntentServiceIntegration:
     async def test_get_intent_integration(self, test_db_session):
         """Test getting an intent by ID end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="plain text")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
             # Create intent via service
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="plain text")
-            created = await create_intent(request, db=test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            retrieved = await get_intent(created.id, db=test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
 
             # Assert
             assert retrieved is not None
@@ -134,13 +141,15 @@ class TestIntentServiceIntegration:
     async def test_update_intent_name_integration(self, test_db_session):
         """Test updating intent name end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Original Name", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Original Name", description="Test description", output_format="JSON")
-            created = await create_intent(request, db=test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_name(created.id, "Updated Name", db=test_db_session)
+            updated = await update_intent_name(created.id, "Updated Name", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -149,7 +158,7 @@ class TestIntentServiceIntegration:
             assert updated.id == created.id
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved is not None
             assert retrieved.name == "Updated Name"
 
@@ -157,13 +166,15 @@ class TestIntentServiceIntegration:
     async def test_update_intent_description_integration(self, test_db_session):
         """Test updating intent description end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Original description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Original description", output_format="JSON")
-            created = await create_intent(request, db=test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_description(created.id, "Updated description", db=test_db_session)
+            updated = await update_intent_description(created.id, "Updated description", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -171,20 +182,22 @@ class TestIntentServiceIntegration:
             assert updated.description == "Updated description"
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.description == "Updated description"
 
     @pytest.mark.asyncio
     async def test_update_intent_output_format_integration(self, test_db_session):
         """Test updating intent output format end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="plain text")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="plain text")
-            created = await create_intent(request, db=test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_output_format(created.id, "JSON", db=test_db_session)
+            updated = await update_intent_output_format(created.id, "JSON", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -192,7 +205,7 @@ class TestIntentServiceIntegration:
             assert updated.output_format == "JSON"
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.output_format == "JSON"
 
     @pytest.mark.asyncio
@@ -203,11 +216,13 @@ class TestIntentServiceIntegration:
             request = IntentCreateRequest(
                 name="Test Intent", description="Test description", output_format="JSON", output_structure="Old structure"
             )
-            created = await create_intent(request, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_output_structure(created.id, "New structure", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            updated = await update_intent_output_structure(created.id, "New structure", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -215,7 +230,8 @@ class TestIntentServiceIntegration:
             assert updated.output_structure == "New structure"
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.output_structure == "New structure"
 
     @pytest.mark.asyncio
@@ -226,11 +242,13 @@ class TestIntentServiceIntegration:
             request = IntentCreateRequest(
                 name="Test Intent", description="Test description", output_format="JSON", context="Old context"
             )
-            created = await create_intent(request, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_context(created.id, "New context", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            updated = await update_intent_context(created.id, "New context", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -238,7 +256,8 @@ class TestIntentServiceIntegration:
             assert updated.context == "New context"
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.context == "New context"
 
     @pytest.mark.asyncio
@@ -249,11 +268,13 @@ class TestIntentServiceIntegration:
             request = IntentCreateRequest(
                 name="Test Intent", description="Test description", output_format="JSON", constraints="Old constraints"
             )
-            created = await create_intent(request, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_intent_constraints(created.id, "New constraints", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            updated = await update_intent_constraints(created.id, "New constraints", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -261,7 +282,8 @@ class TestIntentServiceIntegration:
             assert updated.constraints == "New constraints"
 
             # Verify persistence
-            retrieved = await get_intent(created.id, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.constraints == "New constraints"
 
     @pytest.mark.asyncio
@@ -270,19 +292,24 @@ class TestIntentServiceIntegration:
         # Arrange
         with patch("app.intents.service.event_bus", EventBus()):
             request = IntentCreateRequest(name="Original", description="Test description", output_format="JSON")
-            created = await create_intent(request, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Update multiple fields
-            await update_intent_name(created.id, "Updated Name", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            await update_intent_name(created.id, "Updated Name", repository=repository)
             await test_db_session.commit()
-            await update_intent_description(created.id, "Updated Description", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            await update_intent_description(created.id, "Updated Description", repository=repository)
             await test_db_session.commit()
-            await update_intent_output_format(created.id, "JSON", db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            await update_intent_output_format(created.id, "JSON", repository=repository)
             await test_db_session.commit()
 
             # Assert
-            retrieved = await get_intent(created.id, db=test_db_session)
+            repository = IntentRepository(test_db_session)
+            retrieved = await get_intent(created.id, repository=repository)
             assert retrieved.name == "Updated Name"
             assert retrieved.description == "Updated Description"
             assert retrieved.output_format == "JSON"
@@ -296,13 +323,15 @@ class TestFactServiceIntegration:
     async def test_add_fact_to_intent_integration(self, test_db_session):
         """Test adding a fact to an intent end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            fact = await add_fact_to_intent(created_intent.id, "Test fact value", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "Test fact value", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -312,9 +341,6 @@ class TestFactServiceIntegration:
 
             # Verify persistence
             # Get facts via repository
-            from app.intents.repository import IntentRepository
-
-            repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             assert len(facts) == 1
             assert facts[0].value == "Test fact value"
@@ -323,15 +349,17 @@ class TestFactServiceIntegration:
     async def test_update_fact_value_integration(self, test_db_session):
         """Test updating a fact value end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
-            fact = await add_fact_to_intent(created_intent.id, "Original value", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "Original value", repository=repository)
             await test_db_session.commit()
 
             # Act
-            updated = await update_fact_value(created_intent.id, fact.id, "Updated value", db=test_db_session)
+            updated = await update_fact_value(created_intent.id, fact.id, "Updated value", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -340,9 +368,6 @@ class TestFactServiceIntegration:
 
             # Verify persistence
             # Get facts via repository
-            from app.intents.repository import IntentRepository
-
-            repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
             assert retrieved_fact is not None
@@ -352,24 +377,23 @@ class TestFactServiceIntegration:
     async def test_remove_fact_from_intent_integration(self, test_db_session):
         """Test removing a fact from an intent end-to-end."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
-            fact = await add_fact_to_intent(created_intent.id, "To remove", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "To remove", repository=repository)
             await test_db_session.commit()
 
             # Act
-            removed = await remove_fact_from_intent(created_intent.id, fact.id, db=test_db_session)
+            removed = await remove_fact_from_intent(created_intent.id, fact.id, repository=repository)
             await test_db_session.commit()
 
             # Assert
             assert removed is True
 
             # Verify fact is removed
-            from app.intents.repository import IntentRepository
-
-            repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
             assert retrieved_fact is None
@@ -378,24 +402,23 @@ class TestFactServiceIntegration:
     async def test_multiple_facts_integration(self, test_db_session):
         """Test adding multiple facts to an intent."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Add multiple facts
-            await add_fact_to_intent(created_intent.id, "Fact 1", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 1", repository=repository)
             await test_db_session.commit()
-            await add_fact_to_intent(created_intent.id, "Fact 2", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 2", repository=repository)
             await test_db_session.commit()
-            await add_fact_to_intent(created_intent.id, "Fact 3", db=test_db_session)
+            await add_fact_to_intent(created_intent.id, "Fact 3", repository=repository)
             await test_db_session.commit()
 
             # Assert
             # Get facts via repository
-            from app.intents.repository import IntentRepository
-
-            repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             assert len(facts) == 3
             assert any(f.value == "Fact 1" for f in facts)
@@ -406,27 +429,26 @@ class TestFactServiceIntegration:
     async def test_fact_operations_with_intent_updates_integration(self, test_db_session):
         """Test fact operations combined with intent updates."""
         # Arrange
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", EventBus()):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Add fact, update intent, update fact
-            fact = await add_fact_to_intent(created_intent.id, "Original fact", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "Original fact", repository=repository)
             await test_db_session.commit()
-            await update_intent_name(created_intent.id, "Updated Intent", db=test_db_session)
+            await update_intent_name(created_intent.id, "Updated Intent", repository=repository)
             await test_db_session.commit()
-            await update_fact_value(created_intent.id, fact.id, "Updated fact", db=test_db_session)
+            await update_fact_value(created_intent.id, fact.id, "Updated fact", repository=repository)
             await test_db_session.commit()
 
             # Assert
-            retrieved_intent = await get_intent(created_intent.id, db=test_db_session)
+            retrieved_intent = await get_intent(created_intent.id, repository=repository)
             assert retrieved_intent.name == "Updated Intent"
 
             # Get facts via repository
-            from app.intents.repository import IntentRepository
-
-            repository = IntentRepository(test_db_session)
             facts = await repository.find_facts_by_intent_id(created_intent.id)
             retrieved_fact = next((f for f in facts if f.id == fact.id), None)
             assert retrieved_fact is not None
@@ -449,15 +471,16 @@ class TestEventPublishingIntegration:
 
         event_bus.subscribe("intent.created", capture_event)
 
-        with patch("app.intents.service.event_bus", event_bus):
-            request = IntentCreateRequest(
-                name="Event Test Intent",
-                description="Test description",
-                output_format="JSON",
-            )
+        request = IntentCreateRequest(
+            name="Event Test Intent",
+            description="Test description",
+            output_format="JSON",
+        )
+        repository = IntentRepository(test_db_session)
 
+        with patch("app.intents.service.event_bus", event_bus):
             # Act
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -480,13 +503,15 @@ class TestEventPublishingIntegration:
 
         event_bus.subscribe("intent.updated", capture_event)
 
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", event_bus):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created = await create_intent(request, db=test_db_session)
+            created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            await update_intent_name(created.id, "Updated Name", db=test_db_session)
+            await update_intent_name(created.id, "Updated Name", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -507,13 +532,15 @@ class TestEventPublishingIntegration:
 
         event_bus.subscribe("fact.added", capture_event)
 
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", event_bus):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
             # Act
-            fact = await add_fact_to_intent(created_intent.id, "Test fact", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "Test fact", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -535,15 +562,17 @@ class TestEventPublishingIntegration:
 
         event_bus.subscribe("fact.updated", capture_event)
 
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", event_bus):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
-            fact = await add_fact_to_intent(created_intent.id, "Original value", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "Original value", repository=repository)
             await test_db_session.commit()
 
             # Act
-            await update_fact_value(created_intent.id, fact.id, "Updated value", db=test_db_session)
+            await update_fact_value(created_intent.id, fact.id, "Updated value", repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -564,15 +593,17 @@ class TestEventPublishingIntegration:
 
         event_bus.subscribe("fact.removed", capture_event)
 
+        request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
+        repository = IntentRepository(test_db_session)
+
         with patch("app.intents.service.event_bus", event_bus):
-            request = IntentCreateRequest(name="Test Intent", description="Test description", output_format="JSON")
-            created_intent = await create_intent(request, db=test_db_session)
+            created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
-            fact = await add_fact_to_intent(created_intent.id, "To remove", db=test_db_session)
+            fact = await add_fact_to_intent(created_intent.id, "To remove", repository=repository)
             await test_db_session.commit()
 
             # Act
-            await remove_fact_from_intent(created_intent.id, fact.id, db=test_db_session)
+            await remove_fact_from_intent(created_intent.id, fact.id, repository=repository)
             await test_db_session.commit()
 
             # Assert

@@ -9,6 +9,7 @@ from unittest.mock import patch
 import pytest
 
 from app.items.events import ItemCreatedEvent
+from app.items.repository import ItemRepository
 from app.items.service import (
     create_item,
     delete_item,
@@ -33,14 +34,15 @@ class TestItemServiceIntegration:
         """Test creating and retrieving an item end-to-end."""
         # Arrange
         request = create_test_item_create_request(name="Integration Test Item", price=299.99)
+        repository = ItemRepository(test_db_session)
 
         with patch("app.items.service.event_bus", EventBus()):
             # Act - Create
-            created_item = await create_item(request, db=test_db_session)
+            created_item = await create_item(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_item = await get_item(created_item.id, db=test_db_session)
+            retrieved_item = await get_item(created_item.id, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -55,18 +57,19 @@ class TestItemServiceIntegration:
         # Arrange
         create_request = create_test_item_create_request(name="Original Name", price=99.99)
         update_request = create_test_item_update_request(name="Updated Name", price=149.99)
+        repository = ItemRepository(test_db_session)
 
         with patch("app.items.service.event_bus", EventBus()):
             # Act - Create
-            created_item = await create_item(create_request, db=test_db_session)
+            created_item = await create_item(create_request, repository=repository)
             await test_db_session.commit()
 
             # Act - Update
-            await update_item(created_item.id, update_request, db=test_db_session)
+            await update_item(created_item.id, update_request, repository=repository)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_item = await get_item(created_item.id, db=test_db_session)
+            retrieved_item = await get_item(created_item.id, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -79,18 +82,19 @@ class TestItemServiceIntegration:
         """Test creating, deleting, and attempting to retrieve an item."""
         # Arrange
         request = create_test_item_create_request(name="To Delete", price=99.99)
+        repository = ItemRepository(test_db_session)
 
         with patch("app.items.service.event_bus", EventBus()):
             # Act - Create
-            created_item = await create_item(request, db=test_db_session)
+            created_item = await create_item(request, repository=repository)
             await test_db_session.commit()
 
             # Act - Delete
-            deleted = await delete_item(created_item.id, db=test_db_session)
+            deleted = await delete_item(created_item.id, repository=repository)
             await test_db_session.commit()
 
             # Act - Get
-            retrieved_item = await get_item(created_item.id, db=test_db_session)
+            retrieved_item = await get_item(created_item.id, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -103,16 +107,17 @@ class TestItemServiceIntegration:
         # Arrange
         request1 = create_test_item_create_request(name="Item 1", price=99.99)
         request2 = create_test_item_create_request(name="Item 2", price=149.99)
+        repository = ItemRepository(test_db_session)
 
         with patch("app.items.service.event_bus", EventBus()):
             # Act - Create multiple
-            await create_item(request1, db=test_db_session)
+            await create_item(request1, repository=repository)
             await test_db_session.commit()
-            await create_item(request2, db=test_db_session)
+            await create_item(request2, repository=repository)
             await test_db_session.commit()
 
             # Act - Get all
-            all_items = await get_all_items(db=test_db_session)
+            all_items = await get_all_items(repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -124,16 +129,18 @@ class TestItemServiceIntegration:
     async def test_search_items_integration(self, test_db_session):
         """Test searching items with filters."""
         # Arrange
+        repository = ItemRepository(test_db_session)
+
         with patch("app.items.service.event_bus", EventBus()):
-            await create_item(create_test_item_create_request(name="Laptop Pro", price=999.99), db=test_db_session)
+            await create_item(create_test_item_create_request(name="Laptop Pro", price=999.99), repository=repository)
             await test_db_session.commit()
-            await create_item(create_test_item_create_request(name="Laptop Air", price=799.99), db=test_db_session)
+            await create_item(create_test_item_create_request(name="Laptop Air", price=799.99), repository=repository)
             await test_db_session.commit()
-            await create_item(create_test_item_create_request(name="Desktop", price=1299.99), db=test_db_session)
+            await create_item(create_test_item_create_request(name="Desktop", price=1299.99), repository=repository)
             await test_db_session.commit()
 
             # Act - Search
-            results = await search_items(name="Laptop", min_price=750.0, max_price=1000.0, db=test_db_session)
+            results = await search_items(name="Laptop", min_price=750.0, max_price=1000.0, repository=repository)
             await test_db_session.commit()
 
             # Assert
@@ -145,6 +152,7 @@ class TestItemServiceIntegration:
         """Test that ItemCreatedEvent is published when creating item."""
         # Arrange
         request = create_test_item_create_request(name="Event Test", price=99.99)
+        repository = ItemRepository(test_db_session)
         event_bus = EventBus()
         published_events = []
 
@@ -155,7 +163,7 @@ class TestItemServiceIntegration:
 
         with patch("app.items.service.event_bus", event_bus):
             # Act
-            created_item = await create_item(request, db=test_db_session)
+            created_item = await create_item(request, repository=repository)
             await test_db_session.commit()
 
             # Assert
