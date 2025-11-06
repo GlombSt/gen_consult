@@ -35,10 +35,7 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     """Create a new intent (US-000)."""
     intent = await service.create_intent(request, repository)
 
-    # Get facts for this intent (will be empty for new intent)
-    facts = await repository.find_facts_by_intent_id(intent.id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.get("/{intent_id}", response_model=IntentResponse)
@@ -51,10 +48,7 @@ async def get_intent(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/name", response_model=IntentResponse)
@@ -68,10 +62,7 @@ async def update_intent_name(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/description", response_model=IntentResponse)
@@ -85,10 +76,7 @@ async def update_intent_description(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/output-format", response_model=IntentResponse)
@@ -102,10 +90,7 @@ async def update_intent_output_format(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/output-structure", response_model=IntentResponse)
@@ -119,10 +104,7 @@ async def update_intent_output_structure(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/context", response_model=IntentResponse)
@@ -136,10 +118,7 @@ async def update_intent_context(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.patch("/{intent_id}/constraints", response_model=IntentResponse)
@@ -153,10 +132,7 @@ async def update_intent_constraints(
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
 
-    # Get facts for this intent
-    facts = await repository.find_facts_by_intent_id(intent_id)
-
-    return _to_intent_response(intent, facts)
+    return _to_intent_response(intent)
 
 
 @router.post("/{intent_id}/facts", response_model=FactResponse, status_code=status.HTTP_201_CREATED)
@@ -198,10 +174,8 @@ async def remove_fact_from_intent(
         raise HTTPException(status_code=404, detail="Fact not found")
 
 
-def _to_intent_response(intent, facts=None) -> IntentResponse:
+def _to_intent_response(intent) -> IntentResponse:
     """Convert domain model to response DTO."""
-    if facts is None:
-        facts = []
     return IntentResponse(
         id=intent.id,
         name=intent.name,
@@ -212,7 +186,7 @@ def _to_intent_response(intent, facts=None) -> IntentResponse:
         constraints=intent.constraints,
         created_at=intent.created_at,
         updated_at=intent.updated_at,
-        facts=[_to_fact_response(fact) for fact in facts],
+        facts=[_to_fact_response(fact) for fact in intent.facts],
     )
 
 

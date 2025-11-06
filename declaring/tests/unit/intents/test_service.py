@@ -145,7 +145,6 @@ class TestGetIntent:
 
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=mock_intent)
-        mock_repo.find_facts_by_intent_id = AsyncMock(return_value=[])
 
         # Act
         result = await get_intent(1, repository=mock_repo)
