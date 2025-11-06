@@ -15,6 +15,8 @@
 ### Setup
 
 ```bash
+cd declaring
+
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -24,6 +26,9 @@ pip install -r requirements.txt
 
 # Run development server
 uvicorn main:app --reload
+
+# Run tests
+pytest --cov=app
 ```
 
 ### Access Points
@@ -33,6 +38,41 @@ uvicorn main:app --reload
 - **ReDoc:** http://localhost:8000/redoc
 - **Health Check:** http://localhost:8000/health
 - **MCP Server:** Run `python mcp_server.py` for Model Context Protocol access
+
+## Database Configuration
+
+The backend uses **SQLAlchemy** with async support. Database configuration is environment-based:
+
+**Development (Default):**
+- Uses **in-memory SQLite** - no setup required
+- Tables are auto-created on startup
+- Perfect for local development and testing
+
+**Production:**
+- Uses **PostgreSQL** (configured via environment variables)
+- Requires Alembic migrations for schema management
+- Set the following environment variables:
+
+```bash
+export DATABASE_TYPE=postgresql
+export DATABASE_URL=postgresql://user:password@localhost/dbname
+```
+
+**Environment Variables:**
+- `DATABASE_TYPE`: Database type (`sqlite` or `postgresql`, default: `sqlite`)
+- `DATABASE_URL`: Full database connection URL (required for PostgreSQL)
+
+**Testing:**
+- Tests use in-memory SQLite automatically
+- No external database required for running tests
+- Each test gets a fresh database instance
+
+**Transaction Management:**
+- Each HTTP request gets its own transaction boundary
+- Transactions auto-commit on success, auto-rollback on error
+- For complex multi-step operations, all operations within a single request share the same transaction
+
+See [Database Configuration](./app/shared/database.py) for implementation details.
 
 ## API Key Authentication
 
@@ -306,6 +346,8 @@ pytest --cov=app --cov-report=html
 open htmlcov/index.html  # macOS
 # or
 xdg-open htmlcov/index.html  # Linux
+
+# Coverage requirements: 80%+ overall
 ```
 
 ### Linting & Formatting

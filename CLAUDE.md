@@ -64,284 +64,77 @@ gen_consult/
 ### Project Documentation
 - `TODO.md` - Current architecture alignment tasks
 - `README.md` - Project overview
+- `CI.md` - CI/CD workflow triggers and configuration
 
 
 
 ## Backend (`declaring/`) - The Hexagon
 
-### Tech Stack
-- FastAPI (Python 3.14+)
-- Pydantic for validation
-- Structured JSON logging with PII protection
-- Event-driven domain architecture
+**The backend IS the hexagon** - it contains all business logic. The frontend is a thin adapter.
 
-### Architecture Overview
+### Key Architectural Concepts
 
-```
-app/
-├── {domain}/              # e.g., intents/, users/
-│   ├── models.py          # Domain models with business logic
-│   ├── schemas.py         # API DTOs (request/response)
-│   ├── service.py         # Business logic = PORT (public API)
-│   ├── repository.py      # Data access = ADAPTER (secondary)
-│   ├── router.py          # HTTP endpoints = ADAPTER (primary)
-│   ├── events.py          # Domain events
-│   └── __init__.py        # Exports public API ONLY
-├── shared/                # Cross-cutting concerns
-│   ├── events.py          # Event bus system
-│   ├── logging_config.py  # Structured logging with PII protection
-│   └── value_objects.py   # Shared domain concepts
-└── main.py                # Application entry point
-```
+- **Service layer = Ports** - Public API for cross-domain communication
+- **Three model types:** DB models (`db_models.py`), domain models (`models.py`), API DTOs (`schemas.py`)
+- **Data flow:** `Router (DTO) → Service (Domain Model) → Repository (DB Model) → Database`
+- **Cross-domain communication:** Always through service layer ports, never direct repository/model access
+- **Event system:** All business actions publish domain events (service layer only)
 
-### Critical Layer Rules
+**For detailed architecture rules, see:**
+- `declaring/ARCHITECTURE_STANDARDS.md` - **MANDATORY** - Complete layer rules and structure requirements
+- `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
 
-**The Hexagon Core (Business Logic):**
-- `models.py` - Domain entities with business rules and validation
-- `service.py` - Business operations and orchestration (**THIS IS THE PORT**)
-- `events.py` - Domain events for decoupling
-
-**Adapters (Infrastructure):**
-- `router.py` - HTTP adapter (primary)
-- `repository.py` - Database adapter (secondary)
-- Event bus - Analytics/notification adapter (secondary)
-
-**Data Flow:** `Router (DTO) → Service (Domain Model) → Repository (DB Model) → Database`
-
-**Model Separation (CRITICAL):**
-- `db_models.py` - Database schema (includes audit fields, soft delete, internal data)
-- `models.py` - Domain models with business logic (what the hexagon works with)
-- `schemas.py` - API DTOs for HTTP layer (excludes sensitive data)
-
-**Cross-Domain Communication:**
-```python
-# ✅ CORRECT - Through service port
-from app.intents import service as intent_service
-intent = await intent_service.get_intent(intent_id)
-
-# ❌ WRONG - Direct access to internals
-from app.intents.repository import intent_repository
-from app.intents.models import Intent
-```
-
-**Event System:**
-- ALL significant business actions MUST publish domain events
-- Events are for: analytics, logging, cross-domain communication
-- Frontend does NOT consume these events directly (currently)
-- Service layer publishes events, never router or repository
-
-### Development Commands
-
-```bash
-cd declaring
-
-# Setup
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Run
-uvicorn main:app --reload
-uvicorn main:app --reload --port 8001  # Different port
-
-# Test
-pytest                                  # All tests
-pytest tests/unit -m unit              # Unit tests only
-pytest tests/integration -m integration # Integration tests
-pytest tests/api -m api                # API tests
-pytest --cov=app --cov-report=html     # With coverage
-
-# Docker
-docker-compose up --build
-docker-compose down
-```
-
-### Testing Requirements
-- **Models:** 90%+ coverage
-- **Service:** 85%+ coverage
-- **Repository:** 80%+ coverage
-- **Overall:** 80%+ coverage
-- Event publishing MUST be tested for all business actions
+**For setup, commands, and testing:**
+- `declaring/README.md` - Quick start, development commands, testing requirements
+- `declaring/TESTING_STANDARDS.md` - Coverage requirements and test patterns
 
 ## Frontend (`reacting/`) - The Primary Adapter
 
-### Tech Stack
-- React 18
-- Vite (build tool)
-- Vanilla JavaScript (TypeScript decision pending - see TODO.md)
+**The frontend IS a primary adapter** - it drives the backend hexagon through HTTP. No business logic in frontend.
 
-### Architecture Overview
+### Key Architectural Concepts
 
-```
-src/
-├── features/              # Mirrors backend domains
-│   ├── intents/
-│   │   ├── components/    # UI components (thin, delegate to hooks)
-│   │   ├── hooks/         # Orchestration layer
-│   │   ├── api/           # HTTP adapter to backend
-│   │   └── utils/         # Display formatting, UX validation
-│   └── users/
-├── shared/
-│   ├── components/        # Reusable UI
-│   ├── api/               # httpClient, apiConfig, apiError
-│   └── utils/             # Generic utilities
-├── App.jsx
-└── main.jsx
-```
+- **Thin client** - Presentation and UX only; all business logic in backend
+- **Feature-based organization** - Organized by domain (intents, users), not technical layer
+- **Layer separation** - Components → Hooks → API clients
+- **Type mapping** - Frontend types mirror backend `schemas.py` (API DTOs), NOT `models.py` (domain models)
+- **Development pattern** - API client → Hook → Component
 
-### Critical Frontend Rules
+**For detailed architecture rules, see:**
+- `reacting/ARCHITECTURE.md` - **MANDATORY** - Complete layer responsibilities, patterns, and anti-patterns
 
-**Responsibility Boundaries:**
-- ✅ UI: Presentation, user interaction, loading states, UX feedback
-- ✅ View Models: Shape DTOs for display (formatting, combining fields)
-- ✅ Client Validation: UX only (instant feedback, not business rules)
-- ❌ Business Rules: Backend only (pricing, authorization, domain logic)
-- ❌ Complex Calculations: Backend only
-
-**Type/Interface Mapping (IMPORTANT):**
-- Frontend types mirror backend `schemas.py` (API DTOs)
-- Frontend types DO NOT mirror backend `models.py` (domain models)
-- Example: `IntentResponse` in `schemas.py` → `IntentResponse` type in frontend
-- Domain models with business logic stay in backend only
-
-**Layer Responsibilities:**
-- `components/` - Render, handle interactions, NO API calls, NO business logic
-- `hooks/` - Orchestrate API calls, manage UI state, NO business logic
-- `api/` - HTTP communication, NO business logic, NO UI state
-- `utils/` - Pure functions for formatting/display only
-
-**Development Pattern:**
-1. Build API client (`api/intentsApi.js`) - calls backend endpoints
-2. Create hook (`hooks/useCreateIntent.js`) - orchestrates API + UI state
-3. Build component (`components/IntentCreator/`) - uses hook, displays UI
-
-### Development Commands
-
-```bash
-cd reacting
-
-# Setup
-npm install
-
-# Run
-npm run dev      # Development server (usually http://localhost:5173)
-npm run build    # Production build
-npm run preview  # Preview production build
-```
+**For setup, commands, and workflow:**
+- `reacting/README.md` - Quick start, development commands, feature development workflow
 
 ## Hexagonal Architecture Principles
 
-### Ports & Adapters
+**Key concepts:**
+- **Ports** = Service layer functions (public API of each domain)
+- **Primary Adapters** = Drive the app (HTTP router, React frontend)
+- **Secondary Adapters** = Driven by app (database, event bus)
+- **Decomposition** = Organize by business domain, not technical layer
+- **Communication** = Through service ports (synchronous) or events (asynchronous)
 
-**Ports (Interfaces):**
-- Service layer functions are the ports
-- Defined in `service.py` files
-- Exported in `__init__.py` of each domain
-- Other domains call through these ports
-
-**Primary Adapters (Drive the app):**
-- HTTP Router (`router.py`)
-- React Frontend
-- CLI tools (future)
-- GraphQL API (future)
-
-**Secondary Adapters (Driven by app):**
-- Repository (database)
-- Event bus
-- External APIs
-- Email service (future)
-
-### Decomposition Strategy
-
-**Create new domain when:**
-- ✅ Distinct business concepts (intents ≠ users ≠ orders)
-- ✅ Could be owned by different team
-- ✅ Changes for different business reasons
-- ✅ Has independent lifecycle
-
-**Don't create domain for:**
-- ❌ Technical layers (validation, logging)
-- ❌ Shared utilities
-- ❌ Simple CRUD without business logic
-
-**Shared Value Objects:**
-- Common concepts used across domains
-- Located in `app/shared/value_objects.py`
-- Examples: Money, Address, DateRange
-- Immutable, defined by values
-
-### Communication Patterns
-
-**Synchronous (Direct service calls):**
-```python
-# Use when: Need immediate validation, must fail together
-from app.users import service as user_service
-user = await user_service.get_user(user_id)
-```
-
-**Asynchronous (Domain events):**
-```python
-# Use when: Different contexts, eventual consistency OK, reduce coupling
-await event_bus.publish(IntentCreatedEvent(...))
-# Other domains listen to events
-```
+**For detailed patterns and examples, see:**
+- `declaring/ARCHITECTURE_STANDARDS.md` - Ports, adapters, decomposition rules
+- `declaring/ARCHITECTURE_GUIDE.md` - Communication patterns, examples
 
 ## Development Workflows
 
-### Adding a New Feature (Full Stack)
+**For step-by-step feature development:**
+- Backend: `declaring/ARCHITECTURE_STANDARDS.md` + `declaring/DEVELOPMENT_STANDARDS.md`
+- Frontend: `reacting/ARCHITECTURE.md` + `reacting/README.md`
 
-**MANDATORY: Read `declaring/DEVELOPMENT_STANDARDS.md` first **
-**Backend:**
-1. Create domain folder: `app/new_domain/`
-2. Define domain model with business logic: `models.py`
-3. Define API DTOs: `schemas.py`
-4. Implement service layer (the port): `service.py`
-5. Create repository: `repository.py`
-6. Define and publish events: `events.py`
-7. Add HTTP endpoints: `router.py`
-8. Export public API: `__init__.py`
-9. Write tests (unit, integration, API)
-10. Register router in `main.py`
+## Anti-Patterns
 
-**Frontend:**
-1. Create feature folder: `src/features/new_domain/`
-2. Build API client: `api/newDomainApi.js`
-3. Create orchestration hooks: `hooks/useCreateThing.js`
-4. Build components: `components/ThingCreator/`
-5. Add utilities if needed: `utils/thingFormatters.js`
-
-## Anti-Patterns to Avoid
-
-### Backend
-- ❌ Business logic in routers
-- ❌ Direct cross-domain repository access
-- ❌ Forgetting to publish domain events
-- ❌ Mixing domain models and API DTOs
-- ❌ Exposing sensitive fields in schemas.py
-- ❌ Service layer knowing about HTTP details
-
-### Frontend
-- ❌ Replicating backend business rules
-- ❌ Creating complex entity classes with methods
-- ❌ API calls directly in components (bypass hooks)
-- ❌ Business rule validation (UX validation only)
-- ❌ Assuming client validation is sufficient
-
+**For comprehensive anti-patterns and what to avoid:**
+- Backend: `declaring/ARCHITECTURE_STANDARDS.md` and `declaring/ARCHITECTURE_GUIDE.md`
+- Frontend: `reacting/ARCHITECTURE.md` (Anti-Patterns section)
 
 ## API Integration
 
-### Endpoints
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
-- Health check: `http://localhost:8000/health`
-
-### Default Ports
-- Backend: `http://localhost:8000`
-- Frontend: `http://localhost:5173` (Vite default)
-
-### CORS Configuration
-Backend is pre-configured for common frontend development ports (3000, 5173, 8080).
-If frontend runs on different port, update `declaring/app/main.py` CORS_ORIGINS list.
+**For endpoints, ports, and configuration:**
+- `declaring/README.md` - API endpoints, ports, CORS configuration
 
 ## Working with This Codebase
 
