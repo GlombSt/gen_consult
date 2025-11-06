@@ -221,9 +221,9 @@ class TestIntentsMCPServer:
 
         # Verify fact was added
         await test_db_session.commit()
-        intent_with_facts = await repository.find_by_id(created_intent.id)
-        assert len(intent_with_facts.facts) == 1
-        assert intent_with_facts.facts[0].value == "Test fact value"
+        facts = await repository.find_facts_by_intent_id(created_intent.id)
+        assert len(facts) == 1
+        assert facts[0].value == "Test fact value"
 
     @pytest.mark.asyncio
     async def test_call_tool_invalid_tool_name(self, test_db_session):
