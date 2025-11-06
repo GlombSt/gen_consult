@@ -8,17 +8,18 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.shared.database import get_db
+from app.shared.dependencies import get_user_repository
+from app.users.repository import UserRepository
 
 
 @pytest.fixture
 def client(test_db_session):
     """Create a test client with test database session."""
 
-    async def override_get_db():
-        yield test_db_session
+    def override_get_user_repository():
+        return UserRepository(test_db_session)
 
-    app.dependency_overrides[get_db] = override_get_db
+    app.dependency_overrides[get_user_repository] = override_get_user_repository
     yield TestClient(app)
     app.dependency_overrides.clear()
 
