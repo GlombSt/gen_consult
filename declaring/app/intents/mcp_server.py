@@ -326,6 +326,12 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
 
     Raises:
         ValueError: If tool name is unknown or required arguments are missing
+
+    Note:
+        Database session is properly managed:
+        - Committed on successful operations
+        - Rolled back on errors
+        - Always closed in finally block
     """
     repository, session = await _get_repository()
 
@@ -343,9 +349,10 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id is required")
             intent = await service.get_intent(intent_id, repository)
             if intent is None:
+                # Read operation - no commit needed, just close in finally
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
-            await session.commit()
+            # Read operation - no commit needed, just close in finally
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
         elif name == "update_intent_name":
@@ -355,6 +362,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id and name are required")
             intent = await service.update_intent_name(intent_id, name, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -367,6 +375,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id and description are required")
             intent = await service.update_intent_description(intent_id, description, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -379,6 +388,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id and output_format are required")
             intent = await service.update_intent_output_format(intent_id, output_format, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -391,6 +401,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id is required")
             intent = await service.update_intent_output_structure(intent_id, output_structure, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -403,6 +414,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id is required")
             intent = await service.update_intent_context(intent_id, context, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -415,6 +427,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id is required")
             intent = await service.update_intent_constraints(intent_id, constraints, repository)
             if intent is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _intent_to_dict(intent)
             await session.commit()
@@ -427,6 +440,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id and value are required")
             fact = await service.add_fact_to_intent(intent_id, value, repository)
             if fact is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
             result_dict = _fact_to_dict(fact)
             await session.commit()
@@ -440,6 +454,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id, fact_id, and value are required")
             fact = await service.update_fact_value(intent_id, fact_id, value, repository)
             if fact is None:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Fact not found")]
             result_dict = _fact_to_dict(fact)
             await session.commit()
@@ -452,6 +467,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 raise ValueError("intent_id and fact_id are required")
             removed = await service.remove_fact_from_intent(intent_id, fact_id, repository)
             if not removed:
+                # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Fact not found")]
             await session.commit()
             return [types.TextContent(type="text", text="Fact removed successfully")]

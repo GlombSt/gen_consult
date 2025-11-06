@@ -32,6 +32,7 @@ uvicorn main:app --reload
 - **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
 - **Health Check:** http://localhost:8000/health
+- **MCP Server:** Run `python mcp_server.py` for Model Context Protocol access
 
 ## API Key Authentication
 
@@ -363,6 +364,95 @@ User management system with profile handling and domain event publishing.
 
 ### Intents
 AI prompt generation workflow - captures user intent, facts, and context to iteratively build effective prompts for language models. Tracks prompt versions, outputs, and insights for continuous improvement.
+
+## MCP Server
+
+The backend exposes its functionality via **Model Context Protocol (MCP)** for use with AI assistants like Claude Desktop. The MCP server acts as a primary adapter (like the HTTP router) that uses the service layer as the port.
+
+### Running the MCP Server
+
+```bash
+cd declaring
+python mcp_server.py
+```
+
+The MCP server uses stdio transport by default, which is compatible with MCP clients like Claude Desktop.
+
+### Available Tools
+
+The MCP server exposes the following tools for intents operations:
+
+**Intent Management:**
+- `create_intent` - Create a new intent
+- `get_intent` - Get intent by ID
+- `update_intent_name` - Update intent name
+- `update_intent_description` - Update intent description
+- `update_intent_output_format` - Update output format
+- `update_intent_output_structure` - Update output structure
+- `update_intent_context` - Update context
+- `update_intent_constraints` - Update constraints
+
+**Fact Management:**
+- `add_fact_to_intent` - Add a fact to an intent
+- `update_fact_value` - Update a fact's value
+- `remove_fact_from_intent` - Remove a fact from an intent
+
+### MCP Client Configuration
+
+**Claude Desktop Configuration:**
+
+Add to your Claude Desktop configuration file (typically `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+
+```json
+{
+  "mcpServers": {
+    "intents": {
+      "command": "python",
+      "args": ["/absolute/path/to/gen_consult/declaring/mcp_server.py"]
+    }
+  }
+}
+```
+
+**Note:** Use the absolute path to `mcp_server.py` in your configuration.
+
+### Testing the MCP Server
+
+You can test the MCP server using the MCP Inspector:
+
+```bash
+# Install MCP Inspector (if not already installed)
+npm install -g @modelcontextprotocol/inspector
+
+# Run inspector with the MCP server
+npx @modelcontextprotocol/inspector python mcp_server.py
+```
+
+This will start an interactive session where you can:
+- List available tools
+- Call tools with arguments
+- See tool responses
+
+### Architecture
+
+The MCP server follows hexagonal architecture principles:
+
+```
+MCP Server (Primary Adapter)
+    ↓
+Service Layer (Port)
+    ↓
+Repository (Secondary Adapter)
+    ↓
+Database
+```
+
+- **MCP Server** (`app/intents/mcp_server.py`) - Exposes service functions as MCP tools
+- **Service Layer** (`app/intents/service.py`) - Business logic (the port)
+- **Schemas** (`app/intents/schemas.py`) - Single source of truth for parameter documentation
+- **Service Docstrings** - Single source of truth for operation descriptions
+
+See [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) for documentation standards.
 
 ## Documentation Guide
 
