@@ -31,17 +31,6 @@ class IntentRepository:
         """
         self.db = db
 
-    async def find_all(self) -> List[Intent]:
-        """
-        Get all intents.
-
-        Returns:
-            List of domain model intents
-        """
-        result = await self.db.execute(select(IntentDBModel))
-        db_intents = result.scalars().all()
-        return [self._to_intent_domain_model(db_intent) for db_intent in db_intents]
-
     async def find_by_id(self, intent_id: int) -> Optional[Intent]:
         """
         Find an intent by ID with facts eagerly loaded.
@@ -156,28 +145,6 @@ class IntentRepository:
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_fact)  # Refresh to get all fields
         return self._to_fact_domain_model(db_fact)
-
-    async def find_facts_by_intent_id(self, intent_id: int) -> List[Fact]:
-        """
-        Find all facts for an intent.
-
-        DEPRECATED: Use intent.facts property instead. This method is kept for backward compatibility.
-
-        Args:
-            intent_id: The intent ID
-
-        Returns:
-            List of domain model facts for the intent
-        """
-        import warnings
-        warnings.warn(
-            "find_facts_by_intent_id() is deprecated. Use intent.facts property instead.",
-            DeprecationWarning,
-            stacklevel=2
-        )
-        result = await self.db.execute(select(FactDBModel).where(FactDBModel.intent_id == intent_id))
-        db_facts = result.scalars().all()
-        return [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
 
     async def find_fact_by_id(self, intent_id: int, fact_id: int) -> Optional[Fact]:
         """
