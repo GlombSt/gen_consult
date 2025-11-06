@@ -19,7 +19,6 @@ from app.intents.schemas import IntentCreateRequest
 from app.intents.service import (
     add_fact_to_intent,
     create_intent,
-    get_all_intents,
     get_intent,
     remove_fact_from_intent,
     update_fact_value,
@@ -135,29 +134,6 @@ class TestCreateIntent:
 
 
 @pytest.mark.unit
-class TestGetAllIntents:
-    """Test get_all_intents service function."""
-
-    @pytest.mark.asyncio
-    async def test_get_all_intents_returns_all_intents(self):
-        """Test getting all intents returns repository results."""
-        # Arrange
-        mock_intents = [create_test_intent(id=1, name="Intent 1"), create_test_intent(id=2, name="Intent 2")]
-
-        mock_repo = MagicMock()
-        mock_repo.find_all = AsyncMock(return_value=mock_intents)
-
-        # Act
-        result = await get_all_intents(repository=mock_repo)
-
-        # Assert
-        assert len(result) == 2
-        assert result[0].name == "Intent 1"
-        assert result[1].name == "Intent 2"
-        mock_repo.find_all.assert_called_once()
-
-
-@pytest.mark.unit
 class TestGetIntent:
     """Test get_intent service function."""
 
@@ -169,7 +145,6 @@ class TestGetIntent:
 
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=mock_intent)
-        mock_repo.find_facts_by_intent_id = AsyncMock(return_value=[])
 
         # Act
         result = await get_intent(1, repository=mock_repo)
