@@ -160,6 +160,82 @@ output_structure: Optional[str] = Field(
 output_structure: Optional[str] = Field(None, description="Output structure")
 ```
 
+### Single Source of Truth for Documentation
+
+**MANDATORY:** `schemas.py` and `service.py` serve as single sources of truth for documentation across both API and MCP interfaces.
+
+#### `schemas.py` - Single Source for Parameter/Field Documentation
+
+The `schemas.py` file provides parameter and field documentation that is automatically used by multiple interfaces:
+
+- **Pydantic `Field(description=...)`** defines parameter documentation once
+- **FastAPI OpenAPI/Swagger docs** are auto-generated from Pydantic field descriptions
+- **MCP tool parameter schemas** are derived from Pydantic models via JSON Schema conversion
+- **Must match `*_DOMAIN.md` descriptions** (existing requirement)
+
+**Flow:**
+```
+schemas.py (Field descriptions)
+  ├─> FastAPI OpenAPI/Swagger docs
+  └─> MCP tool parameter schemas (via JSON Schema conversion)
+```
+
+**Example:**
+```python
+# schemas.py - Single source of truth for parameter documentation
+name: str = Field(
+    ...,
+    description="Name of the intent. Used to identify the work that the user wants to accomplish through AI interaction."
+)
+```
+
+This description is automatically used in:
+- FastAPI OpenAPI documentation
+- MCP tool parameter schemas (converted to JSON Schema)
+
+#### `service.py` - Single Source for Operation Descriptions
+
+The `service.py` file provides operation descriptions that are used by multiple interfaces:
+
+- **Service function docstrings** define what each operation does
+- **MCP tool descriptions** use service function docstrings (for LLM consumption)
+- **API endpoint descriptions** should use service docstrings (currently duplicated in router)
+- **Maps 1:1** to both API endpoints and MCP tools
+
+**Flow:**
+```
+service.py (function docstrings)
+  ├─> MCP tool descriptions
+  └─> API endpoint descriptions (should be used, currently duplicated)
+```
+
+**Example:**
+```python
+# service.py - Single source of truth for operation description
+async def create_intent(request: IntentCreateRequest, repository: IntentRepository) -> Intent:
+    """
+    Create a new intent (US-000).
+
+    Args:
+        request: Intent creation request
+        repository: Intent repository instance
+
+    Returns:
+        Created intent
+    """
+    # ... implementation
+```
+
+This docstring is used in:
+- MCP tool descriptions (extracted automatically)
+- Should be referenced in API endpoint descriptions (to avoid duplication)
+
+**Benefits:**
+- **DRY Principle:** Documentation defined once, used everywhere
+- **Consistency:** Same descriptions across API and MCP interfaces
+- **Maintainability:** Update documentation in one place
+- **Hexagonal Architecture:** Service layer (port) is the source of truth for operations
+
 ---
 
 ## Inter-Domain Communication

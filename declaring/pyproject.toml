@@ -107,6 +107,8 @@ omit = [
     "*/.venv/*",
     "*/htmlcov/*",
     "*/__pycache__/*",
+    "*/mcp_server.py",  # MCP server entry point (infrastructure)
+    "*/intents/mcp_server.py",  # MCP server module (infrastructure)
 ]
 branch = true
 
