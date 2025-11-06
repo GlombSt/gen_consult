@@ -4,8 +4,6 @@ HTTP router for intents domain.
 Defines HTTP endpoints and handles request/response serialization.
 """
 
-from typing import List
-
 from fastapi import APIRouter, Depends, HTTPException, Path, status
 
 from app.shared.dependencies import get_intent_repository
@@ -41,13 +39,6 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     facts = await repository.find_facts_by_intent_id(intent.id)
 
     return _to_intent_response(intent, facts)
-
-
-@router.get("", response_model=List[IntentResponse])
-async def get_intents(repository: IntentRepository = Depends(get_intent_repository)):
-    """Get all intents."""
-    intents = await service.get_all_intents(repository)
-    return [_to_intent_response(intent) for intent in intents]
 
 
 @router.get("/{intent_id}", response_model=IntentResponse)
