@@ -6,7 +6,7 @@ Handles data access and conversion between DB models and domain models using SQL
 
 from typing import Optional
 
-from sqlalchemy import select
+from sqlalchemy import inspect, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
@@ -46,7 +46,7 @@ class IntentRepository:
             .where(IntentDBModel.id == intent_id)
             .options(joinedload(IntentDBModel.facts))
         )
-        db_intent = result.scalar_one_or_none()
+        db_intent = result.unique().scalar_one_or_none()
         if db_intent:
             return self._to_intent_domain_model(db_intent)
         return None
@@ -84,7 +84,7 @@ class IntentRepository:
             .where(IntentDBModel.id == intent_id)
             .options(joinedload(IntentDBModel.facts))
         )
-        db_intent = result.scalar_one_or_none()
+        db_intent = result.unique().scalar_one_or_none()
 
         if not db_intent:
             return None
@@ -217,9 +217,15 @@ class IntentRepository:
     def _to_intent_domain_model(self, db_intent: IntentDBModel) -> Intent:
         """Convert DB model to domain model."""
         # Convert facts if they are loaded (via relationship)
+        # Check if the relationship is loaded to avoid lazy loading
         facts = []
-        if hasattr(db_intent, "facts") and db_intent.facts is not None:
-            facts = [self._to_fact_domain_model(db_fact) for db_fact in db_intent.facts]
+        # Use inspect to check if the relationship is loaded without triggering lazy load
+        state = inspect(db_intent)
+        if "facts" not in state.unloaded:
+            # Relationship is loaded, safe to access
+            if db_intent.facts is not None:
+                facts = [self._to_fact_domain_model(db_fact) for db_fact in db_intent.facts]
+        # If relationship is not loaded, facts remains empty list
 
         return Intent(
             id=db_intent.id,
