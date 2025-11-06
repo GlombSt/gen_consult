@@ -93,10 +93,12 @@ fi
 # 4. Flake8 - Full check (warnings)
 print_section "4. Flake8 (Full Check - Warnings)"
 # Note: We ignore exit code for warnings check since warnings are non-critical
-# Use || true to prevent script failure on warnings
-if flake8 app/ tests/ --count --max-complexity=10 --max-line-length=127 --statistics 2>&1 || true; then
+# Run flake8 and capture output, but ignore exit code with || true
+FLAKE8_OUTPUT=$(flake8 app/ tests/ --count --max-complexity=10 --max-line-length=127 --statistics 2>&1 || true)
+if [ -z "$FLAKE8_OUTPUT" ] || echo "$FLAKE8_OUTPUT" | grep -q "^0"; then
     echo -e "${GREEN}✓ No flake8 warnings${NC}"
 else
+    echo "$FLAKE8_OUTPUT"
     echo -e "${YELLOW}⚠ Flake8 warnings found (non-critical)${NC}"
 fi
 
