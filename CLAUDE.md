@@ -78,7 +78,7 @@ gen_consult/
 
 ```
 app/
-├── {domain}/              # e.g., items/, users/
+├── {domain}/              # e.g., intents/, users/
 │   ├── models.py          # Domain models with business logic
 │   ├── schemas.py         # API DTOs (request/response)
 │   ├── service.py         # Business logic = PORT (public API)
@@ -115,12 +115,12 @@ app/
 **Cross-Domain Communication:**
 ```python
 # ✅ CORRECT - Through service port
-from app.items import service as item_service
-item = await item_service.get_item(item_id)
+from app.intents import service as intent_service
+intent = await intent_service.get_intent(intent_id)
 
 # ❌ WRONG - Direct access to internals
-from app.items.repository import item_repository
-from app.items.models import Item
+from app.intents.repository import intent_repository
+from app.intents.models import Intent
 ```
 
 **Event System:**
@@ -174,7 +174,7 @@ docker-compose down
 ```
 src/
 ├── features/              # Mirrors backend domains
-│   ├── items/
+│   ├── intents/
 │   │   ├── components/    # UI components (thin, delegate to hooks)
 │   │   ├── hooks/         # Orchestration layer
 │   │   ├── api/           # HTTP adapter to backend
@@ -200,7 +200,7 @@ src/
 **Type/Interface Mapping (IMPORTANT):**
 - Frontend types mirror backend `schemas.py` (API DTOs)
 - Frontend types DO NOT mirror backend `models.py` (domain models)
-- Example: `ItemResponse` in `schemas.py` → `ItemResponse` type in frontend
+- Example: `IntentResponse` in `schemas.py` → `IntentResponse` type in frontend
 - Domain models with business logic stay in backend only
 
 **Layer Responsibilities:**
@@ -210,9 +210,9 @@ src/
 - `utils/` - Pure functions for formatting/display only
 
 **Development Pattern:**
-1. Build API client (`api/itemsApi.js`) - calls backend endpoints
-2. Create hook (`hooks/useCreateItem.js`) - orchestrates API + UI state
-3. Build component (`components/ItemCreator/`) - uses hook, displays UI
+1. Build API client (`api/intentsApi.js`) - calls backend endpoints
+2. Create hook (`hooks/useCreateIntent.js`) - orchestrates API + UI state
+3. Build component (`components/IntentCreator/`) - uses hook, displays UI
 
 ### Development Commands
 
@@ -253,7 +253,7 @@ npm run preview  # Preview production build
 ### Decomposition Strategy
 
 **Create new domain when:**
-- ✅ Distinct business concepts (items ≠ users ≠ orders)
+- ✅ Distinct business concepts (intents ≠ users ≠ orders)
 - ✅ Could be owned by different team
 - ✅ Changes for different business reasons
 - ✅ Has independent lifecycle
@@ -281,7 +281,7 @@ user = await user_service.get_user(user_id)
 **Asynchronous (Domain events):**
 ```python
 # Use when: Different contexts, eventual consistency OK, reduce coupling
-await event_bus.publish(ItemCreatedEvent(...))
+await event_bus.publish(IntentCreatedEvent(...))
 # Other domains listen to events
 ```
 

@@ -97,7 +97,7 @@ black app/ tests/
 
 **Format a single file:**
 ```bash
-black app/items/service.py
+black app/intents/service.py
 ```
 
 **What Black formats:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#code-formatting-black) for requirements)
@@ -110,12 +110,12 @@ black app/items/service.py
 **Example:**
 ```python
 # Before
-def create_item(name:str,price:float)->Item:
-    return Item(name=name,price=price)
+def create_intent(name:str,output_format:str)->Intent:
+    return Intent(name=name,output_format=output_format)
 
 # After Black
-def create_item(name: str, price: float) -> Item:
-    return Item(name=name, price=price)
+def create_intent(name: str, output_format: str) -> Intent:
+    return Intent(name=name, output_format=output_format)
 ```
 
 ### 2. isort - Import Sorting
@@ -155,8 +155,8 @@ from app.shared.events import publish_event
 from app.users.models import User
 
 # Local
-from .models import Item
-from .schemas import ItemCreate
+from .models import Intent
+from .schemas import IntentCreate
 ```
 
 ### 3. Flake8 - Code Quality Linting
@@ -199,19 +199,19 @@ mypy app/ --ignore-missing-imports
 
 **Check a specific module:**
 ```bash
-mypy app/items/
+mypy app/intents/
 ```
 
 **Type hints example:** (See [LINTING_STANDARDS.md](./LINTING_STANDARDS.md#type-checking-mypy) for requirements)
 ```python
 from typing import Optional, List
 
-def create_item(name: str, price: float) -> Item:
-    """Create a new item with type hints."""
-    return Item(name=name, price=price)
+def create_intent(name: str, output_format: str) -> Intent:
+    """Create a new intent with type hints."""
+    return Intent(name=name, output_format=output_format)
 
-async def get_items(limit: Optional[int] = None) -> List[Item]:
-    """Get items with optional limit."""
+async def get_intents(limit: Optional[int] = None) -> List[Intent]:
+    """Get intents with optional limit."""
     # Implementation
     pass
 ```
@@ -246,14 +246,14 @@ ignore_missing_imports = true
 
 **Problem:**
 ```python
-raise HTTPException(status_code=404, detail=f"Item with ID {item_id} not found in the database")
+raise HTTPException(status_code=404, detail=f"Intent with ID {intent_id} not found in the database")
 ```
 
 **Fix:**
 ```python
 raise HTTPException(
     status_code=404,
-    detail=f"Item with ID {item_id} not found in the database"
+    detail=f"Intent with ID {intent_id} not found in the database"
 )
 ```
 
@@ -262,25 +262,25 @@ raise HTTPException(
 **Problem:**
 ```python
 from typing import Optional, List
-from app.items.models import Item
+from app.intents.models import Intent
 
-def create_item(name: str) -> Item:
-    return Item(name=name)
+def create_intent(name: str) -> Intent:
+    return Intent(name=name)
 ```
 
 **Fix:**
 ```python
-from app.items.models import Item
+from app.intents.models import Intent
 
-def create_item(name: str) -> Item:
-    return Item(name=name)
+def create_intent(name: str) -> Intent:
+    return Intent(name=name)
 ```
 
 ### Issue 3: Import Not Sorted
 
 **Problem:**
 ```python
-from app.items.models import Item
+from app.intents.models import Intent
 from fastapi import APIRouter
 import os
 ```
@@ -291,31 +291,31 @@ import os
 
 from fastapi import APIRouter
 
-from app.items.models import Item
+from app.intents.models import Intent
 ```
 
 ### Issue 4: Complex Function (C901)
 
 **Problem:**
 ```python
-def process_item(item):
-    if item.price > 100:
-        if item.discount > 0.5:
-            if item.category == "electronics":
+def process_intent(intent):
+    if intent.output_format == "json":
+        if intent.context is not None:
+            if intent.name.startswith("Summarize"):
                 # Many nested conditions...
 ```
 
 **Fix - Refactor:**
 ```python
-def is_high_value_electronics(item):
+def is_summarize_json_intent(intent):
     return (
-        item.price > 100
-        and item.discount > 0.5
-        and item.category == "electronics"
+        intent.output_format == "json"
+        and intent.context is not None
+        and intent.name.startswith("Summarize")
     )
 
-def process_item(item):
-    if is_high_value_electronics(item):
+def process_intent(intent):
+    if is_summarize_json_intent(intent):
         # Simplified logic
 ```
 
@@ -323,16 +323,16 @@ def process_item(item):
 
 **Problem:**
 ```python
-def calculate_total(items):
-    return sum(item.price for item in items)
+def count_intents(intents):
+    return len([intent for intent in intents if intent.output_format == "json"])
 ```
 
 **Fix:**
 ```python
 from typing import List
 
-def calculate_total(items: List[Item]) -> float:
-    return sum(item.price for item in items)
+def count_intents(intents: List[Intent]) -> int:
+    return len([intent for intent in intents if intent.output_format == "json"])
 ```
 
 ---

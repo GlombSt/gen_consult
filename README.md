@@ -30,7 +30,7 @@ This repository follows **hexagonal (ports and adapters) architecture** with a f
 gen_consult/
 ├── declaring/              # Backend - FastAPI (Python)
 │   ├── app/
-│   │   ├── items/         # Domain: Items
+│   │   ├── intents/       # Domain: Intents
 │   │   ├── users/         # Domain: Users
 │   │   └── shared/        # Cross-cutting concerns
 │   ├── tests/

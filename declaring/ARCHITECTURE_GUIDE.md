@@ -93,22 +93,24 @@ Different layers have different concerns:
 **Purpose:** Exact representation of database tables
 
 ```python
-# app/items/db_models.py
-from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime
+# app/intents/db_models.py
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class ItemDB(Base):
+class IntentDB(Base):
     """Database model - includes ALL persistence details"""
-    __tablename__ = "items"
+    __tablename__ = "intents"
     
     # Business fields
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    description = Column(String)
-    price = Column(Float, nullable=False)
-    is_available = Column(Boolean, default=True)
+    description = Column(Text)
+    output_format = Column(String, nullable=False)
+    output_structure = Column(Text, nullable=True)
+    context = Column(Text, nullable=True)
+    constraints = Column(Text, nullable=True)
     
     # Audit fields (never exposed to API)
     created_at = Column(DateTime, nullable=False)
@@ -118,8 +120,7 @@ class ItemDB(Base):
     # Internal fields (never exposed)
     is_deleted = Column(Boolean, default=False)
     deleted_at = Column(DateTime, nullable=True)
-    internal_notes = Column(String)
-    cost_price = Column(Float)  # Supplier cost - sensitive!
+    internal_notes = Column(Text)
 ```
 
 ### Domain Models (`models.py`)
@@ -127,48 +128,42 @@ class ItemDB(Base):
 **Purpose:** Business entities with behavior
 
 ```python
-# app/items/models.py
+# app/intents/models.py
 from pydantic import BaseModel, validator
 from typing import Optional
-from decimal import Decimal
 
-class Item(BaseModel):
+class Intent(BaseModel):
     """Domain model - business representation"""
     id: Optional[int] = None
     name: str
     description: Optional[str] = None
-    price: Decimal
-    is_available: bool = True
+    output_format: str
+    output_structure: Optional[str] = None
+    context: Optional[str] = None
+    constraints: Optional[str] = None
     
     # Business validation
-    @validator('price')
-    def price_must_be_positive(cls, v):
-        if v <= 0:
-            raise ValueError('Price must be positive')
-        return v
-    
     @validator('name')
     def name_must_not_be_empty(cls, v):
         if not v or not v.strip():
             raise ValueError('Name cannot be empty')
         return v.strip()
     
+    @validator('output_format')
+    def output_format_must_be_valid(cls, v):
+        valid_formats = ['json', 'xml', 'csv', 'markdown', 'html', 'text']
+        if v.lower() not in valid_formats:
+            raise ValueError(f'Output format must be one of {valid_formats}')
+        return v.lower()
+    
     # Business logic methods
-    def calculate_tax(self, tax_rate: Decimal) -> Decimal:
-        """Calculate tax for this item"""
-        return self.price * tax_rate
+    def is_valid(self) -> bool:
+        """Business rule: is this intent valid?"""
+        return bool(self.name and self.output_format)
     
-    def calculate_total_with_tax(self, tax_rate: Decimal) -> Decimal:
-        """Calculate total price including tax"""
-        return self.price + self.calculate_tax(tax_rate)
-    
-    def mark_unavailable(self) -> None:
-        """Business operation: mark as unavailable"""
-        self.is_available = False
-    
-    def can_be_sold(self) -> bool:
-        """Business rule: can this item be sold?"""
-        return self.is_available and self.price > 0
+    def requires_context(self) -> bool:
+        """Business rule: does this intent require context?"""
+        return self.context is not None and len(self.context) > 0
 ```
 
 ### API DTOs (`schemas.py`)
@@ -176,74 +171,85 @@ class Item(BaseModel):
 **Purpose:** API contract - what crosses the wire
 
 ```python
-# app/items/schemas.py
+# app/intents/schemas.py
 from pydantic import BaseModel, Field
 from typing import Optional
-from decimal import Decimal
 from datetime import datetime
-from .models import Item
+from .models import Intent
 
-class ItemCreateRequest(BaseModel):
-    """What client sends to create an item"""
+class IntentCreateRequest(BaseModel):
+    """What client sends to create an intent"""
     name: str = Field(..., min_length=1, max_length=100, 
-                      description="Item name")
+                      description="Intent name")
     description: Optional[str] = Field(None, max_length=500,
-                                       description="Item description")
-    price: Decimal = Field(..., gt=0, description="Item price (must be positive)")
-    is_available: bool = Field(True, description="Is item available for sale")
+                                       description="Intent description")
+    output_format: str = Field(..., description="Output format (json, xml, csv, markdown, html, text)")
+    output_structure: Optional[str] = Field(None, description="Output structure")
+    context: Optional[str] = Field(None, description="Context information")
+    constraints: Optional[str] = Field(None, description="Constraints")
     
     class Config:
         schema_extra = {
             "example": {
-                "name": "Laptop",
-                "description": "High-performance laptop",
-                "price": 999.99,
-                "is_available": True
+                "name": "Summarize Document",
+                "description": "Create a summary of the document",
+                "output_format": "markdown",
+                "output_structure": "bullet points",
+                "context": "User is a researcher",
+                "constraints": "Maximum 500 words"
             }
         }
 ```
 
-class ItemUpdateRequest(BaseModel):
+class IntentUpdateRequest(BaseModel):
     """What client sends to update (all fields optional)"""
     name: Optional[str] = Field(None, min_length=1, max_length=100)
     description: Optional[str] = Field(None, max_length=500)
-    price: Optional[Decimal] = Field(None, gt=0)
-    is_available: Optional[bool] = None
+    output_format: Optional[str] = None
+    output_structure: Optional[str] = None
+    context: Optional[str] = None
+    constraints: Optional[str] = None
 
-class ItemResponse(BaseModel):
+class IntentResponse(BaseModel):
     """What API returns - no sensitive fields!"""
     id: int
     name: str
     description: Optional[str]
-    price: Decimal
-    is_available: bool
-    # Note: No cost_price, internal_notes, audit fields, etc.
+    output_format: str
+    output_structure: Optional[str]
+    context: Optional[str]
+    constraints: Optional[str]
+    # Note: No internal_notes, audit fields, etc.
     
     @classmethod
-    def from_domain_model(cls, item: Item) -> "ItemResponse":
+    def from_domain_model(cls, intent: Intent) -> "IntentResponse":
         """Convert domain model to API response"""
         return cls(
-            id=item.id,
-            name=item.name,
-            description=item.description,
-            price=item.price,
-            is_available=item.is_available
+            id=intent.id,
+            name=intent.name,
+            description=intent.description,
+            output_format=intent.output_format,
+            output_structure=intent.output_structure,
+            context=intent.context,
+            constraints=intent.constraints
         )
     
     class Config:
         schema_extra = {
             "example": {
                 "id": 1,
-                "name": "Laptop",
-                "description": "High-performance laptop",
-                "price": 999.99,
-                "is_available": True
+                "name": "Summarize Document",
+                "description": "Create a summary of the document",
+                "output_format": "markdown",
+                "output_structure": "bullet points",
+                "context": "User is a researcher",
+                "constraints": "Maximum 500 words"
             }
         }
 
-class ItemListResponse(BaseModel):
+class IntentListResponse(BaseModel):
     """Paginated list response"""
-    items: list[ItemResponse]
+    intents: list[IntentResponse]
     total: int
     page: int
     page_size: int
@@ -376,10 +382,10 @@ class DateRange(BaseModel):
 
 ## Complete Domain Example
 
-### Items Domain - Full Implementation
+### Intents Domain - Full Implementation
 
 ```
-app/items/
+app/intents/
 ├── __init__.py
 ├── models.py
 ├── schemas.py
@@ -393,460 +399,460 @@ app/items/
 
 ```python
 """
-Items domain - Public API
+Intents domain - Public API
 
 Only import these functions/classes from other domains.
 Internal implementation details are not exported.
 """
 from .service import (
-    get_item,
-    get_all_items,
-    create_item,
-    update_item,
-    delete_item,
-    search_items,
+    get_intent,
+    get_all_intents,
+    create_intent,
+    update_intent,
+    delete_intent,
+    search_intents,
 )
 from .schemas import (
-    ItemResponse,
-    ItemCreateRequest,
-    ItemUpdateRequest,
-    ItemListResponse,
+    IntentResponse,
+    IntentCreateRequest,
+    IntentUpdateRequest,
+    IntentListResponse,
 )
 
 __all__ = [
     # Service functions (public API)
-    "get_item",
-    "get_all_items",
-    "create_item",
-    "update_item",
-    "delete_item",
-    "search_items",
+    "get_intent",
+    "get_all_intents",
+    "create_intent",
+    "update_intent",
+    "delete_intent",
+    "search_intents",
     # DTOs (API contract)
-    "ItemResponse",
-    "ItemCreateRequest",
-    "ItemUpdateRequest",
-    "ItemListResponse",
+    "IntentResponse",
+    "IntentCreateRequest",
+    "IntentUpdateRequest",
+    "IntentListResponse",
 ]
 ```
 
 #### `service.py` - Business Logic
 
 ```python
-"""Item service layer - business logic and public API"""
+"""Intent service layer - business logic and public API"""
 from typing import List, Optional
 from datetime import datetime
 from app.shared.events import event_bus
 from app.shared.logging_config import logger
-from .models import Item
-from .schemas import ItemCreateRequest, ItemUpdateRequest
-from .repository import item_repository
-from .events import ItemCreatedEvent, ItemUpdatedEvent, ItemDeletedEvent, ItemViewedEvent
+from .models import Intent
+from .schemas import IntentCreateRequest, IntentUpdateRequest
+from .repository import intent_repository
+from .events import IntentCreatedEvent, IntentUpdatedEvent, IntentDeletedEvent, IntentViewedEvent
 
-async def get_item(item_id: int, viewer_user_id: Optional[int] = None) -> Optional[Item]:
+async def get_intent(intent_id: int, viewer_user_id: Optional[int] = None) -> Optional[Intent]:
     """
-    Get item by ID - public API for other domains.
+    Get intent by ID - public API for other domains.
     
     Args:
-        item_id: Item ID to retrieve
+        intent_id: Intent ID to retrieve
         viewer_user_id: Optional user ID for analytics
     
     Returns:
-        Item if found, None otherwise
+        Intent if found, None otherwise
     """
-    item = await item_repository.get(item_id)
+    intent = await intent_repository.get(intent_id)
     
-    if item:
+    if intent:
         # Publish view event for analytics
-        await event_bus.publish(ItemViewedEvent(
-            item_id=item.id,
+        await event_bus.publish(IntentViewedEvent(
+            intent_id=intent.id,
             user_id=viewer_user_id,
             viewed_at=datetime.utcnow()
         ))
     
-    return item
+    return intent
 
-async def get_all_items() -> List[Item]:
-    """Get all available items - public API"""
-    return await item_repository.get_all()
+async def get_all_intents() -> List[Intent]:
+    """Get all available intents - public API"""
+    return await intent_repository.get_all()
 
-async def create_item(request: ItemCreateRequest) -> Item:
+async def create_intent(request: IntentCreateRequest) -> Intent:
     """
-    Create new item - public API.
+    Create new intent - public API.
     
     Business rules:
     - Name must not be empty
-    - Price must be positive
+    - Output format must be valid
     
-    Publishes: ItemCreatedEvent
+    Publishes: IntentCreatedEvent
     """
     # Create domain model (validation happens here)
-    item = Item(
+    intent = Intent(
         name=request.name,
         description=request.description,
-        price=request.price,
-        is_available=request.is_available
+        output_format=request.output_format,
+        output_structure=request.output_structure,
+        context=request.context,
+        constraints=request.constraints
     )
     
     # Additional business validation
-    if not item.can_be_sold():
-        raise ValueError("Cannot create item that cannot be sold")
+    if not intent.is_valid():
+        raise ValueError("Cannot create intent that is not valid")
     
     # Persist
-    item = await item_repository.create(item)
+    intent = await intent_repository.create(intent)
     
     # ✅ MANDATORY: Publish domain event
-    await event_bus.publish(ItemCreatedEvent(
-        item_id=item.id,
-        name=item.name,
-        price=item.price,
+    await event_bus.publish(IntentCreatedEvent(
+        intent_id=intent.id,
+        name=intent.name,
+        output_format=intent.output_format,
         created_at=datetime.utcnow()
     ))
     
-    logger.info("Item created", extra={
-        'item_id': item.id,
-        'item_name': item.name,
-        'price': float(item.price)
+    logger.info("Intent created", extra={
+        'intent_id': intent.id,
+        'intent_name': intent.name,
+        'output_format': intent.output_format
     })
     
-    return item
+    return intent
 
-async def update_item(item_id: int, request: ItemUpdateRequest) -> Item:
+async def update_intent(intent_id: int, request: IntentUpdateRequest) -> Intent:
     """
-    Update item - public API.
+    Update intent - public API.
     
-    Publishes: ItemUpdatedEvent
+    Publishes: IntentUpdatedEvent
     """
-    item = await item_repository.get(item_id)
-    if not item:
-        raise ValueError("Item not found")
+    intent = await intent_repository.get(intent_id)
+    if not intent:
+        raise ValueError("Intent not found")
     
     # Track what changed for event
     updated_fields = []
     
     if request.name is not None:
-        item.name = request.name
+        intent.name = request.name
         updated_fields.append("name")
     
-    if request.price is not None:
-        item.price = request.price
-        updated_fields.append("price")
-    
     if request.description is not None:
-        item.description = request.description
+        intent.description = request.description
         updated_fields.append("description")
     
-    if request.is_available is not None:
-        item.is_available = request.is_available
-        updated_fields.append("is_available")
+    if request.output_format is not None:
+        intent.output_format = request.output_format
+        updated_fields.append("output_format")
+    
+    if request.output_structure is not None:
+        intent.output_structure = request.output_structure
+        updated_fields.append("output_structure")
+    
+    if request.context is not None:
+        intent.context = request.context
+        updated_fields.append("context")
+    
+    if request.constraints is not None:
+        intent.constraints = request.constraints
+        updated_fields.append("constraints")
     
     # Business validation after updates
-    if not item.can_be_sold() and item.is_available:
-        raise ValueError("Item cannot be marked available - invalid price")
+    if not intent.is_valid():
+        raise ValueError("Intent cannot be updated - invalid state")
     
     # Persist
-    item = await item_repository.update(item)
+    intent = await intent_repository.update(intent)
     
     # ✅ MANDATORY: Publish domain event
-    await event_bus.publish(ItemUpdatedEvent(
-        item_id=item.id,
+    await event_bus.publish(IntentUpdatedEvent(
+        intent_id=intent.id,
         updated_fields=updated_fields,
         updated_at=datetime.utcnow()
     ))
     
-    logger.info("Item updated", extra={
-        'item_id': item.id,
+    logger.info("Intent updated", extra={
+        'intent_id': intent.id,
         'updated_fields': updated_fields
     })
     
-    return item
+    return intent
 
-async def delete_item(item_id: int) -> None:
+async def delete_intent(intent_id: int) -> None:
     """
-    Delete item - public API.
+    Delete intent - public API.
     
-    Publishes: ItemDeletedEvent
+    Publishes: IntentDeletedEvent
     """
     # Verify exists
-    item = await item_repository.get(item_id)
-    if not item:
-        raise ValueError("Item not found")
+    intent = await intent_repository.get(intent_id)
+    if not intent:
+        raise ValueError("Intent not found")
     
     # Delete
-    await item_repository.delete(item_id)
+    await intent_repository.delete(intent_id)
     
     # ✅ MANDATORY: Publish domain event
-    await event_bus.publish(ItemDeletedEvent(
-        item_id=item_id,
+    await event_bus.publish(IntentDeletedEvent(
+        intent_id=intent_id,
         deleted_at=datetime.utcnow()
     ))
     
-    logger.info("Item deleted", extra={'item_id': item_id})
+    logger.info("Intent deleted", extra={'intent_id': intent_id})
 
-async def search_items(
+async def search_intents(
     name: Optional[str] = None,
-    min_price: Optional[float] = None,
-    max_price: Optional[float] = None,
-    available_only: bool = False
-) -> List[Item]:
-    """Search items with filters - public API"""
-    return await item_repository.search(
+    output_format: Optional[str] = None,
+    has_context: Optional[bool] = None
+) -> List[Intent]:
+    """Search intents with filters - public API"""
+    return await intent_repository.search(
         name=name,
-        min_price=min_price,
-        max_price=max_price,
-        available_only=available_only
+        output_format=output_format,
+        has_context=has_context
     )
 ```
 
 #### `repository.py` - Data Access
 
 ```python
-"""Item repository - data access layer"""
+"""Intent repository - data access layer"""
 from typing import List, Optional
-from .models import Item
+from .models import Intent
 
 # Temporary in-memory storage (replace with real DB)
-items_db: List[Item] = []
-item_id_counter = 1
+intents_db: List[Intent] = []
+intent_id_counter = 1
 
-class ItemRepository:
-    """Item data access layer - converts between DB and domain models"""
+class IntentRepository:
+    """Intent data access layer - converts between DB and domain models"""
     
-    async def get(self, item_id: int) -> Optional[Item]:
-        """Get item by ID"""
-        for item in items_db:
-            if item.id == item_id:
-                return item
+    async def get(self, intent_id: int) -> Optional[Intent]:
+        """Get intent by ID"""
+        for intent in intents_db:
+            if intent.id == intent_id:
+                return intent
         return None
     
-    async def get_all(self) -> List[Item]:
-        """Get all items"""
-        return items_db.copy()
+    async def get_all(self) -> List[Intent]:
+        """Get all intents"""
+        return intents_db.copy()
     
-    async def create(self, item: Item) -> Item:
+    async def create(self, intent: Intent) -> Intent:
         """
-        Create new item.
+        Create new intent.
         
         In real implementation:
-        - Convert Item → ItemDB
+        - Convert Intent → IntentDB
         - Save to database
-        - Convert ItemDB → Item
-        - Return Item
+        - Convert IntentDB → Intent
+        - Return Intent
         """
-        global item_id_counter
-        item.id = item_id_counter
-        item_id_counter += 1
-        items_db.append(item)
-        return item
+        global intent_id_counter
+        intent.id = intent_id_counter
+        intent_id_counter += 1
+        intents_db.append(intent)
+        return intent
     
-    async def update(self, item: Item) -> Item:
-        """Update existing item"""
-        for index, existing_item in enumerate(items_db):
-            if existing_item.id == item.id:
-                items_db[index] = item
-                return item
-        raise ValueError("Item not found")
+    async def update(self, intent: Intent) -> Intent:
+        """Update existing intent"""
+        for index, existing_intent in enumerate(intents_db):
+            if existing_intent.id == intent.id:
+                intents_db[index] = intent
+                return intent
+        raise ValueError("Intent not found")
     
-    async def delete(self, item_id: int) -> None:
-        """Delete item"""
-        global items_db
-        items_db = [item for item in items_db if item.id != item_id]
+    async def delete(self, intent_id: int) -> None:
+        """Delete intent"""
+        global intents_db
+        intents_db = [intent for intent in intents_db if intent.id != intent_id]
     
     async def search(
         self,
         name: Optional[str] = None,
-        min_price: Optional[float] = None,
-        max_price: Optional[float] = None,
-        available_only: bool = False
-    ) -> List[Item]:
-        """Search items with filters"""
-        results = items_db.copy()
+        output_format: Optional[str] = None,
+        has_context: Optional[bool] = None
+    ) -> List[Intent]:
+        """Search intents with filters"""
+        results = intents_db.copy()
         
         if name:
-            results = [item for item in results 
-                      if name.lower() in item.name.lower()]
+            results = [intent for intent in results 
+                      if name.lower() in intent.name.lower()]
         
-        if min_price is not None:
-            results = [item for item in results 
-                      if item.price >= min_price]
+        if output_format:
+            results = [intent for intent in results 
+                      if intent.output_format.lower() == output_format.lower()]
         
-        if max_price is not None:
-            results = [item for item in results 
-                      if item.price <= max_price]
-        
-        if available_only:
-            results = [item for item in results 
-                      if item.is_available]
+        if has_context is not None:
+            results = [intent for intent in results 
+                      if (intent.context is not None and len(intent.context) > 0) == has_context]
         
         return results
 
 # Singleton instance
-item_repository = ItemRepository()
+intent_repository = IntentRepository()
 ```
 
 #### `router.py` - HTTP Endpoints
 
 ```python
-"""Item HTTP endpoints"""
+"""Intent HTTP endpoints"""
 from fastapi import APIRouter, HTTPException, Query
 from typing import List, Optional
 from app.shared.logging_config import logger
-from . import service as item_service
+from . import service as intent_service
 from .schemas import (
-    ItemResponse,
-    ItemCreateRequest,
-    ItemUpdateRequest,
-    ItemListResponse
+    IntentResponse,
+    IntentCreateRequest,
+    IntentUpdateRequest,
+    IntentListResponse
 )
 
 router = APIRouter(
-    prefix="/items",
-    tags=["items"],
+    prefix="/intents",
+    tags=["intents"],
 )
 
-@router.get("", response_model=List[ItemResponse])
-async def get_items():
-    """Get all items"""
+@router.get("", response_model=List[IntentResponse])
+async def get_intents():
+    """Get all intents"""
     try:
-        items = await item_service.get_all_items()
-        return [ItemResponse.from_domain_model(item) for item in items]
+        intents = await intent_service.get_all_intents()
+        return [IntentResponse.from_domain_model(intent) for intent in intents]
     except Exception as e:
-        logger.error("Failed to get items", exc_info=True)
+        logger.error("Failed to get intents", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.get("/{item_id}", response_model=ItemResponse)
-async def get_item(item_id: int):
-    """Get specific item by ID"""
+@router.get("/{intent_id}", response_model=IntentResponse)
+async def get_intent(intent_id: int):
+    """Get specific intent by ID"""
     try:
-        item = await item_service.get_item(item_id)
-        if not item:
-            raise HTTPException(status_code=404, detail="Item not found")
-        return ItemResponse.from_domain_model(item)
+        intent = await intent_service.get_intent(intent_id)
+        if not intent:
+            raise HTTPException(status_code=404, detail="Intent not found")
+        return IntentResponse.from_domain_model(intent)
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Failed to get item {item_id}", exc_info=True)
+        logger.error(f"Failed to get intent {intent_id}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.post("", response_model=ItemResponse, status_code=201)
-async def create_item(request: ItemCreateRequest):
-    """Create new item"""
+@router.post("", response_model=IntentResponse, status_code=201)
+async def create_intent(request: IntentCreateRequest):
+    """Create new intent"""
     try:
-        item = await item_service.create_item(request)
-        return ItemResponse.from_domain_model(item)
+        intent = await intent_service.create_intent(request)
+        return IntentResponse.from_domain_model(intent)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        logger.error("Failed to create item", exc_info=True)
+        logger.error("Failed to create intent", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.put("/{item_id}", response_model=ItemResponse)
-async def update_item(item_id: int, request: ItemUpdateRequest):
-    """Update existing item"""
+@router.put("/{intent_id}", response_model=IntentResponse)
+async def update_intent(intent_id: int, request: IntentUpdateRequest):
+    """Update existing intent"""
     try:
-        item = await item_service.update_item(item_id, request)
-        return ItemResponse.from_domain_model(item)
+        intent = await intent_service.update_intent(intent_id, request)
+        return IntentResponse.from_domain_model(intent)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"Failed to update item {item_id}", exc_info=True)
+        logger.error(f"Failed to update intent {intent_id}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.delete("/{item_id}", status_code=204)
-async def delete_item(item_id: int):
-    """Delete item"""
+@router.delete("/{intent_id}", status_code=204)
+async def delete_intent(intent_id: int):
+    """Delete intent"""
     try:
-        await item_service.delete_item(item_id)
+        await intent_service.delete_intent(intent_id)
         return None
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
-        logger.error(f"Failed to delete item {item_id}", exc_info=True)
+        logger.error(f"Failed to delete intent {intent_id}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 
-@router.get("/search/query", response_model=List[ItemResponse])
-async def search_items(
+@router.get("/search/query", response_model=List[IntentResponse])
+async def search_intents(
     name: Optional[str] = Query(None, description="Filter by name (partial match)"),
-    min_price: Optional[float] = Query(None, ge=0, description="Minimum price"),
-    max_price: Optional[float] = Query(None, ge=0, description="Maximum price"),
-    available_only: bool = Query(False, description="Show only available items")
+    output_format: Optional[str] = Query(None, description="Filter by output format"),
+    has_context: Optional[bool] = Query(None, description="Filter by whether context is present")
 ):
-    """Search items with filters"""
+    """Search intents with filters"""
     try:
-        items = await item_service.search_items(
+        intents = await intent_service.search_intents(
             name=name,
-            min_price=min_price,
-            max_price=max_price,
-            available_only=available_only
+            output_format=output_format,
+            has_context=has_context
         )
-        return [ItemResponse.from_domain_model(item) for item in items]
+        return [IntentResponse.from_domain_model(intent) for intent in intents]
     except Exception as e:
-        logger.error("Failed to search items", exc_info=True)
+        logger.error("Failed to search intents", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error")
 ```
 
 #### `events.py` - Domain Events
 
 ```python
-"""Item domain events for analytics and notifications"""
+"""Intent domain events for analytics and notifications"""
 from dataclasses import dataclass
 from datetime import datetime
-from decimal import Decimal
 from typing import Optional
 from app.shared.events import DomainEvent
 
 @dataclass
-class ItemCreatedEvent(DomainEvent):
-    """Published when an item is created"""
-    item_id: int
+class IntentCreatedEvent(DomainEvent):
+    """Published when an intent is created"""
+    intent_id: int
     name: str
-    price: Decimal
+    output_format: str
     created_at: datetime
     
-    def __init__(self, item_id: int, name: str, price: Decimal, created_at: datetime):
-        self.event_type = "item.created"
+    def __init__(self, intent_id: int, name: str, output_format: str, created_at: datetime):
+        self.event_type = "intent.created"
         self.timestamp = datetime.utcnow()
-        self.item_id = item_id
+        self.intent_id = intent_id
         self.name = name
-        self.price = price
+        self.output_format = output_format
         self.created_at = created_at
 
 @dataclass
-class ItemUpdatedEvent(DomainEvent):
-    """Published when an item is updated"""
-    item_id: int
+class IntentUpdatedEvent(DomainEvent):
+    """Published when an intent is updated"""
+    intent_id: int
     updated_fields: list[str]
     updated_at: datetime
     
-    def __init__(self, item_id: int, updated_fields: list[str], updated_at: datetime):
-        self.event_type = "item.updated"
+    def __init__(self, intent_id: int, updated_fields: list[str], updated_at: datetime):
+        self.event_type = "intent.updated"
         self.timestamp = datetime.utcnow()
-        self.item_id = item_id
+        self.intent_id = intent_id
         self.updated_fields = updated_fields
         self.updated_at = updated_at
 
 @dataclass
-class ItemDeletedEvent(DomainEvent):
-    """Published when an item is deleted"""
-    item_id: int
+class IntentDeletedEvent(DomainEvent):
+    """Published when an intent is deleted"""
+    intent_id: int
     deleted_at: datetime
     
-    def __init__(self, item_id: int, deleted_at: datetime):
-        self.event_type = "item.deleted"
+    def __init__(self, intent_id: int, deleted_at: datetime):
+        self.event_type = "intent.deleted"
         self.timestamp = datetime.utcnow()
-        self.item_id = item_id
+        self.intent_id = intent_id
         self.deleted_at = deleted_at
 
 @dataclass
-class ItemViewedEvent(DomainEvent):
-    """Published when an item is viewed - for analytics"""
-    item_id: int
+class IntentViewedEvent(DomainEvent):
+    """Published when an intent is viewed - for analytics"""
+    intent_id: int
     user_id: Optional[int]
     viewed_at: datetime
     
-    def __init__(self, item_id: int, user_id: Optional[int], viewed_at: datetime):
-        self.event_type = "item.viewed"
+    def __init__(self, intent_id: int, user_id: Optional[int], viewed_at: datetime):
+        self.event_type = "intent.viewed"
         self.timestamp = datetime.utcnow()
-        self.item_id = item_id
+        self.intent_id = intent_id
         self.user_id = user_id
         self.viewed_at = viewed_at
 ```
@@ -862,7 +868,7 @@ class ItemViewedEvent(DomainEvent):
 """Order service needs to validate user exists"""
 from app.users import service as user_service
 
-async def create_order(user_id: int, item_id: int) -> Order:
+async def create_order(user_id: int, intent_id: int) -> Order:
     # ✅ Call through service layer
     user = await user_service.get_user(user_id)
     if not user:
@@ -875,30 +881,29 @@ async def create_order(user_id: int, item_id: int) -> Order:
 
 ```python
 # app/orders/service.py
-"""Order service validates across users and items"""
+"""Order service validates across users and intents"""
 from app.users import service as user_service
-from app.items import service as item_service
+from app.intents import service as intent_service
 
-async def create_order(user_id: int, item_id: int, quantity: int) -> Order:
+async def create_order(user_id: int, intent_id: int, quantity: int) -> Order:
     # Validate user
     user_exists = await user_service.validate_user_exists(user_id)
     if not user_exists:
         raise ValueError("Invalid user")
     
-    # Validate item
-    item = await item_service.get_item(item_id)
-    if not item:
-        raise ValueError("Item not found")
+    # Validate intent
+    intent = await intent_service.get_intent(intent_id)
+    if not intent:
+        raise ValueError("Intent not found")
     
-    if not item.is_available:
-        raise ValueError("Item not available")
+    if not intent.is_valid():
+        raise ValueError("Intent not valid")
     
     # Create order
     order = Order(
         user_id=user_id,
-        item_id=item_id,
-        quantity=quantity,
-        total_price=item.price * quantity
+        intent_id=intent_id,
+        quantity=quantity
     )
     
     order = await order_repository.create(order)
@@ -917,23 +922,22 @@ async def create_order(user_id: int, item_id: int, quantity: int) -> Order:
 from pydantic import BaseModel
 
 class OrderDetailResponse(BaseModel):
-    """Order with user and item details"""
+    """Order with user and intent details"""
     id: int
     # User information (from users domain)
     user_id: int
     username: str
     user_email: str
-    # Item information (from items domain)
-    item_id: int
-    item_name: str
-    item_price: Decimal
+    # Intent information (from intents domain)
+    intent_id: int
+    intent_name: str
+    intent_output_format: str
     # Order information
     quantity: int
-    total_price: Decimal
 
 # app/orders/service.py
 from app.users import service as user_service
-from app.items import service as item_service
+from app.intents import service as intent_service
 
 async def get_order_detail(order_id: int) -> OrderDetailResponse:
     """Get order with enriched data"""
@@ -941,7 +945,7 @@ async def get_order_detail(order_id: int) -> OrderDetailResponse:
     
     # Fetch related data from other domains
     user = await user_service.get_user(order.user_id)
-    item = await item_service.get_item(order.item_id)
+    intent = await intent_service.get_intent(order.intent_id)
     
     # Compose enriched response
     return OrderDetailResponse(
@@ -949,11 +953,10 @@ async def get_order_detail(order_id: int) -> OrderDetailResponse:
         user_id=user.id,
         username=user.username,
         user_email=user.email,
-        item_id=item.id,
-        item_name=item.name,
-        item_price=item.price,
-        quantity=order.quantity,
-        total_price=order.total_price
+        intent_id=intent.id,
+        intent_name=intent.name,
+        intent_output_format=intent.output_format,
+        quantity=order.quantity
     )
 ```
 
@@ -1086,14 +1089,14 @@ async def track_all_events(event: DomainEvent):
     )
     # TODO: Send to Mixpanel, Segment, Google Analytics, etc.
 
-async def track_item_events(event: DomainEvent):
-    """Track item-specific events"""
-    if hasattr(event, 'item_id'):
+async def track_intent_events(event: DomainEvent):
+    """Track intent-specific events"""
+    if hasattr(event, 'intent_id'):
         logger.info(
-            "Item analytics",
+            "Intent analytics",
             extra={
-                'analytics_category': 'item',
-                'item_id': event.item_id,
+                'analytics_category': 'intent',
+                'intent_id': event.intent_id,
                 'event_type': event.event_type
             }
         )
@@ -1116,11 +1119,11 @@ def setup_analytics_handlers():
     event_bus.subscribe_all(track_all_events)
     
     # Specific handlers
-    event_bus.subscribe("item.created", track_item_events)
-    event_bus.subscribe("item.updated", track_item_events)
-    event_bus.subscribe("item.deleted", track_item_events)
-    event_bus.subscribe("item.viewed", track_item_events)
-    event_bus.subscribe("item.viewed", track_user_behavior)
+    event_bus.subscribe("intent.created", track_intent_events)
+    event_bus.subscribe("intent.updated", track_intent_events)
+    event_bus.subscribe("intent.deleted", track_intent_events)
+    event_bus.subscribe("intent.viewed", track_intent_events)
+    event_bus.subscribe("intent.viewed", track_user_behavior)
     
     logger.info("Analytics handlers registered")
 ```
@@ -1151,8 +1154,8 @@ async def startup_event():
 #### Step 1: Create Domain Folder Structure
 
 ```bash
-mkdir -p app/items app/users app/shared
-touch app/items/{__init__.py,models.py,schemas.py,service.py,repository.py,router.py,events.py}
+mkdir -p app/intents app/users app/shared
+touch app/intents/{__init__.py,models.py,schemas.py,service.py,repository.py,router.py,events.py}
 touch app/users/{__init__.py,models.py,schemas.py,service.py,repository.py,router.py,events.py}
 ```
 
@@ -1165,116 +1168,117 @@ touch app/users/{__init__.py,models.py,schemas.py,service.py,repository.py,route
 
 **Before (app/models.py):**
 ```python
-class Item(BaseModel):
+class Intent(BaseModel):
     id: Optional[int] = None
     name: str
-    price: float
+    output_format: str
 ```
 
 **After:**
 ```python
-# app/items/models.py - Domain model
-class Item(BaseModel):
+# app/intents/models.py - Domain model
+class Intent(BaseModel):
     id: Optional[int] = None
     name: str
-    price: Decimal
+    output_format: str
     
-    @validator('price')
-    def price_must_be_positive(cls, v):
-        if v <= 0:
-            raise ValueError('Price must be positive')
-        return v
+    @validator('output_format')
+    def output_format_must_be_valid(cls, v):
+        valid_formats = ['json', 'xml', 'csv', 'markdown', 'html', 'text']
+        if v.lower() not in valid_formats:
+            raise ValueError(f'Output format must be one of {valid_formats}')
+        return v.lower()
 
-# app/items/schemas.py - API DTOs
-class ItemCreateRequest(BaseModel):
+# app/intents/schemas.py - API DTOs
+class IntentCreateRequest(BaseModel):
     name: str
-    price: Decimal
+    output_format: str
 
-class ItemResponse(BaseModel):
+class IntentResponse(BaseModel):
     id: int
     name: str
-    price: Decimal
+    output_format: str
 ```
 
 #### Step 4: Extract Service Layer
 
 **Before (logic in router):**
 ```python
-@router.post("/items")
-async def create_item(item: Item):
-    item.id = generate_id()
-    items_db.append(item)
-    return item
+@router.post("/intents")
+async def create_intent(intent: Intent):
+    intent.id = generate_id()
+    intents_db.append(intent)
+    return intent
 ```
 
 **After:**
 ```python
-# app/items/service.py
-async def create_item(request: ItemCreateRequest) -> Item:
-    item = Item(name=request.name, price=request.price)
-    item = await item_repository.create(item)
-    await event_bus.publish(ItemCreatedEvent(...))
-    return item
+# app/intents/service.py
+async def create_intent(request: IntentCreateRequest) -> Intent:
+    intent = Intent(name=request.name, output_format=request.output_format)
+    intent = await intent_repository.create(intent)
+    await event_bus.publish(IntentCreatedEvent(...))
+    return intent
 
-# app/items/router.py
-@router.post("/items", response_model=ItemResponse)
-async def create_item(request: ItemCreateRequest):
-    item = await item_service.create_item(request)
-    return ItemResponse.from_domain_model(item)
+# app/intents/router.py
+@router.post("/intents", response_model=IntentResponse)
+async def create_intent(request: IntentCreateRequest):
+    intent = await intent_service.create_intent(request)
+    return IntentResponse.from_domain_model(intent)
 ```
 
 #### Step 5: Create Repository Layer
 
 ```python
-# app/items/repository.py
-class ItemRepository:
-    async def create(self, item: Item) -> Item:
+# app/intents/repository.py
+class IntentRepository:
+    async def create(self, intent: Intent) -> Intent:
         # Data access logic
         pass
 
-item_repository = ItemRepository()
+intent_repository = IntentRepository()
 ```
 
 #### Step 6: Define and Publish Events
 
 ```python
-# app/items/events.py
+# app/intents/events.py
 @dataclass
-class ItemCreatedEvent(DomainEvent):
-    item_id: int
+class IntentCreatedEvent(DomainEvent):
+    intent_id: int
     name: str
-    price: Decimal
+    output_format: str
     created_at: datetime
     
     def __init__(self, ...):
-        self.event_type = "item.created"
+        self.event_type = "intent.created"
         self.timestamp = datetime.utcnow()
         # ... set fields
 
-# app/items/service.py
-await event_bus.publish(ItemCreatedEvent(...))
+# app/intents/service.py
+await event_bus.publish(IntentCreatedEvent(...))
 ```
 
 #### Step 7: Update Imports
 
 ```python
 # app/main.py
-from app.items.router import router as items_router
+from app.intents.router import router as intents_router
 from app.users.router import router as users_router
 
-app.include_router(items_router)
+app.include_router(intents_router)
 app.include_router(users_router)
 ```
 
 #### Step 8: Export Public API
 
 ```python
-# app/items/__init__.py
-from .service import get_item, create_item, update_item, delete_item
-from .schemas import ItemResponse, ItemCreateRequest
+# app/intents/__init__.py
+from .service import get_intent, create_intent, update_intent, delete_intent
+from .schemas import IntentResponse, IntentCreateRequest
 
-__all__ = ["get_item", "create_item", "update_item", "delete_item",
-           "ItemResponse", "ItemCreateRequest"]
+__all__ = ["get_intent", "create_intent", "update_intent", "delete_intent",
+           "IntentResponse", "IntentCreateRequest"]
 ```
 
 ---
@@ -1300,14 +1304,14 @@ class PaginatedResponse(BaseModel):
     page_size: int
     total_pages: int
 
-# app/items/service.py
-async def get_items_paginated(pagination: PaginationParams) -> PaginatedResponse:
-    items, total = await item_repository.get_paginated(
+# app/intents/service.py
+async def get_intents_paginated(pagination: PaginationParams) -> PaginatedResponse:
+    intents, total = await intent_repository.get_paginated(
         offset=pagination.offset,
         limit=pagination.page_size
     )
     return PaginatedResponse(
-        items=items,
+        items=intents,
         total=total,
         page=pagination.page,
         page_size=pagination.page_size,
@@ -1318,18 +1322,18 @@ async def get_items_paginated(pagination: PaginationParams) -> PaginatedResponse
 ### Pattern: Soft Delete
 
 ```python
-# app/items/service.py
-async def delete_item(item_id: int, soft: bool = True) -> None:
-    """Delete item (soft delete by default)"""
+# app/intents/service.py
+async def delete_intent(intent_id: int, soft: bool = True) -> None:
+    """Delete intent (soft delete by default)"""
     if soft:
-        item = await item_repository.get(item_id)
-        item.is_deleted = True
-        await item_repository.update(item)
+        intent = await intent_repository.get(intent_id)
+        intent.is_deleted = True
+        await intent_repository.update(intent)
     else:
-        await item_repository.delete(item_id)
+        await intent_repository.delete(intent_id)
     
-    await event_bus.publish(ItemDeletedEvent(
-        item_id=item_id,
+    await event_bus.publish(IntentDeletedEvent(
+        intent_id=intent_id,
         deleted_at=datetime.utcnow(),
         soft_delete=soft
     ))
@@ -1338,22 +1342,22 @@ async def delete_item(item_id: int, soft: bool = True) -> None:
 ### Pattern: Audit Trail
 
 ```python
-# app/items/events.py
+# app/intents/events.py
 @dataclass
-class ItemAuditEvent(DomainEvent):
-    """Audit trail for item changes"""
-    item_id: int
+class IntentAuditEvent(DomainEvent):
+    """Audit trail for intent changes"""
+    intent_id: int
     action: str  # 'created', 'updated', 'deleted'
     changed_by: int  # User ID
     changes: dict
     timestamp: datetime
 
-# app/items/service.py
-async def update_item(item_id: int, request: ItemUpdateRequest, user_id: int) -> Item:
+# app/intents/service.py
+async def update_intent(intent_id: int, request: IntentUpdateRequest, user_id: int) -> Intent:
     # ... update logic
     
-    await event_bus.publish(ItemAuditEvent(
-        item_id=item.id,
+    await event_bus.publish(IntentAuditEvent(
+        intent_id=intent.id,
         action='updated',
         changed_by=user_id,
         changes={'fields': updated_fields},
