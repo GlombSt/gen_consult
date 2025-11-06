@@ -58,10 +58,7 @@ class EventBus:
         if event_type not in self._handlers:
             self._handlers[event_type] = []
         self._handlers[event_type].append(handler)
-        logger.info(
-            "Event handler subscribed",
-            extra={"event_type": event_type, "handler": handler.__name__}
-        )
+        logger.info("Event handler subscribed", extra={"event_type": event_type, "handler": handler.__name__})
 
     async def publish(self, event: DomainEvent) -> None:
         """
@@ -70,10 +67,7 @@ class EventBus:
         Args:
             event: The domain event to publish
         """
-        logger.info(
-            "Domain event published",
-            extra={"event_type": event.event_type, "event_data": event.to_dict()}
-        )
+        logger.info("Domain event published", extra={"event_type": event.event_type, "event_data": event.to_dict()})
 
         handlers = self._handlers.get(event.event_type, [])
         for handler in handlers:
@@ -85,11 +79,7 @@ class EventBus:
             except Exception as e:
                 logger.error(
                     "Event handler failed",
-                    extra={
-                        "event_type": event.event_type,
-                        "handler": handler.__name__,
-                        "error_message": str(e)
-                    },
+                    extra={"event_type": event.event_type, "handler": handler.__name__, "error_message": str(e)},
                     exc_info=True,
                 )
 

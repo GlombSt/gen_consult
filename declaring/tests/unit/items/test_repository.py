@@ -1,7 +1,7 @@
 """
 Unit tests for items repository layer.
 
-Tests data access and model conversions with mocked database.
+Tests data access and model conversions with database.
 """
 
 from datetime import datetime
@@ -17,14 +17,15 @@ class TestItemRepositoryFindAll:
     """Test ItemRepository.find_all method."""
 
     @pytest.mark.asyncio
-    async def test_find_all_with_items_returns_all_items(self):
+    async def test_find_all_with_items_returns_all_items(self, test_db_session):
         """Test finding all items when items exist."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item1 = create_test_item(id=None, name="Item 1")
         item2 = create_test_item(id=None, name="Item 2")
         await repo.create(item1)
         await repo.create(item2)
+        await test_db_session.commit()
 
         # Act
         result = await repo.find_all()
@@ -35,10 +36,10 @@ class TestItemRepositoryFindAll:
         assert result[1].name == "Item 2"
 
     @pytest.mark.asyncio
-    async def test_find_all_with_empty_storage_returns_empty_list(self):
+    async def test_find_all_with_empty_storage_returns_empty_list(self, test_db_session):
         """Test finding all items when storage is empty."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
 
         # Act
         result = await repo.find_all()
@@ -52,12 +53,13 @@ class TestItemRepositoryFindById:
     """Test ItemRepository.find_by_id method."""
 
     @pytest.mark.asyncio
-    async def test_find_by_id_when_exists_returns_item(self):
+    async def test_find_by_id_when_exists_returns_item(self, test_db_session):
         """Test finding an item by ID when it exists."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item = create_test_item(id=None, name="Test Item")
         created = await repo.create(item)
+        await test_db_session.commit()
 
         # Act
         result = await repo.find_by_id(created.id)
@@ -68,10 +70,10 @@ class TestItemRepositoryFindById:
         assert result.name == "Test Item"
 
     @pytest.mark.asyncio
-    async def test_find_by_id_when_not_exists_returns_none(self):
+    async def test_find_by_id_when_not_exists_returns_none(self, test_db_session):
         """Test finding an item by ID when it doesn't exist."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
 
         # Act
         result = await repo.find_by_id(999)
@@ -85,14 +87,15 @@ class TestItemRepositoryCreate:
     """Test ItemRepository.create method."""
 
     @pytest.mark.asyncio
-    async def test_create_item_assigns_id_and_returns_item(self):
+    async def test_create_item_assigns_id_and_returns_item(self, test_db_session):
         """Test creating an item assigns ID and returns domain model."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item = create_test_item(id=None, name="New Item", price=99.99)
 
         # Act
         result = await repo.create(item)
+        await test_db_session.commit()
 
         # Assert
         assert result.id is not None
@@ -101,16 +104,18 @@ class TestItemRepositoryCreate:
         assert result.price == 99.99
 
     @pytest.mark.asyncio
-    async def test_create_multiple_items_increments_id(self):
+    async def test_create_multiple_items_increments_id(self, test_db_session):
         """Test creating multiple items increments ID counter."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item1 = create_test_item(id=None, name="Item 1")
         item2 = create_test_item(id=None, name="Item 2")
 
         # Act
         result1 = await repo.create(item1)
+        await test_db_session.commit()
         result2 = await repo.create(item2)
+        await test_db_session.commit()
 
         # Assert
         assert result1.id == 1
@@ -122,12 +127,13 @@ class TestItemRepositoryUpdate:
     """Test ItemRepository.update method."""
 
     @pytest.mark.asyncio
-    async def test_update_item_when_exists_returns_updated_item(self):
+    async def test_update_item_when_exists_returns_updated_item(self, test_db_session):
         """Test updating an existing item."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item = create_test_item(id=None, name="Old Name", price=99.99)
         created = await repo.create(item)
+        await test_db_session.commit()
 
         # Modify the item
         created.name = "New Name"
@@ -135,6 +141,7 @@ class TestItemRepositoryUpdate:
 
         # Act
         result = await repo.update(created.id, created)
+        await test_db_session.commit()
 
         # Assert
         assert result is not None
@@ -143,10 +150,10 @@ class TestItemRepositoryUpdate:
         assert result.price == 149.99
 
     @pytest.mark.asyncio
-    async def test_update_item_when_not_exists_returns_none(self):
+    async def test_update_item_when_not_exists_returns_none(self, test_db_session):
         """Test updating a non-existent item."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item = create_test_item(id=999, name="Test")
 
         # Act
@@ -156,19 +163,21 @@ class TestItemRepositoryUpdate:
         assert result is None
 
     @pytest.mark.asyncio
-    async def test_update_item_preserves_created_at(self):
+    async def test_update_item_preserves_created_at(self, test_db_session):
         """Test updating an item preserves created_at timestamp."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         original_date = datetime(2025, 1, 1, 12, 0, 0)
         item = create_test_item(id=None, name="Test", created_at=original_date)
         created = await repo.create(item)
+        await test_db_session.commit()
 
         # Modify the item
         created.name = "Updated"
 
         # Act
         result = await repo.update(created.id, created)
+        await test_db_session.commit()
 
         # Assert
         assert result.created_at == original_date
@@ -179,15 +188,17 @@ class TestItemRepositoryDelete:
     """Test ItemRepository.delete method."""
 
     @pytest.mark.asyncio
-    async def test_delete_item_when_exists_returns_true(self):
+    async def test_delete_item_when_exists_returns_true(self, test_db_session):
         """Test deleting an existing item."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         item = create_test_item(id=None, name="Test Item")
         created = await repo.create(item)
+        await test_db_session.commit()
 
         # Act
         result = await repo.delete(created.id)
+        await test_db_session.commit()
 
         # Assert
         assert result is True
@@ -196,10 +207,10 @@ class TestItemRepositoryDelete:
         assert found is None
 
     @pytest.mark.asyncio
-    async def test_delete_item_when_not_exists_returns_false(self):
+    async def test_delete_item_when_not_exists_returns_false(self, test_db_session):
         """Test deleting a non-existent item."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
 
         # Act
         result = await repo.delete(999)
@@ -213,13 +224,14 @@ class TestItemRepositorySearch:
     """Test ItemRepository.search method."""
 
     @pytest.mark.asyncio
-    async def test_search_by_name_returns_matching_items(self):
+    async def test_search_by_name_returns_matching_items(self, test_db_session):
         """Test searching items by name."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         await repo.create(create_test_item(id=None, name="Laptop Pro"))
         await repo.create(create_test_item(id=None, name="Laptop Air"))
         await repo.create(create_test_item(id=None, name="Desktop"))
+        await test_db_session.commit()
 
         # Act
         result = await repo.search(name="Laptop")
@@ -229,13 +241,14 @@ class TestItemRepositorySearch:
         assert all("Laptop" in item.name for item in result)
 
     @pytest.mark.asyncio
-    async def test_search_by_price_range_returns_matching_items(self):
+    async def test_search_by_price_range_returns_matching_items(self, test_db_session):
         """Test searching items by price range."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         await repo.create(create_test_item(id=None, name="Item 1", price=50.0))
         await repo.create(create_test_item(id=None, name="Item 2", price=150.0))
         await repo.create(create_test_item(id=None, name="Item 3", price=250.0))
+        await test_db_session.commit()
 
         # Act
         result = await repo.search(min_price=100.0, max_price=200.0)
@@ -245,12 +258,13 @@ class TestItemRepositorySearch:
         assert result[0].price == 150.0
 
     @pytest.mark.asyncio
-    async def test_search_available_only_returns_available_items(self):
+    async def test_search_available_only_returns_available_items(self, test_db_session):
         """Test searching for available items only."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         await repo.create(create_test_item(id=None, name="Available", is_available=True))
         await repo.create(create_test_item(id=None, name="Unavailable", is_available=False))
+        await test_db_session.commit()
 
         # Act
         result = await repo.search(available_only=True)
@@ -260,13 +274,14 @@ class TestItemRepositorySearch:
         assert result[0].is_available is True
 
     @pytest.mark.asyncio
-    async def test_search_with_multiple_filters_returns_matching_items(self):
+    async def test_search_with_multiple_filters_returns_matching_items(self, test_db_session):
         """Test searching with multiple filters."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         await repo.create(create_test_item(id=None, name="Laptop Pro", price=150.0, is_available=True))
         await repo.create(create_test_item(id=None, name="Laptop Air", price=250.0, is_available=True))
         await repo.create(create_test_item(id=None, name="Desktop Pro", price=150.0, is_available=False))
+        await test_db_session.commit()
 
         # Act
         result = await repo.search(name="Laptop", min_price=100.0, available_only=True)
@@ -275,11 +290,12 @@ class TestItemRepositorySearch:
         assert len(result) == 2
 
     @pytest.mark.asyncio
-    async def test_search_with_no_matches_returns_empty_list(self):
+    async def test_search_with_no_matches_returns_empty_list(self, test_db_session):
         """Test searching with no matches."""
         # Arrange
-        repo = ItemRepository()
+        repo = ItemRepository(test_db_session)
         await repo.create(create_test_item(id=None, name="Laptop"))
+        await test_db_session.commit()
 
         # Act
         result = await repo.search(name="Nonexistent")

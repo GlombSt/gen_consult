@@ -29,17 +29,19 @@ class TestUserServiceIntegration:
     """Test users service with real repository."""
 
     @pytest.mark.asyncio
-    async def test_create_and_get_user_integration(self):
+    async def test_create_and_get_user_integration(self, test_db_session):
         """Test creating and retrieving a user end-to-end."""
         # Arrange
         request = create_test_user_create_request(username="testuser", email="test@example.com")
+        repository = UserRepository(test_db_session)
 
-        with patch("app.users.service.user_repository", UserRepository()), patch("app.users.service.event_bus", EventBus()):
+        with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(request)
+            created_user = await create_user(request, repository=repository)
+            await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id)
+            retrieved_user = await get_user(created_user.id, repository=repository)
 
             # Assert
             assert retrieved_user is not None
@@ -48,21 +50,24 @@ class TestUserServiceIntegration:
             assert retrieved_user.email == "test@example.com"
 
     @pytest.mark.asyncio
-    async def test_create_update_get_user_integration(self):
+    async def test_create_update_get_user_integration(self, test_db_session):
         """Test creating, updating, and retrieving a user."""
         # Arrange
         create_request = create_test_user_create_request(username="oldname", email="old@example.com")
         update_request = create_test_user_update_request(username="newname", email="new@example.com")
+        repository = UserRepository(test_db_session)
 
-        with patch("app.users.service.user_repository", UserRepository()), patch("app.users.service.event_bus", EventBus()):
+        with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(create_request)
+            created_user = await create_user(create_request, repository=repository)
+            await test_db_session.commit()
 
             # Act - Update
-            await update_user(created_user.id, update_request)
+            await update_user(created_user.id, update_request, repository=repository)
+            await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id)
+            retrieved_user = await get_user(created_user.id, repository=repository)
 
             # Assert
             assert retrieved_user is not None
@@ -70,39 +75,45 @@ class TestUserServiceIntegration:
             assert retrieved_user.email == "new@example.com"
 
     @pytest.mark.asyncio
-    async def test_create_delete_get_user_integration(self):
+    async def test_create_delete_get_user_integration(self, test_db_session):
         """Test creating, deleting, and attempting to retrieve a user."""
         # Arrange
         request = create_test_user_create_request(username="todelete", email="delete@example.com")
+        repository = UserRepository(test_db_session)
 
-        with patch("app.users.service.user_repository", UserRepository()), patch("app.users.service.event_bus", EventBus()):
+        with patch("app.users.service.event_bus", EventBus()):
             # Act - Create
-            created_user = await create_user(request)
+            created_user = await create_user(request, repository=repository)
+            await test_db_session.commit()
 
             # Act - Delete
-            deleted = await delete_user(created_user.id)
+            deleted = await delete_user(created_user.id, repository=repository)
+            await test_db_session.commit()
 
             # Act - Get
-            retrieved_user = await get_user(created_user.id)
+            retrieved_user = await get_user(created_user.id, repository=repository)
 
             # Assert
             assert deleted is True
             assert retrieved_user is None
 
     @pytest.mark.asyncio
-    async def test_create_multiple_and_get_all_integration(self):
+    async def test_create_multiple_and_get_all_integration(self, test_db_session):
         """Test creating multiple users and retrieving all."""
         # Arrange
         request1 = create_test_user_create_request(username="user1", email="user1@example.com")
         request2 = create_test_user_create_request(username="user2", email="user2@example.com")
+        repository = UserRepository(test_db_session)
 
-        with patch("app.users.service.user_repository", UserRepository()), patch("app.users.service.event_bus", EventBus()):
+        with patch("app.users.service.event_bus", EventBus()):
             # Act - Create multiple
-            await create_user(request1)
-            await create_user(request2)
+            await create_user(request1, repository=repository)
+            await test_db_session.commit()
+            await create_user(request2, repository=repository)
+            await test_db_session.commit()
 
             # Act - Get all
-            all_users = await get_all_users()
+            all_users = await get_all_users(repository=repository)
 
             # Assert
             assert len(all_users) == 2
@@ -110,7 +121,7 @@ class TestUserServiceIntegration:
             assert any(user.username == "user2" for user in all_users)
 
     @pytest.mark.asyncio
-    async def test_user_created_event_published_integration(self):
+    async def test_user_created_event_published_integration(self, test_db_session):
         """Test that UserCreatedEvent is published when creating user."""
         # Arrange
         request = create_test_user_create_request(username="eventtest", email="event@example.com")
@@ -122,9 +133,12 @@ class TestUserServiceIntegration:
 
         event_bus.subscribe("user.created", capture_event)
 
-        with patch("app.users.service.user_repository", UserRepository()), patch("app.users.service.event_bus", event_bus):
+        repository = UserRepository(test_db_session)
+
+        with patch("app.users.service.event_bus", event_bus):
             # Act
-            created_user = await create_user(request)
+            created_user = await create_user(request, repository=repository)
+            await test_db_session.commit()
 
             # Assert
             assert len(published_events) == 1

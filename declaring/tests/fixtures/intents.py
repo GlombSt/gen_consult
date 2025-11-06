@@ -47,4 +47,3 @@ def create_test_fact(
         created_at=created_at or datetime(2025, 1, 1, 12, 0, 0),
         updated_at=updated_at or datetime(2025, 1, 1, 12, 0, 0),
     )
-

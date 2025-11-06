@@ -25,13 +25,13 @@ from .service import (
     get_all_intents,
     get_intent,
     remove_fact_from_intent,
+    update_fact_value,
     update_intent_constraints,
     update_intent_context,
     update_intent_description,
     update_intent_name,
     update_intent_output_format,
     update_intent_output_structure,
-    update_fact_value,
 )
 
 __all__ = [

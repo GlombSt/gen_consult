@@ -11,35 +11,39 @@ from app.shared.logging_config import logger
 
 from .events import ItemCreatedEvent, ItemDeletedEvent, ItemUpdatedEvent
 from .models import Item
-from .repository import item_repository
+from .repository import ItemRepository
 from .schemas import ItemCreateRequest, ItemUpdateRequest
 
 
-async def get_all_items() -> List[Item]:
+async def get_all_items(repository: ItemRepository) -> List[Item]:
     """
     Get all items.
+
+    Args:
+        repository: Item repository instance
 
     Returns:
         List of all items
     """
     logger.info("Fetching all items")
-    items = await item_repository.find_all()
+    items = await repository.find_all()
     logger.info("Items fetched", extra={"total_items": len(items)})
     return items
 
 
-async def get_item(item_id: int) -> Optional[Item]:
+async def get_item(item_id: int, repository: ItemRepository) -> Optional[Item]:
     """
     Get a specific item by ID.
 
     Args:
         item_id: The item ID
+        repository: Item repository instance
 
     Returns:
         Item if found, None otherwise
     """
     logger.info("Looking for item", extra={"item_id": item_id})
-    item = await item_repository.find_by_id(item_id)
+    item = await repository.find_by_id(item_id)
 
     if item:
         logger.info("Item found", extra={"item_id": item_id, "item_name": item.name})
@@ -49,12 +53,13 @@ async def get_item(item_id: int) -> Optional[Item]:
     return item
 
 
-async def create_item(request: ItemCreateRequest) -> Item:
+async def create_item(request: ItemCreateRequest, repository: ItemRepository) -> Item:
     """
     Create a new item.
 
     Args:
         request: Item creation request
+        repository: Item repository instance
 
     Returns:
         Created item
@@ -78,7 +83,7 @@ async def create_item(request: ItemCreateRequest) -> Item:
     )
 
     # Persist
-    created_item = await item_repository.create(item)
+    created_item = await repository.create(item)
 
     # Publish domain event (MANDATORY)
     await event_bus.publish(
@@ -90,21 +95,19 @@ async def create_item(request: ItemCreateRequest) -> Item:
         )
     )
 
-    logger.info(
-        "Item created successfully",
-        extra={"item_id": created_item.id, "item_name": created_item.name}
-    )
+    logger.info("Item created successfully", extra={"item_id": created_item.id, "item_name": created_item.name})
 
     return created_item
 
 
-async def update_item(item_id: int, request: ItemUpdateRequest) -> Optional[Item]:
+async def update_item(item_id: int, request: ItemUpdateRequest, repository: ItemRepository) -> Optional[Item]:
     """
     Update an existing item.
 
     Args:
         item_id: The item ID to update
         request: Item update request
+        repository: Item repository instance
 
     Returns:
         Updated item if found, None otherwise
@@ -112,7 +115,7 @@ async def update_item(item_id: int, request: ItemUpdateRequest) -> Optional[Item
     logger.info("Updating item", extra={"item_id": item_id})
 
     # Get existing item
-    existing_item = await item_repository.find_by_id(item_id)
+    existing_item = await repository.find_by_id(item_id)
     if not existing_item:
         logger.warning("Item not found for update", extra={"item_id": item_id})
         return None
@@ -128,7 +131,7 @@ async def update_item(item_id: int, request: ItemUpdateRequest) -> Optional[Item
         existing_item.is_available = request.is_available
 
     # Persist
-    updated_item = await item_repository.update(item_id, existing_item)
+    updated_item = await repository.update(item_id, existing_item)
 
     # Publish domain event (MANDATORY)
     if updated_item:
@@ -146,12 +149,13 @@ async def update_item(item_id: int, request: ItemUpdateRequest) -> Optional[Item
     return updated_item
 
 
-async def delete_item(item_id: int) -> bool:
+async def delete_item(item_id: int, repository: ItemRepository) -> bool:
     """
     Delete an item.
 
     Args:
         item_id: The item ID to delete
+        repository: Item repository instance
 
     Returns:
         True if deleted, False if not found
@@ -159,13 +163,13 @@ async def delete_item(item_id: int) -> bool:
     logger.info("Deleting item", extra={"item_id": item_id})
 
     # Check if item exists before deleting
-    existing_item = await item_repository.find_by_id(item_id)
+    existing_item = await repository.find_by_id(item_id)
     if not existing_item:
         logger.warning("Item not found for deletion", extra={"item_id": item_id})
         return False
 
     # Delete
-    deleted = await item_repository.delete(item_id)
+    deleted = await repository.delete(item_id)
 
     # Publish domain event (MANDATORY)
     if deleted:
@@ -180,6 +184,7 @@ async def search_items(
     min_price: Optional[float] = None,
     max_price: Optional[float] = None,
     available_only: bool = False,
+    repository: ItemRepository = ...,
 ) -> List[Item]:
     """
     Search items with filters.
@@ -189,6 +194,7 @@ async def search_items(
         min_price: Minimum price filter
         max_price: Maximum price filter
         available_only: Filter for available items only
+        repository: Item repository instance
 
     Returns:
         List of matching items
@@ -203,12 +209,7 @@ async def search_items(
         },
     )
 
-    results = await item_repository.search(
-        name=name,
-        min_price=min_price,
-        max_price=max_price,
-        available_only=available_only
-    )
+    results = await repository.search(name=name, min_price=min_price, max_price=max_price, available_only=available_only)
 
     logger.info("Search completed", extra={"results_count": len(results)})
     return results

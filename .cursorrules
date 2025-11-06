@@ -1,5 +1,7 @@
 # Cursor Rules for Gen Consult
 
-When the user is asking a question in a chat, answer that question, don't start to generate any artifacts.
+If you receive a message in the chat that asks a question, don't generate any code or documentation. Just answer the question.
+
+Use context7 when generating any code, so you are taking advantage of the latest lanuage version templates.
 
 Claude.md as the main entry file into this project, follow the references in this document

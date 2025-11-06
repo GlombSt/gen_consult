@@ -1,67 +1,60 @@
 """
 Database models for intents domain.
 
-These models represent the database schema and include all database-specific fields.
+These models represent the database schema using SQLAlchemy ORM.
 Used exclusively by the repository layer.
 """
 
 from datetime import datetime
-from typing import Optional
+
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
+from app.shared.database import Base
 
 
-class IntentDBModel:
+class IntentDBModel(Base):
     """
-    Database model for intents.
+    SQLAlchemy ORM model for intents table.
 
-    In a real application, this would use SQLAlchemy or similar ORM.
-    For now, it's a simple class that represents the database schema.
-    """
-
-    def __init__(
-        self,
-        id: Optional[int] = None,
-        name: str = "",
-        description: str = "",
-        output_format: str = "",
-        output_structure: Optional[str] = None,
-        context: Optional[str] = None,
-        constraints: Optional[str] = None,
-        created_at: Optional[datetime] = None,
-        updated_at: Optional[datetime] = None,
-        deleted_at: Optional[datetime] = None,  # Soft delete
-    ):
-        self.id = id
-        self.name = name
-        self.description = description
-        self.output_format = output_format
-        self.output_structure = output_structure
-        self.context = context
-        self.constraints = constraints
-        self.created_at = created_at or datetime.utcnow()
-        self.updated_at = updated_at or datetime.utcnow()
-        self.deleted_at = deleted_at
-
-
-class FactDBModel:
-    """
-    Database model for facts.
-
-    In a real application, this would use SQLAlchemy or similar ORM.
-    For now, it's a simple class that represents the database schema.
+    Represents the database schema for intents.
+    Includes audit fields (created_at, updated_at) but no soft delete.
+    Uses hard deletes only.
     """
 
-    def __init__(
-        self,
-        id: Optional[int] = None,
-        intent_id: int = 0,
-        value: str = "",
-        created_at: Optional[datetime] = None,
-        updated_at: Optional[datetime] = None,
-        deleted_at: Optional[datetime] = None,  # Soft delete
-    ):
-        self.id = id
-        self.intent_id = intent_id
-        self.value = value
-        self.created_at = created_at or datetime.utcnow()
-        self.updated_at = updated_at or datetime.utcnow()
-        self.deleted_at = deleted_at
+    __tablename__ = "intents"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    output_format = Column(String, nullable=False)
+    output_structure = Column(String, nullable=True)
+    context = Column(String, nullable=True)
+    constraints = Column(String, nullable=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationship to facts (cascade delete)
+    facts = relationship("FactDBModel", back_populates="intent", cascade="all, delete-orphan")
+
+
+class FactDBModel(Base):
+    """
+    SQLAlchemy ORM model for facts table.
+
+    Represents the database schema for facts.
+    Includes audit fields (created_at, updated_at) but no soft delete.
+    Uses hard deletes only.
+    Has a foreign key relationship to intents with cascade delete.
+    """
+
+    __tablename__ = "facts"
+
+    id = Column(Integer, primary_key=True, index=True)
+    intent_id = Column(Integer, ForeignKey("intents.id", ondelete="CASCADE"), nullable=False, index=True)
+    value = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationship to intent
+    intent = relationship("IntentDBModel", back_populates="facts")

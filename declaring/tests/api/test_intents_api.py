@@ -4,29 +4,24 @@ API tests for intents endpoints.
 Tests full HTTP stack with TestClient.
 """
 
-from unittest.mock import patch
-
 import pytest
 from fastapi.testclient import TestClient
 
 from app.intents.repository import IntentRepository
 from app.main import app
-from app.shared.events import EventBus
+from app.shared.dependencies import get_intent_repository
 
 
 @pytest.fixture
-def client():
-    """Create a test client with fresh repository and event bus for each test."""
-    repo = IntentRepository()
-    event_bus = EventBus()
-    with (
-        patch("app.intents.service.intent_repository", repo),
-        patch("app.intents.service.event_bus", event_bus),
-        patch("app.intents.repository.intent_repository", repo),
-    ):
-        yield TestClient(app)
+def client(test_db_session):
+    """Create a test client with test database session."""
 
+    def override_get_intent_repository():
+        return IntentRepository(test_db_session)
 
+    app.dependency_overrides[get_intent_repository] = override_get_intent_repository
+    yield TestClient(app)
+    app.dependency_overrides.clear()
 
 
 @pytest.mark.api
@@ -174,8 +169,7 @@ class TestGetIntentByIdEndpoint:
         """Test getting an existing intent."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "JSON"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "JSON"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -211,8 +205,7 @@ class TestUpdateIntentNameEndpoint:
         """Test updating an existing intent's name."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Original Name", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Original Name", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -243,8 +236,7 @@ class TestUpdateIntentNameEndpoint:
         """Test updating intent name with empty name."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Original Name", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Original Name", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -266,8 +258,7 @@ class TestUpdateIntentDescriptionEndpoint:
         """Test updating an existing intent's description."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Original description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Original description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -291,8 +282,7 @@ class TestUpdateIntentOutputFormatEndpoint:
         """Test updating an existing intent's output format."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -317,7 +307,12 @@ class TestUpdateIntentOutputStructureEndpoint:
         # Arrange - Create intent via API
         create_response = client.post(
             "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text", "output_structure": "Old structure"}
+            json={
+                "name": "Test Intent",
+                "description": "Test description",
+                "output_format": "plain text",
+                "output_structure": "Old structure",
+            },
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -337,7 +332,12 @@ class TestUpdateIntentOutputStructureEndpoint:
         # Arrange - Create intent via API
         create_response = client.post(
             "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text", "output_structure": "Old structure"}
+            json={
+                "name": "Test Intent",
+                "description": "Test description",
+                "output_format": "plain text",
+                "output_structure": "Old structure",
+            },
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -362,7 +362,12 @@ class TestUpdateIntentContextEndpoint:
         # Arrange - Create intent via API
         create_response = client.post(
             "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text", "context": "Old context"}
+            json={
+                "name": "Test Intent",
+                "description": "Test description",
+                "output_format": "plain text",
+                "context": "Old context",
+            },
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -387,7 +392,12 @@ class TestUpdateIntentConstraintsEndpoint:
         # Arrange - Create intent via API
         create_response = client.post(
             "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text", "constraints": "Old constraints"}
+            json={
+                "name": "Test Intent",
+                "description": "Test description",
+                "output_format": "plain text",
+                "constraints": "Old constraints",
+            },
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -411,8 +421,7 @@ class TestAddFactToIntentEndpoint:
         """Test adding a fact to an existing intent."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -444,8 +453,7 @@ class TestAddFactToIntentEndpoint:
         """Test adding a fact with empty value."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -467,8 +475,7 @@ class TestUpdateFactValueEndpoint:
         """Test updating an existing fact's value."""
         # Arrange - Create intent and fact via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -493,8 +500,7 @@ class TestUpdateFactValueEndpoint:
         """Test updating a non-existent fact."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -527,8 +533,7 @@ class TestRemoveFactFromIntentEndpoint:
         """Test removing an existing fact."""
         # Arrange - Create intent and fact via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -554,8 +559,7 @@ class TestRemoveFactFromIntentEndpoint:
         """Test removing a non-existent fact."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
+            "/intents", json={"name": "Test Intent", "description": "Test description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -575,8 +579,7 @@ class TestIntentEndpointsFlow:
         """Test complete flow: create, update multiple fields, add facts, update facts, remove facts."""
         # Arrange - Create intent via API
         create_response = client.post(
-            "/intents",
-            json={"name": "Original Name", "description": "Original description", "output_format": "plain text"}
+            "/intents", json={"name": "Original Name", "description": "Original description", "output_format": "plain text"}
         )
         assert create_response.status_code == 201
         created_intent = create_response.json()
@@ -592,7 +595,9 @@ class TestIntentEndpointsFlow:
         assert update_name_response.json()["name"] == "Updated Name"
 
         # 3. Update description
-        update_desc_response = client.patch(f"/intents/{created_intent['id']}/description", json={"description": "Updated description"})
+        update_desc_response = client.patch(
+            f"/intents/{created_intent['id']}/description", json={"description": "Updated description"}
+        )
         assert update_desc_response.status_code == 200
         assert update_desc_response.json()["description"] == "Updated description"
 
@@ -617,7 +622,9 @@ class TestIntentEndpointsFlow:
         assert len(facts) == 2
 
         # 8. Update fact value
-        update_fact_response = client.patch(f"/intents/{created_intent['id']}/facts/{fact_id}/value", json={"value": "Updated Fact 1"})
+        update_fact_response = client.patch(
+            f"/intents/{created_intent['id']}/facts/{fact_id}/value", json={"value": "Updated Fact 1"}
+        )
         assert update_fact_response.status_code == 200
         assert update_fact_response.json()["value"] == "Updated Fact 1"
 
@@ -631,4 +638,3 @@ class TestIntentEndpointsFlow:
         final_facts = final_get_response.json()["facts"]
         assert len(final_facts) == 1
         assert final_facts[0]["value"] == "Fact 2"
-
