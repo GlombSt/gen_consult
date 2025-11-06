@@ -8,6 +8,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.intents.mcp_http import router as mcp_router
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
@@ -70,6 +71,10 @@ def create_application() -> FastAPI:
 
     app.include_router(users_router, dependencies=router_dependencies)
     app.include_router(intents_router, dependencies=router_dependencies)
+
+    # Mount MCP server at /mcp endpoint (no authentication required for MCP protocol)
+    # MCP clients handle their own authentication if needed
+    app.include_router(mcp_router, prefix="/mcp", tags=["mcp"])
 
     return app
 

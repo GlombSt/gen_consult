@@ -413,12 +413,16 @@ The backend exposes its functionality via **Model Context Protocol (MCP)** for u
 
 ### Running the MCP Server
 
+The MCP server is integrated into the FastAPI application and uses **Streamable HTTP transport**. It runs alongside the HTTP API and is accessible at the `/mcp` endpoint.
+
 ```bash
 cd declaring
-python mcp_server.py
+uvicorn app.main:app --reload
 ```
 
-The MCP server uses stdio transport by default, which is compatible with MCP clients like Claude Desktop.
+The MCP server is now available at `http://localhost:8000/mcp` (or your configured host/port).
+
+**Note:** The stdio transport entry point (`mcp_server.py`) is deprecated but kept for backwards compatibility with stdio-based clients.
 
 ### Available Tools
 
@@ -441,9 +445,25 @@ The MCP server exposes the following tools for intents operations:
 
 ### MCP Client Configuration
 
-**Claude Desktop Configuration:**
+**HTTP Transport Configuration (Recommended):**
 
-Add to your Claude Desktop configuration file (typically `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+For clients that support HTTP transport, configure the MCP server URL:
+
+```json
+{
+  "mcpServers": {
+    "intents": {
+      "url": "http://localhost:8000/mcp"
+    }
+  }
+}
+```
+
+**Note:** Replace `localhost:8000` with your actual server host and port.
+
+**Stdio Transport Configuration (Deprecated):**
+
+For backwards compatibility with stdio-based clients, you can still use the deprecated stdio entry point:
 
 ```json
 {
@@ -456,17 +476,56 @@ Add to your Claude Desktop configuration file (typically `~/Library/Application 
 }
 ```
 
-**Note:** Use the absolute path to `mcp_server.py` in your configuration.
+**Note:** The stdio transport is deprecated. Use HTTP transport when possible.
 
 ### Testing the MCP Server
 
-You can test the MCP server using the MCP Inspector:
+**HTTP Transport Testing:**
+
+You can test the MCP server using HTTP clients or the MCP Inspector with HTTP transport:
 
 ```bash
 # Install MCP Inspector (if not already installed)
 npm install -g @modelcontextprotocol/inspector
 
-# Run inspector with the MCP server
+# Test with HTTP transport (recommended)
+# First, start the FastAPI server:
+uvicorn app.main:app --reload
+
+# Then use MCP Inspector with HTTP URL
+# The inspector will connect to http://localhost:8000/mcp
+```
+
+You can also test directly with HTTP requests:
+
+```bash
+# Initialize the MCP server
+curl -X POST http://localhost:8000/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "initialize",
+    "params": {}
+  }'
+
+# List available tools
+curl -X POST http://localhost:8000/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/list",
+    "params": {}
+  }'
+```
+
+**Stdio Transport Testing (Deprecated):**
+
+For testing the deprecated stdio transport:
+
+```bash
+# Run inspector with the stdio MCP server
 npx @modelcontextprotocol/inspector python mcp_server.py
 ```
 
@@ -490,9 +549,36 @@ Database
 ```
 
 - **MCP Server** (`app/intents/mcp_server.py`) - Exposes service functions as MCP tools
+- **MCP HTTP Transport** (`app/intents/mcp_http.py`) - HTTP transport wrapper for MCP server
 - **Service Layer** (`app/intents/service.py`) - Business logic (the port)
 - **Schemas** (`app/intents/schemas.py`) - Single source of truth for parameter documentation
 - **Service Docstrings** - Single source of truth for operation descriptions
+
+### Security Considerations
+
+**IMPORTANT**: The MCP endpoint (`/mcp`) does NOT require API key authentication.
+
+**Origin Validation:**
+The MCP HTTP endpoint includes Origin header validation to prevent DNS rebinding attacks. Configure allowed origins via the `MCP_ALLOWED_ORIGINS` environment variable.
+
+**Production Deployment Options:**
+1. **Network-level protection** - Use firewall rules to restrict access to the MCP endpoint
+2. **Reverse proxy authentication** - Use nginx/Caddy with authentication in front of FastAPI
+3. **Origin restrictions** - Set `MCP_ALLOWED_ORIGINS` to specific trusted origins (comma-separated)
+4. **API key authentication** - Add MCP-specific authentication if needed (future enhancement)
+
+**Local Development:**
+- Default `MCP_ALLOWED_ORIGINS=*` is safe (only accessible from localhost)
+- When exposing with ngrok or similar tools, **change to specific origins**:
+  ```bash
+  export MCP_ALLOWED_ORIGINS="https://your-domain.ngrok.io"
+  ```
+
+**Example Production Configuration:**
+```bash
+# Restrict to specific origins
+export MCP_ALLOWED_ORIGINS="https://app.example.com,https://admin.example.com"
+```
 
 See [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) for documentation standards.
 

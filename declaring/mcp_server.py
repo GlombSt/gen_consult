@@ -1,12 +1,26 @@
 """
 MCP Server entry point for intents domain.
 
-Runs the MCP server as a standalone process using stdio transport.
+DEPRECATED: This stdio transport entry point is deprecated.
+The MCP server is now integrated into the FastAPI application
+and accessible via HTTP at /mcp endpoint.
+
+For HTTP transport, run the FastAPI application:
+    uvicorn app.main:app --reload
+
+This file is kept for backwards compatibility with stdio-based clients.
 """
 
 import asyncio
+import warnings
 
 import mcp.server.stdio
+
+warnings.warn(
+    "stdio transport is deprecated. Use HTTP transport: uvicorn app.main:app --reload",
+    DeprecationWarning,
+    stacklevel=2,
+)
 from mcp.server.lowlevel import NotificationOptions
 from mcp.server.models import InitializationOptions
 
