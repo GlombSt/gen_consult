@@ -171,6 +171,30 @@ curl -H "Authorization: Bearer your-secret-api-key-here" \
   https://abc123.ngrok-free.app/users
 ```
 
+### API Key Best Practices
+
+**Generating Strong API Keys:**
+
+```bash
+# Generate a secure 32-character API key
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+**Security Requirements:**
+- ✅ Minimum 32 characters
+- ✅ Use randomly generated keys (not passwords)
+- ✅ Never commit keys to version control
+- ✅ Add `.env` to `.gitignore`
+- ✅ Rotate keys regularly
+- ✅ Use different keys per environment
+
+**⚠️ Environment Variable Security:**
+- Don't use `export` (leaves keys in shell history)
+- Use `.env` files instead
+- In production, use secure secret management (AWS Secrets Manager, HashiCorp Vault)
+- Never log or print API keys
+- Be aware: `ps auxe` can show environment variables
+
 ### Security Best Practices
 
 ⚠️ **Important Security Notes:**
@@ -179,7 +203,7 @@ curl -H "Authorization: Bearer your-secret-api-key-here" \
    - Your server will be accessible to anyone with the ngrok URL
    - Without authentication, anyone can access your API
 
-2. **Use strong API keys**
+2. **Use strong API keys** (see API Key Best Practices above)
    - Generate random, long strings (at least 32 characters)
    - Don't use predictable values like "test" or "password"
 
@@ -194,6 +218,28 @@ curl -H "Authorization: Bearer your-secret-api-key-here" \
 5. **Don't expose production servers**
    - Only use ngrok for development and testing
    - Production should use proper hosting with HTTPS
+
+### ⚠️ Security Considerations for Internet Exposure
+
+**IMPORTANT:** This setup does NOT include:
+- ❌ Rate limiting (vulnerable to DoS and brute force)
+- ❌ Request logging for security monitoring
+- ❌ DDoS protection
+- ❌ IP whitelisting
+- ❌ Failed authentication attempt tracking
+
+**Before exposing to the internet:**
+1. **Enable API key authentication** (required)
+2. **Use strong API keys** (see best practices above)
+3. **Monitor logs** for suspicious activity
+4. **Consider rate limiting** via nginx or FastAPI-limiter
+
+**For production deployments, use:**
+- Nginx reverse proxy with rate limiting
+- Fail2ban for brute force protection
+- Proper TLS/SSL certificates
+- Web Application Firewall (WAF)
+- Secret management service (AWS Secrets Manager, Vault)
 
 ## Project Structure
 

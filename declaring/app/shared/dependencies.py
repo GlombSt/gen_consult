@@ -7,6 +7,7 @@ by receiving repositories as dependencies rather than database sessions.
 """
 
 import os
+import secrets
 from typing import TYPE_CHECKING, Optional
 
 from fastapi import Depends, Header, HTTPException, status
@@ -96,8 +97,17 @@ def verify_api_key(authorization: Optional[str] = Header(None)) -> Optional[str]
     else:
         api_key = authorization.strip()
 
-    # Verify API key
-    if not api_key or api_key != expected_api_key:
+    # Validate extracted API key format
+    # Prevent header injection attacks using whitespace/control characters
+    if not api_key or any(char in api_key for char in [" ", "\n", "\r", "\t"]):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid Authorization header format",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Verify API key using constant-time comparison to prevent timing attacks
+    if not secrets.compare_digest(api_key, expected_api_key):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid API key",

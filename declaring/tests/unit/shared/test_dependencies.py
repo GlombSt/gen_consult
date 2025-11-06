@@ -98,7 +98,8 @@ class TestVerifyApiKey:
                 verify_api_key(authorization="Bearer ")
 
             assert exc_info.value.status_code == status.HTTP_401_UNAUTHORIZED
-            assert "Invalid API key" in exc_info.value.detail
+            # Empty key is caught by header format validation
+            assert "Invalid Authorization header format" in exc_info.value.detail
 
     def test_verify_api_key_with_bearer_token_strips_whitespace(self):
         """Test verify_api_key handles whitespace in Bearer token."""
@@ -121,4 +122,26 @@ class TestVerifyApiKey:
 
             # Assert
             assert result == test_key
+
+    def test_verify_api_key_with_whitespace_in_key_raises_401(self):
+        """Test verify_api_key raises 401 when API key contains whitespace."""
+        # Arrange
+        with patch.dict(os.environ, {"ENABLE_API_KEY_AUTH": "true", "API_KEY": "correct-key"}, clear=False):
+            # Act & Assert
+            with pytest.raises(HTTPException) as exc_info:
+                verify_api_key(authorization="Bearer key with spaces")
+
+            assert exc_info.value.status_code == status.HTTP_401_UNAUTHORIZED
+            assert "Invalid Authorization header format" in exc_info.value.detail
+
+    def test_verify_api_key_with_newline_in_key_raises_401(self):
+        """Test verify_api_key raises 401 when API key contains newline."""
+        # Arrange
+        with patch.dict(os.environ, {"ENABLE_API_KEY_AUTH": "true", "API_KEY": "correct-key"}, clear=False):
+            # Act & Assert
+            with pytest.raises(HTTPException) as exc_info:
+                verify_api_key(authorization="Bearer key\nwith\nnewlines")
+
+            assert exc_info.value.status_code == status.HTTP_401_UNAUTHORIZED
+            assert "Invalid Authorization header format" in exc_info.value.detail
 
