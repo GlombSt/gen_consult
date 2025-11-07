@@ -1,0 +1,316 @@
+"""
+Unit tests for {domain} repository layer.
+
+Tests data access and model conversions with database.
+
+USAGE:
+1. Copy this file to tests/unit/{domain}/test_repository.py
+2. Replace {Domain} with capitalized domain name (e.g., Item)
+3. Replace {domain} with lowercase domain name (e.g., item)
+4. Replace {entity} with entity name (e.g., item)
+5. Add/remove tests based on your repository methods
+"""
+
+from datetime import datetime
+
+import pytest
+
+from app.{domain}.repository import {Domain}Repository
+from tests.fixtures.{domain}s import create_test_{entity}
+
+
+@pytest.mark.unit
+class Test{Domain}RepositoryFindAll:
+    """Test {Domain}Repository.find_all method."""
+
+    @pytest.mark.asyncio
+    async def test_find_all_with_{domain}s_returns_all_{domain}s(self, test_db_session):
+        """Test finding all {domain}s when {domain}s exist."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity}1 = create_test_{entity}(id=None, name="{Domain} 1")
+        {entity}2 = create_test_{entity}(id=None, name="{Domain} 2")
+        await repo.create({entity}1)
+        await repo.create({entity}2)
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.find_all()
+
+        # Assert
+        assert len(result) == 2
+        assert result[0].name == "{Domain} 1"
+        assert result[1].name == "{Domain} 2"
+
+    @pytest.mark.asyncio
+    async def test_find_all_with_empty_storage_returns_empty_list(self, test_db_session):
+        """Test finding all {domain}s when storage is empty."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+
+        # Act
+        result = await repo.find_all()
+
+        # Assert
+        assert result == []
+
+
+@pytest.mark.unit
+class Test{Domain}RepositoryFindById:
+    """Test {Domain}Repository.find_by_id method."""
+
+    @pytest.mark.asyncio
+    async def test_find_by_id_when_exists_returns_{entity}(self, test_db_session):
+        """Test finding a {entity} by ID when it exists."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=None, name="Test {Domain}")
+        created = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.find_by_id(created.id)
+
+        # Assert
+        assert result is not None
+        assert result.id == created.id
+        assert result.name == "Test {Domain}"
+
+    @pytest.mark.asyncio
+    async def test_find_by_id_when_not_exists_returns_none(self, test_db_session):
+        """Test finding a {entity} by ID when it doesn't exist."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+
+        # Act
+        result = await repo.find_by_id(999)
+
+        # Assert
+        assert result is None
+
+
+@pytest.mark.unit
+class Test{Domain}RepositoryCreate:
+    """Test {Domain}Repository.create method."""
+
+    @pytest.mark.asyncio
+    async def test_create_{entity}_assigns_id_and_returns_{entity}(self, test_db_session):
+        """Test creating a {entity} assigns ID and returns domain model."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=None, name="New {Domain}")
+
+        # Act
+        result = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Assert
+        assert result.id is not None
+        assert result.id == 1
+        assert result.name == "New {Domain}"
+
+    @pytest.mark.asyncio
+    async def test_create_multiple_{domain}s_increments_id(self, test_db_session):
+        """Test creating multiple {domain}s increments ID counter."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity}1 = create_test_{entity}(id=None, name="{Domain} 1")
+        {entity}2 = create_test_{entity}(id=None, name="{Domain} 2")
+
+        # Act
+        result1 = await repo.create({entity}1)
+        await test_db_session.commit()
+        result2 = await repo.create({entity}2)
+        await test_db_session.commit()
+
+        # Assert
+        assert result1.id == 1
+        assert result2.id == 2
+
+    @pytest.mark.asyncio
+    async def test_create_{entity}_preserves_all_fields(self, test_db_session):
+        """Test creating a {entity} preserves all field values."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(
+            id=None,
+            name="Test {Domain}",
+            # Add all fields
+        )
+
+        # Act
+        result = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Assert
+        assert result.name == "Test {Domain}"
+        # Assert all other fields
+
+
+@pytest.mark.unit
+class Test{Domain}RepositoryUpdate:
+    """Test {Domain}Repository.update method."""
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_when_exists_returns_updated_{entity}(self, test_db_session):
+        """Test updating an existing {entity}."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=None, name="Old Name")
+        created = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Modify the {entity}
+        created.name = "New Name"
+
+        # Act
+        result = await repo.update(created.id, created)
+        await test_db_session.commit()
+
+        # Assert
+        assert result is not None
+        assert result.id == created.id
+        assert result.name == "New Name"
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_when_not_exists_returns_none(self, test_db_session):
+        """Test updating a non-existent {entity}."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=999, name="Test")
+
+        # Act
+        result = await repo.update(999, {entity})
+
+        # Assert
+        assert result is None
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_preserves_created_at(self, test_db_session):
+        """Test updating a {entity} preserves created_at timestamp."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        original_date = datetime(2025, 1, 1, 12, 0, 0)
+        {entity} = create_test_{entity}(id=None, name="Test", created_at=original_date)
+        created = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Modify the {entity}
+        created.name = "Updated"
+
+        # Act
+        result = await repo.update(created.id, created)
+        await test_db_session.commit()
+
+        # Assert
+        assert result.created_at == original_date
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_updates_all_mutable_fields(self, test_db_session):
+        """Test updating a {entity} updates all mutable fields."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=None, name="Original")
+        created = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Modify all fields
+        created.name = "New Name"
+        # Modify other fields
+
+        # Act
+        result = await repo.update(created.id, created)
+        await test_db_session.commit()
+
+        # Assert
+        assert result.name == "New Name"
+        # Assert other fields updated
+
+
+@pytest.mark.unit
+class Test{Domain}RepositoryDelete:
+    """Test {Domain}Repository.delete method."""
+
+    @pytest.mark.asyncio
+    async def test_delete_{entity}_when_exists_returns_true(self, test_db_session):
+        """Test deleting an existing {entity}."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        {entity} = create_test_{entity}(id=None, name="Test {Domain}")
+        created = await repo.create({entity})
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.delete(created.id)
+        await test_db_session.commit()
+
+        # Assert
+        assert result is True
+        # Verify {entity} is actually deleted
+        found = await repo.find_by_id(created.id)
+        assert found is None
+
+    @pytest.mark.asyncio
+    async def test_delete_{entity}_when_not_exists_returns_false(self, test_db_session):
+        """Test deleting a non-existent {entity}."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+
+        # Act
+        result = await repo.delete(999)
+
+        # Assert
+        assert result is False
+
+
+# If your repository has search/filter methods, add tests here
+@pytest.mark.unit
+class Test{Domain}RepositorySearch:
+    """Test {Domain}Repository.search method."""
+
+    @pytest.mark.asyncio
+    async def test_search_by_name_returns_matching_{domain}s(self, test_db_session):
+        """Test searching {domain}s by name."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        await repo.create(create_test_{entity}(id=None, name="Laptop Pro"))
+        await repo.create(create_test_{entity}(id=None, name="Laptop Air"))
+        await repo.create(create_test_{entity}(id=None, name="Desktop"))
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.search(name="Laptop")
+
+        # Assert
+        assert len(result) == 2
+        assert all("Laptop" in {entity}.name for {entity} in result)
+
+    @pytest.mark.asyncio
+    async def test_search_with_multiple_filters_returns_matching_{domain}s(self, test_db_session):
+        """Test searching with multiple filters."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        # Create test data
+        await repo.create(create_test_{entity}(id=None, name="Match"))
+        await repo.create(create_test_{entity}(id=None, name="No Match"))
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.search(name="Match", other_filter=True)
+
+        # Assert
+        assert len(result) == 1
+
+    @pytest.mark.asyncio
+    async def test_search_with_no_matches_returns_empty_list(self, test_db_session):
+        """Test searching with no matches."""
+        # Arrange
+        repo = {Domain}Repository(test_db_session)
+        await repo.create(create_test_{entity}(id=None, name="{Domain}"))
+        await test_db_session.commit()
+
+        # Act
+        result = await repo.search(name="Nonexistent")
+
+        # Assert
+        assert result == []
