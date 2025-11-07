@@ -37,7 +37,7 @@ pytest --cov=app
 - **Swagger UI:** http://localhost:8000/docs
 - **ReDoc:** http://localhost:8000/redoc
 - **Health Check:** http://localhost:8000/health
-- **MCP Server:** Run `python mcp_server.py` for Model Context Protocol access
+- **MCP Server:** http://localhost:8000/mcp (for Claude Desktop and other MCP clients)
 
 ## Database Configuration
 
@@ -415,10 +415,15 @@ The backend exposes its functionality via **Model Context Protocol (MCP)** for u
 
 The MCP server is integrated into the FastAPI application and uses **Streamable HTTP transport**. It runs alongside the HTTP API and is accessible at the `/mcp` endpoint.
 
-```bash
-cd declaring
-uvicorn app.main:app --reload
-```
+**To use with Claude Desktop:**
+
+1. Start the FastAPI server:
+   ```bash
+   cd declaring
+   uvicorn app.main:app --reload
+   ```
+
+2. Configure Claude Desktop (see [Claude Desktop Configuration](#claude-desktop-configuration) below)
 
 The MCP server is now available at `http://localhost:8000/mcp` (or your configured host/port).
 
@@ -445,9 +450,54 @@ The MCP server exposes the following tools for intents operations:
 
 ### MCP Client Configuration
 
-**HTTP Transport Configuration (Recommended):**
+#### Claude Desktop Configuration
 
-For clients that support HTTP transport, configure the MCP server URL:
+Claude Desktop supports HTTP transport for MCP servers. To use the intents MCP server with Claude Desktop:
+
+1. **Start the FastAPI server:**
+   ```bash
+   cd declaring
+   uvicorn app.main:app --reload
+   ```
+
+2. **Locate Claude Desktop configuration file:**
+   - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
+   - **Linux:** `~/.config/Claude/claude_desktop_config.json`
+
+3. **Edit the configuration file** THIS IS FOR DEVELOPMENT (create it if it doesn't exist):
+   ```json
+   {
+     "mcpServers": {
+        "intents": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote",
+            "http://localhost:8000/mcp"
+          ]
+        }
+   }
+   ```
+
+4. **Restart Claude Desktop** for the changes to take effect.
+
+5. **Verify the connection:**
+   - Open Claude Desktop
+   - The MCP server should appear in the available tools
+   - You can ask Claude to list available tools or create an intent
+
+**Note:** If your FastAPI server is running on a different port, update the URL accordingly (e.g., `http://localhost:8001/mcp`).
+
+**Troubleshooting:**
+- Ensure the FastAPI server is running before starting Claude Desktop
+- Check that the URL in the config matches your server's host and port
+- Verify the `/mcp` endpoint is accessible: `curl http://localhost:8000/mcp` (should return a JSON-RPC error, not 404)
+- Check Claude Desktop logs for connection errors
+
+#### Other MCP Clients (HTTP Transport)
+
+For other clients that support HTTP transport, configure the MCP server URL:
 
 ```json
 {
@@ -461,7 +511,7 @@ For clients that support HTTP transport, configure the MCP server URL:
 
 **Note:** Replace `localhost:8000` with your actual server host and port.
 
-**Stdio Transport Configuration (Deprecated):**
+#### Stdio Transport Configuration (Deprecated)
 
 For backwards compatibility with stdio-based clients, you can still use the deprecated stdio entry point:
 
