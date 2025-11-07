@@ -6,11 +6,9 @@ Handles data access and conversion between DB models and domain models using SQL
 
 from typing import List, Optional
 
-from sqlalchemy import select
-from sqlalchemy.exc import DetachedInstanceError, UnmappedInstanceError
+from sqlalchemy import select, inspect
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from sqlalchemy import inspect
 
 from .db_models import FactDBModel, IntentDBModel
 from .models import Fact, Intent
@@ -233,9 +231,9 @@ class IntentRepository:
                 db_facts = db_intent.facts
                 if db_facts is not None:
                     facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
-        except (AttributeError, KeyError, DetachedInstanceError, UnmappedInstanceError):
+        except (AttributeError, KeyError):
             # If inspection or relationship access fails, use empty list
-            # Only catch specific SQLAlchemy relationship access exceptions
+            # Only catch specific exceptions related to relationship access
             # Let other exceptions (database errors, programming errors) bubble up
             facts = []
         
