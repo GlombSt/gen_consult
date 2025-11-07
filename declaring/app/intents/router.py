@@ -30,7 +30,7 @@ router = APIRouter(
 )
 
 
-@router.post("", response_model=IntentResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=IntentResponse, status_code=status.HTTP_201_CREATED, operation_id="createIntent")
 async def create_intent(request: IntentCreateRequest, repository: IntentRepository = Depends(get_intent_repository)):
     """Create a new intent (US-000)."""
     intent = await service.create_intent(request, repository)
@@ -38,7 +38,7 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     return _to_intent_response(intent)
 
 
-@router.get("/{intent_id}", response_model=IntentResponse)
+@router.get("/{intent_id}", response_model=IntentResponse, operation_id="getIntent")
 async def get_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent to retrieve"),
     repository: IntentRepository = Depends(get_intent_repository),
@@ -51,7 +51,7 @@ async def get_intent(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/name", response_model=IntentResponse)
+@router.patch("/{intent_id}/name", response_model=IntentResponse, operation_id="updateIntentName")
 async def update_intent_name(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateNameRequest = ...,
@@ -65,7 +65,7 @@ async def update_intent_name(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/description", response_model=IntentResponse)
+@router.patch("/{intent_id}/description", response_model=IntentResponse, operation_id="updateIntentDescription")
 async def update_intent_description(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateDescriptionRequest = ...,
@@ -79,7 +79,7 @@ async def update_intent_description(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/output-format", response_model=IntentResponse)
+@router.patch("/{intent_id}/output-format", response_model=IntentResponse, operation_id="updateIntentOutputFormat")
 async def update_intent_output_format(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateOutputFormatRequest = ...,
@@ -93,7 +93,7 @@ async def update_intent_output_format(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/output-structure", response_model=IntentResponse)
+@router.patch("/{intent_id}/output-structure", response_model=IntentResponse, operation_id="updateIntentOutputStructure")
 async def update_intent_output_structure(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateOutputStructureRequest = ...,
@@ -107,7 +107,7 @@ async def update_intent_output_structure(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/context", response_model=IntentResponse)
+@router.patch("/{intent_id}/context", response_model=IntentResponse, operation_id="updateIntentContext")
 async def update_intent_context(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateContextRequest = ...,
@@ -121,7 +121,7 @@ async def update_intent_context(
     return _to_intent_response(intent)
 
 
-@router.patch("/{intent_id}/constraints", response_model=IntentResponse)
+@router.patch("/{intent_id}/constraints", response_model=IntentResponse, operation_id="updateIntentConstraints")
 async def update_intent_constraints(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateConstraintsRequest = ...,
@@ -135,7 +135,7 @@ async def update_intent_constraints(
     return _to_intent_response(intent)
 
 
-@router.post("/{intent_id}/facts", response_model=FactResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/{intent_id}/facts", response_model=FactResponse, status_code=status.HTTP_201_CREATED, operation_id="addFactToIntent")
 async def add_fact_to_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent to add the fact to"),
     request: FactAddRequest = ...,
@@ -148,7 +148,7 @@ async def add_fact_to_intent(
     return _to_fact_response(fact)
 
 
-@router.patch("/{intent_id}/facts/{fact_id}/value", response_model=FactResponse)
+@router.patch("/{intent_id}/facts/{fact_id}/value", response_model=FactResponse, operation_id="updateFactValue")
 async def update_fact_value(
     intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
     fact_id: int = Path(..., description="The unique identifier of the fact to update"),
@@ -162,7 +162,7 @@ async def update_fact_value(
     return _to_fact_response(fact)
 
 
-@router.delete("/{intent_id}/facts/{fact_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{intent_id}/facts/{fact_id}", status_code=status.HTTP_204_NO_CONTENT, operation_id="removeFactFromIntent")
 async def remove_fact_from_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
     fact_id: int = Path(..., description="The unique identifier of the fact to remove"),

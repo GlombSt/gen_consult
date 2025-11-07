@@ -12,7 +12,11 @@ from app.intents.mcp_http import router as mcp_router
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
-from app.shared.exception_handlers import authentication_exception_handler, validation_exception_handler
+from app.shared.exception_handlers import (
+    authentication_exception_handler,
+    http_exception_handler,
+    validation_exception_handler,
+)
 from app.shared.logging_config import logger
 from app.shared.middleware import log_requests_middleware
 from app.users.router import router as users_router
@@ -59,6 +63,8 @@ def create_application() -> FastAPI:
     app.middleware("http")(log_requests_middleware)
 
     # Add exception handlers
+    # Note: authentication_exception_handler handles 401 errors specifically,
+    # and delegates other HTTPExceptions to http_exception_handler
     app.add_exception_handler(RequestValidationError, validation_exception_handler)
     app.add_exception_handler(HTTPException, authentication_exception_handler)
 
