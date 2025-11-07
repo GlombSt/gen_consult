@@ -7,6 +7,7 @@ Handles data access and conversion between DB models and domain models using SQL
 from typing import List, Optional
 
 from sqlalchemy import select
+from sqlalchemy.exc import DetachedInstanceError, UnmappedInstanceError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 from sqlalchemy import inspect
@@ -66,13 +67,7 @@ class IntentRepository:
         self.db.add(db_intent)
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_intent)  # Refresh to get all fields
-        # Load facts relationship (will be empty for new intents)
-        await self.db.execute(
-            select(IntentDBModel)
-            .options(selectinload(IntentDBModel.facts))
-            .where(IntentDBModel.id == db_intent.id)
-        )
-        await self.db.refresh(db_intent)
+        # For new intents, facts will be empty, so _to_intent_domain_model() will handle it
         return self._to_intent_domain_model(db_intent)
 
     async def update(self, intent_id: int, intent: Intent) -> Optional[Intent]:
@@ -238,8 +233,10 @@ class IntentRepository:
                 db_facts = db_intent.facts
                 if db_facts is not None:
                     facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
-        except (AttributeError, KeyError, Exception):
-            # If inspection or access fails, use empty list
+        except (AttributeError, KeyError, DetachedInstanceError, UnmappedInstanceError):
+            # If inspection or relationship access fails, use empty list
+            # Only catch specific SQLAlchemy relationship access exceptions
+            # Let other exceptions (database errors, programming errors) bubble up
             facts = []
         
         return Intent(
