@@ -129,6 +129,46 @@ class TestIntent:
         assert isinstance(intent.updated_at, datetime)
         assert intent.updated_at >= intent.created_at
 
+    def test_intent_facts_default_to_empty_list_not_shared(self):
+        """
+        Test that each Intent instance gets its own empty facts list.
+        
+        This test prevents the mutable default argument bug where all Intent
+        instances would share the same list object if facts parameter used
+        a default value of [].
+        """
+        # Arrange
+        from app.intents.models import Intent, Fact
+
+        # Act - Create two intents without explicitly passing facts
+        intent1 = Intent(
+            id=1,
+            name="Intent 1",
+            description="Description 1",
+            output_format="plain text",
+        )
+        intent2 = Intent(
+            id=2,
+            name="Intent 2",
+            description="Description 2",
+            output_format="plain text",
+        )
+
+        # Assert - Both should have empty facts lists
+        assert intent1.facts == []
+        assert intent2.facts == []
+        # Critical: Verify they are different list objects (not shared)
+        assert intent1.facts is not intent2.facts
+
+        # Act - Add a fact to intent1
+        fact = Fact(id=1, intent_id=1, value="Fact for intent 1")
+        intent1.facts.append(fact)
+
+        # Assert - intent1 should have the fact, intent2 should still be empty
+        assert len(intent1.facts) == 1
+        assert intent1.facts[0].value == "Fact for intent 1"
+        assert len(intent2.facts) == 0  # Should still be empty, not shared
+
 
 @pytest.mark.unit
 class TestFact:
