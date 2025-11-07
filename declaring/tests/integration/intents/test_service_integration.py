@@ -315,11 +315,11 @@ class TestFactServiceIntegration:
             assert fact.intent_id == created_intent.id
             assert fact.value == "Test fact value"
 
-            # Verify persistence
-            # Get facts via repository
-            facts = await repository.find_facts_by_intent_id(created_intent.id)
-            assert len(facts) == 1
-            assert facts[0].value == "Test fact value"
+            # Verify persistence - facts are loaded via intent.facts
+            retrieved_intent = await repository.find_by_id(created_intent.id)
+            assert retrieved_intent is not None
+            assert len(retrieved_intent.facts) == 1
+            assert retrieved_intent.facts[0].value == "Test fact value"
 
     @pytest.mark.asyncio
     async def test_update_fact_value_integration(self, test_db_session):
@@ -342,10 +342,10 @@ class TestFactServiceIntegration:
             assert updated is not None
             assert updated.value == "Updated value"
 
-            # Verify persistence
-            # Get facts via repository
-            facts = await repository.find_facts_by_intent_id(created_intent.id)
-            retrieved_fact = next((f for f in facts if f.id == fact.id), None)
+            # Verify persistence - facts are loaded via intent.facts
+            retrieved_intent = await repository.find_by_id(created_intent.id)
+            assert retrieved_intent is not None
+            retrieved_fact = next((f for f in retrieved_intent.facts if f.id == fact.id), None)
             assert retrieved_fact is not None
             assert retrieved_fact.value == "Updated value"
 
@@ -369,9 +369,10 @@ class TestFactServiceIntegration:
             # Assert
             assert removed is True
 
-            # Verify fact is removed
-            facts = await repository.find_facts_by_intent_id(created_intent.id)
-            retrieved_fact = next((f for f in facts if f.id == fact.id), None)
+            # Verify fact is removed - facts are loaded via intent.facts
+            retrieved_intent = await repository.find_by_id(created_intent.id)
+            assert retrieved_intent is not None
+            retrieved_fact = next((f for f in retrieved_intent.facts if f.id == fact.id), None)
             assert retrieved_fact is None
 
     @pytest.mark.asyncio
@@ -393,13 +394,13 @@ class TestFactServiceIntegration:
             await add_fact_to_intent(created_intent.id, "Fact 3", repository=repository)
             await test_db_session.commit()
 
-            # Assert
-            # Get facts via repository
-            facts = await repository.find_facts_by_intent_id(created_intent.id)
-            assert len(facts) == 3
-            assert any(f.value == "Fact 1" for f in facts)
-            assert any(f.value == "Fact 2" for f in facts)
-            assert any(f.value == "Fact 3" for f in facts)
+            # Assert - facts are loaded via intent.facts
+            retrieved_intent = await repository.find_by_id(created_intent.id)
+            assert retrieved_intent is not None
+            assert len(retrieved_intent.facts) == 3
+            assert any(f.value == "Fact 1" for f in retrieved_intent.facts)
+            assert any(f.value == "Fact 2" for f in retrieved_intent.facts)
+            assert any(f.value == "Fact 3" for f in retrieved_intent.facts)
 
     @pytest.mark.asyncio
     async def test_fact_operations_with_intent_updates_integration(self, test_db_session):
@@ -424,9 +425,9 @@ class TestFactServiceIntegration:
             retrieved_intent = await get_intent(created_intent.id, repository=repository)
             assert retrieved_intent.name == "Updated Intent"
 
-            # Get facts via repository
-            facts = await repository.find_facts_by_intent_id(created_intent.id)
-            retrieved_fact = next((f for f in facts if f.id == fact.id), None)
+            # Facts are loaded via intent.facts
+            assert retrieved_intent is not None
+            retrieved_fact = next((f for f in retrieved_intent.facts if f.id == fact.id), None)
             assert retrieved_fact is not None
             assert retrieved_fact.value == "Updated fact"
 

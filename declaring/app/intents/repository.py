@@ -6,8 +6,9 @@ Handles data access and conversion between DB models and domain models using SQL
 
 from typing import List, Optional
 
-from sqlalchemy import select
+from sqlalchemy import select, inspect
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from .db_models import FactDBModel, IntentDBModel
 from .models import Fact, Intent
@@ -40,7 +41,11 @@ class IntentRepository:
         Returns:
             Domain model intent if found, None otherwise
         """
-        result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        result = await self.db.execute(
+            select(IntentDBModel)
+            .options(selectinload(IntentDBModel.facts))
+            .where(IntentDBModel.id == intent_id)
+        )
         db_intent = result.scalar_one_or_none()
         if db_intent:
             return self._to_intent_domain_model(db_intent)
@@ -60,6 +65,7 @@ class IntentRepository:
         self.db.add(db_intent)
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_intent)  # Refresh to get all fields
+        # For new intents, facts will be empty, so _to_intent_domain_model() will handle it
         return self._to_intent_domain_model(db_intent)
 
     async def update(self, intent_id: int, intent: Intent) -> Optional[Intent]:
@@ -73,7 +79,11 @@ class IntentRepository:
         Returns:
             Updated domain model intent if found, None otherwise
         """
-        result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
+        result = await self.db.execute(
+            select(IntentDBModel)
+            .options(selectinload(IntentDBModel.facts))
+            .where(IntentDBModel.id == intent_id)
+        )
         db_intent = result.scalar_one_or_none()
 
         if not db_intent:
@@ -91,6 +101,7 @@ class IntentRepository:
 
         await self.db.flush()
         await self.db.refresh(db_intent)
+        # Facts are already loaded via selectinload in the query above
         return self._to_intent_domain_model(db_intent)
 
     async def delete(self, intent_id: int) -> bool:
@@ -135,20 +146,6 @@ class IntentRepository:
         await self.db.flush()  # Flush to get the ID
         await self.db.refresh(db_fact)  # Refresh to get all fields
         return self._to_fact_domain_model(db_fact)
-
-    async def find_facts_by_intent_id(self, intent_id: int) -> List[Fact]:
-        """
-        Find all facts for an intent.
-
-        Args:
-            intent_id: The intent ID
-
-        Returns:
-            List of domain model facts for the intent
-        """
-        result = await self.db.execute(select(FactDBModel).where(FactDBModel.intent_id == intent_id))
-        db_facts = result.scalars().all()
-        return [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
 
     async def find_fact_by_id(self, intent_id: int, fact_id: int) -> Optional[Fact]:
         """
@@ -220,6 +217,26 @@ class IntentRepository:
 
     def _to_intent_domain_model(self, db_intent: IntentDBModel) -> Intent:
         """Convert DB model to domain model."""
+        # Convert facts from DB models to domain models
+        # Safely access facts - check if relationship is loaded using SQLAlchemy inspect
+        facts = []
+        try:
+            # Check if facts relationship is loaded
+            state = inspect(db_intent)
+            if hasattr(state, "unloaded") and "facts" in state.unloaded:
+                # Relationship not loaded, use empty list
+                facts = []
+            else:
+                # Relationship is loaded (or doesn't exist), try to access it
+                db_facts = db_intent.facts
+                if db_facts is not None:
+                    facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
+        except (AttributeError, KeyError):
+            # If inspection or relationship access fails, use empty list
+            # Only catch specific exceptions related to relationship access
+            # Let other exceptions (database errors, programming errors) bubble up
+            facts = []
+        
         return Intent(
             id=db_intent.id,
             name=db_intent.name,
@@ -230,6 +247,7 @@ class IntentRepository:
             constraints=db_intent.constraints,
             created_at=db_intent.created_at,
             updated_at=db_intent.updated_at,
+            facts=facts,
         )
 
     def _to_intent_db_model(self, intent: Intent) -> IntentDBModel:

@@ -27,7 +27,7 @@ class Intent:
         constraints: Optional[str] = None,
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
-        facts: List["Fact"] = None,
+        facts: Optional[List["Fact"]] = None,
     ):
         # Validation
         if not name or not name.strip():
