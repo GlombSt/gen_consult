@@ -27,7 +27,7 @@ class Intent:
         constraints: Optional[str] = None,
         created_at: Optional[datetime] = None,
         updated_at: Optional[datetime] = None,
-        facts: List["Fact"] = [],
+        facts: Optional[List["Fact"]] = None,
     ):
         # Validation
         if not name or not name.strip():
@@ -48,7 +48,7 @@ class Intent:
         now = datetime.utcnow()
         self.created_at = created_at or now
         self.updated_at = updated_at or now
-        self.facts = facts
+        self.facts = facts if facts is not None else []
 
 
 class Fact:
