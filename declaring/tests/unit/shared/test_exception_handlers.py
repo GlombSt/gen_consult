@@ -18,7 +18,7 @@ class TestAuthenticationExceptionHandler:
 
     @pytest.mark.asyncio
     async def test_authentication_handler_with_401_returns_json_response(self):
-        """Test authentication handler returns JSON response for 401 errors."""
+        """Test authentication handler returns JSON response for 401 errors using ErrorResponse format."""
         # Arrange
         request = Request(
             scope={
@@ -40,12 +40,16 @@ class TestAuthenticationExceptionHandler:
         assert response.status_code == 401
         content = response.body.decode()
         assert "Invalid API key" in content
-        assert "error" in content
-        assert "details" in content
+        # Check ErrorResponse format (RFC 7807 Problem Details)
+        assert "type" in content
+        assert "title" in content
+        assert "status" in content
+        assert "detail" in content
+        assert "instance" in content
 
     @pytest.mark.asyncio
-    async def test_authentication_handler_with_non_401_returns_default_response(self):
-        """Test authentication handler returns default response for non-401 errors."""
+    async def test_authentication_handler_with_non_401_returns_error_response(self):
+        """Test authentication handler delegates to http_exception_handler for non-401 errors."""
         # Arrange
         request = Request(
             scope={
@@ -67,7 +71,12 @@ class TestAuthenticationExceptionHandler:
         assert response.status_code == 404
         content = response.body.decode()
         assert "Not found" in content
+        # Check ErrorResponse format (RFC 7807 Problem Details)
+        assert "type" in content
+        assert "title" in content
+        assert "status" in content
         assert "detail" in content
+        assert "instance" in content
 
     @pytest.mark.asyncio
     async def test_authentication_handler_includes_www_authenticate_header(self):
@@ -103,7 +112,7 @@ class TestValidationExceptionHandler:
 
     @pytest.mark.asyncio
     async def test_validation_handler_returns_json_response(self):
-        """Test validation handler returns JSON response with error details."""
+        """Test validation handler returns JSON response with ErrorResponse format."""
         # Arrange
         request = Request(
             scope={
@@ -125,5 +134,12 @@ class TestValidationExceptionHandler:
         assert isinstance(response, JSONResponse)
         assert response.status_code == 422
         content = response.body.decode()
+        # Check ErrorResponse format (RFC 7807 Problem Details)
+        assert "type" in content
+        assert "title" in content
+        assert "status" in content
         assert "detail" in content
+        assert "instance" in content
+        assert "Request validation failed" in content
+        assert "username" in content
 

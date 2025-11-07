@@ -2,11 +2,14 @@
 Custom exception handlers for the FastAPI application.
 """
 
+from http import HTTPStatus
+
 from fastapi import HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from .logging_config import logger
+from .schemas import ErrorResponse
 
 
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
@@ -57,10 +60,23 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         },
     )
 
-    # Return standard FastAPI validation error response
+    # Create validation error detail message
+    validation_detail = "Request validation failed: " + "; ".join(
+        f"{'.'.join(str(x) for x in err.get('loc', []))} - {err.get('msg', '')}" for err in exc.errors()
+    )
+
+    # Create ErrorResponse for validation errors (RFC 7807 Problem Details format)
+    error_response = ErrorResponse(
+        type="https://httpstatuses.com/422",
+        title=HTTPStatus(422).phrase,
+        status=422,
+        detail=validation_detail,
+        instance=str(request.url.path),
+    )
+
     return JSONResponse(
         status_code=422,
-        content={"detail": exc.errors()},
+        content=error_response.model_dump(exclude_none=True),
     )
 
 
@@ -68,24 +84,20 @@ async def authentication_exception_handler(request: Request, exc: HTTPException)
     """
     Custom handler for authentication errors (401).
 
-    Logs authentication failures and returns a consistent error response.
-    Only handles 401 Unauthorized errors; other HTTPExceptions return default FastAPI response.
+    Logs authentication failures and returns a consistent error response using ErrorResponse format.
+    Only handles 401 Unauthorized errors; other HTTPExceptions should be handled by http_exception_handler.
 
     Args:
         request: The FastAPI request object
         exc: The HTTPException
 
     Returns:
-        JSONResponse with authentication error details (only for 401 errors)
+        JSONResponse with ErrorResponse format (only for 401 errors)
     """
     # Only handle 401 Unauthorized errors
     if exc.status_code != 401:
-        # For non-401 errors, return default FastAPI HTTPException response
-        return JSONResponse(
-            status_code=exc.status_code,
-            content={"detail": exc.detail},
-            headers=exc.headers if hasattr(exc, "headers") and exc.headers else None,
-        )
+        # For non-401 errors, delegate to http_exception_handler
+        return await http_exception_handler(request, exc)
 
     # Log the authentication failure with structured data
     logger.warning(
@@ -99,9 +111,69 @@ async def authentication_exception_handler(request: Request, exc: HTTPException)
         },
     )
 
-    # Return consistent error response format for 401 errors
+    # Create ErrorResponse for 401 errors
+    error_response = ErrorResponse(
+        type="https://httpstatuses.com/401",
+        title=HTTPStatus(401).phrase,
+        status=401,
+        detail=str(exc.detail) if exc.detail else None,
+        instance=str(request.url.path),
+    )
+
     return JSONResponse(
         status_code=exc.status_code,
-        content={"error": exc.detail, "details": {"path": str(request.url.path)}},
+        content=error_response.model_dump(exclude_none=True),
+        headers=exc.headers if hasattr(exc, "headers") and exc.headers else None,
+    )
+
+
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """
+    General handler for HTTP exceptions using RFC 7807 Problem Details format.
+
+    Converts HTTPException to ErrorResponse format for consistent API error responses.
+    This handler should be registered after specific handlers (like authentication_exception_handler).
+
+    Args:
+        request: The FastAPI request object
+        exc: The HTTPException
+
+    Returns:
+        JSONResponse with ErrorResponse format
+    """
+    # Use HTTPStatus for comprehensive status code mapping
+    try:
+        http_status = HTTPStatus(exc.status_code)
+        title = http_status.phrase
+    except ValueError:
+        # Fallback for non-standard status codes
+        title = "Error"
+
+    error_type = f"https://httpstatuses.com/{exc.status_code}"
+
+    # Create ErrorResponse
+    error_response = ErrorResponse(
+        type=error_type,
+        title=title,
+        status=exc.status_code,
+        detail=str(exc.detail) if exc.detail else None,
+        instance=str(request.url.path),
+    )
+
+    # Log the error
+    logger.warning(
+        "HTTP exception raised",
+        extra={
+            "method": request.method,
+            "path": str(request.url.path),
+            "status_code": exc.status_code,
+            "client_ip": request.client.host if request.client else "unknown",
+            "error_detail": exc.detail,
+        },
+    )
+
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=error_response.model_dump(exclude_none=True),
         headers=exc.headers if hasattr(exc, "headers") and exc.headers else None,
     )
