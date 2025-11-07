@@ -112,7 +112,7 @@ class TestValidationExceptionHandler:
 
     @pytest.mark.asyncio
     async def test_validation_handler_returns_json_response(self):
-        """Test validation handler returns JSON response with error details."""
+        """Test validation handler returns JSON response with ErrorResponse format."""
         # Arrange
         request = Request(
             scope={
@@ -134,5 +134,12 @@ class TestValidationExceptionHandler:
         assert isinstance(response, JSONResponse)
         assert response.status_code == 422
         content = response.body.decode()
+        # Check ErrorResponse format (RFC 7807 Problem Details)
+        assert "type" in content
+        assert "title" in content
+        assert "status" in content
         assert "detail" in content
+        assert "instance" in content
+        assert "Request validation failed" in content
+        assert "username" in content
 

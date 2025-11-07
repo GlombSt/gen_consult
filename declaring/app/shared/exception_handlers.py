@@ -2,6 +2,8 @@
 Custom exception handlers for the FastAPI application.
 """
 
+from http import HTTPStatus
+
 from fastapi import HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -58,10 +60,23 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         },
     )
 
-    # Return standard FastAPI validation error response
+    # Create validation error detail message
+    validation_detail = "Request validation failed: " + "; ".join(
+        f"{'.'.join(str(x) for x in err.get('loc', []))} - {err.get('msg', '')}" for err in exc.errors()
+    )
+
+    # Create ErrorResponse for validation errors (RFC 7807 Problem Details format)
+    error_response = ErrorResponse(
+        type="https://httpstatuses.com/422",
+        title=HTTPStatus(422).phrase,
+        status=422,
+        detail=validation_detail,
+        instance=str(request.url.path),
+    )
+
     return JSONResponse(
         status_code=422,
-        content={"detail": exc.errors()},
+        content=error_response.model_dump(exclude_none=True),
     )
 
 
@@ -99,7 +114,7 @@ async def authentication_exception_handler(request: Request, exc: HTTPException)
     # Create ErrorResponse for 401 errors
     error_response = ErrorResponse(
         type="https://httpstatuses.com/401",
-        title="Unauthorized",
+        title=HTTPStatus(401).phrase,
         status=401,
         detail=str(exc.detail) if exc.detail else None,
         instance=str(request.url.path),
@@ -126,18 +141,14 @@ async def http_exception_handler(request: Request, exc: HTTPException):
     Returns:
         JSONResponse with ErrorResponse format
     """
-    # Map status codes to titles
-    status_titles = {
-        400: "Bad Request",
-        401: "Unauthorized",
-        403: "Forbidden",
-        404: "Not Found",
-        409: "Conflict",
-        422: "Unprocessable Entity",
-        500: "Internal Server Error",
-    }
+    # Use HTTPStatus for comprehensive status code mapping
+    try:
+        http_status = HTTPStatus(exc.status_code)
+        title = http_status.phrase
+    except ValueError:
+        # Fallback for non-standard status codes
+        title = "Error"
 
-    title = status_titles.get(exc.status_code, "Error")
     error_type = f"https://httpstatuses.com/{exc.status_code}"
 
     # Create ErrorResponse
