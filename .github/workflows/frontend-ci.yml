@@ -16,7 +16,7 @@ on:
 jobs:
   build-and-test:
     name: Build and Test Frontend
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: ./reacting
