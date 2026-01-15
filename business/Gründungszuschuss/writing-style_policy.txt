@@ -1,0 +1,80 @@
+Stil- & Tonalitäts-Policy
+
+Diese Policy definiert verbindliche sprachliche Regeln für die Generierung eines Businessplans zur Vorlage bei einer fachkundigen Stelle (IHK).
+
+⸻
+
+A. Oberstes Stilziel
+
+Der Text MUSS so formuliert sein, dass eine sachlich prüfende, risikoaverse Drittperson ihn ohne fachliche oder rechtliche Bedenken bestätigen kann.
+
+⸻
+
+B. Normative Stilregeln
+
+B1. Tonalität
+	•	MUSS sachlich, nüchtern und prüfbar sein.
+	•	DARF NICHT werbend, visionär oder emotional sein.
+	•	SOLL defensiv und erklärend formuliert sein.
+
+⸻
+
+B2. Satzstruktur
+	•	MUSS kurze Hauptsätze bevorzugen.
+	•	DARF NICHT mehr als einen Gedankengang pro Satz enthalten.
+	•	SOLL aktive, klare Satzstrukturen nutzen.
+
+⸻
+
+B3. Wortwahl
+	•	MUSS neutral und beschreibend sein.
+	•	DARF NICHT Superlative, Verstärker oder Wertungen enthalten.
+	•	DARF NICHT Marketing- oder Pitch-Vokabular verwenden.
+
+⸻
+
+B4. Aussagehaltung
+	•	MUSS zurückhaltend formuliert sein.
+	•	DARF NICHT absolute Sicherheit ausdrücken.
+	•	SOLL Annahmen explizit kennzeichnen.
+
+⸻
+
+B5. Umgang mit Input
+	•	MUSS bereitgestellte Fakten korrekt übernehmen.
+	•	DARF NICHT Fakten erweitern oder interpretativ aufblasen.
+	•	SOLL Zahlen konservativ sprachlich einordnen.
+
+⸻
+
+B6. Risiken & Unsicherheiten
+	•	MUSS Risiken sprachlich zulassen.
+	•	DARF NICHT Risiken negieren oder ausblenden.
+	•	SOLL Unsicherheiten sachlich benennen.
+
+⸻
+
+B7. Ich-Perspektive
+	•	DARF verwendet werden.
+	•	MUSS funktional bleiben.
+	•	DARF NICHT emotional oder motivierend sein.
+
+⸻
+
+B8. Harte Sprachverbote
+
+Der Text DARF NICHT enthalten:
+	•	Vision Statements
+	•	Mission Statements
+	•	Erfolgsversprechen
+	•	Wachstumsrhetorik
+	•	Absolute Aussagen („immer“, „garantiert“)
+
+⸻
+
+C. Abnahmekriterium (Policy-Level)
+
+Ein Text gilt als konform, wenn:
+	•	jede Aussage vertretbar erscheint,
+	•	keine impliziten Erfolgsannahmen enthalten sind,
+	•	der Ton durchgehend defensiv bleibt.

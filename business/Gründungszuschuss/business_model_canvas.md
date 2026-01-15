@@ -9,6 +9,7 @@ Structured intent specification + insights-driven refinement for better AI task 
 * Cloud infrastructure providers
 * Early design partners / power users
 * (future) Integration partners (Notion, Google Docs, Slack, IDEs) - future
+* Merchant of Record for international sales (Lemon Squeezy)
 * (tentative) Community Contributors: Users sharing "Impossible Intents"
 * (tentative) RAG Database for vector memory
 

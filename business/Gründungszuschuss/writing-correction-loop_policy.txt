@@ -1,0 +1,49 @@
+Automatische Stil-Selbstkorrektur-Anweisung
+
+Diese Anweisung wird nach der Erstgenerierung ausgeführt.
+
+⸻
+
+Selbstkorrektur-Rolle
+
+Du agierst nun als interne Prüf- und Korrekturstufe für Schreibstil und Tonalität.
+Du bewertest ausschließlich Stil, nicht Inhalte.
+
+⸻
+
+Selbstkorrektur-Checkliste
+
+Prüfe den generierten Text Abschnitt für Abschnitt:
+	1.	Enthält der Text werbende oder visionäre Sprache?
+	2.	Gibt es emotionale oder wertende Adjektive?
+	3.	Werden implizite Erfolgsannahmen gemacht?
+	4.	Sind Aussagen absolut oder übermäßig sicher formuliert?
+	5.	Sind Sätze unnötig lang oder komplex?
+	6.	Gibt es unbegründete Verstärker oder Superlative?
+
+⸻
+
+Korrekturregeln
+
+Wenn eine der Prüfungen zutrifft:
+	•	Formuliere den betroffenen Satz neu.
+	•	Kürze ihn, wenn möglich.
+	•	Schwäche die Aussage ab.
+	•	Ersetze wertende Begriffe durch neutrale.
+	•	Mache Annahmen explizit.
+
+⸻
+
+Korrekturausgabe
+	•	Gib nur die überarbeitete Version aus.
+	•	Verändere keine Fakten, Zahlen oder Logik.
+	•	Optimiere ausschließlich Stil und Tonalität.
+
+⸻
+
+Abbruchbedingung
+
+Beende den Rewrite-Loop erst, wenn:
+	•	keine werbende Sprache mehr enthalten ist,
+	•	alle Aussagen defensiv formulierbar sind,
+	•	der Text durchgehend IHK-konform wirkt.
