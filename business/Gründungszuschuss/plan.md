@@ -9,25 +9,22 @@ Generate a complete Businessplan for a **Gründungszuschuss** application that i
 
 Use inputs in the following order of precedence:
 
-1. `business_plan_template.md`  
-   Defines the required structure, section order, and headings. Do not change structure.
+1. `business_plan_template - with requirements.md`  
+   Defines the required structure, section order, headings and questions that must be answered in each section. Do not change structure.
 
-2. `business_plan_requirements - ihk.md`  
-   Defines mandatory IHK constraints. Treat as hard requirements.
-
-3. `business_plan_input.md`  
+2. `business_plan_input.md`  
    Provides factual content and bullet points per section. Treat as ground truth.
 
-4. `business_model_canvas.md`  
+3. `business_model_canvas.md`  
    Provides facts about the business idea in the structure of the business model canvas. Treat as additional ground truth for the generation.
 
-5. `business-case-sheet.xlsx`  
+4. `business-case-sheet.xlsx`  
    Provides all financials, assumptions, and calculations. Do not invent or adjust numbers.
 
-6. `writing-style_policy.txt`  
+5. `writing-style_policy.txt`  
    Governs wording, tone, and language rules.
 
-7. `writing-correction-loop_policy.txt`  
+6. `writing-correction-loop_policy.txt`  
    Governs post-processing and rewrite behavior.
 
 ---
@@ -35,15 +32,16 @@ Use inputs in the following order of precedence:
 ## Process
 
 1. **Drafting**
-   - Populate each section from `business_plan_template.md`
-   - Use only facts from `business_plan_input.md`
+   - Create a new file `business_plan.md` and apply the section structure from `business_plan_template - with requirements.md` for each section write the text that answers the questions.
+   - Use only facts from `business_plan_input.md` and `business_model_canvas.md`  
    - Use only numbers and assumptions from `business-case-sheet.xlsx`
    - Do not introduce new facts, estimates, or interpretations
+   - Write the Executive Summary when all other sections are complete.
 
 2. **Consistency Check**
    - Ensure all numbers align with the spreadsheet
    - Ensure assumptions described in text match the financial model
-   - Ensure no section contradicts IHK requirements
+   - Ensure no section contradicts requirements from 
 
 3. **Rewrite / Correction Loop**
    - Apply `writing-correction-loop_policy.txt`

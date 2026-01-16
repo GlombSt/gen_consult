@@ -48,7 +48,8 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 **Wer sind deine Kunden?**
 
 - Was zeichnet deine Kunden aus?
-- Hast du bereits erste Aufträge in Aussicht?
+* **Segmentierung:** Demografie, Psychografie, B2B/B2C-Spezifika.
+
 
 ### Vertrieb und Kommunikation
 
@@ -88,7 +89,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Was ist dir wichtig, was unwichtig?
 - Wofür soll dein Unternehmen stehen?
 
-### 4. Partner
+### Partner
 
 **Welche externen Schlüsselpartner brauchst du?**
 
@@ -145,9 +146,6 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Zu welchen Zeitpunkten fließt das Geld?
 - Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?
 
-> **Hinweis:** Mit Hilfe der Assistenten auf der Gründerplattform kannst du deine Umsatzposten auf unterschiedliche Weise kalkulieren:
-> - Für Produkte kannst du den Umsatz mit Menge x Preis bestimmen.
-> - Dienstleistungen kannst du mit Stunden x Stundensatz kalkulieren.
 
 ### Kosten
 
