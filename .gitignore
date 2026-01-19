@@ -151,8 +151,18 @@ logs/
 *.swp
 
 # ===================================
+# LLM exports (generated artifacts)
+# ===================================
+**/llm_exports/
+
+# Local python bytecode cache (used by some scripts)
+.pycache/
+
+# ===================================
 # Database
 # ===================================
 *.db
 *.sqlite
 *.sqlite3
+business/Gründungszuschuss/~$siness_plan.docx
+business/Gründungszuschuss/business-case-sheet.xlsx

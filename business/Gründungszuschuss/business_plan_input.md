@@ -33,9 +33,9 @@ Intentive unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen i
 - Leitet den Benutzer bei der Erstellung der Aufgabe. Ein assistierter Prozess stellt sicher, dass alle fachspezifischen Parameter (z.B. Jurisdiktion, Zielgruppe, Constraints) erfasst sind, bevor die KI startet. 
 - Erfasst die Aufgabe strukturiert
 - Zeigt auf welche Informationen fehlen oder mehrdeutig sind, um ein gutes Ergebnis zu erzielen (basierend auf allgemeinen und industriespezifischen STandards)
-- Bewertet die Aufgabenstellung auf Erfolgschance und sagt offen, wann ein Sprachmodell nicht geeignet ist für eine Aufgabe und ggf. was Alternativen wären
+- Bewertet die Aufgabenstellung auf Risiken und sagt offen, wann ein Sprachmodell nicht geeignet ist für eine Aufgabe und ggf. was Alternativen wären
 - Generiert eine optimierte textuelle Anweisung für das Sprachmodell
-- Prüft die Qualität der Ergebnisse 
+- Gibt eine Einschätzung über die Qualität des Ergebnisses 
 
 Intentive wird als web-basierte SAAS Lösung angeboten.
 
@@ -71,17 +71,17 @@ Zielgruppe:
 
 
 Rollen:
-- Fachkräfte in Marketing, Legal, HR, Consulting, Produktmanagement
+- Fachkräfte in verschiedensten Funktionen, z.B. Marketing, Legal, HR, Consulting, Produktmanagement
 - Team-Leads, die AI-Nutzung verantworten
 
 Nutzer: 
-- Einzelne Mitarbeiter, die Zeitersparnis und bessere Ergebnisse wollen
+- Einzelne Mitarbeiter, die Zeitersparnis und bessere Ergebnisse wollen, weil Sie entweder Effizienz brauchen oder die Konsequenzen schlechter Qualität fürchten.
 
 Entscheider: 
 - Team-Leads, Abteilungsleiter, IT-Verantwortliche – interessiert an ROI, Risikominimierung und Skalierbarkeit
 
 Psychografie:
-- Pragmatiker mit Produktivitätsdruck; erkennen AI-Potenzial, sind aber frustriert von inkonsistenten Ergebnissen; suchen Kontrolle und Verlässlichkeit statt "Prompt-Magie"
+- Neugierige oder Mitarbeiter mit Produktivitätsdruck; erkennen AI-Potenzial, sind aber frustriert von inkonsistenten Ergebnissen; suchen Kontrolle und Verlässlichkeit statt "Prompt-Magie"
 
 Geografie: 
 - Global, initial in Englisch und Deutsch
