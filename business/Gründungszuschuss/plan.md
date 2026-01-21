@@ -212,6 +212,18 @@ PDF should be exported manually from the generated DOCX (Word/LibreOffice), to k
 
 ---
 
+## Phrasing preferences
+
+- In examples like this "Ich baue unter dem Namen „SharpIntent“" don't use the word "baue", other option "entwickle"
+- The output should not be a summary of the input, but a better version: it must read like the final business plan written by us (direct voice), not like a recap of input notes.
+- Avoid "input-referencing"/third-party phrasing like: "genannt/angegeben/laut Input/als Zielgruppen sind genannt/folgende Punkte wurden genannt...".
+- Quick examples:
+  - Bad: "Als Zielgruppen sind genannt: Startups, KMU."
+  - Good: "Unsere Zielgruppen sind Startups und KMU." / "Zielgruppen: Startups, KMU."
+
+
+---
+
 ## Completion Criteria
 
 The task is complete when:
