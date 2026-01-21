@@ -30,7 +30,7 @@ Das führt zu:
 
 ### Angebot
 
-Intentive unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen indem es die Intention des Menschen strukturiet und mit maximaler Unterstützung erfasst, bevor die Sprachmodell die Aufgabe angehen.
+SharpIntent unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen indem es die Intention des Menschen strukturiet und mit maximaler Unterstützung erfasst, bevor die Sprachmodell die Aufgabe angehen.
 
 - Leitet den Benutzer bei der Erstellung der Aufgabe. Ein assistierter Prozess stellt sicher, dass alle fachspezifischen Parameter (z.B. Jurisdiktion, Zielgruppe, Constraints) erfasst sind, bevor die KI startet. 
 - Zeigt auf welche Informationen fehlen oder mehrdeutig sind, um ein gutes Ergebnis zu erzielen (basierend auf allgemeinen und industriespezifischen Standards)
@@ -38,9 +38,9 @@ Intentive unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen i
 - Bewertet die Aufgabenstellung auf Risiken und sagt offen, wann ein Sprachmodell nicht geeignet ist für eine Aufgabe und ggf. was Alternativen wären
 - Generiert eine optimierte textuelle Anweisung für das Sprachmodell
 - Gibt eine Einschätzung über die Qualität des Ergebnisses durch probehaftes Ausführen und erlaubt direktes Verbessern der Definitionen (feedback loop)
-- Erlaubt sowohl das "Mitnehmen" des optimalen Prompts in die eigene Umgebung oder das Ausführen des Prompts durch Intentive in einer Umgebung
+- Erlaubt sowohl das "Mitnehmen" des optimalen Prompts in die eigene Umgebung oder das Ausführen des Prompts durch SharpIntent in einer Umgebung
 
-Intentive wird als web-basierte SAAS Lösung angeboten.
+SharpIntent wird als web-basierte SAAS Lösung angeboten.
 
 
 ### Nutzen
@@ -65,7 +65,7 @@ Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen 
 ## 3. Vertrieb & Wettbewerb
 
 ### Kunden
-Intentive adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität geschäftskritisch ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region.
+SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität geschäftskritisch ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region.
 
 
 Zielgruppe:
@@ -126,7 +126,7 @@ Paid Ads, Affiliates, Priorität: Niedrig (später)
 - E-Mail-Onboarding-Sequenz zur Aktivierung
 - In-App-Hilfe und Dokumentation
 - Community-Forum oder Slack für Power-User (bei Skalierung)
-- Aufgaben sind als Assets in Intentive gehalten
+- Aufgaben sind als Assets in SharpIntent gehalten
 
 
 * **Kommunikation:** Tonalität und Botschaft.
@@ -193,7 +193,7 @@ Narrow AI
 
 * **Abgrenzung:** Konkrete Unterscheidungsmerkmale (Preis, Qualität, Innovation).
 
-Bestehende Tools optimieren den Output nachträglich oder bieten fertige Templates. Intentive setzt früher an: Es hilft Nutzern, überhaupt erst zu verstehen, was sie wollen, ob ein LLM dafür geeignet ist, und was fehlt. Die Prämisse ist, dass 80% der Qualitätsprobleme aus unklaren oder unvollständigen Aufgabenstellungen resultieren – nicht aus schlechten Prompts.
+Bestehende Tools optimieren den Output nachträglich oder bieten fertige Templates. SharpIntent setzt früher an: Es hilft Nutzern, überhaupt erst zu verstehen, was sie wollen, ob ein LLM dafür geeignet ist, und was fehlt. Die Prämisse ist, dass 80% der Qualitätsprobleme aus unklaren oder unvollständigen Aufgabenstellungen resultieren – nicht aus schlechten Prompts.
 
 
 
@@ -257,7 +257,7 @@ Vor diesem Hintergrund stellt die geplante Selbstständigkeit für mich die kons
 
 Wofür soll dein Unternehmen stehen?
 
-Intentive steht für Klarheit vor Automatisierung. Das Unternehmen hilft Menschen und Teams, Sprachmodelle bewusster, reflektierter und wirksamer einzusetzen – mit dem Ziel, bessere Entscheidungen statt nur schneller Texte zu erzeugen
+SharpIntent steht für Klarheit vor Automatisierung. Das Unternehmen hilft Menschen und Teams, Sprachmodelle bewusster, reflektierter und wirksamer einzusetzen – mit dem Ziel, bessere Entscheidungen statt nur schneller Texte zu erzeugen
 
 Was ist dir wichtig, was unwichtig?
 

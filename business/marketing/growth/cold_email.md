@@ -12,7 +12,7 @@
 
 | Komponente | Details | Kosten/Monat |
 |------------|---------|--------------|
-| Outreach-Domains | 3 Domains (z.B. mail.intentive.app, getintentive.com) | ~€3 |
+| Outreach-Domains | 3 Domains (z.B. mail.sharpintent.com, sharpintent.com) | ~€3 |
 | Mailboxen | 6 Stück (2 pro Domain) via Google Workspace | ~€36 |
 | Cold E-Mail Tool | Instantly.ai | €37 |
 | Listenbau | Apollo.io (Free Tier oder €49) | €0–49 |
