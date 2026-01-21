@@ -10,13 +10,15 @@ Der „Korrektur-Aufwand“: Das Ergebnis ist zu 80 % gut, aber die restlichen 2
 
 Souveräne Halluzination: Die KI schreibt in einem absolut überzeugenden Experten-Ton, erfindet dabei aber Fakten, Paragrafen oder Quellen, die professionell klingen, aber schlicht falsch sind.
 
-Mangelnder Kontext (Jurisdiktion): LLMs liefern oft einen „globalen Standard“, der lokal rechtlich wertlos ist (z. B. US-Rechtskonzepte in einem deutschen Vertrag).
+Mangelnder Kontext: LLMs liefern oft einen „globalen Standard“ oder "Durschschnitt", der lokal rechtlich wertlos oder mittelmäßig ist (z. B. US-Rechtskonzepte in einem deutschen Vertrag).
 
 Logik-Lücken: Die KI wählt statistisch wahrscheinliche Wörter, versteht aber nicht die logische Kausalität dahinter. Das führt zu internen Widersprüchen im Dokument.
 
 Formatierungs-Chaos: Spezifische Vorgaben (wie Nummerierungen, Platzhalter oder Corporate Design) werden oft ignoriert, was mühsame manuelle Nacharbeit erfordert.
 
-Oberflächlichkeit: Ohne extrem präzise Befehle bleibt der Output generisch („Blabla“) und geht nicht auf die spezifischen strategischen Risiken eines Falls ein.
+Oberflächlichkeit: Ohne präzise Befehle bleibt der Output generisch („Blabla“) und geht nicht auf die spezifischen strategischen Risiken eines Falls ein.
+
+Limitierendes Chatformat: Chat-Interfaces produzieren Text über eine Aufgabe, aber keine strukturierte Repräsentation. Was definiert ist, was fehlt, was widersprüchlich ist – das muss der Nutzer und das Sprachmodell) selbst aus dem Gesprächsverlauf rekonstruieren.
 
 Bestehende Anbieter sind nicht kritisch gegenüber ihrem eingenen Angebot. Sie weisen nur allgemein auf das Fehlverhalten hin. Nicht jedoch in konkreten Fällen.
 
@@ -31,11 +33,12 @@ Das führt zu:
 Intentive unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen indem es die Intention des Menschen strukturiet und mit maximaler Unterstützung erfasst, bevor die Sprachmodell die Aufgabe angehen.
 
 - Leitet den Benutzer bei der Erstellung der Aufgabe. Ein assistierter Prozess stellt sicher, dass alle fachspezifischen Parameter (z.B. Jurisdiktion, Zielgruppe, Constraints) erfasst sind, bevor die KI startet. 
-- Erfasst die Aufgabe strukturiert
-- Zeigt auf welche Informationen fehlen oder mehrdeutig sind, um ein gutes Ergebnis zu erzielen (basierend auf allgemeinen und industriespezifischen STandards)
+- Zeigt auf welche Informationen fehlen oder mehrdeutig sind, um ein gutes Ergebnis zu erzielen (basierend auf allgemeinen und industriespezifischen Standards)
+- Erfasst Aufgaben strukturiert in einem visuellen Interface, das Vollständigkeit, Lücken und Risiken auf einen Blick zeigt – statt sie im Chatverlauf "zu verstecken".
 - Bewertet die Aufgabenstellung auf Risiken und sagt offen, wann ein Sprachmodell nicht geeignet ist für eine Aufgabe und ggf. was Alternativen wären
 - Generiert eine optimierte textuelle Anweisung für das Sprachmodell
-- Gibt eine Einschätzung über die Qualität des Ergebnisses 
+- Gibt eine Einschätzung über die Qualität des Ergebnisses durch probehaftes Ausführen und erlaubt direktes Verbessern der Definitionen (feedback loop)
+- Erlaubt sowohl das "Mitnehmen" des optimalen Prompts in die eigene Umgebung oder das Ausführen des Prompts durch Intentive in einer Umgebung
 
 Intentive wird als web-basierte SAAS Lösung angeboten.
 
@@ -91,7 +94,9 @@ Geografie:
 
 Go-to-Market-Strategie: Produktgetriebenes Wachstum mit Content-Unterstützung
 
-Als Solopreneur ohne Vertriebsteam ist ein skalierbarer, low-touch Ansatz zwingend. Der Vertrieb erfolgt primär digital und selbstbedient.
+Als Solopreneur ohne Vertriebsteam ist ein skalierbarer, low-touch Ansatz zwingend. Der Vertrieb erfolgt primär digital und selbstbedient. Anstatt budgetintensiver Werbeanzeigen (Paid Ads) wird das bestehende Netzwerk (3.500 Kontakte auf LinkedIn) als initialer Hebel genutzt.
+
+
 
 * **Kanäle:** Wie erreicht das Angebot den Kunden (Online/Offline, Direct Sales)?
 
@@ -106,10 +111,10 @@ Content Marketing (Blog, LinkedIn), Priorität: Hoch
 
 Community-Präsenz, Priorität: Mittel
 - Reddit (r/ChatGPT, r/PromptEngineering), Indie Hackers, Hacker News, Podcast Guest
-- Aktive Teilnahme in 2–3 relevanten Subreddits/Foren, Hilfe anbieten, Tool subtil einbringen
+- Monatlch aktive Teilnahme in 2–3 relevanten Subreddits/Foren, Hilfe anbieten, Tool subtil einbringen
 
 Integration/Partnership, Priorität: Mittel
-- Listings in AI-Tool-Verzeichnissen, ggf. API-Integration mit LLM-Anbietern
+- Listings in AI-Tool-Verzeichnissen, ggf. API-Integration mit LLM-Anbietern z.B. als GPT 
 
 Paid Ads, Affiliates, Priorität: Niedrig (später)
 - Google Ads, LinkedIn (erst nach validiertem CAC)
@@ -121,6 +126,7 @@ Paid Ads, Affiliates, Priorität: Niedrig (später)
 - E-Mail-Onboarding-Sequenz zur Aktivierung
 - In-App-Hilfe und Dokumentation
 - Community-Forum oder Slack für Power-User (bei Skalierung)
+- Aufgaben sind als Assets in Intentive gehalten
 
 
 * **Kommunikation:** Tonalität und Botschaft.
@@ -193,30 +199,80 @@ Bestehende Tools optimieren den Output nachträglich oder bieten fertige Templat
 
 ## 4. Team & Partner
 
-### Gründerteam & Struktur
-* **Kompetenzprofil:** Fachliche & soziale Skills der Gründer.
+### Gründer\*innen & Team
+
+**Wer ist in deinem Team?**
+
+- Welche Kompetenzen, auch soziale, sind in deinem Team vereint?
+- Welche Aufgaben und Funktionen sollen Mitarbeiter\*innen übernehmen?
+- Wie viele Mitarbeiter\*innen benötigst du dafür?
+- Welche Qualifikation sollten die Mitarbeiter\*innen haben?
+
+
 Steffen Glomb:
+
+<stichpunkte zum ausformulieren>
 - Diplom Informatiker
 - Master of Business Administration
 - Lange Erfahrung in der Entwicklung und Betrieb von Software Produkten
 - Mitgründer von clark.de, CTO für ersten 6 Jahre, Wachstum bis auf 40Mio Euro revenue und 400k Nutzer
-- Chief Product & Technology Officer
-- Experte in der Verwandung von Generativer KI zur Programmierung und automatisierung von allgemeinen Aufgaben
+- Chief Product & Technology Officer bei BetterDoc, 3,5 Jahre
+- Experte in der Verwendung von Generativer KI zur Programmierung und aAutomatisierung von allgemeinen Aufgaben
 - vormals freiberuflichers IT Berater mit Aufträgen in grossen Unternehmen (z.B. Vodafone, Siemens)
-- Erfahren in IT-Sicherheit und Compliance, auch schonmal nach BAFIN Anforderungen audidirt
+- Erfahren in IT-Sicherheit und Datenschutz, auch schonmal nach BAFIN Anforderungen audiert worden
+- Überzeugungskraft
+- Fähigkeit zur Execution
+</stichpunkte zum ausformulieren>
+
+
+
 
 * **Rollenverteilung:** Wer übernimmt welche Funktion?
-Solopreneur für die ersten 12 Monate, ggf. Erweiterung durch Marketing und Software Entwickler
+Steffen Glomb fungiert als Einzelunternehmer für die ersten 12 Monate, ggf. Erweiterung durch Marketing und Software Entwickler
+
+* **Situation und Motivation**
+- Aus welcher Situation und Motivation heraus gründest du/gründet ihr?
+
+Ich verfüge über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle. Zuletzt war ich 3,5 Jahre als Chief Product & Technology Officer bei BetterDoc tätig. Zuvor habe ich über sechs Jahre als CTO und Mitgründer bei clark.de, einem digitalen Versicherungsmakler, maßgeblich zur Entwicklung und Skalierung des Unternehmens beigetragen.
+
+Ich lebe mit meiner Familie (Ehefrau, zwei Kinder im Alter von 3 und 6 Jahren) in Durbach im Ortenaukreis. Aufgrund meiner familiären Situation und meines Wohnorts ist eine regelmäßige, zeitintensive Pendeltätigkeit, wie sie für vergleichbare Führungspositionen im digitalen Umfeld häufig erforderlich ist, dauerhaft nur eingeschränkt praktikabel.
+
+Der regionale Arbeitsmarkt in der Ortenau ist überwiegend durch Handwerk und industrielle Fertigung geprägt. Hochqualifizierte Positionen im Bereich digitaler Produkt- und Technologieentwicklung mit einem softwarezentrierten Geschäftsmodell sind nur in begrenztem Umfang vorhanden. Eine meiner Qualifikation und Berufserfahrung entsprechende sozialversicherungspflichtige Beschäftigung ist daher regional nur sehr eingeschränkt realistisch erreichbar.
+
+Die geplante Selbstständigkeit ermöglicht es mir, meine in den letzten zehn Jahren erworbenen Kompetenzen im Aufbau, in der Weiterentwicklung und im Betrieb digitaler Produkte weiterhin gezielt und wirtschaftlich sinnvoll einzusetzen. Insbesondere meine Erfahrung an der Schnittstelle von Produktstrategie, Technologie und Geschäftsmodellentwicklung kann in einem selbstständigen Kontext unmittelbar in marktfähige digitale Dienstleistungen überführt werden.
+
+Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Bereich der generativen künstlichen Intelligenz, neue Möglichkeiten zur effizienten Entwicklung und Bereitstellung digitaler Dienstleistungen. Diese Technologien ermöglichen es, mit überschaubarem Ressourceneinsatz hochwertige Softwarelösungen wirtschaftlich zu entwickeln und zu betreiben, ohne den Aufbau eines großen Teams vorauszusetzen.
+
+Vor diesem Hintergrund stellt die geplante Selbstständigkeit für mich die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das meinen Lebensunterhalt sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
+
 
 * **Personalbedarf:** Geplante Mitarbeiteranzahl und Anforderungsprofile.
-- Steffen Glomb wird der einzige Mitarbeiter sein. 
+- Steffen Glomb wird zu Beginn der einzige Mitarbeiter sein. 
 - Dienste wie Rechts- und Steuerberatung werden situative hinzugezogen
+- Bei positiver Entwicklung werden Mitarbeiter zur Ausbau des Unternehmens eingestellt.
 
-### Unternehmenskultur
-* **Mission Statement:** Motivation der Gründung ("Why").
+### Werte
 
-* **Werte:** Leitbild des Unternehmens.
-- sicherer Datenschutz
+**Welche Werte lebt dein Unternehmen?**
+
+Wofür soll dein Unternehmen stehen?
+
+Intentive steht für Klarheit vor Automatisierung. Das Unternehmen hilft Menschen und Teams, Sprachmodelle bewusster, reflektierter und wirksamer einzusetzen – mit dem Ziel, bessere Entscheidungen statt nur schneller Texte zu erzeugen
+
+Was ist dir wichtig, was unwichtig?
+
+Was ist dir wichtig?
+	•	Anwender dabei zu unterstützen, ihre eigenen Ziele, Annahmen und Anforderungen klar zu formulieren.
+	•	Reduktion von Frustration durch schlechte oder inkonsistente KI-Ergebnisse.
+	•	Wissensaufbau bei weniger erfahrenen Nutzern durch strukturierte Führung.
+	•	Ehrliche Hinweise auf Grenzen, Unsicherheiten und notwendige menschliche Prüfung.
+	•	Ein Produkt, das Denken unterstützt, statt es zu ersetzen.
+
+Was ist dir unwichtig?
+	•	Vollautomatisierung ohne menschliche Verantwortung.
+	•	Ergebnisse, die „gut klingen“, aber fachlich nicht belastbar sind.
+	•	Abkürzungen, die langfristig Vertrauen untergraben.
+	•	Abhängigkeit von einzelnen Experten oder implizitem Wissen.
 
 
 ### Partner
@@ -226,6 +282,23 @@ Solopreneur für die ersten 12 Monate, ggf. Erweiterung durch Marketing und Soft
 * **Outsourcing:** Welche Bereiche werden extern vergeben?
 
 
+
+### Partner
+
+**Welche externen Schlüsselpartner brauchst du?**
+
+- Was können andere besser und wer ist das?
+
+
+- Welchen Nutzen haben deine Partner davon, mit dir zu arbeiten?
+
+
+- Welche Teilleistungen willst du an die Schlüsselpartner auslagern?
+
+
+- Welche Kontakte hast du, die für dein Vorhaben nützlich sind?
+
+Aus meiner professionellen Karriere gibt es eine Vielzahl an Kontakten zu erfahrenen Experten aus unterschiedlichen Funktionen, die meinem Vorhaben unterstützend gegenüber stehen. 
 
 
 ## 5. Unternehmen

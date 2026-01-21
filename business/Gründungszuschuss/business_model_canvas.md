@@ -7,11 +7,12 @@ Structured intent specification + insights-driven refinement for better AI task 
 ## KEY PARTNERS
 * LLM Providers: OpenAI, Anthropic, Google (for raw intelligence)
 * Cloud infrastructure providers
-* Early design partners / power users
 * (future) Integration partners (Notion, Google Docs, Slack, IDEs) - future
+* Model Routers like Litellm or Open router for cost efficiency in use of language models
 * Merchant of Record for international sales (Lemon Squeezy)
 * (tentative) Community Contributors: Users sharing "Impossible Intents"
 * (tentative) RAG Database for vector memory
+* LinkedId, Reddit and similar platforms for user acquisition
 
 ## KEY ACTIVITIES
 * Product development and UX iteration

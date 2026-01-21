@@ -13,7 +13,7 @@ Use inputs in the following order of precedence:
    Defines the required structure, section order, headings and questions that must be answered in each section. Do not change structure.
 
 2. `business_plan_input.md`  
-   Provides factual content and bullet points per section. Treat as ground truth.
+   Provides factual content and bullet points per section. Treat as ground truth. The text may contain XML Tags with instructions about how to use the content in the respective section.
 
 3. `business_model_canvas.md`  
    Provides facts about the business idea in the structure of the business model canvas. Treat as additional ground truth for the generation.
@@ -34,7 +34,7 @@ Use inputs in the following order of precedence:
 
 To be created or populated as part of the task. May be empty at start.
 
-1. `business_plan.md`
+1. `./output/business_plan.md`
 2. `open_questions.md`
 3. `coverage_checklist.md`
 
@@ -45,9 +45,12 @@ To be created or populated as part of the task. May be empty at start.
 ### Phase 1: Section 1-5
 
 0. **Initialize Coverage Checklist (must be done first)**
-   - (Re-)generate `coverage_checklist.md` at the start of the task (overwrite file)
+   - **Always** (re-)generate `coverage_checklist.md` at the start of **every run** (overwrite file)
    - Populate it with **one row per template prompt** from `business_plan_template with requirements.md`
    - This checklist is the driver for completeness and must exist before drafting starts
+   - **Always** (re-)initialize `open_questions.md` at the start of **every run** (overwrite file)
+     - Keep only the document header/structure initially
+     - Add concrete bullets during drafting for every `information_missing` checklist item
 
 1. **Drafting**
    - Create a new file `business_plan.md` and apply the section structure from `business_plan_template with requirements.md` for each section write the text that answers the questions. 
@@ -149,7 +152,57 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 
 ### Primary Output Format
 The Businessplan is generated as **Markdown (CommonMark)**.  
-This file (`business_plan.md`) is the single source of truth and is intended for downstream conversion to formatted documents (e.g. DOCX, PDF). Creation of the docx is not in scope of this plan.
+This file (`business_plan.md`) is the single source of truth and is intended for downstream conversion to formatted documents (DOCX, PDF).
+
+**Canonical path:** `business/Gründungszuschuss/output/business_plan.md`  
+(Export will fall back to `business/Gründungszuschuss/business_plan.md` and copy it into `output/` if needed.)
+
+**Canonical Word template path:** `business/Gründungszuschuss/output/reference.docx`  
+(Export will fall back to `business/Gründungszuschuss/reference.docx` and copy it into `output/` if needed.)
+
+### Export-friendly Markdown Rules (Pandoc-safe subset)
+Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with stable tables, headings, and page breaks.
+
+#### Headings & Structure
+- Use exactly **one** H1 at the top: `# Mein Businessplan`
+- Chapters must be **H2** (`## 1. ...`, `## 2. ...` ...), sub-sections **H3**, sub-sub-sections **H4**
+- Do not “jump” heading levels (e.g. H2 → H4)
+- Do not use horizontal rules (`---`) to simulate structure. Use explicit page breaks (see below).
+
+#### Page breaks
+- Use `\newpage` (or `\pagebreak`) on its own line for controlled page breaks (e.g., before Financials/Appendix).
+- Do not rely on manual line breaks for layout.
+
+#### Tables (most important for audit)
+- Use **pipe tables** only.
+- Never split a single logical table into “table + loose lines below”. If something does not fit, create a second table or add a paragraph.
+- Avoid `|` inside cells; if needed, escape as `\|`.
+- Keep number formats consistent (German: thousands `.` and decimal `,`, e.g. `7.004,00`).
+
+#### Lists & paragraphs
+- Keep one blank line between block elements (headings, lists, tables, paragraphs).
+- Lists must not “run into” tables and vice versa.
+
+#### Inline formatting
+- Use `**bold**`, `*italic*`, and `` `code` `` only (no raw HTML).
+- Avoid exotic Markdown extensions unless explicitly required.
+
+#### Placeholders
+- Avoid placeholders like `TBD` in final export artifacts. If information is missing, it must be captured in `open_questions.md`.
+
+### Export workflow (Docker, reproducible)
+From repo root, run:
+
+```bash
+./business/Gründungszuschuss/export.sh
+```
+
+This generates:
+- `business/Gründungszuschuss/output/business_plan.docx`
+Optional styling template:
+- `business/Gründungszuschuss/output/reference.docx`
+
+PDF should be exported manually from the generated DOCX (Word/LibreOffice), to keep the pipeline minimal.
 
 ### Images
 - Images may be included using standard Markdown syntax.
