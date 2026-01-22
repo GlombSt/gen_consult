@@ -1,80 +1,105 @@
-Stil- & Tonalitäts-Policy
+# Stil- & Tonalitäts-Policy  
+**für Businesspläne zur Vorlage bei fachkundigen Stellen (z. B. IHK) und der Agentur für Arbeit**
 
-Diese Policy definiert verbindliche sprachliche Regeln für die Generierung eines Businessplans zur Vorlage bei einer fachkundigen Stelle (IHK).
-
-⸻
-
-A. Oberstes Stilziel
-
-Der Text MUSS so formuliert sein, dass eine sachlich prüfende, risikoaverse Drittperson ihn ohne fachliche oder rechtliche Bedenken bestätigen kann.
+Diese Policy definiert verbindliche sprachliche Regeln für die Erstellung eines Businessplans, der sowohl von einer fachkundigen Stelle als auch von der Agentur für Arbeit sachlich geprüft und ohne Vorbehalte bestätigt werden kann.
 
 ⸻
 
-B. Normative Stilregeln
+## A. Oberstes Stilziel
 
-B1. Tonalität
-	•	MUSS sachlich, nüchtern und prüfbar sein.
-	•	DARF NICHT werbend, visionär oder emotional sein.
-	•	SOLL defensiv und erklärend formuliert sein.
+Der Text **MUSS** so formuliert sein, dass eine sachlich prüfende, risikoaverse Drittperson ihn **ohne fachliche, wirtschaftliche oder rechtliche Bedenken** bestätigen kann.
 
-⸻
-
-B2. Satzstruktur
-	•	MUSS kurze Hauptsätze bevorzugen.
-	•	DARF NICHT mehr als einen Gedankengang pro Satz enthalten.
-	•	SOLL aktive, klare Satzstrukturen nutzen.
+Der Text dient der **Prüfbarkeit und Nachvollziehbarkeit**, nicht der Überzeugung.
 
 ⸻
 
-B3. Wortwahl
-	•	MUSS neutral und beschreibend sein.
-	•	DARF NICHT Superlative, Verstärker oder Wertungen enthalten.
-	•	DARF NICHT Marketing- oder Pitch-Vokabular verwenden.
+## B. Normative Stilregeln
+
+### B1. Tonalität
+- **MUSS** sachlich, nüchtern und prüfbar sein.
+- **DARF NICHT** werbend, visionär oder emotional sein.
+- **SOLL** defensiv, erläuternd und begründend formuliert sein.
+- **DARF NICHT** Begeisterung, Dringlichkeit oder persönliche Motivation transportieren.
 
 ⸻
 
-B4. Aussagehaltung
-	•	MUSS zurückhaltend formuliert sein.
-	•	DARF NICHT absolute Sicherheit ausdrücken.
-	•	SOLL Annahmen explizit kennzeichnen.
+### B2. Satzstruktur
+- **MUSS** kurze, klar abgegrenzte Hauptsätze bevorzugen.
+- **DARF NICHT** mehr als einen Gedankengang pro Satz enthalten.
+- **SOLL** aktive, klare Satzstrukturen nutzen.
+- **DARF NICHT** verschachtelte Argumentationsketten oder implizite Schlussfolgerungen enthalten.
 
 ⸻
 
-B5. Umgang mit Input
-	•	MUSS bereitgestellte Fakten korrekt übernehmen.
-	•	DARF NICHT Fakten erweitern oder interpretativ aufblasen.
-	•	SOLL Zahlen konservativ sprachlich einordnen.
+### B3. Wortwahl
+- **MUSS** neutral, beschreibend und fachlich korrekt sein.
+- **DARF NICHT** Superlative, Verstärker oder qualitative Wertungen enthalten.
+- **DARF NICHT** Marketing-, Pitch- oder Investoren-Vokabular verwenden.
+- **DARF NICHT** implizite Erfolgsbegriffe enthalten (z. B. „skalierbar“, „einzigartig“, „marktführend“).
 
 ⸻
 
-B6. Risiken & Unsicherheiten
-	•	MUSS Risiken sprachlich zulassen.
-	•	DARF NICHT Risiken negieren oder ausblenden.
-	•	SOLL Unsicherheiten sachlich benennen.
+### B4. Aussagehaltung
+- **MUSS** zurückhaltend und abwägend formuliert sein.
+- **DARF NICHT** absolute Sicherheit oder Erfolg suggerieren.
+- **SOLL** Annahmen, Planungen und Prognosen explizit kennzeichnen.
 
 ⸻
 
-B7. Ich-Perspektive
-	•	DARF verwendet werden.
-	•	MUSS funktional bleiben.
-	•	DARF NICHT emotional oder motivierend sein.
+### B5. Umgang mit Fakten und Zahlen
+- **MUSS** bereitgestellte Fakten korrekt und konsistent übernehmen.
+- **DARF NICHT** Fakten erweitern oder interpretativ aufladen.
+- **SOLL** Zahlen konservativ sprachlich einordnen.
+- **DARF NICHT** aus Zahlen automatische Schlussfolgerungen ableiten.
 
 ⸻
 
-B8. Harte Sprachverbote
-
-Der Text DARF NICHT enthalten:
-	•	Vision Statements
-	•	Mission Statements
-	•	Erfolgsversprechen
-	•	Wachstumsrhetorik
-	•	Absolute Aussagen („immer“, „garantiert“)
+### B6. Risiken und Unsicherheiten
+- **MUSS** Risiken, Abhängigkeiten und Unsicherheiten benennen.
+- **DARF NICHT** Risiken negieren, relativieren oder ausblenden.
+- **SOLL** sachlich und ohne Dramatisierung formulieren.
 
 ⸻
 
-C. Abnahmekriterium (Policy-Level)
+### **B7. Perspektive und Personenbezug (verbindlich)**
 
-Ein Text gilt als konform, wenn:
-	•	jede Aussage vertretbar erscheint,
-	•	keine impliziten Erfolgsannahmen enthalten sind,
-	•	der Ton durchgehend defensiv bleibt.
+- Der Businessplan **MUSS durchgehend in der dritten Person** verfasst sein  
+  (z. B. „der Gründer“, „die Gründerin“, „das Unternehmen“).
+- Die **Ich-Form DARF NICHT** im eigentlichen Businessplan verwendet werden.
+- Ein Perspektivwechsel innerhalb des Dokuments **IST NICHT ZULÄSSIG**.
+- Persönliche Motive, Haltungen oder Bewertungen **DÜRFEN NICHT** sprachlich sichtbar werden.
+
+**Zweck:**  
+Die dritte Person stellt sicher, dass der Text als **objektive Entscheidungs- und Prüfgrundlage** gelesen werden kann und nicht als Selbstdarstellung.
+
+⸻
+
+### B8. Umgang mit Förderinstrumenten (z. B. Gründungszuschuss)
+- **MUSS** Förderleistungen sachlich und zweckgebunden beschreiben.
+- **DARF NICHT** Förderungen als Einnahme des Unternehmens darstellen.
+- **DARF NICHT** den Eindruck erwecken, dass die Tragfähigkeit vom Förderinstrument abhängt.
+- **SOLL** klarstellen, dass Förderungen der privaten Absicherung in der Anlaufphase dienen.
+
+⸻
+
+### B9. Harte Sprachverbote
+
+Der Text **DARF NICHT** enthalten:
+- Vision Statements
+- Mission Statements
+- Erfolgs- oder Einkommensversprechen
+- Wachstums- oder Skalierungsrhetorik
+- Absolute Aussagen („immer“, „garantiert“, „sicher“, „ohne Risiko“)
+- Appellative, rechtfertigende oder motivierende Formulierungen
+
+⸻
+
+## C. Abnahmekriterium (Policy-Level)
+
+Ein Text gilt als **policy-konform**, wenn:
+- jede Aussage isoliert vertretbar ist,
+- keine impliziten Erfolgsannahmen enthalten sind,
+- Risiken nicht ausgeblendet werden,
+- der Ton durchgehend sachlich und defensiv bleibt,
+- der Text vollständig in der dritten Person verfasst ist,
+- eine fachkundige Stelle und die Agentur für Arbeit den Text ohne Rückfragen bestätigen könnten.

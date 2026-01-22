@@ -285,20 +285,19 @@ Steffen Glomb fungiert als Einzelunternehmer für die ersten 12 Monate, ggf. Erw
 * **Situation und Motivation**
 - Aus welcher Situation und Motivation heraus gründest du/gründet ihr?
 
-<take literally, don't change>
-Ich verfüge über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle. Zuletzt war ich 3,5 Jahre als Chief Product & Technology Officer bei BetterDoc tätig. Zuvor habe ich über sechs Jahre als CTO und Mitgründer bei clark.de, einem digitalen Versicherungsmakler, maßgeblich zur Entwicklung und Skalierung des Unternehmens beigetragen.
+<take literally>
+Der Gründer verfügt über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle. Zuletzt war er 3,5 Jahre als Chief Product & Technology Officer bei BetterDoc tätig. Zuvor war er über sechs Jahre als CTO und Mitgründer bei clark.de, einem digitalen Versicherungsmakler, maßgeblich an der Entwicklung und Skalierung des Unternehmens beteiligt.
 
-Ich lebe mit meiner Familie (Ehefrau, zwei Kinder im Alter von 3 und 6 Jahren) in Durbach im Ortenaukreis. Aufgrund meiner familiären Situation und meines Wohnorts ist eine regelmäßige, zeitintensive Pendeltätigkeit, wie sie für vergleichbare Führungspositionen im digitalen Umfeld häufig erforderlich ist, dauerhaft nur eingeschränkt praktikabel.
+Der Gründer lebt mit seiner Familie (Ehefrau, zwei Kinder im Alter von 3 und 6 Jahren) in Durbach im Ortenaukreis. Aufgrund seiner familiären Situation und seines Wohnorts ist eine regelmäßige, zeitintensive Pendeltätigkeit, wie sie für vergleichbare Führungspositionen im digitalen Umfeld häufig erforderlich ist, dauerhaft nur eingeschränkt praktikabel.
 
-Der regionale Arbeitsmarkt in der Ortenau ist überwiegend durch Handwerk und industrielle Fertigung geprägt. Hochqualifizierte Positionen im Bereich digitaler Produkt- und Technologieentwicklung mit einem softwarezentrierten Geschäftsmodell sind nur in begrenztem Umfang vorhanden. Eine meiner Qualifikation und Berufserfahrung entsprechende sozialversicherungspflichtige Beschäftigung ist daher regional nur sehr eingeschränkt realistisch erreichbar.
+Der regionale Arbeitsmarkt in der Ortenau ist überwiegend durch Handwerk und industrielle Fertigung geprägt. Hochqualifizierte Positionen im Bereich digitaler Produkt- und Technologieentwicklung mit einem softwarezentrierten Geschäftsmodell sind nur in begrenztem Umfang vorhanden. Eine seiner Qualifikation und Berufserfahrung entsprechende sozialversicherungspflichtige Beschäftigung ist daher regional nur sehr eingeschränkt realistisch erreichbar.
 
-Die geplante Selbstständigkeit ermöglicht es mir, meine in den letzten zehn Jahren erworbenen Kompetenzen im Aufbau, in der Weiterentwicklung und im Betrieb digitaler Produkte weiterhin gezielt und wirtschaftlich sinnvoll einzusetzen. Insbesondere meine Erfahrung an der Schnittstelle von Produktstrategie, Technologie und Geschäftsmodellentwicklung kann in einem selbstständigen Kontext unmittelbar in marktfähige digitale Dienstleistungen überführt werden.
+Die geplante Selbstständigkeit ermöglicht es dem Gründer, die in den letzten zehn Jahren erworbenen Kompetenzen im Aufbau, in der Weiterentwicklung und im Betrieb digitaler Produkte weiterhin gezielt und wirtschaftlich sinnvoll einzusetzen. Insbesondere die Erfahrung an der Schnittstelle von Produktstrategie, Technologie und Geschäftsmodellentwicklung kann in einem selbstständigen Kontext unmittelbar in marktfähige digitale Dienstleistungen überführt werden.
 
 Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Bereich der generativen künstlichen Intelligenz, neue Möglichkeiten zur effizienten Entwicklung und Bereitstellung digitaler Dienstleistungen. Diese Technologien ermöglichen es, mit überschaubarem Ressourceneinsatz hochwertige Softwarelösungen wirtschaftlich zu entwickeln und zu betreiben, ohne den Aufbau eines großen Teams vorauszusetzen.
 
-Vor diesem Hintergrund stellt die geplante Selbstständigkeit für mich die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das meinen Lebensunterhalt sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
-
-</take literally, don't change>
+Vor diesem Hintergrund stellt die geplante Selbstständigkeit für den Gründer die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das den Lebensunterhalt des Gründers sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
+</take literally>
 
 
 * **Personalbedarf:** Geplante Mitarbeiteranzahl und Anforderungsprofile.
@@ -347,7 +346,7 @@ Unwichtig?
 - Welche Teilleistungen willst du an die Schlüsselpartner auslagern?
 - Welche Kontakte hast du, die für dein Vorhaben nützlich sind?
 
-Aus meiner professionellen Karriere gibt es eine Vielzahl an Kontakten zu erfahrenen Experten aus unterschiedlichen Funktionen, die meinem Vorhaben unterstützend gegenüber stehen. 
+Aus der professionellen Karriere des Gründers gibt es eine Vielzahl an Kontakten zu erfahrenen Experten aus unterschiedlichen Funktionen, die dem Vorhaben unterstützend gegenüber stehen. 
 
 
 ## 5. Unternehmen
@@ -378,7 +377,7 @@ Partner:
 
 Unterschiede:
 <bitte passend zum gesamtbild sauber neuer formulieren>
-- Wir beschäftigen uns wirklich mit dem Kern einer Aufgabenstellung. Anstatt mit Formulierungsvarianten kleine Verbesserungen zu erzielen, fokussieren wir uns darauf die Quintessenz und den Kontext zu schärfen.
+- SharpIntent beschäftigt sich mit dem Kern einer Aufgabenstellung. Anstatt mit Formulierungsvarianten nur kleine Verbesserungen zu erzielen, fokussiert sich das Unternehmen darauf, die Quintessenz und den Kontext zu schärfen.
 
 - Intents bauen dabei einen umfangreiche Wissensdatenbank auf, die unabhängig von konkreten KI Anbietern ist und das zentrale Wissen zu Aufgaben akkumuliert. Asset-Aufbau: Mit jeder Nutzung wächst die Datenbank an validierten Aufgaben-Strukturen und Risikomustern. Verteidigbarkeit: Diese kuratierte Bibliothek aus „Business Logic“ ist für reine LLM-Wrapper schwer zu replizieren und bildet die Basis für zukünftige Automatisierungs-Features.
  
@@ -445,12 +444,11 @@ EU-AI Act
 Verzögerter Break-Even durch langsamere Kundenakquise bei gleichzeitig fixen Infrastruktur- und Druck auf Entnahmen für Lebensunterhalt.
 
 Risikobewertung
-- Schweregrad: Hoch
-- Eintrittswahrscheinlichkeit: Mittel
-- Kritische Phase: Monat 12 bis 18
+  Schweregrad: Hoch
+  Eintrittswahrscheinlichkeit: Mittel
+  Kritische Phase: Monat 12 bis 18
 
 Gegenmaßnahmen
-
 1. Operative Absicherung 
 - Kosteneffizienz: Fixkosten-Deckelung auf < 500 €/Monat (für Infrastruktur/Tools).
 - Liquiditätssicherung: Inanspruchnahme des Gründungszuschusses zur Unterstützung der privaten Lebenshaltung in der Startphase.
@@ -466,7 +464,7 @@ Gegenmaßnahmen
 
 
 
-### Risiko Akquise-Ineffizienz (SEO & Marketing)
+#### Risiko Akquise-Ineffizienz (SEO & Marketing)
 
 Der geplante Product-Led Growth (PLG) Ansatz über Content Marketing und SEO greift zu langsam. Die organische Reichweite reicht nicht aus, um die notwendige Anzahl an Freemium-Nutzern für die Konvertierung in Bezahl-Abos zu gewinnen.
 
@@ -482,7 +480,7 @@ Gegenmaßnahmen
 
 
 
-### Risiko Technologische Obsoleszenz (Modell-Fortschritt)
+#### Risiko Technologische Obsoleszenz (Modell-Fortschritt)
 
 Sprachmodelle (z.B. GPT-5, Claude Next) entwickeln native Fähigkeiten zur eigenständigen Rückfrage („Agentic Behavior“) und übernehmen die Klärung von Aufgabenstellungen selbstständig, wodurch das Kernwertversprechen des Tools geschwächt wird.
 
@@ -518,31 +516,55 @@ Gegenmaßnahmen
 **Wofür und wann fließt Geld an dich?**
 
 - Womit nimmst du Geld ein?
-
-Abonnements, monatlich oder jährlich
-Pay as you go basierend auf Gutenhabenpunkten (credits). Guthabenpunkte spiegeln ungefähr die Nutzung. 
-
 *- Zu welchen Zeitpunkten fließt das Geld?*
-Im Voraus
-
 *- Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?*
 
-Freemium/Trial user haben für die Nutzung eine Obergrenze und müssen danach ein Abbonnement abschliessen.
 
-Zahlende Nutzer  haben festgelegte Grundpreise, die eine Nutzungsgrenze enthalten. Die Grenze wird so gewählt, dass ein ausreichende Marge erzielt wird. Nutzer können zusätzlich Guthabenpunkte erwerben, um den Dienst weiter nutzen zu können. Die Guthabenpunkte sind so bepreist, dass eine Marge ensteht. 
 
-Der optimale Preis wird in den ersten 4 Monate ermittelt und der business plan ggf. angepasst.
+
+Die Erlöse des Unternehmens entstehen aus der Nutzung eines digitalen Dienstes, der über wiederkehrende Entgeltmodelle sowie nutzungsabhängige Zusatzleistungen abgerechnet wird.
+
+Art der Ertragsquellen
+Die Einnahmen setzen sich aus folgenden Komponenten zusammen:
+	1.	Abonnementbasierte Entgelte
+Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnements nutzen. Die Abonnements beinhalten jeweils ein definiertes Nutzungsvolumen.
+	2.	Nutzungsabhängige Zusatzentgelte („Pay as you go“)
+Zusätzlich zu den Abonnements besteht die Möglichkeit, Guthabenpunkte (Credits) zu erwerben. Diese Guthabenpunkte ermöglichen eine über das im Abonnement enthaltene Nutzungsvolumen hinausgehende Nutzung.
+Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider.
+
+Nutzergruppen und Preismodell
+Zur Strukturierung der Nachfrage werden drei Nutzergruppen unterschieden:
+	•	Trial-/Freemium-Nutzer
+Diese Nutzer erhalten einen kostenlosen, funktional begrenzten Zugang zum Dienst. Die Nutzung ist mengenmäßig beschränkt. Nach Erreichen der Obergrenze ist für eine weitere Nutzung der Abschluss eines kostenpflichtigen Abonnements erforderlich.
+	•	Standard-Nutzer
+Standard-Nutzer zahlen ein monatliches Entgelt von 15 Euro. Das Abonnement enthält ein definiertes Nutzungsvolumen.
+	•	Premium-Nutzer
+Premium-Nutzer zahlen ein monatliches Entgelt von 100 Euro. Dieses Abonnement beinhaltet ein höheres Nutzungsvolumen sowie erweiterte Nutzungsmöglichkeiten.
+
+Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann.
+Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
+
+Zahlungszeitpunkt
+Die Abrechnung der Abonnements erfolgt im Voraus.
+Auch der Erwerb von Guthabenpunkten erfolgt vor der Nutzung. Dadurch entstehen keine Forderungsausfälle aus laufender Nutzung.
+
+Preisfindung und Markteinordnung
+Die initiale Preisstruktur orientiert sich an:
+	•	vergleichbaren marktüblichen Preismodellen,
+	•	der erwarteten durchschnittlichen Nutzung,
+	•	sowie den zugrunde gelegten Kostenannahmen.
+
+In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
+Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
+
+
+
 
 ### Kosten
 
 **Wofür gibst du Geld aus?**
 
 - Wofür gibst du im Unternehmen wie viel Geld aus?
-<Zusammenfassung Marketing kosten im ersten Jahr aus excel sheet Kosten/>
-<Zusammenfassung Direkte Kosten aus excel sheet Kosten/>
-<Zusammenfassung Kosten Produktentwicklung aus excel sheet Kosten/>
-<Zusammenfassung Administratve Kosten aus excel sheet Kosten/>
-<Zusammenfassung IT Infrastruktur Kosten aus excel sheet Kosten/>
 
 - Wie flexibel sind diese Kosten?
 * Es ist möglich den Betrieb des Unternehmens zeitweise mit weniger als 1000 Euro Fixkosten / Monat fortzuführen. Es sind keine langfristigen Zahlungsverpflichtungen geplant.
@@ -563,59 +585,214 @@ Fixkosten liegen fallen im wesentlichen für Produktentwicklung und können bei 
 
 
 
+Die Kostenplanung umfasst ausschließlich betriebsnotwendige Aufwendungen. Die Kostenstruktur weist einen hohen Anteil variabler oder kurzfristig beeinflussbarer Kosten auf. Die einzelnen Kostenpositionen sind im Excel-Sheet „Kosten“ detailliert dargestellt.
+
+Kostenstruktur und Kostenarten
+Die betrieblichen Ausgaben setzen sich aus folgenden Kostenblöcken zusammen:
+
+#### Marketing
+Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots.
+(Zusammenfassung der Marketingkosten aus dem Excel-Sheet „Kosten“)
+<Zusammenfassung Marketing kosten im ersten Jahr aus excel sheet Kosten/>
+
+#### Direkte Kosten
+Direkte Kosten entstehen im Zusammenhang mit der Leistungserbringung für Kunden.
+<Zusammenfassung Direkte Kosten aus excel sheet Kosten/>
+
+#### Kosten der Produktentwicklung
+Diese Kosten betreffen die Weiterentwicklung und Pflege des digitalen Produkts.
+<Zusammenfassung Kosten Produktentwicklung aus excel sheet Kosten/>
+
+#### Administrative Kosten
+Administrative Kosten umfassen unter anderem Buchhaltung, rechtliche Grundlagen und sonstige betriebliche Verwaltungsaufwendungen.
+<Zusammenfassung Administratve Kosten aus excel sheet Kosten/>
+
+#### IT-Infrastrukturkosten
+IT-Kosten entstehen insbesondere durch Hosting, Rechenleistung und technische Basisdienste.
+<Zusammenfassung IT Infrastruktur Kosten aus excel sheet Kosten/>
+
+#### Flexibilität der Kostenstruktur
+Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden.
+
+#### Umsatzabhängige (variable) Kosten
+Variable Kosten entstehen im Wesentlichen im Rahmen der Wertschöpfung für Kunden. Diese sind insbesondere abhängig von der Nutzung generativer KI-Dienste externer Anbieter. Weitere variable Kosten sind im Vergleich hierzu von untergeordneter Bedeutung.
+
+#### Personalkosten
+Zum Zeitpunkt der Planung ist keine Einstellung von Mitarbeitenden vorgesehen.
+Sollte sich das Unternehmen positiv entwickeln, kann perspektivisch die Anstellung von Mitarbeitenden in den Bereichen Marketing oder Softwareentwicklung sinnvoll werden. Diese Annahme ist nicht Bestandteil der aktuellen Kostenplanung.
+
+#### Fixe Betriebsausgaben
+Klassische fixe Betriebsausgaben (z. B. Büro-Miete oder Energiekosten) fallen nur in geringem Umfang an.
+Als wesentliche laufende Betriebskosten sind insbesondere Aufwendungen für Rechenleistung zu nennen, die in den Bereichen Produktentwicklung, Marketing, IT-Infrastruktur und Administration anfallen.
+(Aufstellung gemäß Excel-Sheet „Kosten“)
+
+Die Fixkosten fallen überwiegend im Bereich der Produktentwicklung an und können bei Bedarf reduziert oder zeitlich verschoben werden.
+
+
+
 ### Privatentnahme
 Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?
 •	Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
 •	Wie viel Einkommenssteuer musst du zahlen? 
-4 Personen Haushalt, Familie mit 2 Kindern (3, 6 Jahre), Frau ist Juristing und arbeitet als Beamtin in der JVA Offenburg. Unsere Einnahmen und Ausgaben in typischen Monaten sind im excel sheet "private finanzen" dargestellt. <Auflistung Einnahmen uns Ausgaben ohne Beträge aus "Private Finanzen"/>
 
-Für die Selbständigkeit haben wir unsere monaliche Kosten kalkuliert und mit private Rücklagen und dem Gründungszuschuss wäre es möglich unsere Lebenshaltungskosten zu tragen. Hierbei wird angenommen, dass wir in 2026 keine Entnahmen haben und in 2027 die Entnahme schrittweise erhöhen, sodass wir Ende 2027 aus der Selbständigkeit getragen werden.
+Der Gründer lebt in einem Vier-Personen-Haushalt (Ehepaar mit zwei Kindern im Alter von 3 und 6 Jahren). Die Ehepartnerin ist als Beamtin (Juristin) in der JVA Offenburg tätig. Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ nachvollziehbar dargestellt.
+
+Für die Aufnahme der Selbständigkeit wurden die monatlichen privaten Lebenshaltungskosten realistisch und konservativ kalkuliert. Die Sicherstellung des privaten Lebensunterhalts in der Anlaufphase erfolgt außerhalb der Unternehmensfinanzen durch eine Kombination aus dauerhaften privaten Einnahmen, dem Gründungszuschuss sowie privaten Rücklagen.
+
+Der Gründungszuschuss wird in der Anlaufphase zur Deckung der laufenden privaten Lebenshaltungskosten verwendet, um vorübergehend auf Privatentnahmen aus dem Unternehmen verzichten zu können. Zusätzlich zufließende, einmalige Einkünfte aus der vorherigen abhängigen Beschäftigung werden nicht zur laufenden Finanzierung der Lebenshaltungskosten herangezogen, sondern separat behandelt und nicht in die monatliche Entnahmeplanung einbezogen. Auf Basis des bewilligten Anspruchs wird für die ersten sechs Monate ein Zuschuss in Höhe von ca. 20.000 € sowie für weitere neun Monate eine Pauschale von 9 × 300 € berücksichtigt. Der Gründungszuschuss ist nicht Bestandteil der Unternehmensfinanzierung und keine Voraussetzung für die wirtschaftliche Tragfähigkeit des Vorhabens.
+
+Zusätzlich stehen private Rücklagen in Höhe von 45.000 € zur Verfügung. Diese dienen der privaten Liquiditätssicherung in der Anlaufphase. Einlagen in das Unternehmen erfolgen hiervon unabhängig ausschließlich aus gesondert vorgesehenem Kapital.
+
+Da der private Lebensunterhalt in der Anfangsphase außerhalb des Unternehmens abgesichert ist, wird das Unternehmen in der Aufbauphase nicht durch private Entnahmen belastet. Dies reduziert den finanziellen Druck und unterstützt einen sachgerechten und nachhaltigen Unternehmensaufbau.
+
+Beantwortung der Leitfragen
+
+Wie viel Geld wird dem Unternehmen für private Zwecke entnommen?
+Für das Jahr 2026 sind keine Privatentnahmen aus dem Unternehmen vorgesehen.
+Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen geplant. Die konkrete Höhe orientiert sich an der Entwicklung der Unternehmenserträge. Ziel ist es, den privaten Lebensunterhalt bis Ende 2027 vollständig aus der Selbständigkeit zu decken.
+
+Welche Lebenshaltungskosten fallen an?
+Die privaten Lebenshaltungskosten umfassen insbesondere:
+	•	Wohnkosten (inkl. Nebenkosten),
+	•	Kranken- und Versicherungsbeiträge,
+	•	Kosten für Verpflegung,
+	•	laufende Kosten des Vier-Personen-Haushalts,
+	•	sonstige regelmäßige private Ausgaben.
+
+Die Kosten wurden realistisch und konservativ kalkuliert und sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt.
+
+
+Wie viel Einkommensteuer fällt an?
+Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt.
+Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
+Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet.
+
+<Auflistung Einnahmen und Ausgaben ohne Beträge aus "Private Finanzen"/>
 
 
 ### Kapitalbedarf & Finanzierung
 Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
 
 •	Welche Investitionen sind für dein Unternehmen notwendig (z.B. Büroausstattung, Maschinen, Gebäude, Fahrzeuge)?
-
-Es sind keine physischen Güter notwendig. Am Anfang der Selbständigkeit muss Zeit in die Entwicklung des Produkts und den Aufbau der Präsenz im Internet investiert werden. Diese Investitionen benötigen wenig Kapital.
-
 •	Gibt es Sachen, die für dein Unternehmen notwendig sind, die du selbst beisteuerst? Wie viel sind sie noch wert (Sacheinlage, z. B. dein PC, dein Auto)?
-
-Private IT Ausrüstung (Monitor, Laptop, Desktop Computer) werden in das Unternehmen eingebracht. 
-
 •	Welche Kosten fallen einmalig bei der Gründung deines Unternehmens an (z. B. Warenerstausstattung, Gebühren für die Gewerbeanmeldung)?
-
-Gewerbeanmeldung, Markenschutz, Erstellung der AGB und der Datenschtzrichtlinien, Abschluss einer Berufshaftpflichtvesicherung
-
 •	Wie viel Mittel benötigst du zur Gewährleistung des laufenden Betriebes in der Anlaufphase?
+
+•	Wie viel Liquiditätsreserve benötigst du als allgemeines Sicherheitspolster und um die Zeit zwischen Aus- und Einzahlungen innerhalb eines Monats überbrücken zu können?
+????
+•	Wie viel Geld steuerst du selber bei (Geldeinlage)?
+•	Woher kommen die zusätzlichen Mittel, um deinen Kapitalbedarf decken zu können?
+
+
+Der Kapitalbedarf des Unternehmens ergibt sich aus den einmaligen Gründungskosten, den laufenden Betriebskosten in der Anlaufphase sowie einer angemessenen Liquiditätsreserve. Ziel der Finanzierung ist es, den Geschäftsbetrieb in der Startphase ohne Abhängigkeit von kurzfristigen Einnahmen aufrechterhalten zu können.
+
+#### Notwendige Investitionen
+Für den Geschäftsbetrieb sind keine physischen Anlagegüter wie Maschinen, Fahrzeuge oder Gebäude erforderlich.
+Zu Beginn der Selbständigkeit liegt der Schwerpunkt auf dem Zeitaufwand für die Entwicklung des Produkts sowie dem Aufbau der Online-Präsenz. Diese Tätigkeiten sind kapitalarm und verursachen überwiegend laufende, variable Kosten, jedoch keine hohen Anfangsinvestitionen.
+
+#### Sacheinlagen
+Private IT-Ausrüstung (insbesondere Laptop, Desktop-Computer und Monitor) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt.
+Es handelt sich um bereits vorhandene Arbeitsmittel. Eine gesonderte Finanzierung oder Ersatzbeschaffung ist hierfür nicht vorgesehen.
+
+
+
+#### Einmalige Gründungskosten
+Im Rahmen der Unternehmensgründung fallen einmalige Kosten an, insbesondere für:
+	•	Gebühren im Zusammenhang mit der Gewerbeanmeldung,
+	•	Markenschutz,
+	•	die Erstellung von AGB und Datenschutzrichtlinien,
+	•	den Abschluss einer Berufshaftpflichtversicherung.
+
+Diese Kosten sind einmalig und im Excel-Sheet „Kosten“ berücksichtigt.
+
+
+#### Kapitalbedarf für den laufenden Betrieb (Anlaufphase)
+Zur Sicherstellung des laufenden Geschäftsbetriebs in der Anlaufphase werden Mittel zur Deckung der monatlichen Betriebskosten benötigt.
+Die geplanten monatlichen Kosten für das Jahr 2026 sind im Excel-Sheet „Kosten“ detailliert aufgeschlüsselt.
 
 <Berechne und stelle als Tabelle dar: monatliche kosten in 2026/>
 
-•	Wie viel Liquiditätsreserve benötigst du als allgemeines Sicherheitspolster und um die Zeit zwischen Aus- und Einzahlungen innerhalb eines Monats überbrücken zu können?
+Die Kostenstruktur ist so ausgestaltet, dass der Geschäftsbetrieb bei Bedarf mit reduziertem Kostenumfang fortgeführt werden kann.
 
-•	Wie viel Geld steuerst du selber bei (Geldeinlage)?
+
+#### Liquiditätsreserve
+Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von 2000 Euro eingeplant.
+Diese dient dazu,
+	•	kurzfristige zeitliche Verschiebungen zwischen Aus- und Einzahlungen auszugleichen,
+	•	unvorhergesehene, einmalige Ausgaben abzufedern,
+	•	sowie die Zahlungsfähigkeit des Unternehmens auch bei schwankenden Einnahmen sicherzustellen.
+
+Die Liquiditätsreserve ist konservativ bemessen und im Liquiditätsplan berücksichtigt.
+
+
+#### Eigene Mittel (Geldeinlagen)
+Der Gründer bringt eigene finanzielle Mittel in das Unternehmen ein.
+Die geplanten privaten Einlagen erfolgen monatlich und sind im Excel-Sheet „Liquidität“ nachvollziehbar dargestellt. Diese Einlagen dienen der Deckung des laufenden Kapitalbedarfs in der Anlaufphase.
 <Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität>
 
-•	Woher kommen die zusätzlichen Mittel, um deinen Kapitalbedarf decken zu können?
-Neben dem Gründungszuschuss werde ich auf private Rücklagen zurückgreifen, um den Lebensunterhalt zu bestreiten.
+
+#### Weitere Finanzierungsquellen
+Zur Deckung des Kapitalbedarfs werden keine externen Finanzierungsinstrumente wie Bankdarlehen oder Beteiligungskapital eingesetzt.
+
+Neben den eigenen Einlagen greift der Gründer auf den Gründungszuschuss sowie private Rücklagen zurück, um den privaten Lebensunterhalt während der Anlaufphase sicherzustellen. Der Gründungszuschuss und die privaten Rücklagen sind nicht Bestandteil der Unternehmensfinanzierung und werden nicht zur Deckung betrieblicher Ausgaben verwendet.
 
 
 
-Rentabilität
-Wie viel Gewinn machst du?
-•	Wie stehen die Kosten im Verhältnis zu den Erlösen?
+### Rentabilität
 <stelle kennzahlen aus sheet "Übersicht" dar, jährlich>
 
-•	Ab wann erzielst du einen Gewinn und wie entwickelt sich dieser?
-<erkläre rentabilität basiered auf Zahlen in sheet Rentabilität>
 
 
-Liquidität
-Wie entwickelt sich dein Kontostand?
+### Rentabilität
+
+Die Rentabilitätsvorschau basiert auf der vorliegenden Finanzplanung und stellt die geplante wirtschaftliche Entwicklung des Einzelunternehmens dar. Dargestellt wird ausschließlich die betriebliche Ergebnislage vor Steuern.
+
+#### Jahresübersicht (gemäß Finanzplanung)
+
+<Tabelle "Rentabilität" erstellen basiered auf Zahlen in sheet Rentabilität, Spalten: Jahr | Umsatz (EUR) | Variable Kosten (EUR) | Fixkosten (EUR) | Betriebsergebnis vor Steuern (EUR) >
+
+
+#### Einordnung der Ergebnisse
+
+In der Anlaufphase im Jahr 2026 weist das Unternehmen ein negatives Betriebsergebnis vor Steuern aus. Ursache hierfür sind die fixen Aufbaukosten bei gleichzeitig noch geringem Umsatzniveau.
+
+Gemäß Planung wird ab Februar 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab August 2027 positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
+
+Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten steigen im Planungszeitraum nur moderat an. Ab dem Jahr 2027 decken die Erlöse sowohl die variablen Kosten als auch die laufenden Fixkosten.
+
+#### Verhältnis von Kosten zu Erlösen (Kennzahlen)
+
+Zur Darstellung des Kosten-Erlös-Verhältnisses werden die Bruttomarge sowie die Fixkostenquote herangezogen. Die Kennzahlen basieren ausschließlich auf der vorliegenden Finanzplanung und sind auch im Reiter "Rentabilität" aufgeführt.
+
+#### Kennzahlenübersicht (gemäß Finanzplanung)
+
+<Tabelle "Kosten zu Erlösen" erstellen basiered auf Zahlen in sheet Rentabilität, Spalten: Jahr | Bruttomarge | Fixkostenquote  >
+
+Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich.
+
+#### Einordnung des Unternehmerlohns
+
+Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitte "Entnahmen" separat dargestellt.
+
+
+### Liquidität
 •	Wie entwickelt sich die Liquidität deines Unternehmens?
+Wie entwickelt sich dein Kontostand?
 
 Die ersten 18 Monate erfordern disziplinierten Umgang mit den liquiden Mitteln, d.h. genaue Verfolgung des Planes. Anschliessed ergibt sich eine Reserve von liquiden Mitteln.
 
 •	Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte Einzahlungen eingeplant?
 
 Ein Polster von 2000 Euro ist eingeplant.
+
+### Liquidität
+Wie entwickelt sich dein Kontostand?
+
+Im Jahr 2026 werden neben den ersten Umsätzen private Einlagen berücksichtigt. In diesem Zeitraum erfolgen keine Privatentnahmen, um den Aufbau des Unternehmens nicht durch laufende Entnahmen zu belasten. Die privaten Einlagen sind zeitlich begrenzt und dienen ausschließlich der Sicherstellung der Zahlungsfähigkeit in der Anlaufphase.
+
+Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen vorgesehen. Die Entnahmen orientieren sich an der Entwicklung der Umsätze und werden so angesetzt, dass die Liquidität des Unternehmens durchgehend positiv bleibt. Ab dem Jahr 2028 wird eine konstante monatliche Privatentnahme zugrunde gelegt.
+
+Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand <berechnen>, zum Jahresende 2027  <berechnen> und zum Jahresende 2028  <berechnen>. Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau bei gleichzeitig konstant angesetzten Privatentnahmen und dient dem Aufbau eines finanziellen Puffers zur Absicherung des laufenden Geschäftsbetriebs.
+
+Der nachfolgende Auszug zeigt den monatlichen Liquiditätsverlauf für den Zeitraum 03/2026 bis 12/2028. Die vollständige Liquiditätsplanung ist im Excel-Sheet „Liquidität“ dargestellt.
+

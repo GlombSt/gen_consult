@@ -167,7 +167,7 @@ Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with sta
 - Use exactly **one** H1 at the top: `# Mein Businessplan`
 - Chapters must be **H2** (`## 1. ...`, `## 2. ...` ...), sub-sections **H3**, sub-sub-sections **H4**
 - Do not “jump” heading levels (e.g. H2 → H4)
-- Do not use horizontal rules (`---`) to simulate structure. Use explicit page breaks (see below).
+- Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. (The template may contain `---`; do not carry them over—use headings and/or explicit page breaks instead.)
 
 #### Page breaks
 - Use `\newpage` (or `\pagebreak`) on its own line for controlled page breaks (e.g., before Financials/Appendix).
