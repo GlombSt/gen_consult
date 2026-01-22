@@ -4,411 +4,478 @@
 
 ### Was hast du vor?
 
-Ich baue als Einzelunternehmer unter dem Namen „SharpIntent“ eine webbasierte SaaS-Lösung auf. Das Produkt unterstützt Nutzer dabei, Aufgaben für Sprachmodelle strukturiert zu erfassen, zu präzisieren und als optimierte Anweisung auszugeben. Ziel ist, durch klarere Aufgabenstellungen die Qualität und Verlässlichkeit von Sprachmodell-Ergebnissen zu verbessern und den Prüf- und Korrekturaufwand zu verringern.
+Ich entwickle unter dem Namen „SharpIntent“ eine webbasierte Software-as-a-Service-Lösung, die die Nutzung von Sprachmodellen bei fachlichen Aufgaben unterstützt. Der Schwerpunkt liegt auf der strukturierten Klärung der Aufgabenstellung vor der Ausführung durch das Sprachmodell. Ziel ist, Mehrdeutigkeiten und fehlende Angaben frühzeitig sichtbar zu machen und dadurch Nacharbeit und Qualitätsrisiken bei der Nutzung von Sprachmodellen zu reduzieren.
 
-Das Angebot richtet sich an Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und bei denen Output-Qualität geschäftskritisch ist. Als Zielgruppen sind Einzelunternehmer/Freelancer sowie KMU (ca. 10–500 Mitarbeiter) und Abteilungen größerer Unternehmen vorgesehen. Der Markteintritt ist als digitaler, produktgetriebener Ansatz (Freemium/Trial, Content Marketing, Community-Präsenz) geplant.
+Das Angebot richtet sich an Einzelanwender und Teams, die Sprachmodelle regelmäßig im Arbeitskontext einsetzen oder den Einsatz planen und bei denen die Ergebnisqualität relevant ist. Der Vertrieb ist als digitaler, selbstbedienter Ansatz geplant, mit organischer Kundengewinnung über Content, Communities und das bestehende berufliche Netzwerk.
 
-Gründer ist Steffen Glomb (Diplom-Informatiker, MBA) mit langjähriger Erfahrung im Aufbau und Betrieb softwarebasierter Produkte (u.a. clark.de, BetterDoc). In den ersten 12 Monaten ist die Umsetzung als Einzelperson vorgesehen, ergänzt durch situative externe Leistungen (z.B. Rechts- und Steuerberatung).
+Im ersten Schritt wird das Vorhaben als Einzelunternehmen umgesetzt. Der Gründer bringt dafür fachliche und praktische Erfahrung im Aufbau und Betrieb digitaler Produkte sowie in IT-Sicherheit und Datenschutz mit.
 
-In der Rentabilitätsvorschau wird das Monatsergebnis ab 2027-07 positiv. In der Finanzplanung sind private Einlagen von insgesamt 11.000,00 EUR vorgesehen. Im Liquiditätsplan wird zeitweise ein negativer Kontostand ausgewiesen; der niedrigste Wert der Liquidität nach Entnahme liegt bei -2.425,69 EUR (2027-03). Zur Vermeidung wäre ein entsprechender Liquiditätspuffer erforderlich. Fremdkapital ist nicht als fester Bestandteil der Planung hinterlegt.
+Finanziell ist das Vorhaben in der Anlaufphase durch private Einlagen abgesichert. In der Unternehmensplanung sind für 2026 private Einlagen in Höhe von 14.000,00 EUR vorgesehen. Fremdkapital ist nicht geplant.
+
+Gemäß Rentabilitätsvorschau wird das Betriebsergebnis vor Steuern ab 02/2027 positiv. Das Monatsergebnis wird ab 08/2027 positiv. Die Privatentnahmen sind ab 2027 geplant und steigen im Jahresverlauf an; ab 2028 ist eine konstante Entnahme vorgesehen.
+
 
 ## 2. Geschäftsidee
 
 ### Angebot
 
-Ich baue unter dem Namen „SharpIntent“ eine webbasierte SaaS-Lösung auf. Das Produkt unterstützt Nutzer dabei, Aufgaben für Sprachmodelle strukturiert zu erfassen, zu präzisieren und als optimierte Anweisung auszugeben.
+SharpIntent ist eine webbasierte Software-as-a-Service-Lösung, die die Nutzung von Sprachmodellen bei fachlichen Aufgaben unterstützt. Der Kern des Angebots ist eine geführte Erfassung der Aufgabenstellung vor der eigentlichen Ausführung durch das Sprachmodell. Dabei werden Parameter wie Zielgruppe, Rahmenbedingungen und fachliche Einschränkungen strukturiert abgefragt.
 
-Kern des Angebots ist eine assistierte Benutzerführung, die vor der Ausführung fachliche Parameter und Rahmenbedingungen abfragt (z.B. Jurisdiktion, Zielgruppe, Constraints). Auf dieser Basis zeigt das System fehlende oder mehrdeutige Informationen auf und bewertet die Aufgabenstellung hinsichtlich typischer Risiken (z.B. Halluzinationen, Logikbrüche, fehlender Kontext).
+SharpIntent soll die Aufgabe nicht „automatisch richtig“ machen. Die Lösung unterstützt dabei, die eigene Absicht klar zu formulieren, Mehrdeutigkeiten zu reduzieren und fehlende Informationen sichtbar zu machen. Zusätzlich soll das System Hinweise geben, wenn eine Aufgabe mit einem Sprachmodell voraussichtlich nicht zuverlässig lösbar ist, und alternative Vorgehensweisen aufzeigen.
 
-Die Nutzung ist als SaaS vorgesehen. Nutzer können einen optimierten Prompt in ihre eigene Umgebung übernehmen oder die Ausführung in einer durch SharpIntent bereitgestellten Umgebung durchführen.
+Verkauft wird der Zugang zur Software in Form von Abonnements. Ergänzend ist eine nutzungsbasierte Abrechnung über Guthabenpunkte (Credits) vorgesehen. Die Software ermöglicht sowohl den Export einer erzeugten Anweisung zur Nutzung in bestehenden Arbeitsabläufen als auch die direkte Ausführung innerhalb der Anwendung.
 
 ### Nutzen
 
-Viele Nutzer erleben Sprachmodelle als „unzuverlässig genial“: In einzelnen Fällen liefern sie sehr gute Ergebnisse, in anderen Fällen enthalten die Ergebnisse subtile Fehler, erfundene Quellen oder unpassende, nicht-lokale Standards. Der erforderliche Korrektur- und Prüfaufwand kann den erwarteten Zeitgewinn reduzieren oder aufheben. Zusätzlich kann das Chatformat dazu führen, dass Unklarheiten, Lück    en und Widersprüche in der Aufgabenstellung übersehen werden.
+Viele Nutzer erleben Sprachmodelle als wechselhaft: Ergebnisse sind häufig zu einem großen Teil brauchbar, enthalten aber einzelne inhaltliche oder formale Fehler. Das kann zu Nacharbeit führen, die den erwarteten Zeitgewinn reduziert. Hinzu kommen Risiken durch überzeugend formulierte, aber unzutreffende Aussagen („Halluzinationen“), unpassenden Kontext (z. B. internationale statt lokaler Rahmenbedingungen) und logische Widersprüche.
 
-SharpIntent setzt vor der Textgenerierung an. Durch die strukturierte Erfassung der Intention und die explizite Klärung relevanter Parameter soll die Wahrscheinlichkeit unpassender oder inkonsistenter Ergebnisse sinken. Nutzer erhalten Hinweise, welche Informationen für ein belastbares Ergebnis fehlen oder welche Teile der Aufgabe mehrdeutig sind. Zudem soll das System offen ausweisen, wenn eine Aufgabenstellung aus Sicht des Tools für ein Sprachmodell nicht geeignet ist, und Alternativen anregen.
+SharpIntent setzt vor der Texterstellung an. Durch die strukturierte Klärung der Aufgabenstellung sollen Nutzer schneller zu einer belastbaren Ausgangslage kommen und weniger Iterationsschleifen benötigen. Das unterstützt insbesondere bei wiederkehrenden, komplexeren Aufgaben und bei Nutzern, die für die Qualität des Ergebnisses verantwortlich sind.
 
-Der Nutzen wird im Wesentlichen in Zeitersparnis durch weniger Iterationen, in einer realistischeren Erwartungshaltung gegenüber der Technologie sowie in einer Reduktion von Frustration und Fehlanwendungen gesehen.
+Die Software soll außerdem dazu beitragen, Erwartungen an die Leistungsfähigkeit von Sprachmodellen realistisch einzuordnen. Unsicherheiten und Prüfbedarf werden nicht ausgeblendet, sondern explizit gemacht. Dadurch kann das Risiko fachlich unzureichender Ergebnisse sinken, insbesondere wenn die Nutzung von Sprachmodellen in Teams skaliert werden soll.
 
 ### Kernfähigkeiten
 
-Für die Umsetzung sind insbesondere folgende Fähigkeiten und Ressourcen relevant:
+Für die Umsetzung sind folgende Kernfähigkeiten wesentlich:
 
-- Strukturierte Intent-Deklaration in einem spezialisierten Datenmodell, das präzise Bearbeitung und Revisionen ermöglicht.
-- Benutzerführung und Logik zur schnellen Klärung und Verfeinerung der Aufgabenstellung.
-- Qualitätsbewertung und Erfolgsprognose durch Metriken zur Einschätzung der Definitionsgüte und des Risikos fehlerhafter Ergebnisse.
-- Aufbau und Pflege einer industrie- bzw. domänenspezifischen Referenzdatenbank für Aufgabenbeschreibungen und Qualitätsstandards.
-- Automatisierte Erstellung und iterative Optimierung von Sprachmodell-Anweisungen aus strukturierten Aufgaben.
+- Strukturierte Erfassung von Aufgaben in einem spezialisierten Datenmodell, das Revision und Wiederverwendung erlaubt.
+- Intelligente, geführte Klärungsfragen, um fehlende oder mehrdeutige Angaben schnell sichtbar zu machen.
+- Qualitätsbewertung der Aufgabenstellung (z. B. anhand von Metriken für Klarheit und Vollständigkeit) und eine vorsichtige Erfolgsabschätzung.
+- Ableitung konsistenter Anweisungen an Sprachmodelle aus den erfassten Strukturen.
+- Aufbau und Pflege einer Referenzdatenbasis für Aufgabenmuster und fachspezifische Standards.
 
-Zusätzlich ist der Aufbau weiterer Fähigkeiten vorgesehen, insbesondere beim systematischen Ausbau domänenspezifischer Referenzdaten (Inhaltspflege, kuratierte Standards) sowie bei der Skalierung von Marketing- und Vertriebsaktivitäten im Rahmen eines produktgetriebenen Ansatzes.
+Aufzubauen bzw. fortlaufend zu entwickeln sind insbesondere die Referenzdatenbasis sowie die Bewertungslogik und die Benutzerführung, damit der zusätzliche Klärungsaufwand für Nutzer praktikabel bleibt.
+
 
 ## 3. Vertrieb & Wettbewerb
 
 ### Kunden
 
-SharpIntent richtet sich an Nutzer, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und bei denen die Qualität des Outputs geschäftskritisch ist. Der adressierte Bedarf betrifft sowohl einzelne Professionals als auch Teams in Unternehmen.
+SharpIntent richtet sich an Personen und Organisationen, die Sprachmodelle regelmäßig im Arbeitskontext einsetzen oder den Einsatz planen und bei denen die Ergebnisqualität relevant ist. Die Lösung ist sowohl für Einzelanwender als auch für Teams gedacht.
 
-Als Zielgruppen sind genannt:
+Im Fokus stehen:
 
 - Einzelunternehmer und Freelancer.
-- KMU und Mittelstand (ca. 10–500 Mitarbeiter) sowie Abteilungen in Großunternehmen.
+- Kleine und mittlere Unternehmen (ca. 10–500 Mitarbeitende) sowie einzelne Abteilungen in größeren Unternehmen.
 
-Typische Rollen sind Fachkräfte (z.B. Marketing, Legal, HR, Consulting, Produktmanagement) sowie Team-Leads, die die Nutzung von KI verantworten. Nutzer sind häufig einzelne Mitarbeiter mit Produktivitätsdruck oder mit erhöhten Qualitätsanforderungen. Entscheider sind typischerweise Team-Leads, Abteilungsleiter oder IT-Verantwortliche mit Fokus auf ROI, Risikominimierung und Skalierbarkeit.
-
-Geografisch ist der Markt grundsätzlich global. Initial ist eine Ausrichtung auf Englisch und Deutsch vorgesehen.
+Typische Rollen sind Fachkräfte in unterschiedlichen Funktionen (z. B. Marketing, Recht, HR, Consulting, Produktmanagement), Team-Leads sowie Verantwortliche für ROI, Risiko und Skalierung. Psychografisch richtet sich das Angebot insbesondere an Nutzer, die das Potenzial erkennen, aber mit inkonsistenter Qualität und fehlender Kontrolle unzufrieden sind. Geografisch ist die Zielgruppe grundsätzlich global; initial ist eine Ausrichtung auf Englisch und Deutsch vorgesehen.
 
 ### Vertrieb und Kommunikation
 
-Der geplante Markteintritt folgt einer produktgetriebenen Strategie (Product-Led Growth) mit inhaltlicher Unterstützung. Als Einzelunternehmer ohne Vertriebsteam ist ein skalierbarer, überwiegend digitaler und selbstbedienter Ansatz vorgesehen.
+Der Vertrieb ist als digitaler, selbstbedienter Ansatz geplant. Als Einzelunternehmer ohne eigenes Vertriebsteam ist ein ressourcenschonendes Vorgehen erforderlich. Die Kundengewinnung soll daher primär über organische Kanäle erfolgen, ergänzt um produktgetriebene Mechanismen (Freemium/Trial mit Upgrade-Pfad).
 
-Geplante Kanäle und Maßnahmen sind:
+Als initialer Hebel ist das bestehende berufliche Netzwerk vorgesehen (ca. 3.500 Kontakte auf LinkedIn). Zusätzlich ist problemorientierter Content geplant, der über Suchmaschinen organischen Traffic generiert. Der Schwerpunkt liegt auf spezifischen Suchanfragen mit Bezug zu typischen Problemen der Sprachmodell-Nutzung. Für SEO wird eine Anlaufzeit von mehreren Monaten einkalkuliert. Für Marketing ist ein Zeitbudget von etwa zehn Stunden pro Woche neben der Produktentwicklung vorgesehen.
 
-- Website mit Freemium- bzw. Trial-Angebot als direkter Einstieg, um Konversion über Produkterlebnis zu erreichen.
-- Content Marketing (Blog, LinkedIn) mit Schwerpunkt auf konkreten Problemen rund um Output-Qualität. Geplant sind 2–4 Blogartikel pro Monat sowie die Gewinnung von 20–50 Beta-Nutzern für Feedback und Testimonials.
-- Community-Präsenz (z.B. Reddit, Indie Hackers, Hacker News) mit regelmäßiger, hilfreicher Teilnahme und zurückhaltender Einbindung des Tools.
-- Einträge in AI-Tool-Verzeichnissen und perspektivisch Integrationen/Partnerschaften. Paid Ads sind nachgelagert vorgesehen (erst nach Validierung von Akquisitionskosten).
+Ergänzend sind Aktivitäten in relevanten Online-Communities (z. B. Reddit) geplant. Der Ansatz ist, zunächst durch konkrete Beiträge Nutzen zu liefern und das Produkt erst nach ausreichender Beteiligung zu erwähnen. Ein geplanter Launch über Plattformen wie Product Hunt kann zusätzliche Sichtbarkeit erzeugen, setzt jedoch Vorbereitung voraus.
 
-Für Kundenbindung sind regelmäßige Produktweiterentwicklung anhand von Feedback, eine E-Mail-Onboarding-Sequenz, In-App-Hilfe/Dokumentation sowie perspektivisch ein Community-Format für fortgeschrittene Nutzer vorgesehen. Aufgaben und Definitionen werden im Produkt als wiederverwendbare Assets gehalten.
+Die Kommunikation ist sachlich und problemorientiert geplant. Übertreibungen und implizite Erfolgsversprechen sollen vermieden werden. Als Marktsprache ist primär Englisch vorgesehen, ergänzt um deutschsprachige Inhalte für DACH-spezifische Themen.
 
-Die Positionierung soll sich bewusst von werblichem AI-Hype abgrenzen. Die Kommunikation ist sachlich und problemorientiert. Als Kernbotschaft wird genannt: „Wissen, ob es funktionieren kann – bevor du startest.“
+Zur Kundenbindung sind regelmäßige Weiterentwicklungen auf Basis von Nutzerfeedback, eine E-Mail-Onboarding-Sequenz, In-App-Hilfe und Dokumentation vorgesehen. Bei entsprechender Skalierung kann ein Community-Angebot (z. B. Forum oder Slack) ergänzt werden. Ein Empfehlungsmechanismus ist langfristig über teilbare Aufgaben-Templates vorgesehen.
 
 ### Markt & Wettbewerb
 
-Für den Markt rund um Prompt Engineering und verwandte Tooling-Kategorien wird in den bereitgestellten Unterlagen ein dynamisches Wachstum beschrieben. Als Quellen werden u.a. Fortune Business Insights (Marktvolumen 2024 ca. 0,85 Mrd. USD bis 2029 ca. 3,5 Mrd. USD) sowie Research and Markets (CAGR ca. 32–33%) genannt. Zusätzlich werden Nutzungszahlen zu generativer KI und Unternehmensadoption zitiert (z.B. McKinsey 2024).
+Der Markt rund um „Prompt Engineering“ und unterstützende Werkzeuge entwickelt sich. Für den globalen Markt wird ein Wachstum von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) beschrieben (Quelle: Fortune Business Insights, https://www.fortunebusinessinsights.com/prompt-engineering-market-109382). Weitere Analystenberichte nennen eine jährliche Wachstumsrate (CAGR) von etwa 32–33% (Quelle: Research and Markets, https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report). Für das Segment der Prompt-Optimization-Tools wird für 2024 ein Marktanteil von ca. 31% genannt (Quelle: Mordor Intelligence, https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market).
 
-Quellen (aus den bereitgestellten Unterlagen):
+Parallel dazu nimmt die praktische Nutzung generativer KI zu. Als Größenordnung werden weltweit ca. 115–180 Mio. täglich aktive Nutzer genannt (Quelle: Master of Code, 2025, https://masterofcode.com/blog/generative-ai-statistics). In Unternehmen wird eine breite Nutzung berichtet; als Kennzahl werden 78% der Unternehmen genannt, die KI in mindestens einer Funktion einsetzen (Quelle: McKinsey, 2024, https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai).
 
-- https://www.fortunebusinessinsights.com/prompt-engineering-market-109382
-- https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report
-- https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market
-- https://masterofcode.com/blog/generative-ai-statistics
-- https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai
+Kurzfristig (1–2 Jahre) wird eine weiter steigende Adoption erwartet, zugleich aber auch eine Ernüchterung über die Ergebnisqualität. Mittelfristig (3–5 Jahre) ist eine Konsolidierung im Tool-Markt plausibel. Verbesserungen in den Modellen können einzelne Probleme reduzieren, der Bedarf an klarer Aufgabenstrukturierung und Qualitätssicherung kann jedoch bestehen bleiben.
 
-Darüber hinaus enthält der Input eine grobe TAM/SAM/SOM-Herleitung auf Basis öffentlich genannter Nutzerzahlen. Diese Herleitung enthält explizite Schätzannahmen (z.B. Anteil beruflicher Nutzer, Anteil regelmäßig komplexer Aufgaben). Sie wird als Orientierung verstanden und nicht als belastbare Marktprognose.
+Als Wettbewerber bzw. Konkurrenzprodukte werden unter anderem genannt:
 
-Die Brancheneinschätzung im Input ist:
+- AIPRM (Prompt-Bibliothek/Template-Ansatz).
+- PromptPerfect (automatische Prompt-Optimierung).
+- Promptmetheus (modularer Prompt-Builder).
+- LangSmith/LangChain (Developer-Tools für Testing/Tracing).
 
-- Kurzfristig (1–2 Jahre): steigende Adoption bei gleichzeitig zunehmender Sensibilisierung für Output-Qualität, Governance und Qualitätslösungen.
-- Mittelfristig (3–5 Jahre): Konsolidierung im Tool-Markt; Modelle werden besser, Aufgabenstrukturierung bleibt relevant; Integration in Workflows wird Standard.
+Viele bestehende Tools setzen nachträglich am Prompt oder am Ergebnis an oder stellen Vorlagen bereit. SharpIntent setzt früher an und adressiert die Aufgabenklärung. Ziel ist es, unklare oder unvollständige Aufgabenstellungen vor der Ausführung zu erkennen, zu präzisieren und mit Risikoindikationen zu versehen. Eine weitere Abgrenzung ist der geplante Aufbau einer wiederverwendbaren Aufgaben- und Wissensbasis, die unabhängig von einem einzelnen KI-Anbieter ist.
 
-Als Risiko wird genannt, dass Sprachmodelle die Aufgabenklärung künftig besser unterstützen könnten. Gleichzeitig wird argumentiert, dass die verlässliche Erkennung eigener Fehler und die kritische Qualitätsbewertung weiterhin ein relevantes Problem bleiben können.
-
-Als direkte bzw. indirekte Wettbewerber werden beispielhaft genannt:
-
-- AIPRM (Prompt-Bibliothek/Templates)
-- PromptPerfect (Prompt-Optimierung)
-- Promptmetheus (modularer Prompt-Builder)
-- LangSmith/LangChain (Developer-Tools, Testing/Tracing)
-- Narrow AI (automatische Prompt-Generierung)
-
-Die Abgrenzung ist: Bestehende Tools optimieren häufig nachträglich oder liefern Templates. SharpIntent setzt früher an, indem es die Aufgabenstellung strukturiert, fehlende Informationen sichtbar macht, Risiken bewertet und bei ungeeigneten Aufgabenstellungen eine Ablehnung bzw. Alternativen nahelegt.
 
 ## 4. Team & Partner
 
 ### Gründer*innen & Team
 
-In der Startphase ist die Gründung als Einzelunternehmer vorgesehen. Steffen Glomb übernimmt Aufbau und Betrieb des Vorhabens.
+Gründer ist Steffen Glomb. Relevante Qualifikationen und Erfahrungen sind:
 
-Relevante Qualifikationen und Erfahrungen (Auszug aus den bereitgestellten Angaben):
+- Diplom-Informatiker.
+- Master of Business Administration.
+- Lange Erfahrung in der Entwicklung und im Betrieb von Softwareprodukten.
+- Mitgründer von clark.de, CTO für die ersten 6 Jahre.
+- Chief Product & Technology Officer bei BetterDoc (3,5 Jahre).
+- Erfahrung in der Verwendung generativer KI zur Programmierung und zur Automatisierung allgemeiner Aufgaben.
+- Frühere Tätigkeit als freiberuflicher IT-Berater mit Aufträgen in großen Unternehmen (z. B. Vodafone, Siemens).
+- Erfahrung in IT-Sicherheit und Datenschutz; Audit-Erfahrung nach BaFin-Anforderungen.
+- Überzeugungskraft und Umsetzungsstärke.
 
-- Diplom-Informatiker und Master of Business Administration.
-- Langjährige Erfahrung in Entwicklung und Betrieb softwarebasierter Produkte.
-- Mitgründer von clark.de; dort CTO in den ersten sechs Jahren; Skalierung bis auf ca. 40 Mio. Euro Umsatz und ca. 400.000 Nutzer.
-- Chief Product & Technology Officer bei BetterDoc über ca. 3,5 Jahre.
-- Erfahrung als freiberuflicher IT-Berater mit Projekten in großen Unternehmen (z.B. Vodafone, Siemens).
-- Erfahrung in IT-Sicherheit und Datenschutz; Audit-Erfahrung nach Anforderungen im regulierten Umfeld wird angegeben.
+Für die ersten zwölf Monate ist die Umsetzung als Einzelunternehmer vorgesehen. Eine Erweiterung durch Marketing- und Softwareentwicklungskapazitäten ist bei positiver Entwicklung möglich.
 
-Die Rollenverteilung ist in den ersten 12 Monaten als Einzelperson geplant. Als relevante überfachliche Stärken werden Überzeugungskraft und die Fähigkeit zur konsequenten Umsetzung genannt. Bei positiver Entwicklung ist eine Erweiterung durch Marketing- und Softwareentwicklungsressourcen vorgesehen.
+Sofern später Mitarbeitende eingestellt werden, sind Aufgaben und Funktionen insbesondere in den Bereichen Marketing (Content/Distribution) und Softwareentwicklung vorgesehen. In der frühen Phase ist keine Einstellung geplant; bei positiver Entwicklung kann eine schrittweise Erweiterung erfolgen. Die konkrete Anzahl hängt vom Geschäftsverlauf ab.
 
-Zur Gründungssituation und Motivation wird angegeben:
+Als Qualifikationsprofil sind vorrangig Erfahrung in der Vermarktung digitaler Produkte (z. B. Content/SEO/Community) sowie Erfahrung in der Entwicklung und dem Betrieb einer webbasierten SaaS-Lösung relevant.
 
-Der Gründer verfügt über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler Geschäftsmodelle. Aufgrund familiärer Situation und Wohnort ist eine regelmäßige, zeitintensive Pendeltätigkeit dauerhaft nur eingeschränkt praktikabel. Gleichzeitig werden im regionalen Arbeitsmarkt im Ortenaukreis nur in begrenztem Umfang passende Positionen im Bereich softwarezentrierter digitaler Produkt- und Technologieentwicklung gesehen. Die Selbstständigkeit wird daher als wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung eingeordnet, um vorhandene Kompetenzen marktfähig einzusetzen. Zusätzlich werden die aktuellen technologischen Entwicklungen im Bereich generativer KI als Hebel für effiziente Produktentwicklung mit überschaubarem Ressourceneinsatz genannt.
+Ich verfüge über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle. Zuletzt war ich 3,5 Jahre als Chief Product & Technology Officer bei BetterDoc tätig. Zuvor habe ich über sechs Jahre als CTO und Mitgründer bei clark.de, einem digitalen Versicherungsmakler, maßgeblich zur Entwicklung und Skalierung des Unternehmens beigetragen.
 
-Ein Personalaufbau ist initial nicht geplant. Externe Leistungen (z.B. Rechts- und Steuerberatung) sollen situativ hinzugezogen werden.
+Ich lebe mit meiner Familie (Ehefrau, zwei Kinder im Alter von 3 und 6 Jahren) in Durbach im Ortenaukreis. Aufgrund meiner familiären Situation und meines Wohnorts ist eine regelmäßige, zeitintensive Pendeltätigkeit, wie sie für vergleichbare Führungspositionen im digitalen Umfeld häufig erforderlich ist, dauerhaft nur eingeschränkt praktikabel.
+
+Der regionale Arbeitsmarkt in der Ortenau ist überwiegend durch Handwerk und industrielle Fertigung geprägt. Hochqualifizierte Positionen im Bereich digitaler Produkt- und Technologieentwicklung mit einem softwarezentrierten Geschäftsmodell sind nur in begrenztem Umfang vorhanden. Eine meiner Qualifikation und Berufserfahrung entsprechende sozialversicherungspflichtige Beschäftigung ist daher regional nur sehr eingeschränkt realistisch erreichbar.
+
+Die geplante Selbstständigkeit ermöglicht es mir, meine in den letzten zehn Jahren erworbenen Kompetenzen im Aufbau, in der Weiterentwicklung und im Betrieb digitaler Produkte weiterhin gezielt und wirtschaftlich sinnvoll einzusetzen. Insbesondere meine Erfahrung an der Schnittstelle von Produktstrategie, Technologie und Geschäftsmodellentwicklung kann in einem selbstständigen Kontext unmittelbar in marktfähige digitale Dienstleistungen überführt werden.
+
+Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Bereich der generativen künstlichen Intelligenz, neue Möglichkeiten zur effizienten Entwicklung und Bereitstellung digitaler Dienstleistungen. Diese Technologien ermöglichen es, mit überschaubarem Ressourceneinsatz hochwertige Softwarelösungen wirtschaftlich zu entwickeln und zu betreiben, ohne den Aufbau eines großen Teams vorauszusetzen.
+
+Vor diesem Hintergrund stellt die geplante Selbstständigkeit für mich die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das meinen Lebensunterhalt sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
 
 ### Werte
 
-Für SharpIntent werden folgende Werte genannt: Klarheit vor Automatisierung. Ziel ist, Menschen und Teams zu unterstützen, Sprachmodelle bewusster, reflektierter und wirksamer einzusetzen, um bessere Entscheidungen statt nur schnellere Texte zu ermöglichen.
+SharpIntent steht für Klarheit vor Automatisierung. Ziel ist, Menschen und Teams dabei zu unterstützen, Sprachmodelle bewusster und wirksamer einzusetzen. Dabei steht die nachvollziehbare Klärung von Anforderungen vor der automatisierten Textproduktion im Vordergrund.
 
-Als wichtig werden genannt: Unterstützung bei klarer Formulierung von Zielen, Annahmen und Anforderungen; Reduktion von Frustration durch inkonsistente KI-Ergebnisse; Wissensaufbau bei weniger erfahrenen Nutzern; ehrliche Hinweise auf Grenzen, Unsicherheiten und notwendige menschliche Prüfung; ein Produkt, das Denken unterstützt statt ersetzt.
+Wichtig ist:
 
-Als unwichtig werden genannt: Vollautomatisierung ohne menschliche Verantwortung; Ergebnisse, die gut klingen, aber fachlich nicht belastbar sind; Abkürzungen, die Vertrauen untergraben; Abhängigkeit von implizitem Wissen einzelner Experten.
+- Anwender dabei zu unterstützen, eigene Ziele, Annahmen und Anforderungen klar zu formulieren.
+- Wissensaufbau bei weniger erfahrenen Nutzern durch strukturierte Führung und Hilfe zur Selbsthilfe.
+- Ehrliche Hinweise auf Grenzen, Unsicherheiten und notwendige menschliche Prüfung.
+- Ein Produkt, das Denken unterstützt, statt es zu ersetzen.
+
+Unwichtig ist:
+
+- Vollautomatisierung ohne menschliche Verantwortung.
+- Ergebnisse, die gut klingen, aber fachlich nicht belastbar sind.
+- Abkürzungen, die langfristig Vertrauen untergraben.
+- Abhängigkeit von einzelnen Experten oder implizitem Wissen.
 
 ### Partner
 
-Als Schlüsselpartner bzw. externe Bausteine sind vorgesehen:
+Für die Umsetzung sind folgende externe Partner bzw. Leistungen vorgesehen:
 
-- Cloud-Infrastruktur-Anbieter für Hosting und Betrieb.
-- Anbieter von Sprachmodellen (z.B. OpenAI, Anthropic, Google) als Technologie-Komponenten.
-- Ein Merchant of Record für internationalen Verkauf (Lemon Squeezy).
-- Perspektivisch Integrationspartner (z.B. Notion, Google Docs, Slack, IDEs) sowie Tool-Verzeichnisse/Plattformen als Distributionskanäle.
+- Cloud-Infrastruktur (Hosting) bei einem europäischen Anbieter.
+- Sprachmodell-Anbieter (z. B. OpenAI, Anthropic, Google) als technische Grundlage für die Nutzung.
+- Merchant of Record für den internationalen Verkauf (Lemon Squeezy).
+- Situative Unterstützung durch Steuerberatung und Rechtsberatung.
 
-Die Auslagerung betrifft insbesondere Infrastruktur, Zahlungsverarbeitung (Merchant of Record) sowie den Bezug externer KI-Dienste. Der Nutzen der Partner besteht jeweils in Nutzungs- bzw. Transaktionsentgelten sowie in zusätzlicher Reichweite, sofern Integrationen realisiert werden.
+Für die Partner ergibt sich der Nutzen in der Regel durch die Vergütung ihrer Leistungen (z. B. Infrastruktur-, API- und Abwicklungsentgelte bzw. Beratungsleistungen). Es ist überwiegend eine Lieferanten- bzw. Dienstleisterbeziehung geplant.
 
-Darüber hinaus wird ein berufliches Netzwerk zu Experten aus unterschiedlichen Funktionen genannt, die das Vorhaben unterstützend begleiten können.
+Darüber hinaus besteht ein berufliches Netzwerk mit Kontakten zu Experten aus unterschiedlichen Funktionen, die das Vorhaben fachlich unterstützen können.
+
 
 ## 5. Unternehmen
 
 ### Produktion (Kernaktivitäten)
 
-Die Kernaktivitäten umfassen den Aufbau und Betrieb einer webbasierten SaaS-Lösung zur strukturierten Aufgaben- bzw. Intent-Deklaration sowie die begleitende Distribution über digitale Kanäle.
+Das Angebot entsteht durch die Entwicklung und den Betrieb einer webbasierten SaaS-Lösung. Wesentliche Kernaktivitäten sind:
 
-Konkrete Schritte und Leistungen sind:
+- Produktentwicklung und UX-Iteration.
+- Aufbau und Betrieb einer Website für Content-Marketing.
+- Unterstützung der Entwicklung durch den Einsatz von KI-gestützten Tools (Coding Agents).
+- Aufbau domänenspezifischer Aufgaben- und Wissensdatenbanken durch Automatisierung.
+- Entwicklung von Logik zur Unterstützung der Aufgabenklärung (z. B. Klärungsfragen, Vollständigkeitsprüfungen, Risikohinweise).
+- Betrieb der Anwendung in einer Cloud-Laufzeitumgebung.
+- Distribution und Abrechnung über einen Merchant-of-Record-Partner.
 
-- Entwicklung der SaaS-Anwendung inklusive Nutzerführung, Datenmodell und Funktionen zur Aufgabenbewertung.
-- Aufbau und Betrieb einer Website als Grundlage für Content Marketing.
-- Nutzung von KI-gestützten Entwicklungswerkzeugen (z.B. Coding Agents) zur Beschleunigung der Umsetzung.
-- Aufbau domänenspezifischer Aufgaben- und Wissensdatenbanken durch Automatisierung und KI-gestützte Prozesse.
-- Konfiguration einer Cloud-Laufzeitumgebung für den Betrieb bei einem europäischen Anbieter.
-- Entwicklung von Algorithmen zur Unterstützung bei der Aufgabendefinition und zur Prompt-Optimierung.
-- Aufbau einer Promptdatenbank als Wissensquelle.
-- Einrichtung einer Distribution und Abrechnung für Abonnenten über einen Merchant of Record (Lemon Squeezy).
+Die Umsetzung erfolgt initial überwiegend durch den Gründer. Kunden nutzen die Anwendung zur strukturierten Erfassung ihrer Aufgaben und zur Ausführung bzw. zum Export der erzeugten Anweisungen. Externe Partner stellen Infrastruktur, Sprachmodelle und Zahlungsabwicklung bereit.
 
-In der Arbeitsteilung übernimmt der Gründer die Produktentwicklung, den Betrieb und die initialen Marketingaktivitäten. Kunden liefern die inhaltlichen Aufgabenstellungen, nutzen die geführte Erfassung und treffen die fachliche Entscheidung über Einsatz und Prüfung der Ergebnisse. Partner liefern Infrastruktur, Sprachmodell-APIs und Zahlungsabwicklung.
-
-Als Unterschiede gegenüber Wettbewerbern werden genannt: kurze Entwicklungszyklen, hoher Automatisierungsgrad durch KI von Beginn an und keine Altlasten in bestehenden Systemen.
+Im Vergleich zu Wettbewerbern liegt der Fokus weniger auf nachträglichen Formulierungsvarianten eines Prompts, sondern auf der Klärung der eigentlichen Aufgabenstellung und des Kontextes. Zusätzlich ist vorgesehen, wiederverwendbare Aufgabenstrukturen und Risikomuster als Wissensbasis aufzubauen. Der Ansatz wird durch die Erfahrung des Gründers im Aufbau und in der Skalierung digitaler Produkte sowie durch eine organische, problemorientierte Marktbearbeitung ergänzt.
 
 ### Standort
 
-Als Standort sind Offenburg und Durbach vorgesehen. In der Anfangsphase steht ein Arbeitszimmer im privaten Wohnhaus zur Verfügung und ist sofort nutzbar. Mittelfristig ist die Nutzung eines Co-Working-Spaces in Offenburg (Flow1986) vorgesehen.
+Der Standort ist in Offenburg und Durbach geplant. Zu Beginn steht ein Arbeitszimmer im privaten Wohnhaus zur Verfügung, das sofort nutzbar ist. Mittelfristig ist ein Büro in einem Co-Working Space in Offenburg (Flow1986) vorgesehen.
 
-Als Standortmerkmale werden eine gute Internetanbindung sowie eine gute Anbindung an das Bahnnetz für mögliche Reisen genannt. Anpassungen an den Räumlichkeiten sind nach Angabe nicht erforderlich.
+Der Standort zeichnet sich durch eine gute Internetanbindung sowie eine gute Anbindung an das Bahnnetz für mögliche Reisen aus. Weitere räumliche Anpassungen sind derzeit nicht erforderlich.
 
 ### Rechtsform & Vorschriften
 
-In der Anfangsphase ist eine Gründung als Einzelunternehmen vorgesehen. Mittelfristig wird eine Umstellung auf UG bzw. GmbH erwogen.
+Die Gründung ist initial als Einzelunternehmen geplant. Mittelfristig ist eine Umstellung auf eine UG und später eine GmbH vorgesehen.
 
-Als relevante Rahmenbedingungen werden insbesondere der EU AI Act sowie Anforderungen an Datenschutz und IT-Sicherheit genannt. Die konkrete Ausgestaltung wird im Rahmen der Produkt- und Betriebsprozesse berücksichtigt.
+Als relevante regulatorische Rahmenbedingung wird der EU AI Act berücksichtigt.
 
 ### Risiken
 
-Als wesentliches Risiko wird eine verzögerte Gewinnschwelle durch langsamere Kundenakquise bei gleichzeitigem Druck auf private Entnahmen genannt. Die kritische Phase wird im Input für Monat 12 bis 18 verortet. Als Gegenmaßnahmen sind eine Begrenzung der Fixkosten (Infrastruktur/Tools), die Nutzung des Gründungszuschusses zur privaten Absicherung in der Startphase, ein früher Fokus auf Monetarisierung über ein Freemium-Modell sowie ein regelmäßiger Abgleich von Ausgabenentwicklung und Nutzerwachstum vorgesehen.
+#### Risiko Finanzielle Reichweite
 
-Als Fallback-Option wird eine kurzfristige Monetarisierung vorhandener Expertise im Bereich KI-Implementierung als Consulting beschrieben. Diese Option wird als Absicherung verstanden und nicht als hybrides Zielmodell, um den Fokus auf die Weiterentwicklung des SaaS-Produkts nicht zu gefährden. Zusätzlich wird eine klare Abbruch- bzw. Pivot-Entscheidung nach 18 Monaten genannt, falls das Wachstum deutlich hinter dem Zielwert zurückbleibt.
+Verzögerter Break-Even durch langsamere Kundenakquise bei gleichzeitig fixen Infrastruktur- und Druck auf Entnahmen für Lebensunterhalt.
 
-Ein weiteres Risiko aus dem Markt-/Technologieumfeld ist, dass sich Fähigkeiten von Sprachmodellen und Tool-Märkte weiterentwickeln und sich der Bedarf an externer Aufgabenklärung verändern kann. Dieses Risiko wird im Konzept durch Fokus auf strukturierte Definition, Transparenz über Unsicherheiten und kritische Qualitätsbewertung adressiert.
+Risikobewertung
+
+- Schweregrad: Hoch
+- Eintrittswahrscheinlichkeit: Mittel
+- Kritische Phase: Monat 12 bis 18
+
+Gegenmaßnahmen
+
+1. Operative Absicherung
+
+- Kosteneffizienz: Fixkosten-Deckelung auf < 500 €/Monat (für Infrastruktur/Tools).
+- Liquiditätssicherung: Inanspruchnahme des Gründungszuschusses zur Unterstützung der privaten Lebenshaltung in der Startphase.
+- Frühe Monetarisierung: Conversion-Fokus (Freemium-Modell) ab dem ersten Quartal.
+
+2. Strategische Reserve: Consulting-Option Sollte die Liquidität unter eine Reserve von 3 Monaten fallen (bei < 200 Kunden), wird kurzfristig die vorhandene Expertise im Bereich KI-Implementierung monetarisiert.
+
+- Einordnung: Consulting dient rein als Fallback-Option zur Kapitalsicherung, nicht als hybrides Geschäftsmodell, um den Fokus auf die Skalierung des SaaS-Produkts nicht zu gefährden.
+- Der Gründer hat langjährige Consulting Erfahrung, die auch für das Geschäftsfeld dieser Unternehmung anwendbar ist
+
+3. Controlling & Exit-Strategie
+
+- Monitoring: Wöchentlicher Abgleich von Burn-Rate und Nutzerwachstum.
+- Harte Abbruchkante: Bleibt das Wachstum nach 18 Monaten signifikant hinter dem Zielwert zurück (< 150 Kunden), erfolgt eine Liquidation oder ein Pivot, um eine Überschuldung zu vermeiden.
+
+#### Risiko Akquise-Ineffizienz (SEO & Marketing)
+
+Der geplante Product-Led Growth (PLG) Ansatz über Content Marketing und SEO greift zu langsam. Die organische Reichweite reicht nicht aus, um die notwendige Anzahl an Freemium-Nutzern für die Konvertierung in Bezahl-Abos zu gewinnen.
+
+Risikobewertung
+
+- Schweregrad: Mittel
+- Eintrittswahrscheinlichkeit: Mittel
+- Kritische Phase: Monat 6 bis 12
+
+Gegenmaßnahmen
+
+1. Multi-Channel-Distribution: Nicht nur warten auf Inbound-Traffic, sondern aktive Platzierung in High-Traffic AI-Verzeichnissen und Nutzung von Plattform-Marktplätzen (z. B. GPT Store, Notion Integration).
+2. Community Engineering: Aufbau von kostenlosen „Side-Project“-Tools (z. B. kostenloser „Prompt-Checker“ ohne Login) als Marketing-Vehikel.
+3. Budget-Shift: Sollte SEO nicht greifen, Umschichtung von Entwicklungszeit in kurzfristige Performance-Marketing-Tests (sofern CAC < LTV), um Traffic einzukaufen.
+
+#### Risiko Technologische Obsoleszenz (Modell-Fortschritt)
+
+Sprachmodelle (z. B. GPT-5, Claude Next) entwickeln native Fähigkeiten zur eigenständigen Rückfrage („Agentic Behavior“) und übernehmen die Klärung von Aufgabenstellungen selbstständig, wodurch das Kernwertversprechen des Tools geschwächt wird.
+
+Risikobewertung
+
+- Schweregrad: Hoch
+- Eintrittswahrscheinlichkeit: Mittel bis Hoch (Mittelfristig 2–4 Jahre)
+- Kritische Phase: Ab Jahr 3
+
+Gegenmaßnahmen
+
+1. Aufbau proprietärer Daten: Fokusverschiebung von reiner „Logik-Prüfung“ hin zu domänenspezifischem Expertenwissen (Referenzdatenbanken für Legal, HR, Marketing), das allgemeinen Modellen fehlt.
+2. Integration statt Standalone: Entwicklung von Integrationen (Plugins, API), um als spezialisierter „Governance-Layer“ in den Modellen zu funktionieren, statt als vorgeschaltetes Tool ersetzt zu werden.
+3. Shift zu Compliance: Positionierung des Tools als unabhängige Instanz zur Risikobewertung und Qualitätssicherung (Vier-Augen-Prinzip), die aus Compliance-Gründen nicht von der generierenden KI selbst stammen darf.
+
 
 ## 6. Finanzen
 
 ### Ertragsquellen/Umsatz
 
-Die Umsätze werden in der Planung primär aus digitalen Service-Erlösen (SaaS) erwartet. Als Erlösquellen sind Abonnements (monatlich und jährlich) sowie ein nutzungsbasiertes Modell über Guthabenpunkte (Credits) vorgesehen. Die Abrechnung erfolgt grundsätzlich im Voraus.
+Die Einnahmen entstehen primär durch den Verkauf eines Zugangs zur webbasierten SaaS-Anwendung. Geplant sind Abonnements (monatlich oder jährlich) sowie eine nutzungsbasierte Ergänzung über Guthabenpunkte (Credits). Zahlungen erfolgen im Voraus. In der frühen Phase wird die Preisgestaltung anhand von Marktrückmeldungen überprüft. Die Finanzplanung basiert auf dem aktuellen Preismodell und dem erwarteten Nutzerwachstum.
 
-Die Umsatzplanung im Business-Case basiert auf einer Abo-Logik mit zwei Preisstufen und Annahmen zur Nutzerentwicklung. Die Consulting-Umsätze sind in der Planung mit 0 angesetzt.
+**Umsatzplan (netto, monatlich) gemäß Finanzplanung:**
 
-| Produkt / Planannahme | Wert |
-| --- | --- |
-| Standard (Preis pro Monat) | 20 EUR |
-| Premium (Preis pro Monat) | 100 EUR |
-| Discount für Jahresabo | 10% |
-| Anteil zahlender Nutzer (Planannahme) | 10% |
-| Anteil Premium an zahlenden Nutzern (Planannahme) | 20% |
+Umsatzplan 2026:
 
-Umsatzplan (Monatsbasis, Rumpfjahr + 2 Folgejahre):
+| Monat | Umsatz (EUR) |
+| --- | ---: |
+| 03/2026 | 15,00 |
+| 04/2026 | 30,00 |
+| 05/2026 | 145,00 |
+| 06/2026 | 175,00 |
+| 07/2026 | 335,00 |
+| 08/2026 | 523,50 |
+| 09/2026 | 887,00 |
+| 10/2026 | 1.250,50 |
+| 11/2026 | 1.744,00 |
+| 12/2026 | 2.281,00 |
+| **Summe 2026** | **7.386,00** |
 
-| Monat | Zahlende Nutzer (Monatsende) | Umsatz gesamt (EUR) |
-| --- | --- | --- |
-| 2026-03 | 1 | 20,00 |
-| 2026-04 | 2 | 40,00 |
-| 2026-05 | 3 | 160,00 |
-| 2026-06 | 5 | 200,00 |
-| 2026-07 | 9 | 380,00 |
-| 2026-08 | 15 | 598,00 |
-| 2026-09 | 26 | 1.016,00 |
-| 2026-10 | 37 | 1.434,00 |
-| 2026-11 | 50 | 1.992,00 |
-| 2026-12 | 66 | 2.608,00 |
-| 2027-01 | 83 | 3.344,00 |
-| 2027-02 | 104 | 4.158,00 |
-| 2027-03 | 128 | 5.132,00 |
-| 2027-04 | 154 | 6.144,00 |
-| 2027-05 | 183 | 7.316,00 |
-| 2027-06 | 214 | 8.526,00 |
-| 2027-07 | 248 | 9.896,00 |
-| 2027-08 | 284 | 11.304,00 |
-| 2027-09 | 323 | 12.872,00 |
-| 2027-10 | 364 | 14.478,00 |
-| 2027-11 | 408 | 16.242,00 |
-| 2027-12 | 454 | 18.046,00 |
-| 2028-01 | 503 | 20.008,00 |
-| 2028-02 | 555 | 22.028,00 |
-| 2028-03 | 610 | 24.208,00 |
-| 2028-04 | 668 | 26.546,00 |
-| 2028-05 | 728 | 28.922,00 |
-| 2028-06 | 792 | 31.376,00 |
-| 2028-07 | 860 | 34.108,00 |
-| 2028-08 | 931 | 36.898,00 |
-| 2028-09 | 1005 | 39.846,00 |
-| 2028-10 | 1083 | 42.972,00 |
-| 2028-11 | 1166 | 46.196,00 |
-| 2028-12 | 1253 | 49.698,00 |
+Umsatzplan 2027:
+
+| Monat | Umsatz (EUR) |
+| --- | ---: |
+| 01/2027 | 2.933,00 |
+| 02/2027 | 3.643,50 |
+| 03/2027 | 4.499,00 |
+| 04/2027 | 5.383,00 |
+| 05/2027 | 6.412,00 |
+| 06/2027 | 7.469,50 |
+| 07/2027 | 8.672,00 |
+| 08/2027 | 9.903,00 |
+| 09/2027 | 11.279,00 |
+| 10/2027 | 12.683,50 |
+| 11/2027 | 14.231,50 |
+| 12/2027 | 15.809,50 |
+| **Summe 2027** | **102.918,50** |
+
+Umsatzplan 2028:
+
+| Monat | Umsatz (EUR) |
+| --- | ---: |
+| 01/2028 | 17.531,00 |
+| 02/2028 | 19.296,00 |
+| 03/2028 | 21.206,00 |
+| 04/2028 | 23.259,50 |
+| 05/2028 | 25.341,50 |
+| 06/2028 | 27.482,00 |
+| 07/2028 | 29.881,00 |
+| 08/2028 | 32.323,50 |
+| 09/2028 | 34.909,50 |
+| 10/2028 | 37.654,00 |
+| 11/2028 | 40.472,00 |
+| 12/2028 | 43.548,50 |
+| **Summe 2028** | **352.904,50** |
 
 ### Kosten
 
-Die Planung unterscheidet variable und fixe Kosten. Variable Kosten entstehen im Wesentlichen durch die Nutzung externer KI-Dienste (direkte Leistungskosten) sowie durch Gebühren der Zahlungsabwicklung. Fixkosten bestehen überwiegend aus Produktentwicklung, IT-Infrastruktur, Administration und Marketing-Tools. Personalkosten sind in der Planung mit 0 angesetzt.
+Die Kosten bestehen aus variablen Kosten, die mit Umsatz und Nutzung steigen. Dazu zählen insbesondere die Nutzung externer Sprachmodelle sowie Gebühren der Zahlungs- und Steuerabwicklung. Hinzu kommen fixe Kosten für Produktentwicklung, IT-Infrastruktur, Administration und Marketing. Personalkosten sind in der Planung nicht enthalten.
 
-Als zentrale Annahmen für variable Kosten sind im Business-Case hinterlegt:
+Die Planung ist so angelegt, dass Fixkosten bei Bedarf reduziert werden können. Wesentliche laufende Kostentreiber sind in der Anfangsphase die Produktentwicklung (Tools und Rechenleistung) sowie die Infrastrukturkosten.
 
-- Kosten bezahlter Accounts als Prozentsatz vom Verkaufspreis: 30%
-- Verkaufs- und Steuerabwicklungsgebühren (Merchant of Record): 5%
-- Kosten von Free Accounts: fixe Kosten pro aktivem Free-Account (als Annahme im Modell hinterlegt)
+**Kostenplan (Ausgaben, monatlich) gemäß Finanzplanung:**
 
-Für fixe Kosten ist im Modell u.a. ein Budget für Produktentwicklung (inkl. KI-Entwicklungswerkzeuge), IT-Infrastruktur sowie externe Beratung (Rechts-/Datenschutzberatung) vorgesehen. Die Fixkosten im Monatsverlauf enthalten einzelne, unregelmäßige Posten (z.B. Beratung), wodurch es zu Schwankungen kommt.
+Kostenplan 2026:
+
+| Monat | Variable Kosten (EUR) | Produktentwicklung (EUR) | IT-Infrastruktur (EUR) | Administrative Kosten (EUR) | Marketing-Kosten (EUR) | Personalkosten (EUR) | Gesamtkosten (EUR) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 03/2026 | 10,50 | 680,00 | 153,60 | 1.252,90 | 60,00 | 0,00 | 2.157,00 |
+| 04/2026 | 21,00 | 680,00 | 153,60 | 81,90 | 60,00 | 0,00 | 996,50 |
+| 05/2026 | 65,50 | 680,00 | 153,60 | 81,90 | 60,00 | 0,00 | 1.041,00 |
+| 06/2026 | 104,50 | 680,00 | 153,60 | 581,90 | 159,00 | 0,00 | 1.679,00 |
+| 07/2026 | 210,50 | 680,00 | 173,60 | 81,90 | 159,00 | 0,00 | 1.305,00 |
+| 08/2026 | 343,05 | 680,00 | 273,60 | 81,90 | 159,00 | 0,00 | 1.537,55 |
+| 09/2026 | 602,10 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 1.946,60 |
+| 10/2026 | 835,15 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 2.179,65 |
+| 11/2026 | 1.059,20 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 2.403,70 |
+| 12/2026 | 1.356,30 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 2.700,80 |
+| **Summe 2026** | **4.607,80** | **6.800,00** | **2.156,00** | **3.090,00** | **1.293,00** | **0,00** | **17.946,80** |
+
+Kostenplan 2027:
+
+| Monat | Variable Kosten (EUR) | Produktentwicklung (EUR) | IT-Infrastruktur (EUR) | Administrative Kosten (EUR) | Marketing-Kosten (EUR) | Personalkosten (EUR) | Gesamtkosten (EUR) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 01/2027 | 1.695,90 | 680,00 | 273,60 | 631,90 | 159,00 | 0,00 | 3.440,40 |
+| 02/2027 | 2.083,05 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 3.427,55 |
+| 03/2027 | 2.527,70 | 680,00 | 273,60 | 552,90 | 159,00 | 0,00 | 4.193,20 |
+| 04/2027 | 2.968,90 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 4.313,40 |
+| 05/2027 | 3.463,60 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 4.808,10 |
+| 06/2027 | 3.986,85 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 5.331,35 |
+| 07/2027 | 4.563,60 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 5.908,10 |
+| 08/2027 | 5.148,90 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 6.493,40 |
+| 09/2027 | 5.787,70 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 7.132,20 |
+| 10/2027 | 6.447,05 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 7.791,55 |
+| 11/2027 | 7.161,45 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 8.505,95 |
+| 12/2027 | 7.896,85 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 9.241,35 |
+| **Summe 2027** | **53.731,55** | **8.160,00** | **3.283,20** | **3.503,80** | **1.908,00** | **0,00** | **70.586,55** |
+
+Kostenplan 2028:
+
+| Monat | Variable Kosten (EUR) | Produktentwicklung (EUR) | IT-Infrastruktur (EUR) | Administrative Kosten (EUR) | Marketing-Kosten (EUR) | Personalkosten (EUR) | Gesamtkosten (EUR) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 01/2028 | 8.689,30 | 680,00 | 273,60 | 2.631,90 | 159,00 | 0,00 | 12.433,80 |
+| 02/2028 | 9.508,80 | 680,00 | 273,60 | 331,90 | 159,00 | 0,00 | 10.953,30 |
+| 03/2028 | 10.385,80 | 680,00 | 273,60 | 552,90 | 159,00 | 0,00 | 12.051,30 |
+| 04/2028 | 11.321,85 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 12.666,35 |
+| 05/2028 | 12.282,45 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 13.626,95 |
+| 06/2028 | 13.276,60 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 14.621,10 |
+| 07/2028 | 14.364,30 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 15.708,80 |
+| 08/2028 | 15.485,05 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 16.829,55 |
+| 09/2028 | 16.668,85 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 18.013,35 |
+| 10/2028 | 17.920,20 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 19.264,70 |
+| 11/2028 | 19.215,60 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 20.560,10 |
+| 12/2028 | 20.608,55 | 680,00 | 273,60 | 231,90 | 159,00 | 0,00 | 21.953,05 |
+| **Summe 2028** | **169.727,35** | **8.160,00** | **3.283,20** | **5.603,80** | **1.908,00** | **0,00** | **188.682,35** |
 
 ### Privatentnahme
 
-Die Privatentnahme wird aus dem ermittelten privaten Finanzbedarf abgeleitet. Der private Finanzbedarf wird im Business-Case als typischer Monat im ersten Jahr dargestellt.
+Der private Finanzbedarf ergibt sich aus einem Vier-Personen-Haushalt (Ehefrau, zwei Kinder). Einnahmen außerhalb der Selbständigkeit sowie die privaten Lebenshaltungskosten sind in der Finanzplanung erfasst. Für das erste Jahr nach Gründung ist in der privaten Planung eine Privatentnahme in Höhe von 460,00 EUR pro Monat kalkuliert; in der Unternehmensliquiditätsplanung werden Entnahmen ab 2027 angesetzt.
 
-Privater Finanzbedarf (typischer Monat, 2026):
+**Privater Finanzbedarf – Beispielmonat (2026, monatlich):**
 
-| Position | Betrag (EUR/Monat) |
+| Position | Betrag (EUR) |
 | --- | ---: |
-| Einnahmen: Nettogehalt Ehe- bzw. Lebenspartner/in | 4.000,00 |
-| Einnahmen: Einkommen aus Kapitalerträgen | 200,00 |
-| Einnahmen: Kindergeld | 510,00 |
-| Einnahmen: Vermietung Immobilie 1 | 544,00 |
-| Einnahmen: Vermietung Immobilie 2 | 1.750,00 |
-| **Summe Einnahmen** | **7.004,00** |
-|  |  |
-| Ausgaben: Private Wohnkosten (inkl. Nebenkosten und Strom) | 150,00 |
-| Ausgaben: Sonstige Versicherungen (Berufsunfähigkeit, Haftpflicht, Hausrat, Unfallversicherung etc.) | 100,00 |
-| Ausgaben: Telefon/Fernsehen/Radio/Internet | 150,00 |
-| Ausgaben: Kita Kind1 | 317,25 |
-| Ausgaben: Kita Kind2 | 343,00 |
-| Ausgaben: Private Kfz-Kosten | 400,00 |
-| Ausgaben: Beiträge (Vereine etc.) | 10,00 |
-| Ausgaben: Kranken- und Pflegeversicherung Ehefrau (Beamtin) | 350,00 |
-| Ausgaben: Rentenversicherung/Altersvorsorge | 600,00 |
-| Ausgaben: Haushaltsnahe Dienstleistungen | 500,00 |
-| Ausgaben: Kosten des täglichen Bedarfs (Essen, Trinken, Kleidung etc.) | 1.800,00 |
-| Ausgaben: Anschaffungen Haus | 1.000,00 |
-| Ausgaben: Urlaub | 400,00 |
-| Ausgaben: Vermietete Immobilie 1: Hausgeld | 297,26 |
-| Ausgaben: Vermietete Immobilie 2: Hausgeld, Tilgung und Zinsen | 1.982,75 |
-| Ausgaben: Wohnhaus: Tilgung und Zinsen | 2.300,00 |
-| **Summe Ausgaben** | **10.700,26** |
-|  |  |
-| **Benötigte Privatentnahme aus der Unternehmung** | **460,00** |
-
-Für die Folgejahre sind im Business-Case zudem Planwerte für Privatentnahme und private Abgaben hinterlegt:
-
-| Position | 2026 | 2027 | 2028 |
-| --- | ---: | ---: | ---: |
-| Privatentnahme (monatlich) | 460,00 | 2.616,89 | 5.410,24 |
-| Einkommensteuer (monatlich) | 0,00 | 72,39 | 862,74 |
-| Kirchensteuer (monatlich) | 0,00 | 5,79 | 69,02 |
-| GKV (monatlich) | 460,00 | 746,36 | 1.019,48 |
-| Brutto (monatlich) | 460,00 | 2.616,89 | 5.410,24 |
+| **Einnahme:** Nettogehalt Partnerin | 4.000,00 |
+| **Einnahme:** Kapitalerträge | 200,00 |
+| **Einnahme:** Kindergeld | 510,00 |
+| **Einnahme:** Vermietung Immobilie 1 | 544,00 |
+| **Einnahme:** Vermietung Immobilie 2 | 1.750,00 |
+| **Einnahmen gesamt (ohne Selbständigkeit)** | **7.004,00** |
+| **Ausgabe:** Private Wohnkosten (inkl. Nebenkosten und Strom) | 150,00 |
+| **Ausgabe:** Sonstige Versicherungen | 100,00 |
+| **Ausgabe:** Telefon/Internet/Medien | 150,00 |
+| **Ausgabe:** Kita Kind 1 | 317,25 |
+| **Ausgabe:** Kita Kind 2 | 343,00 |
+| **Ausgabe:** Private Kfz-Kosten | 400,00 |
+| **Ausgabe:** Beiträge/Vereine | 10,00 |
+| **Ausgabe:** KV/PV Ehefrau (Beamtin) | 350,00 |
+| **Ausgabe:** Haushaltsnahe Dienstleistungen | 500,00 |
+| **Ausgabe:** Täglicher Bedarf | 1.800,00 |
+| **Ausgabe:** Anschaffungen Haus | 1.000,00 |
+| **Ausgabe:** Urlaub | 400,00 |
+| **Ausgabe:** Vermietete Immobilie 1: Hausgeld | 297,26 |
+| **Ausgabe:** Vermietete Immobilie 2: Hausgeld/Tilgung/Zinsen | 1.982,75 |
+| **Ausgabe:** Wohnhaus: Tilgung und Zinsen | 2.300,00 |
+| **Ausgaben gesamt** | **10.700,26** |
+| **Fehlbetrag (Ausgaben - Einnahmen)** | **3.696,26** |
+| **Benötigte Privatentnahme aus der Unternehmung (monatlich)** | **460,00** |
 
 ### Kapitalbedarf & Finanzierung
 
-Der Kapitalbedarf ergibt sich in dieser Planung im Wesentlichen aus (a) laufenden Fixkosten in der Anlaufphase und (b) einem Liquiditätspuffer, um temporäre Unterdeckungen zwischen Ein- und Auszahlungen abzufangen. Sachinvestitionen (z.B. Büroausstattung) sind im Modell nur in geringem Umfang als einzelne Verwaltungsposten abgebildet (z.B. Gewerbeanmeldung).
+Für das Vorhaben sind keine größeren physischen Investitionen (Maschinen, Fahrzeuge, Büroausstattung) vorgesehen. Notwendige IT-Ausrüstung (Laptop, Desktop, Monitor) wird aus Privatbesitz eingebracht. Der Kapitalbedarf ergibt sich im Wesentlichen aus Anlaufkosten und der Finanzierung des laufenden Betriebs in der Anfangsphase.
 
-Die Finanzierung erfolgt in der Planung über private Einlagen. Fremdkapital ist nicht als fester Bestandteil der Planung hinterlegt.
+**Kapitalbedarfsplan (Auszug – einmalige/administrative Gründungskosten 2026):**
 
-Im Liquiditätsplan wird zeitweise ein negativer Kontostand ausgewiesen. Der niedrigste Wert der Liquidität nach Entnahme liegt bei -2.425,69 EUR (2027-03). Zur Vermeidung eines negativen Kontostands wäre ein entsprechender Liquiditätspuffer (z.B. zusätzliche private Mittel oder eine kurzfristige Kreditlinie) erforderlich.
-
-Private Einlagen (Planwerte im Liquiditätsmodell):
-
-| Monat | Private Einlage (EUR) |
+| Position | Betrag 2026 (EUR) |
 | --- | ---: |
-| 2026-03 | 3.000,00 |
-| 2026-04 | 1.000,00 |
-| 2026-05 | 1.000,00 |
-| 2026-06 | 1.000,00 |
-| 2026-07 | 1.000,00 |
-| 2026-08 | 1.000,00 |
-| 2026-09 | 1.000,00 |
-| 2026-10 | 1.000,00 |
-| 2026-11 | 1.000,00 |
-| **Summe** | **11.000,00** |
+| Gewerbeanmeldung | 60,00 |
+| Markenschutz Deutschland | 290,00 |
+| Datenschutzberatung | 500,00 |
+| Rechtsberatung | 500,00 |
+| Berufshaftpflichtversicherung (exali.de) | 321,00 |
+| **Summe** | **1.671,00** |
+
+Als Liquiditätsreserve ist ein Sicherheitspolster von 2.000 EUR vorgesehen.
+
+**Finanzierungsplan (ohne Gründungszuschuss als Unternehmensfinanzierung):**
+
+| Finanzierung | Betrag (EUR) |
+| --- | ---: |
+| Private Einlagen (2026, in Summe) | 14.000,00 |
+| Fremdkapital | 0,00 |
 
 ### Rentabilität
 
-Die Rentabilitätsvorschau wird im Business-Case als monatliche Betrachtung dargestellt. In der Planung wird das Monatsergebnis ab 2027-07 positiv.
+Die Rentabilitätsvorschau zeigt in der Anlaufphase negative Ergebnisse aufgrund der fixen Aufbaukosten. Das Betriebsergebnis vor Steuern wird in der Planung ab 02/2027 positiv. Das Monatsergebnis wird ab 08/2027 positiv.
 
-Rentabilitätsvorschau (Monatsbasis, Rumpfjahr + 2 Folgejahre):
+**Rentabilität – Jahresübersicht (gemäß Finanzplanung):**
 
-| Monat | Umsatz (EUR) | Variable Kosten (EUR) | Fixkosten (EUR) | Monatsergebnis (EUR) |
-| --- | --- | --- | --- | --- |
-| 2026-03 | 20,00 | -12,00 | -2.356,50 | -2.348,50 |
-| 2026-04 | 40,00 | -24,00 | -1.475,50 | -1.459,50 |
-| 2026-05 | 160,00 | -70,00 | -1.475,50 | -1.385,50 |
-| 2026-06 | 200,00 | -112,00 | -2.074,50 | -1.986,50 |
-| 2026-07 | 380,00 | -224,00 | -1.594,50 | -1.438,50 |
-| 2026-08 | 598,00 | -365,40 | -1.694,50 | -1.461,90 |
-| 2026-09 | 1.016,00 | -640,80 | -1.844,50 | -1.469,30 |
-| 2026-10 | 1.434,00 | -890,20 | -1.844,50 | -1.300,70 |
-| 2026-11 | 1.992,00 | -1.133,60 | -1.844,50 | -986,10 |
-| 2026-12 | 2.608,00 | -1.454,40 | -1.844,50 | -690,90 |
-| 2027-01 | 3.344,00 | -1.819,20 | -2.244,50 | -1.122,30 |
-| 2027-02 | 4.158,00 | -2.237,40 | -1.844,50 | -729,10 |
-| 2027-03 | 5.132,00 | -2.717,60 | -2.165,50 | -958,89 |
-| 2027-04 | 6.144,00 | -3.197,20 | -1.844,50 | -508,09 |
-| 2027-05 | 7.316,00 | -3.734,80 | -1.844,50 | -276,29 |
-| 2027-06 | 8.526,00 | -4.303,80 | -1.844,50 | -37,89 |
-| 2027-07 | 9.896,00 | -4.930,80 | -1.844,50 | 302,51 |
-| 2027-08 | 11.304,00 | -5.569,20 | -1.844,50 | 669,51 |
-| 2027-09 | 12.872,00 | -6.265,60 | -1.844,50 | 1.138,52 |
-| 2027-10 | 14.478,00 | -6.985,40 | -1.844,50 | 1.622,12 |
-| 2027-11 | 16.242,00 | -7.764,60 | -1.844,50 | 2.204,32 |
-| 2027-12 | 18.046,00 | -8.567,80 | -1.844,50 | 2.802,52 |
-| 2028-01 | 20.008,00 | -9.432,40 | -2.244,50 | 2.920,86 |
-| 2028-02 | 22.028,00 | -10.328,40 | -1.944,50 | 4.344,86 |
-| 2028-03 | 24.208,00 | -11.286,40 | -2.165,50 | 5.345,86 |
-| 2028-04 | 26.546,00 | -12.307,80 | -1.844,50 | 6.983,46 |
-| 2028-05 | 28.922,00 | -13.356,60 | -1.844,50 | 8.310,66 |
-| 2028-06 | 31.376,00 | -14.444,80 | -1.844,50 | 9.676,46 |
-| 2028-07 | 34.108,00 | -15.632,40 | -1.844,50 | 11.220,86 |
-| 2028-08 | 36.898,00 | -16.857,40 | -1.844,50 | 12.785,86 |
-| 2028-09 | 39.846,00 | -18.149,80 | -1.844,50 | 14.441,46 |
-| 2028-10 | 42.972,00 | -19.515,60 | -1.844,50 | 16.201,66 |
-| 2028-11 | 46.196,00 | -20.932,80 | -1.844,50 | 18.008,46 |
-| 2028-12 | 49.698,00 | -22.453,40 | -1.844,50 | 19.989,86 |
+| Jahr | Umsatz (EUR) | Variable Kosten (EUR) | Fixkosten (EUR) | Betriebsergebnis vor Steuern (EUR) | Monatsergebnis (EUR) |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 2026 | 7.386,00 | 4.607,80 | 13.339,00 | -10.560,80 | -10.560,80 |
+| 2027 | 102.918,50 | 53.731,55 | 16.855,00 | 32.331,95 | 929,28 |
+| 2028 | 352.904,50 | 169.727,35 | 18.955,00 | 164.222,15 | 99.299,28 |
 
 ### Liquidität
 
-Die Liquiditätsplanung wird im Business-Case auf Monatsbasis dargestellt. Einzahlungen bestehen aus Umsätzen sowie privaten Einlagen. Auszahlungen bestehen aus Produktentwicklung, IT-Infrastruktur, variablen Kosten, Administration und Marketing. Die Privatentnahme wird separat berücksichtigt.
+Die Liquiditätsplanung berücksichtigt Einzahlungen aus Umsatz sowie private Einlagen in 2026. Ab 2027 ist eine Privatentnahme geplant. Diese steigt im Jahresverlauf an und ist ab 2028 konstant angesetzt. Die Liquidität ist in der Planung durchgehend positiv. Zum Jahresende 2026 beträgt die Liquidität 5.488,20 EUR. Zum Jahresende 2027 beträgt sie 13.900,98 EUR. Zum Jahresende 2028 beträgt sie 129.080,77 EUR.
 
-Liquiditätsplan (Monatsbasis, Rumpfjahr + 2 Folgejahre):
+**Monatlicher Liquiditätsplan (Auszug, 03/2026 bis 12/2028):**
 
-| Monat | Liquide Mittel Anfang (EUR) | Einzahlungen brutto (EUR) | Auszahlungen (EUR) | Privatentnahme (EUR) | Liquide Mittel Ende (EUR) |
-| --- | --- | --- | --- | --- | --- |
-| 2026-03 | 0,00 | 3.020,00 | -2.368,50 | 0,00 | 711,50 |
-| 2026-04 | 711,50 | 1.040,00 | -1.499,50 | 0,00 | 312,00 |
-| 2026-05 | 312,00 | 1.160,00 | -1.545,50 | 0,00 | -13,50 |
-| 2026-06 | -13,50 | 1.200,00 | -2.186,50 | 0,00 | -841,00 |
-| 2026-07 | -841,00 | 1.380,00 | -1.818,50 | 0,00 | -1.120,50 |
-| 2026-08 | -1.120,50 | 1.796,00 | -2.059,90 | 0,00 | -1.225,40 |
-| 2026-09 | -1.225,40 | 2.196,00 | -2.485,30 | 0,00 | -1.355,70 |
-| 2026-10 | -1.355,70 | 2.596,00 | -2.734,70 | 0,00 | -1.335,40 |
-| 2026-11 | -1.335,40 | 3.136,00 | -2.978,10 | 0,00 | -1.018,50 |
-| 2026-12 | -1.018,50 | 2.932,00 | -3.298,90 | 0,00 | -1.226,40 |
-| 2027-01 | -1.226,40 | 3.632,00 | -4.063,70 | -402,60 | -1.901,70 |
-| 2027-02 | -1.901,70 | 4.608,00 | -4.081,90 | -805,20 | -2.021,79 |
-| 2027-03 | -2.021,79 | 5.528,00 | -4.883,10 | -1.207,79 | -2.425,69 |
-| 2027-04 | -2.425,69 | 6.684,00 | -5.041,70 | -1.610,39 | -2.234,78 |
-| 2027-05 | -2.234,78 | 7.784,00 | -5.579,30 | -2.012,99 | -1.884,07 |
-| 2027-06 | -1.884,07 | 9.120,00 | -6.148,30 | -2.415,59 | -1.168,96 |
-| 2027-07 | -1.168,96 | 10.400,00 | -6.775,30 | -2.818,19 | -203,45 |
-| 2027-08 | -203,45 | 12.132,00 | -7.413,70 | -3.220,79 | 1.453,06 |
-| 2027-09 | 1.453,06 | 13.592,00 | -8.110,10 | -3.623,38 | 3.470,58 |
-| 2027-10 | 3.470,58 | 15.288,00 | -8.829,90 | -4.025,98 | 6.061,69 |
-| 2027-11 | 6.061,69 | 17.124,00 | -9.609,10 | -4.428,58 | 9.307,01 |
-| 2027-12 | 9.307,01 | 19.000,00 | -10.412,30 | -4.831,18 | 13.222,53 |
-| 2028-01 | 13.222,53 | 21.016,00 | -11.676,90 | -5.410,24 | 17.310,40 |
-| 2028-02 | 17.310,40 | 23.288,00 | -12.272,90 | -5.410,24 | 23.074,26 |
-| 2028-03 | 23.074,26 | 25.288,00 | -13.451,90 | -5.410,24 | 29.659,12 |
-| 2028-04 | 29.659,12 | 27.860,00 | -14.152,30 | -5.410,24 | 38.115,58 |
-| 2028-05 | 38.115,58 | 30.236,00 | -15.201,10 | -5.410,24 | 47.899,24 |
-| 2028-06 | 47.899,24 | 32.888,00 | -16.289,30 | -5.410,24 | 59.246,70 |
-| 2028-07 | 59.246,70 | 35.584,00 | -17.476,90 | -5.410,24 | 72.102,56 |
-| 2028-08 | 72.102,56 | 38.752,00 | -18.701,90 | -5.410,24 | 86.901,42 |
-| 2028-09 | 86.901,42 | 41.628,00 | -19.994,30 | -5.410,24 | 103.283,89 |
-| 2028-10 | 103.283,89 | 44.880,00 | -21.360,10 | -5.410,24 | 121.552,55 |
-| 2028-11 | 121.552,55 | 48.212,00 | -22.777,30 | -5.410,24 | 141.736,01 |
-| 2028-12 | 141.736,01 | 51.804,00 | -24.297,90 | -5.410,24 | 163.990,87 |
-
-## Anhang
-
-Der tabellarische Lebenslauf wird als separate Anlage eingereicht.
+| Monat | Umsatz (netto) | Einlagen | Auszahlungen Betrieb (ohne Entnahme) | Privatentnahme | Liquidität Monatsende |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 03/2026 | 15,00 | 3.000,00 | 2.157,00 | 0,00 | 918,00 |
+| 04/2026 | 30,00 | 2.000,00 | 996,50 | 0,00 | 2.011,50 |
+| 05/2026 | 145,00 | 2.000,00 | 1.041,00 | 0,00 | 3.175,50 |
+| 06/2026 | 175,00 | 1.000,00 | 1.679,00 | 0,00 | 2.830,50 |
+| 07/2026 | 335,00 | 1.000,00 | 1.305,00 | 0,00 | 3.019,50 |
+| 08/2026 | 510,00 | 1.000,00 | 1.537,55 | 0,00 | 3.312,95 |
+| 09/2026 | 860,00 | 1.000,00 | 1.946,60 | 0,00 | 3.547,35 |
+| 10/2026 | 1.210,00 | 1.000,00 | 2.179,65 | 0,00 | 3.898,70 |
+| 11/2026 | 1.690,00 | 1.000,00 | 2.403,70 | 0,00 | 4.506,00 |
+| 12/2026 | 2.200,00 | 1.000,00 | 2.700,80 | 0,00 | 5.488,20 |
+| 01/2027 | 2.825,00 | 0,00 | 3.440,40 | 402,60 | 4.953,20 |
+| 02/2027 | 3.495,00 | 0,00 | 3.427,55 | 805,20 | 4.860,46 |
+| 03/2027 | 4.310,00 | 0,00 | 4.193,20 | 1.207,79 | 4.414,46 |
+| 04/2027 | 5.140,00 | 0,00 | 4.313,40 | 1.610,39 | 4.437,67 |
+| 05/2027 | 6.115,00 | 0,00 | 4.808,10 | 2.012,99 | 4.538,58 |
+| 06/2027 | 7.105,00 | 0,00 | 5.331,35 | 2.415,59 | 4.865,64 |
+| 07/2027 | 8.240,00 | 0,00 | 5.908,10 | 2.818,19 | 5.348,35 |
+| 08/2027 | 9.390,00 | 0,00 | 6.493,40 | 3.220,79 | 6.317,16 |
+| 09/2027 | 10.685,00 | 0,00 | 7.132,20 | 3.623,38 | 7.539,58 |
+| 10/2027 | 11.995,00 | 0,00 | 7.791,55 | 4.025,98 | 9.172,04 |
+| 11/2027 | 13.435,00 | 0,00 | 8.505,95 | 4.428,58 | 11.289,51 |
+| 12/2027 | 14.905,00 | 0,00 | 9.241,35 | 4.831,18 | 13.900,98 |
+| 01/2028 | 16.505,00 | 0,00 | 12.433,80 | 5.410,24 | 14.502,95 |
+| 02/2028 | 18.135,00 | 0,00 | 10.953,30 | 5.410,24 | 18.539,41 |
+| 03/2028 | 19.910,00 | 0,00 | 12.051,30 | 5.410,24 | 23.252,87 |
+| 04/2028 | 21.815,00 | 0,00 | 12.666,35 | 5.410,24 | 29.580,28 |
+| 05/2028 | 23.735,00 | 0,00 | 13.626,95 | 5.410,24 | 37.029,09 |
+| 06/2028 | 25.700,00 | 0,00 | 14.621,10 | 5.410,24 | 45.772,75 |
+| 07/2028 | 27.910,00 | 0,00 | 15.708,80 | 5.410,24 | 55.800,71 |
+| 08/2028 | 30.150,00 | 0,00 | 16.829,55 | 5.410,24 | 67.433,92 |
+| 09/2028 | 32.520,00 | 0,00 | 18.013,35 | 5.410,24 | 80.415,34 |
+| 10/2028 | 35.035,00 | 0,00 | 19.264,70 | 5.410,24 | 94.984,40 |
+| 11/2028 | 37.610,00 | 0,00 | 20.560,10 | 5.410,24 | 111.157,06 |
+| 12/2028 | 40.430,00 | 0,00 | 21.953,05 | 5.410,24 | 129.080,77 |
