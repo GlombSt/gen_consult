@@ -14,7 +14,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Ab wann wird dein Unternehmen Gewinn machen?
 - Wofür benötigst du fremdes Kapital und wie viel?
 
----
+
 
 ## 2. Geschäftsidee
 
@@ -39,7 +39,6 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Was kannst du/kann dein Team besonders gut, das einen Wert für deine Kunden hat?
 - Welche Fähigkeiten musst du/müsst ihr aufbauen?
 
----
 
 ## 3. Vertrieb & Wettbewerb
 
@@ -68,7 +67,6 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wie groß ist der Markt?
 - Wie wird sich die Branche voraussichtlich entwickeln?
 
----
 
 ## 4. Team & Partner
 
@@ -98,7 +96,6 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Welche Teilleistungen willst du an die Schlüsselpartner auslagern?
 - Welche Kontakte hast du, die für dein Vorhaben nützlich sind?
 
----
 
 ## 5. Unternehmen
 
@@ -134,7 +131,6 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Für überregional tätige oder sehr innovative Unternehmen: Welche Risiken entstehen möglicherweise aus Veränderungen bei Rahmenbedingungen wie Technologie, Trends o.ä.?
 - Mit welchen Maßnahmen planst du den Problemen und Risiken zu begegnen?
 
----
 
 ## 6. Finanzen
 
@@ -208,9 +204,3 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte Einzahlungen eingeplant?
 
 * Monatlicher Liquiditätsplan mit detaillierter Kostenaufstellung als Tabelle für 3 Jahre (Rumpfjahr + 2 Jahre auf Monatsbasis) ohne Gründungszuschuss
-
-
----
-
-## Anhang
-* Tabellarischer Lebenslauf

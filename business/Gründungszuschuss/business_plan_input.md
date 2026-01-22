@@ -1,3 +1,14 @@
+# Mein Businessplan
+
+## 1. Executive Summary
+
+
+<meta: wichtige finanzielle Aspekte>
+Summary sollte am ende enthalten:
+- wann ist der break even vor entnahmen
+- ab wann kann der Gründer seinen Lebensunterhalt bestreiten, rentabilität nach entnahmen
+- wieviel investiert der Unternehmer selbst (siehe "Finanzielle MIttel aus Grüngungszuschuss und privaten Rücklagen (jährlich)" aus excel)
+</meta: formuliere nicht technisch>
 
 ## 2. Geschäftsidee
 
@@ -30,17 +41,22 @@ Das führt zu:
 
 ### Angebot
 
+<meta: formuliere nicht technisch>
+WICHTIG: Sharpintent ist nich perfekt. Es macht Ergebnisse nicht prüfbar, es unterstützt bei der Präzisierung, das muss bei der Formula
+</meta: formuliere nicht technisch>
+
 SharpIntent unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen indem es die Intention des Menschen strukturiet und mit maximaler Unterstützung erfasst, bevor die Sprachmodell die Aufgabe angehen.
 
 - Leitet den Benutzer bei der Erstellung der Aufgabe. Ein assistierter Prozess stellt sicher, dass alle fachspezifischen Parameter (z.B. Jurisdiktion, Zielgruppe, Constraints) erfasst sind, bevor die KI startet. 
 - Zeigt auf welche Informationen fehlen oder mehrdeutig sind, um ein gutes Ergebnis zu erzielen (basierend auf allgemeinen und industriespezifischen Standards)
 - Erfasst Aufgaben strukturiert in einem visuellen Interface, das Vollständigkeit, Lücken und Risiken auf einen Blick zeigt – statt sie im Chatverlauf "zu verstecken".
 - Bewertet die Aufgabenstellung auf Risiken und sagt offen, wann ein Sprachmodell nicht geeignet ist für eine Aufgabe und ggf. was Alternativen wären
-- Generiert eine optimierte textuelle Anweisung für das Sprachmodell
+- Generiert im Hintergrung eine optimierte textuelle Anweisung für das Sprachmodell ohne dass der Nutzer sich damit auseinandersetzen muss
 - Gibt eine Einschätzung über die Qualität des Ergebnisses durch probehaftes Ausführen und erlaubt direktes Verbessern der Definitionen (feedback loop)
-- Erlaubt sowohl das "Mitnehmen" des optimalen Prompts in die eigene Umgebung oder das Ausführen des Prompts durch SharpIntent in einer Umgebung
+- Zur Kompatibilität mit bestehenden Workflows ermöglicht SharpIntent sowohl den Export der generierten LLM-Anweisung (Prompt/Instruction) zur Nutzung in der eigenen Umgebung als auch die Ausführung direkt in SharpIntent.
 
 SharpIntent wird als web-basierte SAAS Lösung angeboten.
+
 
 
 ### Nutzen
@@ -49,15 +65,15 @@ Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen 
 
 ### Kernfähigkeiten
 
-- Strukturierte Intent-Deklaration: System zur Erfassung von Aufgaben in einem spezialisierten Datenmodell, das eine präzise Bearbeitung und Revision ermöglicht.
+- Strukturierte Intent-Deklaration: System zur Erfassung von Aufgaben in einem spezialisierten Datenmodell, das eine präzise Bearbeitung und Revision ermöglicht. Wichtig ist hier insbesondere eine Benutzerführung die so aktiv unterstützt, dass es sich für den Nutzer nicht wie unnötiger Mehraufwand am Anfang anfühlt.
 
 - Intelligente Algorithmen und effiziente Benutzerführung für schnelle und explizite Klärung und Verfeinerung der Aufgabe.
 
-- Qualitäts-Grading & Erfolgsprognose: Metriken zur Bewertung der Definitionsgüte einer Aufgabe und der statistischen Wahrscheinlichkeit eines korrekten Ergebnisses.
+- Qualitäts-Grading & Erfolgsabschätzung: Metriken zur Bewertung der Definitionsgüte einer Aufgabe und der möglichen Aussichten auf ein korrektes Ergebnisses.
 
-- Industrie-Referenzdatenbank: Proprietärer Datenbestand fachspezifischer Aufgabenbeschreibungen und exzellenter Arbeitsergebnissen zur Sicherstellung angemessener Vollständigkeit und Konsistenz der Aufgabendeklaration.
+- Industrie-Referenzdatenbank: Proprietärer Datenbestand fachspezifischer Aufgabenbeschreibungen und exzellenter Arbeitsergebnissen zur Sicherstellung angemessener Vollständigkeit und Konsistenz der Aufgabendeklaration. 
 
-- Automatisierte Erstellung und Optimierung von Sprachmodell-Anweisungen auf Basis vordefinierter Aufgabenstrukturen.
+- Automatisierte Ableitung einer robusten, konsistenten LLM-Anweisung (Prompt/Instruction) auf Basis vordefinierter Aufgabenstrukturen.
 
 - Anweisungsoptimierung: Algorithmen zur iterativen Verbesserung der Anweisungen an Sprachmodells für maximale Modell-Performance.
 
@@ -65,7 +81,7 @@ Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen 
 ## 3. Vertrieb & Wettbewerb
 
 ### Kunden
-SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität geschäftskritisch ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region.
+SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität wichtig ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region. Es ist sowohl für einfache, als auch für kompliziertere Aufgaben gedacht.
 
 
 Zielgruppe:
@@ -74,7 +90,7 @@ Zielgruppe:
 
 
 Rollen:
-- Fachkräfte in verschiedensten Funktionen, z.B. Marketing, Legal, HR, Consulting, Produktmanagement
+- Fachkräfte in verschiedensten Funktionen, z.B. Marketing, Legal, HR, Consulting, Produktmanagement <wichtig: das sind nur Beispiele/>
 - Team-Leads, die AI-Nutzung verantworten
 
 Nutzer: 
@@ -182,8 +198,8 @@ Sprache: Englisch als primäre Marktsprache (globale Reichweite), Deutsch für D
 ### Markt & Wettbewerb
 * **Marktgröße:** Einschätzung Marktvolumen und Wachstumstrends.
 
-Der Markt für Prompt Engineering wächst dynamisch: Für den globalen Markt wird ein Anstieg von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) erwartet (Quelle: Fortune Business Insights, https://www.fortunebusinessinsights.com/prompt-engineering-market-109382 ). Das entspricht einer prognostizierten jährlichen Wachstumsrate (CAGR) von etwa 32–33% (Quellen: diverse Analysten, https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report ). Innerhalb des Gesamtmarkts gewinnen insbesondere Prompt-Optimization-Tools an Bedeutung; dieses Segment wird für 2024 auf einen Marktanteil von ca. 31% geschätzt (Quelle: Mordor Intelligence, https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market ).
-Parallel dazu steigt die praktische Nutzung von Generativer KI stark: Weltweit werden ca. 115–180 Mio. Nutzer als täglich aktiv angegeben (Quelle: diverse, 2025, https://masterofcode.com/blog/generative-ai-statistics ). In Unternehmen ist GenAI ebenfalls angekommen: Laut McKinsey nutzen 78% der Unternehmen KI in mindestens einer Funktion (Quelle: McKinsey, 2024, https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai ). Insgesamt deuten die Kennzahlen auf einen schnell wachsenden, sich professionalisierenden Markt hin, in dem sowohl Methodenkompetenz (Prompt Engineering) als auch Tooling (Optimierung/Testing/Monitoring) zunehmend nachgefragt werden.
+Der Markt für Lösungen im den traditionelle Begriff "Prompt Engineering" wächst dynamisch: Für den globalen Markt wird ein Anstieg von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) erwartet (Quelle: Fortune Business Insights, https://www.fortunebusinessinsights.com/prompt-engineering-market-109382 ). Das entspricht einer prognostizierten jährlichen Wachstumsrate (CAGR) von etwa 32–33% (Quellen: diverse Analysten, https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report ). Innerhalb des Gesamtmarkts gewinnen insbesondere Prompt-Optimization-Tools an Bedeutung; dieses Segment wird für 2024 auf einen Marktanteil von ca. 31% geschätzt (Quelle: Mordor Intelligence, https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market ).
+Parallel dazu steigt die praktische Nutzung von Generativer KI stark: Weltweit werden ca. 115–180 Mio. Nutzer als täglich aktiv angegeben (Quelle: diverse, 2025, https://masterofcode.com/blog/generative-ai-statistics ). In Unternehmen ist GenAI ebenfalls angekommen: Laut McKinsey nutzen 78% der Unternehmen KI in mindestens einer Funktion (Quelle: McKinsey, 2024, https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai ). Insgesamt deuten die Kennzahlen auf einen schnell wachsenden, sich professionalisierenden Markt hin, in dem sowohl Methodenkompetenz (Prompt Engineering) als auch Tooling (Optimierung/Testing/Monitoring) zunehmend nachgefragt werden. SharpIntent kann hier die Bedürfnisse der Kunden aufnehmen und sich mit einem Angebot differenzieren, dass das eigentliche "Prompting" langsam in den Hintergrund drängt.
 
 
 Markt (TAM/SAM/SOM)
@@ -269,6 +285,7 @@ Steffen Glomb fungiert als Einzelunternehmer für die ersten 12 Monate, ggf. Erw
 * **Situation und Motivation**
 - Aus welcher Situation und Motivation heraus gründest du/gründet ihr?
 
+<take literally, don't change>
 Ich verfüge über mehr als zehn Jahre Erfahrung in leitenden Funktionen im Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle. Zuletzt war ich 3,5 Jahre als Chief Product & Technology Officer bei BetterDoc tätig. Zuvor habe ich über sechs Jahre als CTO und Mitgründer bei clark.de, einem digitalen Versicherungsmakler, maßgeblich zur Entwicklung und Skalierung des Unternehmens beigetragen.
 
 Ich lebe mit meiner Familie (Ehefrau, zwei Kinder im Alter von 3 und 6 Jahren) in Durbach im Ortenaukreis. Aufgrund meiner familiären Situation und meines Wohnorts ist eine regelmäßige, zeitintensive Pendeltätigkeit, wie sie für vergleichbare Führungspositionen im digitalen Umfeld häufig erforderlich ist, dauerhaft nur eingeschränkt praktikabel.
@@ -280,6 +297,8 @@ Die geplante Selbstständigkeit ermöglicht es mir, meine in den letzten zehn Ja
 Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Bereich der generativen künstlichen Intelligenz, neue Möglichkeiten zur effizienten Entwicklung und Bereitstellung digitaler Dienstleistungen. Diese Technologien ermöglichen es, mit überschaubarem Ressourceneinsatz hochwertige Softwarelösungen wirtschaftlich zu entwickeln und zu betreiben, ohne den Aufbau eines großen Teams vorauszusetzen.
 
 Vor diesem Hintergrund stellt die geplante Selbstständigkeit für mich die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das meinen Lebensunterhalt sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
+
+</take literally, don't change>
 
 
 * **Personalbedarf:** Geplante Mitarbeiteranzahl und Anforderungsprofile.
@@ -297,14 +316,13 @@ SharpIntent steht für Klarheit vor Automatisierung. Das Unternehmen hilft Mensc
 
 Was ist dir wichtig, was unwichtig?
 
-Was ist dir wichtig?
+Wichtig:
 	•	Anwender dabei zu unterstützen, ihre eigenen Ziele, Annahmen und Anforderungen klar zu formulieren.
-	•	Reduktion von Frustration durch schlechte oder inkonsistente KI-Ergebnisse.
-	•	Wissensaufbau bei weniger erfahrenen Nutzern durch strukturierte Führung.
+	•	Wissensaufbau bei weniger erfahrenen Nutzern durch strukturierte Führung und Hilfe zur Selbsthilfe.
 	•	Ehrliche Hinweise auf Grenzen, Unsicherheiten und notwendige menschliche Prüfung.
 	•	Ein Produkt, das Denken unterstützt, statt es zu ersetzen.
 
-Was ist dir unwichtig?
+Unwichtig?
 	•	Vollautomatisierung ohne menschliche Verantwortung.
 	•	Ergebnisse, die „gut klingen“, aber fachlich nicht belastbar sind.
 	•	Abkürzungen, die langfristig Vertrauen untergraben.
@@ -344,7 +362,6 @@ Aus meiner professionellen Karriere gibt es eine Vielzahl an Kontakten zu erfahr
 - Aufbaue Domainspezifischer Aufgaben und Wissensdatenbanken durck KI Agenten und programmierte Automatisierung
 - Konfiguration einer Cloud Laufzeitumgebung zum Betrieb der Anwendung bei einem europäischen Cloud Anbieter
 - Entwicklung von Algorithmen zur Unterstützung on Aufgabendefinition
-- Aufbau einer Promptdatenbank als Wissensquelle
 - Aufsetzen einer Distribution für Abonnenten durch einen weltweit agierenden Merchant of Record (Lemon Squeezy)
 
 Partner:
@@ -423,7 +440,7 @@ EU-AI Act
 
 
 
-
+<struktur der risiken beibehalten>
 #### Risiko Finanzielle Reichweite
 Verzögerter Break-Even durch langsamere Kundenakquise bei gleichzeitig fixen Infrastruktur- und Druck auf Entnahmen für Lebensunterhalt.
 
@@ -481,10 +498,20 @@ Gegenmaßnahmen
 
 3. Shift zu Compliance: Positionierung des Tools als unabhängige Instanz zur Risikobewertung und Qualitätssicherung (Vier-Augen-Prinzip), die aus Compliance-Gründen nicht von der generierenden KI selbst stammen darf.
 
+</struktur der risiken beibehalten>
 
 
 
 ## 6. Finanzen
+
+## Finanzen (Abschnitt 6)
+
+- **Gewinnschwelle/Break-even**: Ab wann wird das Unternehmen gemäß Finanzplanung profitabel (Monat/Jahr) und welche Annahmen sind dafür maßgeblich?
+- **Kapitalbedarf**: Höhe und Zusammensetzung des Kapitalbedarfs (Investitionen, Anlaufkosten, Liquiditätsreserve) als Zahlen aus `business-case-sheet.xlsx`.
+- **Finanzierung**: Welche Mittel werden konkret eingesetzt (Eigenmittel, ggf. Darlehen etc.) und in welcher Höhe (ohne Gründungszuschuss)?
+- **Privatentnahme**: Monatliche private Lebenshaltungskosten (Miete, Kranken-/Pflegeversicherung, Verpflegung, Mobilität etc.), Einkommensteuer und Altersvorsorge für das erste Jahr, inkl. Beispielmonat als Tabelle.
+
+
 
 ### Ertragsquellen/Umsatz
 
@@ -495,39 +522,100 @@ Gegenmaßnahmen
 Abonnements, monatlich oder jährlich
 Pay as you go basierend auf Gutenhabenpunkten (credits). Guthabenpunkte spiegeln ungefähr die Nutzung. 
 
-- Zu welchen Zeitpunkten fließt das Geld?
+*- Zu welchen Zeitpunkten fließt das Geld?*
 Im Voraus
 
-- Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?
+*- Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?*
 
-Freemium user haben für die Nutzung eine Obergrenze und müssen dann ein Abbonnement abschliessen
-Paid user haben festgelegte Grundpreise, die eine Nutzungsgrenze enthalten. Die Grenze wird so gewählt, dass ein ausreichende Marge erzielt wird.
-Guthabenpunkte sind so bepreist, dass eine Marge ensteht. 
+Freemium/Trial user haben für die Nutzung eine Obergrenze und müssen danach ein Abbonnement abschliessen.
+
+Zahlende Nutzer  haben festgelegte Grundpreise, die eine Nutzungsgrenze enthalten. Die Grenze wird so gewählt, dass ein ausreichende Marge erzielt wird. Nutzer können zusätzlich Guthabenpunkte erwerben, um den Dienst weiter nutzen zu können. Die Guthabenpunkte sind so bepreist, dass eine Marge ensteht. 
+
 Der optimale Preis wird in den ersten 4 Monate ermittelt und der business plan ggf. angepasst.
 
+### Kosten
 
 **Wofür gibst du Geld aus?**
 
 - Wofür gibst du im Unternehmen wie viel Geld aus?
-* KI Dienste von Partnern für Entwicklung
-* KI Dienste von Partnern als direkte Kosten für das Angebot
-* Marketing und Kundenaquise
+<Zusammenfassung Marketing kosten im ersten Jahr aus excel sheet Kosten/>
+<Zusammenfassung Direkte Kosten aus excel sheet Kosten/>
+<Zusammenfassung Kosten Produktentwicklung aus excel sheet Kosten/>
+<Zusammenfassung Administratve Kosten aus excel sheet Kosten/>
+<Zusammenfassung IT Infrastruktur Kosten aus excel sheet Kosten/>
 
 - Wie flexibel sind diese Kosten?
-* Es ist möglich den Betrieb des Unternehmens mit weniger als 1000 Euro Fixkosten / Monat fortzuführen. Es sind keine langfristigen Zahlungsverpflichtungen geplant.
+* Es ist möglich den Betrieb des Unternehmens zeitweise mit weniger als 1000 Euro Fixkosten / Monat fortzuführen. Es sind keine langfristigen Zahlungsverpflichtungen geplant.
 
 
 - Welche Kosten (z.B. Waren- oder Materialeinsatz) steigen oder fallen direkt mit dem Umsatz?
-* Variable Kosten bei der Wertschöpfung für Kunden sind nur signifikant getrieben von der Nutzung Generativer KI von externen Dienstleistern. Andere Variable Kosten sind vernachlässigbar gering < 5% des zu erzielenden Umsatzes.
+* Variable Kosten bei der Wertschöpfung für Kunden sind im wesentlichen signifikant von der Nutzung Generativer KI von externen Dienstleistern. Andere Variable Kosten sind vernachlässigbar gering.
 
-Der Reiter "Kosten" in dem beigefügten Excel gibt einen detailierten Aufschlss zu den geplanten Kosten.
-
+Der Reiter "Kosten" in dem beigefügten Excel gibt einen detailierten Aufschluss zu den geplanten Kosten.
 
 - Wie hoch sind die Personalausgaben für deine Mitarbeiter\*innen?
-Bisher ist nicht geplant in den ersten 18 Monate einen Mitarbeiter einzustellen. Sollte sich das Unternehmen positiv entwickeln ist jedoch eine Anstellung von Mitarbeitern für Marketing oder Softwareentwicklung lohnenswert.
-
+Bisher ist nicht geplant einen Mitarbeiter einzustellen. Sollte sich das Unternehmen positiv entwickeln ist jedoch eine Anstellung von Mitarbeitern für Marketing oder Softwareentwicklung lohnenswert.
 
 - Wie hoch sind die Betriebsausgaben (z.B. Miete, Energiekosten, Versicherungen)?
+Als wesentliche fixe Betriebskosten im klassischen Sinne ist der Einkauf von Rechenleistung für Produktentwicklug, Marketing, IT-Infrastruktur und Administrativa. <Aus Excel Kosten Sheet Aufstellung übernehmen/>
+
 Fixkosten liegen fallen im wesentlichen für Produktentwicklung und können bei Bedarf reduziert werden.
 
 
+
+### Privatentnahme
+Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?
+•	Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
+•	Wie viel Einkommenssteuer musst du zahlen? 
+4 Personen Haushalt, Familie mit 2 Kindern (3, 6 Jahre), Frau ist Juristing und arbeitet als Beamtin in der JVA Offenburg. Unsere Einnahmen und Ausgaben in typischen Monaten sind im excel sheet "private finanzen" dargestellt. <Auflistung Einnahmen uns Ausgaben ohne Beträge aus "Private Finanzen"/>
+
+Für die Selbständigkeit haben wir unsere monaliche Kosten kalkuliert und mit private Rücklagen und dem Gründungszuschuss wäre es möglich unsere Lebenshaltungskosten zu tragen. Hierbei wird angenommen, dass wir in 2026 keine Entnahmen haben und in 2027 die Entnahme schrittweise erhöhen, sodass wir Ende 2027 aus der Selbständigkeit getragen werden.
+
+
+### Kapitalbedarf & Finanzierung
+Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
+
+•	Welche Investitionen sind für dein Unternehmen notwendig (z.B. Büroausstattung, Maschinen, Gebäude, Fahrzeuge)?
+
+Es sind keine physischen Güter notwendig. Am Anfang der Selbständigkeit muss Zeit in die Entwicklung des Produkts und den Aufbau der Präsenz im Internet investiert werden. Diese Investitionen benötigen wenig Kapital.
+
+•	Gibt es Sachen, die für dein Unternehmen notwendig sind, die du selbst beisteuerst? Wie viel sind sie noch wert (Sacheinlage, z. B. dein PC, dein Auto)?
+
+Private IT Ausrüstung (Monitor, Laptop, Desktop Computer) werden in das Unternehmen eingebracht. 
+
+•	Welche Kosten fallen einmalig bei der Gründung deines Unternehmens an (z. B. Warenerstausstattung, Gebühren für die Gewerbeanmeldung)?
+
+Gewerbeanmeldung, Markenschutz, Erstellung der AGB und der Datenschtzrichtlinien, Abschluss einer Berufshaftpflichtvesicherung
+
+•	Wie viel Mittel benötigst du zur Gewährleistung des laufenden Betriebes in der Anlaufphase?
+
+<Berechne und stelle als Tabelle dar: monatliche kosten in 2026/>
+
+•	Wie viel Liquiditätsreserve benötigst du als allgemeines Sicherheitspolster und um die Zeit zwischen Aus- und Einzahlungen innerhalb eines Monats überbrücken zu können?
+
+•	Wie viel Geld steuerst du selber bei (Geldeinlage)?
+<Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität>
+
+•	Woher kommen die zusätzlichen Mittel, um deinen Kapitalbedarf decken zu können?
+Neben dem Gründungszuschuss werde ich auf private Rücklagen zurückgreifen, um den Lebensunterhalt zu bestreiten.
+
+
+
+Rentabilität
+Wie viel Gewinn machst du?
+•	Wie stehen die Kosten im Verhältnis zu den Erlösen?
+<stelle kennzahlen aus sheet "Übersicht" dar, jährlich>
+
+•	Ab wann erzielst du einen Gewinn und wie entwickelt sich dieser?
+<erkläre rentabilität basiered auf Zahlen in sheet Rentabilität>
+
+
+Liquidität
+Wie entwickelt sich dein Kontostand?
+•	Wie entwickelt sich die Liquidität deines Unternehmens?
+
+Die ersten 18 Monate erfordern disziplinierten Umgang mit den liquiden Mitteln, d.h. genaue Verfolgung des Planes. Anschliessed ergibt sich eine Reserve von liquiden Mitteln.
+
+•	Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte Einzahlungen eingeplant?
+
+Ein Polster von 2000 Euro ist eingeplant.

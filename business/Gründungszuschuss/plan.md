@@ -3,6 +3,9 @@
 ## Goal
 Generate a complete Businessplan for a **Gründungszuschuss** application that is suitable for review and confirmation by a fachkundige Stelle (IHK).
 
+You are teaming up with me to write a business plan that I use to receive a german "Gründungszuschuss". This plan.md explains your tasks. 
+
+
 ---
 
 ## Inputs (Authoritative Sources)
@@ -13,7 +16,7 @@ Use inputs in the following order of precedence:
    Defines the required structure, section order, headings and questions that must be answered in each section. Do not change structure.
 
 2. `business_plan_input.md`  
-   Provides factual content and bullet points per section. Treat as ground truth. The text may contain XML Tags with instructions about how to use the content in the respective section.
+   Provides factual content and bullet points per section. Treat as ground truth.  Do not change facts, logic, or figures from here. The text contains XML Tags with instructions about how to present the content in the respective section. Example: <Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität/>
 
 3. `business_model_canvas.md`  
    Provides facts about the business idea in the structure of the business model canvas. Treat as additional ground truth for the generation.
@@ -71,12 +74,12 @@ To be created or populated as part of the task. May be empty at start.
 
 3. **Consistency Check**
    - all section must be consistent with each other in use of terms, style and semantic consistency
-   - will be done by a human
+   - Ensure that each section has the information from the source, not more and not less
+
 
 4. **Rewrite / Correction Loop**
    - Apply `writing-correction-loop_policy.txt`
    - Revise only wording and phrasing
-   - Do not change facts, logic, or figures
 
 ### Phase 2: Section 6, Financials 
 
@@ -128,7 +131,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 - **One idea, one sentence:** Each sentence should convey a complete thought. Avoid run-on sentences.
 - **Context before detail:** Start paragraphs with the main point, then elaborate.
 - When the input has sources (links) the sources must be presented in the document. Please validate that the link exists.
-- Use all information from the input, don't omit details. The input is intentionally very concise, but everything is chosen deliberately there.
+- Use all information from the input, don't omit details. The input is intentionally very concise, but everything is chosen deliberately there, *so stick to the exact meaning that is conveyed in the input*
 
 ### Example Transformation
 
@@ -155,10 +158,7 @@ The Businessplan is generated as **Markdown (CommonMark)**.
 This file (`business_plan.md`) is the single source of truth and is intended for downstream conversion to formatted documents (DOCX, PDF).
 
 **Canonical path:** `business/Gründungszuschuss/output/business_plan.md`  
-(Export will fall back to `business/Gründungszuschuss/business_plan.md` and copy it into `output/` if needed.)
-
 **Canonical Word template path:** `business/Gründungszuschuss/output/reference.docx`  
-(Export will fall back to `business/Gründungszuschuss/reference.docx` and copy it into `output/` if needed.)
 
 ### Export-friendly Markdown Rules (Pandoc-safe subset)
 Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with stable tables, headings, and page breaks.
@@ -220,7 +220,8 @@ PDF should be exported manually from the generated DOCX (Word/LibreOffice), to k
 - Quick examples:
   - Bad: "Als Zielgruppen sind genannt: Startups, KMU."
   - Good: "Unsere Zielgruppen sind Startups und KMU." / "Zielgruppen: Startups, KMU."
-
+  - Bad: "(Angaben aus dem Input)"
+  - Bad: "Der Input bewertet ..."
 
 ---
 
