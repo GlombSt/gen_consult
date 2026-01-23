@@ -3,7 +3,7 @@
 ## Goal
 Generate a complete Businessplan for a **Gründungszuschuss** application that is suitable for review and confirmation by a fachkundige Stelle (IHK).
 
-You are teaming up with me to write a business plan that I use to receive a german "Gründungszuschuss". This plan.md explains your tasks. The business has not started yet and is in hte planning phase, i.e. is planning to develop a solution. Official start is March 1st, 2026.
+You are teaming up with me to write a business plan that I use to receive a German "Gründungszuschuss". This `plan.md` explains your tasks. The business has not started yet and is in the planning phase, i.e. the solution is still being developed. Official start is March 1st, 2026.
 
 
 ---
@@ -32,6 +32,14 @@ Use inputs in the following order of precedence:
 6. `writing-correction-loop_policy.txt`  
    Governs post-processing and rewrite behavior.
 
+### Interpreting input markup (required)
+
+`business_plan_input.md` contains inline control markup (e.g. `<...>`). Treat these as **instructions**, not as content.
+
+- **Apply, but dont use in output**: apply the instruction, but the markup itself must **not** appear in `output/business_plan.md`.
+- **“Take literally” blocks** (e.g. `<take literally>...</take literally>`): keep the meaning and wording as-is except for minimal, strictly necessary edits to comply with the template headings and the style policy.
+- **Placeholders / tasks** (e.g. `<Tabelle .../>`, `<Berechne .../>`, `<Zusammenfassung .../>`): these are mandatory work items. If the required source data is missing or cannot be located, mark the corresponding checklist row as `information_missing` and add a concrete bullet to `open_questions.md` (do not leave placeholders in the final document).
+
 
 ## Outputs 
 
@@ -40,6 +48,7 @@ To be created or populated as part of the task. May be empty at start.
 1. `./output/business_plan.md`
 2. `open_questions.md`
 3. `coverage_checklist.md`
+4. `./output/financials.md` (optional working file used during Phase 2 extraction)
 
 ---
 
@@ -72,9 +81,19 @@ To be created or populated as part of the task. May be empty at start.
    - For `information_missing` prompts: add a concrete bullet to `open_questions.md` that states exactly what information is needed to complete the prompt.
    - The user does **not** need to maintain this checklist; the agent keeps it and uses it to drive completeness.
 
+   **Definition: “one row per template prompt”**
+   - A “template prompt” is each explicit question/lead sentence in `business_plan_template with requirements.md` (e.g. `**Was bietest du an?**`) and each bullet question directly below it.
+   - Use a stable identifier for each row: `Template Section > Subheading > Prompt text`.
+
 3. **Consistency Check**
    - all section must be consistent with each other in use of terms, style and semantic consistency
    - Ensure that each section has the information from the source, not more and not less
+
+   **Traceability (numbers & claims)**
+   - For any numeric claim used in `business_plan.md`, record its precise origin in `coverage_checklist.md` (file + (if financial) `sheet_slug` + cell/range/table identifier from `llm_exports/...`). Keep the business plan text clean (no inline citations or meta-notes).
+
+   **Locked terminology**
+   - Maintain a short “locked terms” list (product name, offer names, key labels) derived from the authoritative sources and use those terms consistently. If sources conflict, prefer `business_plan_input.md` and capture the conflict as an `open_questions.md` item.
 
 
 4. **Rewrite / Correction Loop**
@@ -105,7 +124,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 #### Drafting steps
 
 1. Use `workbook.json` to locate the relevant sheets (e.g. `umsatz`, `kosten`, `liquiditaet`, `rentabilitaet`) and their artifact files.
-2. Extract the required tables/series into `financials.md` (prefer `cells.jsonl` when formulas/types matter; `grid.csv` for quick chart data).
+2. Extract the required tables/series into `./output/financials.md` (prefer `cells.jsonl` when formulas/types matter; `grid.csv` for quick chart data).
 3. Draft Section 6 using the template structure and extracted data.
 4. Verify consistency between text (sections 1–5) and numbers (section 6).
 5. Integrate into final `business_plan.md`.
@@ -117,7 +136,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 
 - Output must be in German
 - Output a single, Businessplan document
-- Follow the template structure exactly, but use page breaks for the first to levels of headlines
+- Follow the template structure exactly; apply page breaks per the rules in **Export-friendly Markdown Rules (Pandoc-safe subset)** below.
 - Do not include meta commentary, explanations, or notes
 - Do not restate style or policy rules in the document
 
@@ -234,3 +253,4 @@ The task is complete when:
 - All sections are filled
 - No 'not_started' items in coverage_checklist.md
 - The document passes the correction loop without further changes
+- No instruction markup or placeholders from inputs remain in `output/business_plan.md`
