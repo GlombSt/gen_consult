@@ -1,8 +1,18 @@
-# Mein Businessplan
+# Executive Summary
 
-## 1. Executive Summary
+
+
 
 <formulierung: nicht technisch, Fliesstext ohne Stickpunkte>
+
+Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und knapp die wichtigsten Aspekte deines Vorhabens aufzählt.
+- Was ist der Kern deiner Idee?
+- Was bietest du an?
+- Wer sind deine Kunden?
+- Warum wird dein Angebot für deine Kunden nützlich sein?
+- Wer ist im Gründungsteam und welche relevanten Qualifikationen habt ihr?
+- Ab wann wird dein Unternehmen Gewinn machen?
+- Wofür benötigst du fremdes Kapital und wie viel?
 
 <finanzielles für Exec Summary>
 - wann ist der break even vor entnahmen
@@ -12,9 +22,9 @@
 </finanzielles für Exec Summary>
 </formulierung: nicht technisch, Fliesstext ohne Stickpunkte>
 
-## 2. Geschäftsidee
+# Geschäftsidee
 
-### Problem
+## Problem
 
 Sprachmodell fühlen sich für Nutzer "unzuverlässig genial" an. Man weiß, dass sie es kann, aber man weiß nie, ob sie es dieses Mal richtig gemacht hat und wie man sie zuverlässig dazu kriegt. 
 
@@ -41,7 +51,7 @@ Das führt zu:
 - Profis sich ausgebremst fühlen. Sie erkennen das Potenzial, aber es bleibt für sie eher ein Spielzeug
 - Negativem ROI bei der Verwendung einer Technologie, z.B. durch Kosten für KI Lizenzen und extra Prüfungsaufwand
 
-### Angebot
+## Angebot
 
 <meta: formuliere nicht technisch>
 WICHTIG: Sharpintent ist nich perfekt. Es macht Ergebnisse nicht prüfbar, es unterstützt bei der Präzisierung, das muss bei der Formula
@@ -61,11 +71,11 @@ SharpIntent wird als web-basierte SAAS Lösung angeboten.
 
 
 
-### Nutzen
+## Nutzen
 
 Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen an die Technologie werden angepasst. Berührungsängste und Bedenken werden reduziert. Menschen und Unternehmen können Produktivität verlässlicher steigern. Riskio der Verwendung von Sprachmodellen reduziert sich.
 
-### Kernfähigkeiten
+## Kernfähigkeiten
 
 - Strukturierte Intent-Deklaration: System zur Erfassung von Aufgaben in einem spezialisierten Datenmodell, das eine präzise Bearbeitung und Revision ermöglicht. Wichtig ist hier insbesondere eine Benutzerführung die so aktiv unterstützt, dass es sich für den Nutzer nicht wie unnötiger Mehraufwand am Anfang anfühlt.
 
@@ -80,9 +90,9 @@ Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen 
 - Anweisungsoptimierung: Algorithmen zur iterativen Verbesserung der Anweisungen an Sprachmodells für maximale Modell-Performance.
 
 
-## 3. Vertrieb & Wettbewerb
+# Vertrieb & Wettbewerb
 
-### Kunden
+## Kunden
 SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität wichtig ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region. Es ist sowohl für einfache, als auch für kompliziertere Aufgaben gedacht.
 
 
@@ -108,7 +118,7 @@ Geografie:
 - Global, initial in Englisch und Deutsch
 
 
-### Vertrieb und Kommunikation
+## Vertrieb und Kommunikation
 
 Go-to-Market-Strategie: Produktgetriebenes Wachstum mit Content-Unterstützung
 
@@ -197,7 +207,7 @@ Tonalität: Sachlich, problemorientiert, keine Übertreibungen. Spricht die Frus
 Sprache: Englisch als primäre Marktsprache (globale Reichweite), Deutsch für DACH-spezifische Inhalte. KI unterstützte Übersetzung in alle anderen Sprachen.
 
 
-### Markt & Wettbewerb
+## Markt & Wettbewerb
 * **Marktgröße:** Einschätzung Marktvolumen und Wachstumstrends.
 
 Der Markt für Lösungen im den traditionelle Begriff "Prompt Engineering" wächst dynamisch: Für den globalen Markt wird ein Anstieg von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) erwartet (Quelle: Fortune Business Insights, https://www.fortunebusinessinsights.com/prompt-engineering-market-109382 ). Das entspricht einer prognostizierten jährlichen Wachstumsrate (CAGR) von etwa 32–33% (Quellen: diverse Analysten, https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report ). Innerhalb des Gesamtmarkts gewinnen insbesondere Prompt-Optimization-Tools an Bedeutung; dieses Segment wird für 2024 auf einen Marktanteil von ca. 31% geschätzt (Quelle: Mordor Intelligence, https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market ).
@@ -251,9 +261,9 @@ Bestehende Tools optimieren den Output nachträglich oder bieten fertige Templat
 
 
 
-## 4. Team & Partner
+# Team & Partner
 
-### Gründer\*innen & Team
+## Gründer\*innen & Team
 
 **Wer ist in deinem Team?**
 
@@ -307,7 +317,7 @@ Vor diesem Hintergrund stellt die geplante Selbstständigkeit für den Gründer 
 - Dienste wie Rechts- und Steuerberatung werden situative hinzugezogen
 - Bei positiver Entwicklung werden Mitarbeiter zur Ausbau des Unternehmens eingestellt.
 
-### Werte
+## Werte
 
 **Welche Werte lebt dein Unternehmen?**
 
@@ -330,7 +340,7 @@ Unwichtig?
 	•	Abhängigkeit von einzelnen Experten oder implizitem Wissen.
 
 
-### Partner
+## Partner
 
 * **Netzwerk:** Lieferanten, Distributoren oder Technologiepartner.
 - [Siehe business_model_canvas.md]
@@ -351,9 +361,9 @@ Unwichtig?
 Aus der professionellen Karriere des Gründers gibt es eine Vielzahl an Kontakten zu erfahrenen Experten aus unterschiedlichen Funktionen, die dem Vorhaben unterstützend gegenüber stehen. 
 
 
-## 5. Unternehmen
+# Unternehmen
 
-### Produktion (Kernaktivitäten)
+## Produktion (Kernaktivitäten)
 
 **Wie entsteht das, was du anbietest?**
 
@@ -395,7 +405,7 @@ Unterschiede:
 
 
 
-### Standort
+## Standort
 
 **Wo willst du dein Unternehmen aufbauen?**
 
@@ -416,7 +426,7 @@ keine
 
 
 
-### Rechtsform & Vorschriften
+## Rechtsform & Vorschriften
 
 **Was musst du formal beachten?**
 <auch in exec summary>
@@ -431,7 +441,7 @@ Mittelfristig: UG und GmbH
 EU-AI Act
 
 
-### Risiken
+## Risiken
 
 **Was könnte die Entwicklung deines Unternehmens behindern?**
 
@@ -505,11 +515,9 @@ Gegenmaßnahmen
 
 
 
-## 6. Finanzen
+# Finanzen
 
-## Finanzen (Abschnitt 6)
-
-### Ertragsquellen/Umsatz
+## Ertragsquellen/Umsatz
 
 **Wofür und wann fließt Geld an dich?**
 
@@ -520,7 +528,7 @@ Gegenmaßnahmen
 
 Die Erlöse des Unternehmens entstehen aus der Nutzung eines digitalen Dienstes, der über wiederkehrende Entgeltmodelle sowie nutzungsabhängige Zusatzleistungen abgerechnet wird.
 
-#### Art der Ertragsquellen
+### Art der Ertragsquellen
 Die Einnahmen setzen sich aus folgenden Komponenten zusammen:
 	1.	Abonnementbasierte Entgelte
 Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnements nutzen. Die Abonnements beinhalten jeweils ein definiertes Nutzungsvolumen.
@@ -528,7 +536,7 @@ Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnemen
 Zusätzlich zu den Abonnements besteht die Möglichkeit, Guthabenpunkte (Credits) zu erwerben. Diese Guthabenpunkte ermöglichen eine über das im Abonnement enthaltene Nutzungsvolumen hinausgehende Nutzung.
 Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider.
 
-#### Nutzergruppen und Preismodell
+### Nutzergruppen und Preismodell
 Zur Strukturierung der Nachfrage werden drei Nutzergruppen unterschieden:
 	•	Trial-/Freemium-Nutzer
 Diese Nutzer erhalten einen kostenlosen, funktional begrenzten Zugang zum Dienst. Die Nutzung ist mengenmäßig beschränkt. Nach Erreichen der Obergrenze ist für eine weitere Nutzung der Abschluss eines kostenpflichtigen Abonnements erforderlich.
@@ -540,21 +548,21 @@ Premium-Nutzer zahlen ein monatliches Entgelt von 100 Euro. Dieses Abonnement be
 Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann.
 Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
 
-#### Zahlungszeitpunkt
+### Zahlungszeitpunkt
 Die Abrechnung der Abonnements erfolgt im Voraus.
 Auch der Erwerb von Guthabenpunkten erfolgt vor der Nutzung. Dadurch entstehen keine Forderungsausfälle aus laufender Nutzung.
 
-#### Preisfindung und Markteinordnung
+### Preisfindung und Markteinordnung
 Die initiale Preisstruktur orientiert sich an, vergleichbaren marktüblichen Preismodellen, sowie den zugrunde gelegten Kostenannahmen.
 
 In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
 Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
 
-#### Umsatzplan
-Der nachfolgende Umsatzplan bildet die geplanten Einzahlungen aus Umsätzen (Cash) auf Monatsbasis für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
-<Tabelle Monat, Umsatz/>
+### Umsatzplan
+Der nachfolgende Umsatzplan bildet die geplanten Umsätze auf Monatsbasis für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
+<Tabelle Monat, Total Revenue from Umsatz from March 2026 to end of 2028/>
 
-### Kosten
+## Kosten
 
 **Wofür gibst du Geld aus?**
 
@@ -564,57 +572,61 @@ Der nachfolgende Umsatzplan bildet die geplanten Einzahlungen aus Umsätzen (Cas
 - Wie hoch sind die Personalausgaben für deine Mitarbeiter\*innen?
 - Wie hoch sind die Betriebsausgaben (z.B. Miete, Energiekosten, Versicherungen)?
 
+<take literally>
 
 Die Kostenplanung umfasst ausschließlich betriebsnotwendige Aufwendungen. Die Kostenstruktur weist einen hohen Anteil variabler oder kurzfristig beeinflussbarer Kosten auf. Die einzelnen Kostenpositionen sind im Excel-Sheet „Kosten“ detailliert dargestellt.
 
 Kostenstruktur und Kostenarten
 Die betrieblichen Ausgaben setzen sich aus folgenden Kostenblöcken zusammen:
 
-#### Marketing
+### Marketing
 Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots.
 (Zusammenfassung der Marketingkosten aus dem Excel-Sheet „Kosten“)
-<Zusammenfassung Marketing kosten im ersten Jahr aus excel sheet Kosten/>
+<Zusammenfassung Marketing kosten 2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
-#### Direkte Kosten
+### Direkte Kosten
 Direkte Kosten entstehen im Zusammenhang mit der Leistungserbringung für Kunden.
-<Zusammenfassung Direkte Kosten aus excel sheet Kosten/>
+<Zusammenfassung Direkte Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
-#### Kosten der Produktentwicklung
+### Kosten der Produktentwicklung
 Diese Kosten betreffen die Weiterentwicklung und Pflege des digitalen Produkts.
-<Zusammenfassung Kosten Produktentwicklung aus excel sheet Kosten/>
+<Zusammenfassung Kosten Produktentwicklung  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
-#### Administrative Kosten
+### Administrative Kosten
 Administrative Kosten umfassen unter anderem Buchhaltung, rechtliche Grundlagen und sonstige betriebliche Verwaltungsaufwendungen.
-<Zusammenfassung Administratve Kosten aus excel sheet Kosten/>
+<Zusammenfassung Administratve Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
-#### IT-Infrastrukturkosten
+### IT-Infrastrukturkosten
 IT-Kosten entstehen insbesondere durch Hosting, Rechenleistung und technische Basisdienste.
-<Zusammenfassung IT Infrastruktur Kosten aus excel sheet Kosten/>
+<Zusammenfassung IT Infrastruktur Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
-#### Flexibilität der Kostenstruktur
+### Flexibilität der Kostenstruktur
 Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden.
 
-#### Umsatzabhängige (variable) Kosten
+### Umsatzabhängige (variable) Kosten
 Variable Kosten entstehen im Wesentlichen im Rahmen der Wertschöpfung für Kunden. Diese sind insbesondere abhängig von der Nutzung generativer KI-Dienste externer Anbieter. Weitere variable Kosten sind im Vergleich hierzu von untergeordneter Bedeutung.
 
-#### Personalkosten
+### Personalkosten
 Zum Zeitpunkt der Planung ist keine Einstellung von Mitarbeitenden vorgesehen.
 Sollte sich das Unternehmen positiv entwickeln, kann perspektivisch die Anstellung von Mitarbeitenden in den Bereichen Marketing oder Softwareentwicklung sinnvoll werden. Diese Annahme ist nicht Bestandteil der aktuellen Kostenplanung.
 
-#### Fixe Betriebsausgaben
+### Fixe Betriebsausgaben
 Klassische fixe Betriebsausgaben (z. B. Büro-Miete oder Energiekosten) fallen nur in geringem Umfang an.
 Als wesentliche laufende Betriebskosten sind insbesondere Aufwendungen für Rechenleistung zu nennen, die in den Bereichen Produktentwicklung, Marketing, IT-Infrastruktur und Administration anfallen.
 (Aufstellung gemäß Excel-Sheet „Kosten“)
 
 Die Fixkosten fallen überwiegend im Bereich der Produktentwicklung an und können bei Bedarf reduziert oder zeitlich verschoben werden.
 
+</take literally>
 
 
-### Privatentnahme
+## Privatentnahme
 Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?
 •	Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
 •	Wie viel Einkommenssteuer musst du zahlen? 
 
+
+<take literally>
 Der Gründer lebt in einem Vier-Personen-Haushalt (Ehepaar mit zwei Kindern im Alter von 3 und 6 Jahren). Die Ehepartnerin ist als Beamtin (Juristin) in der JVA Offenburg tätig. Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ nachvollziehbar dargestellt.
 
 Für die Aufnahme der Selbständigkeit wurden die monatlichen privaten Lebenshaltungskosten realistisch und konservativ kalkuliert. Die Sicherstellung des privaten Lebensunterhalts in der Anlaufphase erfolgt außerhalb der Unternehmensfinanzen durch eine Kombination aus dauerhaften privaten Einnahmen, dem Gründungszuschuss sowie privaten Rücklagen.
@@ -642,15 +654,23 @@ Die privaten Lebenshaltungskosten umfassen insbesondere:
 Die Kosten wurden realistisch und konservativ kalkuliert und sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt.
 
 
+
 Wie viel Einkommensteuer fällt an?
 Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt.
 Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
 Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet.
 
-<Auflistung Einnahmen und Ausgaben ohne Beträge aus "Private Finanzen"/>
+
+</take literally>
+
+<Tabelle Einnahmen außerhalb der Selbständigkeit: From "Private Finanzen",  take values under "Einnahmen außerhalb der Selbständigkeit (monatlich)" for years 2026-2028. />
+
+<Tabelle Private Ausgagen From "Private Finanzen",  take values under "Privatausgaben (monatlich)" for years 2026-2028. />
 
 
-### Kapitalbedarf & Finanzierung
+
+
+## Kapitalbedarf & Finanzierung
 Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
 •	Welche Investitionen sind für dein Unternehmen notwendig (z.B. Büroausstattung, Maschinen, Gebäude, Fahrzeuge)?
 •	Gibt es Sachen, die für dein Unternehmen notwendig sind, die du selbst beisteuerst? Wie viel sind sie noch wert (Sacheinlage, z. B. dein PC, dein Auto)?
@@ -662,19 +682,20 @@ Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
 •	Woher kommen die zusätzlichen Mittel, um deinen Kapitalbedarf decken zu können?
 
 
+<take literally, don't omit anything>
 Der Kapitalbedarf des Unternehmens ergibt sich aus den einmaligen Gründungskosten, den laufenden Betriebskosten in der Anlaufphase sowie einer angemessenen Liquiditätsreserve. Ziel der Finanzierung ist es, den Geschäftsbetrieb in der Startphase ohne Abhängigkeit von kurzfristigen Einnahmen aufrechterhalten zu können.
 
 #### Notwendige Investitionen
 Für den Geschäftsbetrieb sind keine physischen Anlagegüter wie Maschinen, Fahrzeuge oder Gebäude erforderlich.
 Zu Beginn der Selbständigkeit liegt der Schwerpunkt auf dem Zeitaufwand für die Entwicklung des Produkts sowie dem Aufbau der Online-Präsenz. Diese Tätigkeiten sind kapitalarm und verursachen überwiegend laufende, variable Kosten, jedoch keine hohen Anfangsinvestitionen.
 
-#### Sacheinlagen
+### Sacheinlagen
 Private IT-Ausrüstung (insbesondere Laptop, Desktop-Computer und Monitor) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt.
 Es handelt sich um bereits vorhandene Arbeitsmittel. Eine gesonderte Finanzierung oder Ersatzbeschaffung ist hierfür nicht vorgesehen.
 
 
 
-#### Einmalige Gründungskosten
+### Einmalige Gründungskosten
 Im Rahmen der Unternehmensgründung fallen einmalige Kosten an, insbesondere für:
 	•	Gebühren im Zusammenhang mit der Gewerbeanmeldung,
 	•	Markenschutz,
@@ -684,16 +705,16 @@ Im Rahmen der Unternehmensgründung fallen einmalige Kosten an, insbesondere fü
 Diese Kosten sind einmalig und im Excel-Sheet „Kosten“ berücksichtigt.
 
 
-#### Kapitalbedarf für den laufenden Betrieb (Anlaufphase)
+### Kapitalbedarf für den laufenden Betrieb (Anlaufphase)
 Zur Sicherstellung des laufenden Geschäftsbetriebs in der Anlaufphase werden Mittel zur Deckung der monatlichen Betriebskosten benötigt.
 Die geplanten monatlichen Kosten für das Jahr 2026 sind im Excel-Sheet „Kosten“ detailliert aufgeschlüsselt.
 
-<Berechne und stelle als Tabelle dar: monatliche kosten in 2026/>
+<Berechne und stelle als Tabelle dar: monatliche kosten in 2026 ab März from sheet Kosten, line: Total/>
 
 Die Kostenstruktur ist so ausgestaltet, dass der Geschäftsbetrieb bei Bedarf mit reduziertem Kostenumfang fortgeführt werden kann.
 
 
-#### Liquiditätsreserve
+### Liquiditätsreserve
 Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von 2000 Euro eingeplant.
 Diese dient dazu,
 	•	kurzfristige zeitliche Verschiebungen zwischen Aus- und Einzahlungen auszugleichen,
@@ -703,33 +724,34 @@ Diese dient dazu,
 Die Liquiditätsreserve ist konservativ bemessen und im Liquiditätsplan berücksichtigt.
 
 
-#### Eigene Mittel (Geldeinlagen)
+### Eigene Mittel (Geldeinlagen)
 Der Gründer bringt eigene finanzielle Mittel in das Unternehmen ein.
 Die geplanten privaten Einlagen erfolgen monatlich und sind im Excel-Sheet „Liquidität“ nachvollziehbar dargestellt. Diese Einlagen dienen der Deckung des laufenden Kapitalbedarfs in der Anlaufphase.
-<Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität>
+<Tabelle: Private Einlagen, monatlich, aus Sheet Liquidität für March-December 2026>
 
 
-#### Weitere Finanzierungsquellen
+### Weitere Finanzierungsquellen
 Zur Deckung des Kapitalbedarfs werden keine externen Finanzierungsinstrumente wie Bankdarlehen oder Beteiligungskapital eingesetzt.
 
 Neben den eigenen Einlagen greift der Gründer auf den Gründungszuschuss sowie private Rücklagen zurück, um den privaten Lebensunterhalt während der Anlaufphase sicherzustellen. Der Gründungszuschuss und die privaten Rücklagen sind nicht Bestandteil der Unternehmensfinanzierung und werden nicht zur Deckung betrieblicher Ausgaben verwendet.
 
+</take literally>
 
-### Rentabilität
+## Rentabilität
 
-<take with minimal changes>
+<take literally, don't omit anything>
 Die Rentabilitätsvorschau basiert auf der vorliegenden Finanzplanung und stellt die geplante wirtschaftliche Entwicklung des Einzelunternehmens dar. Dargestellt wird ausschließlich die betriebliche Ergebnislage vor Steuern.
 
-#### Jahresübersicht (gemäß Finanzplanung)
+### Jahresübersicht (gemäß Finanzplanung)
 
 <Tabelle "Rentabilität" erstellen basiered auf Zahlen in sheet Rentabilität, Spalten: Jahr | Umsatz (EUR) | Variable Kosten (EUR) | Fixkosten (EUR) | Betriebsergebnis vor Steuern (EUR) >
 
 
-#### Einordnung der Ergebnisse
+### Einordnung der Ergebnisse
 
 In der Anlaufphase im Jahr 2026 weist das Unternehmen ein negatives Betriebsergebnis vor Steuern aus. Ursache hierfür sind die fixen Aufbaukosten bei gleichzeitig noch geringem Umsatzniveau.
 
-Gemäß Planung wird ab Februar 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab August 2027 positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
+Gemäß Planung wird ab Februar 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab <berechne Monat für positive Rentabilität - Zeile Monatsergerbnis> positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
 
 Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten steigen im Planungszeitraum nur moderat an. Ab dem Jahr 2027 decken die Erlöse sowohl die variablen Kosten als auch die laufenden Fixkosten.
 
@@ -737,33 +759,34 @@ Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten stei
 
 Zur Darstellung des Kosten-Erlös-Verhältnisses werden die Bruttomarge sowie die Fixkostenquote herangezogen. Die Kennzahlen basieren ausschließlich auf der vorliegenden Finanzplanung und sind auch im Reiter "Rentabilität" aufgeführt.
 
-#### Kennzahlenübersicht (gemäß Finanzplanung)
-
+Kennzahlenübersicht (gemäß Finanzplanung)
 <Tabelle "Kosten zu Erlösen" erstellen basiered auf Zahlen in sheet Rentabilität, Spalten: Jahr | Bruttomarge | Fixkostenquote  >
 
 Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich.
 
-#### Einordnung des Unternehmerlohns
+### Einordnung des Unternehmerlohns
 
 Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitte "Entnahmen" separat dargestellt.
-</take with minimal changes>
+</take literally>
 
 
-### Liquidität
+## Liquidität
 Wie entwickelt sich dein Kontostand?
 Wie entwickelt sich die Liquidität deines Unternehmens?
 Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte 
 
-<take with minimal changes>
+<take literally calculate missing values, don't omit anything>
 Im Jahr 2026 werden neben den ersten Umsätzen private Einlagen berücksichtigt. In diesem Zeitraum erfolgen keine Privatentnahmen, um den Aufbau des Unternehmens nicht durch laufende Entnahmen zu belasten. Die privaten Einlagen sind zeitlich begrenzt und dienen ausschließlich der Sicherstellung der Zahlungsfähigkeit in der Anlaufphase.
 
 Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen vorgesehen. Die Entnahmen orientieren sich an der Entwicklung der Umsätze und werden so angesetzt, dass die Liquidität des Unternehmens durchgehend positiv bleibt. Ab dem Jahr 2028 wird eine konstante monatliche Privatentnahme zugrunde gelegt.
 
-Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand <berechnen>, zum Jahresende 2027  <berechnen> und zum Jahresende 2028  <berechnen>. Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau bei gleichzeitig konstant angesetzten Privatentnahmen und dient dem Aufbau eines finanziellen Puffers zur Absicherung des laufenden Geschäftsbetriebs.
+Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand <berechnen liquidität nach December 2026>, zum Jahresende 2027  <berechnen liquidität nach December 2027> und zum Jahresende 2028  <berechnen liquidität nach December 2028>. 
+
+Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau bei gleichzeitig konstant angesetzten Privatentnahmen und dient dem Aufbau eines finanziellen Puffers zur Absicherung des laufenden Geschäftsbetriebs.
+</take literally>
 
 Der nachfolgende Auszug zeigt den monatlichen Liquiditätsverlauf für den Zeitraum 03/2026 bis 12/2028. Die vollständige Liquiditätsplanung ist im Excel-Sheet „Liquidität“ dargestellt.
-<table: Monat | Liquidität Monatsanfang | Einzahlungen Umsatz (Cash) | Private Einlagen | Auszahlungen (Summe) | Privatentnahme | Liquidität Monatsende / >
+<table: Monat | Liquidität Monatsanfang | Einzahlungen / Umsatz (EUR) | Private Einlagen | Gesamtkosten (EUR) [von Kosten Sheet] | Entnahmen | Liquidität Monatsende / >
 
-</take with minimal changes>
 
 

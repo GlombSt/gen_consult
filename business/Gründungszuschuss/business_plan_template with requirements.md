@@ -1,11 +1,6 @@
-# Mein Businessplan
-
-## 1. Executive Summary
-
-### Was hast du vor?
+# Executive Summary
 
 Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und knapp die wichtigsten Aspekte deines Vorhabens aufzählt.
-
 - Was ist der Kern deiner Idee?
 - Was bietest du an?
 - Wer sind deine Kunden?
@@ -15,24 +10,23 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wofür benötigst du fremdes Kapital und wie viel?
 
 
+# Geschäftsidee
 
-## 2. Geschäftsidee
-
-### Angebot
+## Angebot
 
 **Was bietest du an?**
 
 - Was ist dein Angebot?
 - Was genau verkaufst du damit an deine Kunden?
 
-### Nutzen
+## Nutzen
 
 **Warum begeistert dein Angebot die Kunden?**
 
 - Welche Aufgabe nimmst du deinen Kunden ab bzw. womit machst du ihnen das Leben einfacher oder schöner?
 - Warum wird dein Angebot für deine Kunden nützlich sein?
 
-### Kernfähigkeiten
+## Kernfähigkeiten
 
 **Was kannst du gut?**
 
@@ -40,9 +34,9 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Welche Fähigkeiten musst du/müsst ihr aufbauen?
 
 
-## 3. Vertrieb & Wettbewerb
+# Vertrieb & Wettbewerb
 
-### Kunden
+## Kunden
 
 **Wer sind deine Kunden?**
 
@@ -50,7 +44,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 * **Segmentierung:** Demografie, Psychografie, B2B/B2C-Spezifika.
 
 
-### Vertrieb und Kommunikation
+## Vertrieb und Kommunikation
 
 **Wie erreichst du deine Kunden?**
 
@@ -58,7 +52,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wie kommunizierst du mit deinen Kunden?
 - Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
 
-### Markt & Wettbewerb
+## Markt & Wettbewerb
 
 **Wie ist die Markt- und deine Wettbewerbssituation?**
 
@@ -68,9 +62,9 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wie wird sich die Branche voraussichtlich entwickeln?
 
 
-## 4. Team & Partner
+# Team & Partner
 
-### Gründer\*innen & Team
+## Gründer\*innen & Team
 
 **Wer ist in deinem Team?**
 
@@ -80,14 +74,14 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wie viele Mitarbeiter\*innen benötigst du dafür?
 - Welche Qualifikation sollten die Mitarbeiter\*innen haben?
 
-### Werte
+## Werte
 
 **Welche Werte lebt dein Unternehmen?**
 
 - Was ist dir wichtig, was unwichtig?
 - Wofür soll dein Unternehmen stehen?
 
-### Partner
+## Partner
 
 **Welche externen Schlüsselpartner brauchst du?**
 
@@ -97,9 +91,9 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Welche Kontakte hast du, die für dein Vorhaben nützlich sind?
 
 
-## 5. Unternehmen
+# Unternehmen
 
-### Produktion (Kernaktivitäten)
+## Produktion (Kernaktivitäten)
 
 **Wie entsteht das, was du anbietest?**
 
@@ -107,7 +101,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Was davon machst du selbst, was deine Kunden, was deine Partner?
 - Wie unterscheidet sich dein Prozess von dem deiner Wettbewerber?
 
-### Standort
+## Standort
 
 **Wo willst du dein Unternehmen aufbauen?**
 
@@ -116,14 +110,14 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Welche Räumlichkeiten stehen dir zur Verfügung?
 - Welche Anpassungen musst du noch vornehmen?
 
-### Rechtsform & Vorschriften
+## Rechtsform & Vorschriften
 
 **Was musst du formal beachten?**
 
 - In welcher Rechtsform wirst du das Unternehmen gründen?
 - Welche besonderen Vorschriften (z.B. Zulassungen und gewerbliche Vorschriften) musst du beachten?
 
-### Risiken
+## Risiken
 
 **Was könnte die Entwicklung deines Unternehmens behindern?**
 
@@ -132,9 +126,9 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Mit welchen Maßnahmen planst du den Problemen und Risiken zu begegnen?
 
 
-## 6. Finanzen
+# Finanzen
 
-### Ertragsquellen/Umsatz
+## Ertragsquellen/Umsatz
 
 **Wofür und wann fließt Geld an dich?**
 
@@ -143,7 +137,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?
 
 
-### Kosten
+## Kosten
 
 **Wofür gibst du Geld aus?**
 
@@ -155,7 +149,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 
 > **Hinweis:** Bei Kapitalgesellschaften kann ein Geschäftsführergehalt eingeplant werden, bei Personengesellschaften wird deine Entlohnung hingegen im Kapitel "Privatentnahme" erfasst.
 
-### Privatentnahme
+## Privatentnahme
 
 **Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?**
 
@@ -165,11 +159,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 - Privater Finanzbedarf (private monatliche Kosten als Tabelle), typisch für einen Monat im ersten Jahr (nach der Gründung). Bitte beachten Sie die Kranken- und Pflegepflichtversicherungen ab der Gründung, sowie die Einkommenssteuer und die Altersvorsorge
 
 
-> **Hinweis:** Eine grobe Planung kannst du auf Basis der Rentabilitätsvorschau vornehmen.
-
-> **Praxistipp:** Für das Haushaltsgeld (inkl. Kosten für Telefon, Internet, Freizeit und Unterhaltung) solltest du pauschal mind. 600 Euro für die erste Person und 200 Euro für jede weitere Person deines Haushalts kalkulieren. Fahrzeugkosten beinhalten den Kraftstoffverbrauch, Ausgaben für Steuer, Versicherung, Wartung und Reparatur. Insgesamt solltest du mind. 250 Euro pro Auto berechnen.
-
-### Kapitalbedarf & Finanzierung
+## Kapitalbedarf & Finanzierung
 
 **Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?**
 
@@ -186,7 +176,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 * Detaillierter Umsatzplan auf Monatsbasis mit Erläuterung als Tabelle für 3 Jahre (Rumpfjahr + 2 Jahre auf Monatsbasis)
 
 
-### Rentabilität
+## Rentabilität
 
 **Wie viel Gewinn machst du?**
 
@@ -196,7 +186,7 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 * Rentabilitätsvorschau/Ertragsvorschau als Tabelle für 3 Jahre (Prognose der zu erwartenden Umsätze und der betrieblichen Kosten als Gegenüberstellung)
 
 
-### Liquidität
+## Liquidität
 
 **Wie entwickelt sich dein Kontostand?**
 

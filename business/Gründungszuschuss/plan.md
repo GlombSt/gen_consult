@@ -96,7 +96,22 @@ To be created or populated as part of the task. May be empty at start.
    - Maintain a short “locked terms” list (product name, offer names, key labels) derived from the authoritative sources and use those terms consistently. If sources conflict, prefer `business_plan_input.md` and capture the conflict as an `open_questions.md` item.
 
 
-4. **Rewrite / Correction Loop**
+4. **Take-literally Integrity Check (must be done before rewrite)**
+   - Purpose: enforce that all `<take literally>...</take literally>` blocks from `business_plan_input.md` are carried into `output/business_plan.md` without omissions or paraphrasing.
+   - Treat each `<take literally>...</take literally>` block as a **must-include** text block. The markup itself must not appear in `output/business_plan.md`, but the block content must.
+
+   **Verification procedure (mandatory)**
+   - Extract all `<take literally>...</take literally>` blocks from `business_plan_input.md` in document order.
+   - Normalize for comparison: collapse repeated whitespace and normalize line breaks in both source blocks and `output/business_plan.md`.
+   - For each block: verify that the normalized block text occurs as a contiguous substring in `output/business_plan.md`.
+
+   **Failure handling (hard fail)**
+   - If any block is missing or shortened:
+     - Add a bullet to `open_questions.md` that includes: section context + the exact missing block (verbatim) + where it should appear.
+     - Mark the corresponding `coverage_checklist.md` row(s) as `information_missing` with a note `take literally missing`.
+     - The run is **not complete**. Do not proceed to the rewrite loop until all missing blocks are present in `output/business_plan.md`.
+
+5. **Rewrite / Correction Loop**
    - Apply `writing-correction-loop_policy.txt`
    - Revise only wording and phrasing
 
@@ -185,17 +200,13 @@ This file (`business_plan.md`) is the single source of truth and is intended for
 Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with stable tables, headings, and page breaks.
 
 #### Headings & Structure
-- Use exactly **one** H1 at the top: `# Mein Businessplan`
-- Chapters must be **H2** (`## 1. ...`, `## 2. ...` ...), sub-sections **H3**, sub-sub-sections **H4**
+- Chapters must be **H1** (`## 1. ...`, `## 2. ...` ...), sub-sections **H2**, sub-sub-sections **H3**
 - Do not “jump” heading levels (e.g. H2 → H4)
 - Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. (The template may contain `---`; do not carry them over—use headings and/or explicit page breaks instead.)
 
-#### Page breaks
-- Use `\newpage` (or `\pagebreak`) on its own line for controlled page breaks (e.g., before Financials/Appendix).
-- Do not rely on manual line breaks for layout.
-
 #### Tables (most important for audit)
-- Use **grid tables** only.
+- Use **pipe tables** only.
+- rightaline currency values
 - Never split a single logical table into “table + loose lines below”. If something does not fit, create a second table or add a paragraph.
 - Avoid `|` inside cells; if needed, escape as `\|`.
 - Keep number formats consistent (German: thousands `.` and decimal `,`, e.g. `7.004,00`).
