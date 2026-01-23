@@ -2,13 +2,15 @@
 
 ## 1. Executive Summary
 
+<formulierung: nicht technisch, Fliesstext ohne Stickpunkte>
 
-<meta: wichtige finanzielle Aspekte>
-Summary sollte am ende enthalten:
+<finanzielles für Exec Summary>
 - wann ist der break even vor entnahmen
 - ab wann kann der Gründer seinen Lebensunterhalt bestreiten, rentabilität nach entnahmen
 - wieviel investiert der Unternehmer selbst (siehe "Finanzielle MIttel aus Grüngungszuschuss und privaten Rücklagen (jährlich)" aus excel)
-</meta: formuliere nicht technisch>
+- Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt. Der geplante Arbeitsumfang beträgt mind. 40 Wochenstunden.
+</finanzielles für Exec Summary>
+</formulierung: nicht technisch, Fliesstext ohne Stickpunkte>
 
 ## 2. Geschäftsidee
 
@@ -203,7 +205,7 @@ Parallel dazu steigt die praktische Nutzung von Generativer KI stark: Weltweit w
 
 
 Markt (TAM/SAM/SOM)
-Gesamtmarkt (TAM): Alle professionellen GenAI-Nutzer weltweit (~500 Mio. ChatGPT-Nutzer/Monat, Quelle)
+Gesamtmarkt (TAM): Alle professionellen GenAI-Nutzer weltweit (>500 Mio. ChatGPT-Nutzer/Monat, Quelle: https://firstpagesage.com/seo-blog/chatgpt-usage-statistics/?utm_source=chatgpt.com)
 
 Relevanter Teil (SAM): 
 - Wissensarbeiter in Unternehmen, die regelmäßig komplexe Aufgaben mit LLMs bearbeiten (~50–100 Mio.) 
@@ -211,7 +213,7 @@ Relevanter Teil (SAM):
 
 Erreichbarer Teil (SOM): (Jahr 1–3):
 - Early Adopters mit hohem Leidensdruck, erreichbar über organische Kanäle (~500.000–2.500.000)
-- Herleitzung: von 50-100 Mio (SAM) - Organisch erreichbar
+- Herleitung: von 50-100 Mio (SAM) - Organisch erreichbar
 
 
 Einschätzung Branchenentwicklung:
@@ -417,9 +419,12 @@ keine
 ### Rechtsform & Vorschriften
 
 **Was musst du formal beachten?**
+<auch in exec summary>
+</auch in exec summary>
 
 - In welcher Rechtsform wirst du das Unternehmen gründen?
 Initial: Einzelunternehmen
+Der Geplanter Gründungstermin: 01.03.2026
 Mittelfristig: UG und GmbH
 
 - Welche besonderen Vorschriften (z.B. Zulassungen und gewerbliche Vorschriften) musst du beachten?
@@ -439,7 +444,7 @@ EU-AI Act
 
 
 
-<struktur der risiken beibehalten>
+<struktur der risiken beibehalten, gut formatieren>
 #### Risiko Finanzielle Reichweite
 Verzögerter Break-Even durch langsamere Kundenakquise bei gleichzeitig fixen Infrastruktur- und Druck auf Entnahmen für Lebensunterhalt.
 
@@ -455,7 +460,7 @@ Gegenmaßnahmen
 - Frühe Monetarisierung: Conversion-Fokus (Freemium-Modell) ab dem ersten Quartal.
 
 2. Strategische Reserve: Consulting-Option Sollte die Liquidität unter eine Reserve von 3 Monaten fallen (bei < 200 Kunden), wird kurzfristig die vorhandene Expertise im Bereich KI-Implementierung monetarisiert.
-- Einordnung: Consulting dient rein als Fallback-Option zur Kapitalsicherung, nicht als hybrides Geschäftsmodell, um den Fokus auf die Skalierung des SaaS-Produkts nicht zu gefährden.
+- Einordnung: Consulting dient rein als Fallback-Option zur Kapitalsicherung, nicht als Teil des regulären Geschäftsmodell, um den Fokus auf die Skalierung des SaaS-Produkts nicht zu gefährden.
 - Der Gründer hat langjährige Consulting Erfahrung, die auch für das Geschäftsfeld dieser Unternehmung anwendbar ist
 
 3. Controlling & Exit-Strategie
@@ -496,20 +501,13 @@ Gegenmaßnahmen
 
 3. Shift zu Compliance: Positionierung des Tools als unabhängige Instanz zur Risikobewertung und Qualitätssicherung (Vier-Augen-Prinzip), die aus Compliance-Gründen nicht von der generierenden KI selbst stammen darf.
 
-</struktur der risiken beibehalten>
+</struktur der risiken beibehalten, gut formatieren>
 
 
 
 ## 6. Finanzen
 
 ## Finanzen (Abschnitt 6)
-
-- **Gewinnschwelle/Break-even**: Ab wann wird das Unternehmen gemäß Finanzplanung profitabel (Monat/Jahr) und welche Annahmen sind dafür maßgeblich?
-- **Kapitalbedarf**: Höhe und Zusammensetzung des Kapitalbedarfs (Investitionen, Anlaufkosten, Liquiditätsreserve) als Zahlen aus `business-case-sheet.xlsx`.
-- **Finanzierung**: Welche Mittel werden konkret eingesetzt (Eigenmittel, ggf. Darlehen etc.) und in welcher Höhe (ohne Gründungszuschuss)?
-- **Privatentnahme**: Monatliche private Lebenshaltungskosten (Miete, Kranken-/Pflegeversicherung, Verpflegung, Mobilität etc.), Einkommensteuer und Altersvorsorge für das erste Jahr, inkl. Beispielmonat als Tabelle.
-
-
 
 ### Ertragsquellen/Umsatz
 
@@ -520,11 +518,9 @@ Gegenmaßnahmen
 *- Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?*
 
 
-
-
 Die Erlöse des Unternehmens entstehen aus der Nutzung eines digitalen Dienstes, der über wiederkehrende Entgeltmodelle sowie nutzungsabhängige Zusatzleistungen abgerechnet wird.
 
-Art der Ertragsquellen
+#### Art der Ertragsquellen
 Die Einnahmen setzen sich aus folgenden Komponenten zusammen:
 	1.	Abonnementbasierte Entgelte
 Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnements nutzen. Die Abonnements beinhalten jeweils ein definiertes Nutzungsvolumen.
@@ -532,7 +528,7 @@ Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnemen
 Zusätzlich zu den Abonnements besteht die Möglichkeit, Guthabenpunkte (Credits) zu erwerben. Diese Guthabenpunkte ermöglichen eine über das im Abonnement enthaltene Nutzungsvolumen hinausgehende Nutzung.
 Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider.
 
-Nutzergruppen und Preismodell
+#### Nutzergruppen und Preismodell
 Zur Strukturierung der Nachfrage werden drei Nutzergruppen unterschieden:
 	•	Trial-/Freemium-Nutzer
 Diese Nutzer erhalten einen kostenlosen, funktional begrenzten Zugang zum Dienst. Die Nutzung ist mengenmäßig beschränkt. Nach Erreichen der Obergrenze ist für eine weitere Nutzung der Abschluss eines kostenpflichtigen Abonnements erforderlich.
@@ -544,45 +540,29 @@ Premium-Nutzer zahlen ein monatliches Entgelt von 100 Euro. Dieses Abonnement be
 Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann.
 Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
 
-Zahlungszeitpunkt
+#### Zahlungszeitpunkt
 Die Abrechnung der Abonnements erfolgt im Voraus.
 Auch der Erwerb von Guthabenpunkten erfolgt vor der Nutzung. Dadurch entstehen keine Forderungsausfälle aus laufender Nutzung.
 
-Preisfindung und Markteinordnung
-Die initiale Preisstruktur orientiert sich an:
-	•	vergleichbaren marktüblichen Preismodellen,
-	•	der erwarteten durchschnittlichen Nutzung,
-	•	sowie den zugrunde gelegten Kostenannahmen.
+#### Preisfindung und Markteinordnung
+Die initiale Preisstruktur orientiert sich an, vergleichbaren marktüblichen Preismodellen, sowie den zugrunde gelegten Kostenannahmen.
 
 In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
 Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
 
-
-
+#### Umsatzplan
+Der nachfolgende Umsatzplan bildet die geplanten Einzahlungen aus Umsätzen (Cash) auf Monatsbasis für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
+<Tabelle Monat, Umsatz/>
 
 ### Kosten
 
 **Wofür gibst du Geld aus?**
 
 - Wofür gibst du im Unternehmen wie viel Geld aus?
-
 - Wie flexibel sind diese Kosten?
-* Es ist möglich den Betrieb des Unternehmens zeitweise mit weniger als 1000 Euro Fixkosten / Monat fortzuführen. Es sind keine langfristigen Zahlungsverpflichtungen geplant.
-
-
 - Welche Kosten (z.B. Waren- oder Materialeinsatz) steigen oder fallen direkt mit dem Umsatz?
-* Variable Kosten bei der Wertschöpfung für Kunden sind im wesentlichen signifikant von der Nutzung Generativer KI von externen Dienstleistern. Andere Variable Kosten sind vernachlässigbar gering.
-
-Der Reiter "Kosten" in dem beigefügten Excel gibt einen detailierten Aufschluss zu den geplanten Kosten.
-
 - Wie hoch sind die Personalausgaben für deine Mitarbeiter\*innen?
-Bisher ist nicht geplant einen Mitarbeiter einzustellen. Sollte sich das Unternehmen positiv entwickeln ist jedoch eine Anstellung von Mitarbeitern für Marketing oder Softwareentwicklung lohnenswert.
-
 - Wie hoch sind die Betriebsausgaben (z.B. Miete, Energiekosten, Versicherungen)?
-Als wesentliche fixe Betriebskosten im klassischen Sinne ist der Einkauf von Rechenleistung für Produktentwicklug, Marketing, IT-Infrastruktur und Administrativa. <Aus Excel Kosten Sheet Aufstellung übernehmen/>
-
-Fixkosten liegen fallen im wesentlichen für Produktentwicklung und können bei Bedarf reduziert werden.
-
 
 
 Die Kostenplanung umfasst ausschließlich betriebsnotwendige Aufwendungen. Die Kostenstruktur weist einen hohen Anteil variabler oder kurzfristig beeinflussbarer Kosten auf. Die einzelnen Kostenpositionen sind im Excel-Sheet „Kosten“ detailliert dargestellt.
@@ -672,12 +652,10 @@ Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen b
 
 ### Kapitalbedarf & Finanzierung
 Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
-
 •	Welche Investitionen sind für dein Unternehmen notwendig (z.B. Büroausstattung, Maschinen, Gebäude, Fahrzeuge)?
 •	Gibt es Sachen, die für dein Unternehmen notwendig sind, die du selbst beisteuerst? Wie viel sind sie noch wert (Sacheinlage, z. B. dein PC, dein Auto)?
 •	Welche Kosten fallen einmalig bei der Gründung deines Unternehmens an (z. B. Warenerstausstattung, Gebühren für die Gewerbeanmeldung)?
 •	Wie viel Mittel benötigst du zur Gewährleistung des laufenden Betriebes in der Anlaufphase?
-
 •	Wie viel Liquiditätsreserve benötigst du als allgemeines Sicherheitspolster und um die Zeit zwischen Aus- und Einzahlungen innerhalb eines Monats überbrücken zu können?
 ????
 •	Wie viel Geld steuerst du selber bei (Geldeinlage)?
@@ -737,14 +715,9 @@ Zur Deckung des Kapitalbedarfs werden keine externen Finanzierungsinstrumente wi
 Neben den eigenen Einlagen greift der Gründer auf den Gründungszuschuss sowie private Rücklagen zurück, um den privaten Lebensunterhalt während der Anlaufphase sicherzustellen. Der Gründungszuschuss und die privaten Rücklagen sind nicht Bestandteil der Unternehmensfinanzierung und werden nicht zur Deckung betrieblicher Ausgaben verwendet.
 
 
-
-### Rentabilität
-<stelle kennzahlen aus sheet "Übersicht" dar, jährlich>
-
-
-
 ### Rentabilität
 
+<take with minimal changes>
 Die Rentabilitätsvorschau basiert auf der vorliegenden Finanzplanung und stellt die geplante wirtschaftliche Entwicklung des Einzelunternehmens dar. Dargestellt wird ausschließlich die betriebliche Ergebnislage vor Steuern.
 
 #### Jahresübersicht (gemäß Finanzplanung)
@@ -773,21 +746,15 @@ Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zune
 #### Einordnung des Unternehmerlohns
 
 Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitte "Entnahmen" separat dargestellt.
+</take with minimal changes>
 
 
 ### Liquidität
-•	Wie entwickelt sich die Liquidität deines Unternehmens?
 Wie entwickelt sich dein Kontostand?
+Wie entwickelt sich die Liquidität deines Unternehmens?
+Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte 
 
-Die ersten 18 Monate erfordern disziplinierten Umgang mit den liquiden Mitteln, d.h. genaue Verfolgung des Planes. Anschliessed ergibt sich eine Reserve von liquiden Mitteln.
-
-•	Hast du eine Liquiditätsreserve für unvorhergesehene Kosten und verzögerte Einzahlungen eingeplant?
-
-Ein Polster von 2000 Euro ist eingeplant.
-
-### Liquidität
-Wie entwickelt sich dein Kontostand?
-
+<take with minimal changes>
 Im Jahr 2026 werden neben den ersten Umsätzen private Einlagen berücksichtigt. In diesem Zeitraum erfolgen keine Privatentnahmen, um den Aufbau des Unternehmens nicht durch laufende Entnahmen zu belasten. Die privaten Einlagen sind zeitlich begrenzt und dienen ausschließlich der Sicherstellung der Zahlungsfähigkeit in der Anlaufphase.
 
 Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen vorgesehen. Die Entnahmen orientieren sich an der Entwicklung der Umsätze und werden so angesetzt, dass die Liquidität des Unternehmens durchgehend positiv bleibt. Ab dem Jahr 2028 wird eine konstante monatliche Privatentnahme zugrunde gelegt.
@@ -795,4 +762,8 @@ Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen vorgesehen. Die Ent
 Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand <berechnen>, zum Jahresende 2027  <berechnen> und zum Jahresende 2028  <berechnen>. Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau bei gleichzeitig konstant angesetzten Privatentnahmen und dient dem Aufbau eines finanziellen Puffers zur Absicherung des laufenden Geschäftsbetriebs.
 
 Der nachfolgende Auszug zeigt den monatlichen Liquiditätsverlauf für den Zeitraum 03/2026 bis 12/2028. Die vollständige Liquiditätsplanung ist im Excel-Sheet „Liquidität“ dargestellt.
+<table: Monat | Liquidität Monatsanfang | Einzahlungen Umsatz (Cash) | Private Einlagen | Auszahlungen (Summe) | Privatentnahme | Liquidität Monatsende / >
+
+</take with minimal changes>
+
 

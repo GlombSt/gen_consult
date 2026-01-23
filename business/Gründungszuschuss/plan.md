@@ -3,7 +3,7 @@
 ## Goal
 Generate a complete Businessplan for a **Gründungszuschuss** application that is suitable for review and confirmation by a fachkundige Stelle (IHK).
 
-You are teaming up with me to write a business plan that I use to receive a german "Gründungszuschuss". This plan.md explains your tasks. 
+You are teaming up with me to write a business plan that I use to receive a german "Gründungszuschuss". This plan.md explains your tasks. The business has not started yet and is in hte planning phase, i.e. is planning to develop a solution. Official start is March 1st, 2026.
 
 
 ---
@@ -16,7 +16,7 @@ Use inputs in the following order of precedence:
    Defines the required structure, section order, headings and questions that must be answered in each section. Do not change structure.
 
 2. `business_plan_input.md`  
-   Provides factual content and bullet points per section. Treat as ground truth.  Do not change facts, logic, or figures from here. The text contains XML Tags with instructions about how to present the content in the respective section. Example: <Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität/>
+   Provides factual content and bullet points per section. Treat as ground truth.  Do not change facts, logic, or figures from here. The text contains XML Tags with instructions about how to present the content in the respective section. Example: <Berechne und erkläre: Private Einlagen, monatlich aus Sheet Liquidität/> Follow these instructions precisely.
 
 3. `business_model_canvas.md`  
    Provides facts about the business idea in the structure of the business model canvas. Treat as additional ground truth for the generation.
@@ -59,7 +59,7 @@ To be created or populated as part of the task. May be empty at start.
    - Create a new file `business_plan.md` and apply the section structure from `business_plan_template with requirements.md` for each section write the text that answers the questions. 
    - Do not introduce new facts, estimates, or interpretations
    - **Synthesize, don't enumerate:** Treat input bullet points as raw material. Combine related points into coherent paragraphs. Avoid repeating the input structure verbatim. Write flowing prose that integrates multiple facts into single, well-constructed sentences.
-   - Write the section 1, Executive Summary, when sections 2 and 5 are complete.
+   - Write the section 1, Executive Summary, when sections 2 + 5 and 6 are complete.
    - If input for a section is missing: explicitly state what is missing in a file: "open_questions.md"
 
 2. **Coverage Checklist (Agent-owned, maintained during drafting)**
@@ -117,7 +117,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 
 - Output must be in German
 - Output a single, Businessplan document
-- Follow the template structure exactly
+- Follow the template structure exactly, but use page breaks for the first to levels of headlines
 - Do not include meta commentary, explanations, or notes
 - Do not restate style or policy rules in the document
 
@@ -126,12 +126,14 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 ## Writing Quality Rules
 
 - **Text over lists:** Where is helps understanding and readabilty, convert bullet-point input into flowing paragraphs. Use lists for genuinely enumerable items (e.g., product features, competitor tables).
-- **Synthesize related facts:** If multiple input points address the same topic, combine them into a single coherent statement.
 - **Avoid mechanical repetition:** Do not mirror the input structure. Reorganize information for readability and logical flow.
-- **One idea, one sentence:** Each sentence should convey a complete thought. Avoid run-on sentences.
+- **One idea, one sentence:** Each sentence should convey a complete thought. Avoid run-on sentences. Be concise
 - **Context before detail:** Start paragraphs with the main point, then elaborate.
 - When the input has sources (links) the sources must be presented in the document. Please validate that the link exists.
 - Use all information from the input, don't omit details. The input is intentionally very concise, but everything is chosen deliberately there, *so stick to the exact meaning that is conveyed in the input*
+- follow the instructions in XML Tags precisely.
+- if a paragraph from the input is already of high quality, only make minimal changes to it.
+- Don't state common knowledge, Bad: "Die Liquiditätsplanung stellt Ein- und Auszahlungen sowie die Entwicklung der Liquidität auf Monatsbasis dar."
 
 ### Example Transformation
 
@@ -174,7 +176,7 @@ Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with sta
 - Do not rely on manual line breaks for layout.
 
 #### Tables (most important for audit)
-- Use **pipe tables** only.
+- Use **grid tables** only.
 - Never split a single logical table into “table + loose lines below”. If something does not fit, create a second table or add a paragraph.
 - Avoid `|` inside cells; if needed, escape as `\|`.
 - Keep number formats consistent (German: thousands `.` and decimal `,`, e.g. `7.004,00`).
@@ -215,11 +217,12 @@ PDF should be exported manually from the generated DOCX (Word/LibreOffice), to k
 ## Phrasing preferences
 
 - In examples like this "Ich baue unter dem Namen „SharpIntent“" don't use the word "baue", other option "entwickle"
-- The output should not be a summary of the input, but a better version: it must read like the final business plan written by us (direct voice), not like a recap of input notes.
-- Avoid "input-referencing"/third-party phrasing like: "genannt/angegeben/laut Input/als Zielgruppen sind genannt/folgende Punkte wurden genannt...".
+- The output should not be a summary of the input, but a better version: it must read like the final business plan not like a recap of input notes.
+- Avoid "input-referencing" phrasing like: ".. laut Input ...". 
+- Do not replace specific terms from input with broader synonyms.
 - Quick examples:
   - Bad: "Als Zielgruppen sind genannt: Startups, KMU."
-  - Good: "Unsere Zielgruppen sind Startups und KMU." / "Zielgruppen: Startups, KMU."
+  - Good: "Zielgruppen sind Startups und KMU." / "Zielgruppen: Startups, KMU."
   - Bad: "(Angaben aus dem Input)"
   - Bad: "Der Input bewertet ..."
 
