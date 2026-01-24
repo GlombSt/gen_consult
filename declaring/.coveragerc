@@ -1,0 +1,123 @@
+# Coverage.py configuration
+# See: https://coverage.readthedocs.io/en/latest/config.html
+
+[run]
+# Measure code coverage for these paths
+source = app
+
+# Branch coverage (more thorough than statement coverage)
+branch = True
+
+# Don't include these files/directories in coverage
+omit =
+    */tests/*
+    */test_*.py
+    */__pycache__/*
+    */site-packages/*
+    */venv/*
+    */.venv/*
+    */conftest.py
+    */main.py
+    # Exclude generated files
+    */__init__.py
+    # Exclude migrations if you have them
+    */migrations/*
+    */alembic/*
+
+# Parallel execution (useful for CI/CD)
+parallel = False
+
+[report]
+# Precision of coverage percentages
+precision = 2
+
+# Show lines that weren't covered
+show_missing = True
+
+# Skip files with 100% coverage in reports
+skip_covered = False
+
+# Skip empty files
+skip_empty = True
+
+# Sort report by name
+sort = Name
+
+# Exclude lines from coverage (use these in code comments)
+exclude_lines =
+    # Standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code
+    def __repr__
+    def __str__
+
+    # Don't complain if tests don't hit defensive assertion code
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    if typing.TYPE_CHECKING:
+
+    # Don't complain about abstract methods
+    @(abc\.)?abstractmethod
+
+    # Don't complain about protocol methods
+    @(typing\.)?overload
+    @(typing_extensions\.)?overload
+
+    # Don't complain about defensive programming
+    raise ValueError
+    raise TypeError
+    raise KeyError
+
+    # Type checking blocks
+    if TYPE_CHECKING:
+
+# Ignore errors (set to False for strict mode)
+ignore_errors = False
+
+[html]
+# Directory for HTML report
+directory = htmlcov
+
+# Title for HTML report
+title = Declaring Backend Test Coverage
+
+[xml]
+# File name for XML report (for CI/CD tools)
+output = coverage.xml
+
+[json]
+# File name for JSON report
+output = coverage.json
+
+# Show execution contexts in JSON report
+show_contexts = True
+
+[paths]
+# Map different paths to same source (useful for Docker/CI)
+source =
+    app/
+    /app/
+    */app/
+
+[coverage:paths]
+# Combine coverage from different environments
+source =
+    app
+    */app
+
+# Coverage thresholds by component (enforced via pytest-cov)
+# Usage: pytest --cov-fail-under=80
+
+# Overall minimum: 80%
+# Models: 90%
+# Services: 85%
+# Repositories: 80%
+# Routers: 70%
+
+# To enforce these per-file thresholds, use pytest-cov with fail_under in pytest.ini
+# Or run: pytest --cov=app/items --cov-fail-under=85

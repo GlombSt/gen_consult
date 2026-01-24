@@ -1,0 +1,195 @@
+"""
+Unit tests for {domain} schemas.
+
+Tests API DTO validation and serialization.
+
+USAGE:
+1. Copy this file to tests/unit/{domain}/test_schemas.py
+2. Replace {Domain} with capitalized domain name (e.g., Item)
+3. Replace {domain} with lowercase domain name (e.g., item)
+4. Replace {entity} with entity name (e.g., item)
+5. Add/remove fields based on your schemas
+"""
+
+import pytest
+from pydantic import ValidationError
+
+from app.{domain}.models import {Domain}
+from app.{domain}.schemas import {Domain}CreateRequest, {Domain}Response, {Domain}UpdateRequest
+
+
+@pytest.mark.unit
+class Test{Domain}CreateRequest:
+    """Test {Domain}CreateRequest schema."""
+
+    def test_create_request_with_valid_data_succeeds(self):
+        """Test creating request with valid data."""
+        # Arrange & Act
+        request = {Domain}CreateRequest(
+            name="Test {Domain}",
+            # Add other required fields here
+        )
+
+        # Assert
+        assert request.name == "Test {Domain}"
+        # Add other assertions
+
+    def test_create_request_without_required_field_raises_validation_error(self):
+        """Test creating request without required field."""
+        # Arrange & Act & Assert
+        with pytest.raises(ValidationError) as exc_info:
+            {Domain}CreateRequest(
+                # Missing required field 'name'
+            )
+
+        assert "name" in str(exc_info.value)
+
+    def test_create_request_with_invalid_field_raises_validation_error(self):
+        """Test creating request with invalid field value."""
+        # Arrange & Act & Assert
+        with pytest.raises(ValidationError) as exc_info:
+            {Domain}CreateRequest(
+                name="Test",
+                price=-10.0  # Example: negative price
+            )
+
+        assert "price" in str(exc_info.value)
+
+    def test_create_request_with_defaults_sets_expected_values(self):
+        """Test default values are set correctly."""
+        # Arrange & Act
+        request = {Domain}CreateRequest(
+            name="Test {Domain}",
+            # Don't provide optional fields with defaults
+        )
+
+        # Assert
+        # Check default values are set
+        assert request.some_field is True  # Example default
+
+    def test_create_request_with_optional_fields_accepts_values(self):
+        """Test optional fields can be provided."""
+        # Arrange & Act
+        request = {Domain}CreateRequest(
+            name="Test {Domain}",
+            optional_field="Optional Value"
+        )
+
+        # Assert
+        assert request.optional_field == "Optional Value"
+
+
+@pytest.mark.unit
+class Test{Domain}UpdateRequest:
+    """Test {Domain}UpdateRequest schema."""
+
+    def test_update_request_with_partial_data_succeeds(self):
+        """Test updating with only some fields."""
+        # Arrange & Act
+        request = {Domain}UpdateRequest(name="New Name")
+
+        # Assert
+        assert request.name == "New Name"
+        # Other fields should be None
+        assert request.description is None
+
+    def test_update_request_with_all_fields_succeeds(self):
+        """Test updating with all fields."""
+        # Arrange & Act
+        request = {Domain}UpdateRequest(
+            name="New Name",
+            description="New Description",
+            # Add all updateable fields
+        )
+
+        # Assert
+        assert request.name == "New Name"
+        assert request.description == "New Description"
+
+    def test_update_request_with_empty_succeeds(self):
+        """Test creating update request with no fields."""
+        # Arrange & Act
+        request = {Domain}UpdateRequest()
+
+        # Assert
+        assert request.name is None
+        assert request.description is None
+
+    def test_update_request_with_invalid_field_raises_validation_error(self):
+        """Test update with invalid field value."""
+        # Arrange & Act & Assert
+        with pytest.raises(ValidationError) as exc_info:
+            {Domain}UpdateRequest(
+                price=-10.0  # Example: negative price
+            )
+
+        assert "price" in str(exc_info.value)
+
+
+@pytest.mark.unit
+class Test{Domain}Response:
+    """Test {Domain}Response schema."""
+
+    def test_from_domain_model_converts_correctly(self):
+        """Test converting domain model to response DTO."""
+        # Arrange
+        domain_{entity} = {Domain}(
+            id=1,
+            name="Test {Domain}",
+            # Add other fields
+        )
+
+        # Act
+        response = {Domain}Response.from_domain_model(domain_{entity})
+
+        # Assert
+        assert response.id == 1
+        assert response.name == "Test {Domain}"
+        assert response.created_at == domain_{entity}.created_at
+        # Add other assertions
+
+    def test_from_domain_model_with_none_optional_fields(self):
+        """Test converting model with None optional fields."""
+        # Arrange
+        domain_{entity} = {Domain}(
+            id=1,
+            name="Test {Domain}",
+            description=None
+        )
+
+        # Act
+        response = {Domain}Response.from_domain_model(domain_{entity})
+
+        # Assert
+        assert response.description is None
+
+    def test_response_excludes_sensitive_fields(self):
+        """Test that sensitive fields are not exposed in response."""
+        # Arrange
+        domain_{entity} = {Domain}(
+            id=1,
+            name="Test {Domain}",
+            # Add fields including sensitive ones
+        )
+
+        # Act
+        response = {Domain}Response.from_domain_model(domain_{entity})
+        response_dict = response.model_dump()
+
+        # Assert - Verify sensitive fields are NOT in response
+        assert "internal_id" not in response_dict
+        assert "deleted_at" not in response_dict
+        # Add checks for other sensitive fields
+
+    def test_response_serializes_to_json_correctly(self):
+        """Test response can be serialized to JSON."""
+        # Arrange
+        domain_{entity} = {Domain}(id=1, name="Test {Domain}")
+        response = {Domain}Response.from_domain_model(domain_{entity})
+
+        # Act
+        json_str = response.model_dump_json()
+
+        # Assert
+        assert '"id":1' in json_str or '"id": 1' in json_str
+        assert "Test {Domain}" in json_str

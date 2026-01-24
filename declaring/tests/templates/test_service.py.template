@@ -1,0 +1,289 @@
+"""
+Unit tests for {domain} service layer.
+
+Tests business logic with mocked dependencies.
+
+USAGE:
+1. Copy this file to tests/unit/{domain}/test_service.py
+2. Replace {Domain} with capitalized domain name (e.g., Item)
+3. Replace {domain} with lowercase domain name (e.g., item)
+4. Replace {entity} with entity name (e.g., item)
+5. Add/remove tests based on your service functions
+"""
+
+from unittest.mock import AsyncMock, MagicMock, patch
+
+import pytest
+
+from app.{domain}.events import {Domain}CreatedEvent, {Domain}DeletedEvent, {Domain}UpdatedEvent
+from app.{domain}.service import (
+    create_{entity},
+    delete_{entity},
+    get_all_{domain}s,
+    get_{entity},
+    update_{entity},
+)
+from tests.fixtures.{domain}s import (
+    create_test_{entity},
+    create_test_{entity}_create_request,
+    create_test_{entity}_update_request,
+)
+
+
+@pytest.mark.unit
+class TestGetAll{Domain}s:
+    """Test get_all_{domain}s service function."""
+
+    @pytest.mark.asyncio
+    async def test_get_all_{domain}s_returns_all_{domain}s(self):
+        """Test getting all {domain}s returns repository results."""
+        # Arrange
+        mock_{domain}s = [
+            create_test_{entity}(id=1, name="{Domain} 1"),
+            create_test_{entity}(id=2, name="{Domain} 2"),
+        ]
+        mock_repo = MagicMock()
+        mock_repo.find_all = AsyncMock(return_value=mock_{domain}s)
+
+        # Act
+        result = await get_all_{domain}s(mock_repo)
+
+        # Assert
+        assert len(result) == 2
+        assert result[0].name == "{Domain} 1"
+        assert result[1].name == "{Domain} 2"
+        mock_repo.find_all.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_get_all_{domain}s_with_empty_repository_returns_empty_list(self):
+        """Test getting all {domain}s from empty repository."""
+        # Arrange
+        mock_repo = MagicMock()
+        mock_repo.find_all = AsyncMock(return_value=[])
+
+        # Act
+        result = await get_all_{domain}s(mock_repo)
+
+        # Assert
+        assert result == []
+        mock_repo.find_all.assert_called_once()
+
+
+@pytest.mark.unit
+class TestGet{Domain}:
+    """Test get_{entity} service function."""
+
+    @pytest.mark.asyncio
+    async def test_get_{entity}_when_exists_returns_{entity}(self):
+        """Test getting a {entity} that exists."""
+        # Arrange
+        mock_{entity} = create_test_{entity}(id=1, name="Test {Domain}")
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=mock_{entity})
+
+        # Act
+        result = await get_{entity}(1, mock_repo)
+
+        # Assert
+        assert result is not None
+        assert result.id == 1
+        assert result.name == "Test {Domain}"
+        mock_repo.find_by_id.assert_called_once_with(1)
+
+    @pytest.mark.asyncio
+    async def test_get_{entity}_when_not_found_returns_none(self):
+        """Test getting a {entity} that doesn't exist."""
+        # Arrange
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
+
+        # Act
+        result = await get_{entity}(999, mock_repo)
+
+        # Assert
+        assert result is None
+        mock_repo.find_by_id.assert_called_once_with(999)
+
+
+@pytest.mark.unit
+class TestCreate{Domain}:
+    """Test create_{entity} service function."""
+
+    @pytest.mark.asyncio
+    async def test_create_{entity}_with_valid_data_returns_created_{entity}(self):
+        """Test creating a {entity} with valid data."""
+        # Arrange
+        request = create_test_{entity}_create_request(name="New {Domain}")
+        created_{entity} = create_test_{entity}(id=1, name="New {Domain}")
+        mock_repo = MagicMock()
+        mock_repo.create = AsyncMock(return_value=created_{entity})
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            result = await create_{entity}(request, mock_repo)
+
+            # Assert
+            assert result.id == 1
+            assert result.name == "New {Domain}"
+            mock_repo.create.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_create_{entity}_publishes_{entity}_created_event(self):
+        """Test creating a {entity} publishes {Domain}CreatedEvent."""
+        # Arrange
+        request = create_test_{entity}_create_request(name="New {Domain}")
+        created_{entity} = create_test_{entity}(id=1, name="New {Domain}")
+        mock_repo = MagicMock()
+        mock_repo.create = AsyncMock(return_value=created_{entity})
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            await create_{entity}(request, mock_repo)
+
+            # Assert - MANDATORY event testing
+            mock_bus.publish.assert_called_once()
+            published_event = mock_bus.publish.call_args[0][0]
+            assert isinstance(published_event, {Domain}CreatedEvent)
+            assert published_event.{entity}_id == 1
+            assert published_event.name == "New {Domain}"
+            assert published_event.event_type == "{entity}.created"
+
+
+@pytest.mark.unit
+class TestUpdate{Domain}:
+    """Test update_{entity} service function."""
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_when_exists_returns_updated_{entity}(self):
+        """Test updating an existing {entity}."""
+        # Arrange
+        existing_{entity} = create_test_{entity}(id=1, name="Old Name")
+        updated_{entity} = create_test_{entity}(id=1, name="New Name")
+        request = create_test_{entity}_update_request(name="New Name")
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_{entity})
+        mock_repo.update = AsyncMock(return_value=updated_{entity})
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            result = await update_{entity}(1, request, mock_repo)
+
+            # Assert
+            assert result is not None
+            assert result.name == "New Name"
+            mock_repo.find_by_id.assert_called_once_with(1)
+            mock_repo.update.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_when_not_found_returns_none(self):
+        """Test updating a non-existent {entity}."""
+        # Arrange
+        request = create_test_{entity}_update_request(name="New Name")
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            result = await update_{entity}(999, request, mock_repo)
+
+            # Assert
+            assert result is None
+            mock_repo.find_by_id.assert_called_once_with(999)
+            mock_bus.publish.assert_not_called()  # No event if not found
+
+    @pytest.mark.asyncio
+    async def test_update_{entity}_publishes_{entity}_updated_event(self):
+        """Test updating a {entity} publishes {Domain}UpdatedEvent."""
+        # Arrange
+        existing_{entity} = create_test_{entity}(id=1, name="Old Name")
+        updated_{entity} = create_test_{entity}(id=1, name="New Name")
+        request = create_test_{entity}_update_request(name="New Name")
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_{entity})
+        mock_repo.update = AsyncMock(return_value=updated_{entity})
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            await update_{entity}(1, request, mock_repo)
+
+            # Assert - MANDATORY event testing
+            mock_bus.publish.assert_called_once()
+            published_event = mock_bus.publish.call_args[0][0]
+            assert isinstance(published_event, {Domain}UpdatedEvent)
+            assert published_event.{entity}_id == 1
+            assert published_event.event_type == "{entity}.updated"
+
+
+@pytest.mark.unit
+class TestDelete{Domain}:
+    """Test delete_{entity} service function."""
+
+    @pytest.mark.asyncio
+    async def test_delete_{entity}_when_exists_returns_true(self):
+        """Test deleting an existing {entity}."""
+        # Arrange
+        existing_{entity} = create_test_{entity}(id=1)
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_{entity})
+        mock_repo.delete = AsyncMock(return_value=True)
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            result = await delete_{entity}(1, mock_repo)
+
+            # Assert
+            assert result is True
+            mock_repo.find_by_id.assert_called_once_with(1)
+            mock_repo.delete.assert_called_once_with(1)
+
+    @pytest.mark.asyncio
+    async def test_delete_{entity}_when_not_found_returns_false(self):
+        """Test deleting a non-existent {entity}."""
+        # Arrange
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=None)
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            result = await delete_{entity}(999, mock_repo)
+
+            # Assert
+            assert result is False
+            mock_repo.find_by_id.assert_called_once_with(999)
+            mock_bus.publish.assert_not_called()  # No event if not found
+
+    @pytest.mark.asyncio
+    async def test_delete_{entity}_publishes_{entity}_deleted_event(self):
+        """Test deleting a {entity} publishes {Domain}DeletedEvent."""
+        # Arrange
+        existing_{entity} = create_test_{entity}(id=1)
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing_{entity})
+        mock_repo.delete = AsyncMock(return_value=True)
+
+        with patch("app.{domain}.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+
+            # Act
+            await delete_{entity}(1, mock_repo)
+
+            # Assert - MANDATORY event testing
+            mock_bus.publish.assert_called_once()
+            published_event = mock_bus.publish.call_args[0][0]
+            assert isinstance(published_event, {Domain}DeletedEvent)
+            assert published_event.{entity}_id == 1
+            assert published_event.event_type == "{entity}.deleted"
