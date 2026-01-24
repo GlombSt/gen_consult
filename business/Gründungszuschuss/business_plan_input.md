@@ -93,13 +93,17 @@ Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen 
 # Vertrieb & Wettbewerb
 
 ## Kunden
-SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität wichtig ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region. Es ist sowohl für einfache, als auch für kompliziertere Aufgaben gedacht.
+Wer sind deine Kunden?
+- Wie erreicht das Angebot deine Kunden?
+- Wie kommunizierst du mit deinen Kunden?
+- Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
 
+
+SharpIntent adressiert Professionals, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und deren Output-Qualität wichtig ist. Das Kernproblem betrifft global alle Nutzer von LLMs, unabhängig von Branche oder Region. Es ist sowohl für einfache, als auch für kompliziertere Aufgaben gedacht.
 
 Zielgruppe:
 - Einzelunternehmer und Freelancer
 - KMU und Mittelstand (10–500 Mitarbeiter) sowie Abteilungen in Großunternehmen
-
 
 Rollen:
 - Fachkräfte in verschiedensten Funktionen, z.B. Marketing, Legal, HR, Consulting, Produktmanagement <wichtig: das sind nur Beispiele/>
@@ -120,6 +124,12 @@ Geografie:
 
 ## Vertrieb und Kommunikation
 
+Wie erreichst du deine Kunden?**
+- Wie erreicht das Angebot deine Kunden?
+- Wie kommunizierst du mit deinen Kunden?
+- Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
+
+
 Go-to-Market-Strategie: Produktgetriebenes Wachstum mit Content-Unterstützung
 
 Als Solopreneur ohne Vertriebsteam ist ein skalierbarer, low-touch Ansatz zwingend. Der Vertrieb erfolgt primär digital und selbstbedient. Anstatt budgetintensiver Werbeanzeigen (Paid Ads) wird das bestehende Netzwerk (3.500 Kontakte auf LinkedIn) als initialer Hebel genutzt. 
@@ -127,6 +137,11 @@ Als Solopreneur ohne Vertriebsteam ist ein skalierbarer, low-touch Ansatz zwinge
 * **Kanäle:** Wie erreicht das Angebot den Kunden (Online/Offline, Direct Sales)?
 
 # Vertrieb und Kommunikation
+Wie erreichst du deine Kunden?
+•	Wie erreicht das Angebot deine Kunden?
+•	Wie kommunizierst du mit deinen Kunden?
+•	Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
+
 
 ## Strategischer Ansatz
 
@@ -180,6 +195,9 @@ Ab dem zweiten Jahr soll ein signifikanter Anteil neuer Nutzer durch Empfehlunge
 
 **Phase 3 – Skalierung (Monat 8–36):** SEO wird zum dominanten Kanal. Word-of-Mouth setzt ein. LinkedIn und Community-Engagement laufen in stabiler Routine.
 
+<Tabelle: Akquise Kanäle erste 12 Monate, from excel sheet Wachstum: for March 26 to Feb 27, Monthly new users by channel: Persönlicher Kontakt und Events, LinkedIn (3500 Kontakte), WOM, Product Hunt,SAAS Service Directories, Communities / Foren, Twitter build in public, Content / SEO>
+
+
 ---
 
 ## Risiken
@@ -208,13 +226,19 @@ Sprache: Englisch als primäre Marktsprache (globale Reichweite), Deutsch für D
 
 
 ## Markt & Wettbewerb
-* **Marktgröße:** Einschätzung Marktvolumen und Wachstumstrends.
+
+**Wie ist die Markt- und deine Wettbewerbssituation?**
+- Wer sind deine Wettbewerber bzw. welche Konkurrenzprodukte gibt es?
+- Wie unterscheidet sich dein Unternehmen / dein Angebot von deinen Wettbewerbern?
+- Wie groß ist der Markt? Wie entwickelt er sich?
+- Wie wird sich die Branche voraussichtlich entwickeln?
+
 
 Der Markt für Lösungen im den traditionelle Begriff "Prompt Engineering" wächst dynamisch: Für den globalen Markt wird ein Anstieg von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) erwartet (Quelle: Fortune Business Insights, https://www.fortunebusinessinsights.com/prompt-engineering-market-109382 ). Das entspricht einer prognostizierten jährlichen Wachstumsrate (CAGR) von etwa 32–33% (Quellen: diverse Analysten, https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report ). Innerhalb des Gesamtmarkts gewinnen insbesondere Prompt-Optimization-Tools an Bedeutung; dieses Segment wird für 2024 auf einen Marktanteil von ca. 31% geschätzt (Quelle: Mordor Intelligence, https://www.mordorintelligence.com/industry-reports/prompt-engineering-and-agent-programming-tools-market ).
 Parallel dazu steigt die praktische Nutzung von Generativer KI stark: Weltweit werden ca. 115–180 Mio. Nutzer als täglich aktiv angegeben (Quelle: diverse, 2025, https://masterofcode.com/blog/generative-ai-statistics ). In Unternehmen ist GenAI ebenfalls angekommen: Laut McKinsey nutzen 78% der Unternehmen KI in mindestens einer Funktion (Quelle: McKinsey, 2024, https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai ). Insgesamt deuten die Kennzahlen auf einen schnell wachsenden, sich professionalisierenden Markt hin, in dem sowohl Methodenkompetenz (Prompt Engineering) als auch Tooling (Optimierung/Testing/Monitoring) zunehmend nachgefragt werden. SharpIntent kann hier die Bedürfnisse der Kunden aufnehmen und sich mit einem Angebot differenzieren, dass das eigentliche "Prompting" langsam in den Hintergrund drängt.
 
 
-Markt (TAM/SAM/SOM)
+### Markt 
 Gesamtmarkt (TAM): Alle professionellen GenAI-Nutzer weltweit (>500 Mio. ChatGPT-Nutzer/Monat, Quelle: https://firstpagesage.com/seo-blog/chatgpt-usage-statistics/?utm_source=chatgpt.com)
 
 Relevanter Teil (SAM): 
@@ -233,6 +257,8 @@ Mittelfristig (3–5 Jahre): Konsolidierung im Tool-Markt. Modelle werden besser
 Risiken: Falls LLMs selbst die Aufgabenklärung deutlich besser beherrschen, sinkt der Bedarf. Jedoch bleibt das Problem der "souveränen Halluzination" und der kritischen Qualitätsbewertung bestehen – Modelle werden ihre eigenen Fehler nicht zuverlässig erkennen.
 
 * **Konkurrenzanalyse:** Direkte/Indirekte Wettbewerber. (Auswahl)
+
+### Wettbewerb
 
 AIPRM
 - Ansatz: Prompt-Bibliothek, Templates
@@ -254,6 +280,8 @@ LangSmith/LangChain
 - Stärken: Versionskontrolle, Tracing
 - Schwächen: Für Entwickler, nicht Endnutzer; keine Intent-Strukturierung
 
+
+### Abgrenzun
 
 * **Abgrenzung:** Konkrete Unterscheidungsmerkmale (Preis, Qualität, Innovation).
 

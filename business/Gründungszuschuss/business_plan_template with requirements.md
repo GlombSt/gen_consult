@@ -38,19 +38,18 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 
 ## Kunden
 
-**Wer sind deine Kunden?**
-
+Wer sind deine Kunden?
 - Was zeichnet deine Kunden aus?
+- Hast du bereits erste Aufträge in Aussicht?
 * **Segmentierung:** Demografie, Psychografie, B2B/B2C-Spezifika.
 
 
 ## Vertrieb und Kommunikation
+Wie erreichst du deine Kunden?
+•	Wie erreicht das Angebot deine Kunden?
+•	Wie kommunizierst du mit deinen Kunden?
+•	Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
 
-**Wie erreichst du deine Kunden?**
-
-- Wie erreicht das Angebot deine Kunden?
-- Wie kommunizierst du mit deinen Kunden?
-- Was hast du konkret geplant, um Kunden zu gewinnen und zu behalten?
 
 ## Markt & Wettbewerb
 

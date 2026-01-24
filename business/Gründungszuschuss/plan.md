@@ -206,7 +206,16 @@ Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with sta
 
 #### Tables (most important for audit)
 - Use **pipe tables** only.
-- rightaline currency values
+- Every table must have a caption (short and precise, 3-5 words).
+  - Put the caption on its own line **directly above** the table.
+  - Keep it factual and specific (e.g. what + period). Avoid long sentences.
+  - Example:
+
+    Tabelle: Liquiditätsplan (03/2026–12/2028)
+    +-----+-----+
+    | ... | ... |
+    +-----+-----+
+- right aline currency values in columns
 - Never split a single logical table into “table + loose lines below”. If something does not fit, create a second table or add a paragraph.
 - Avoid `|` inside cells; if needed, escape as `\|`.
 - Keep number formats consistent (German: thousands `.` and decimal `,`, e.g. `7.004,00`).
