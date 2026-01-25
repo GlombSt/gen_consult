@@ -163,6 +163,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 - **Avoid mechanical repetition:** Do not mirror the input structure. Reorganize information for readability and logical flow.
 - **One idea, one sentence:** Each sentence should convey a complete thought. Avoid run-on sentences. Be concise
 - **Context before detail:** Start paragraphs with the main point, then elaborate.
+- **Paragraph structure:** Structure content into distinct paragraphs, each covering one main topic. This is especially important for the Executive Summary, which should be divided into logical paragraphs (e.g., business idea, target customers, founder qualifications, financial projections, financing). Each paragraph should be 3-5 sentences maximum. Avoid creating single long paragraphs that are difficult to read.
 - When the input has sources (links) the sources must be presented in the document. Please validate that the link exists.
 - Use all information from the input, don't omit details. The input is intentionally very concise, but everything is chosen deliberately there, *so stick to the exact meaning that is conveyed in the input*
 - follow the instructions in XML Tags precisely.

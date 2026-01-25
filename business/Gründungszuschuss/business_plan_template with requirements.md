@@ -1,6 +1,15 @@
 # Executive Summary
 
 Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und knapp die wichtigsten Aspekte deines Vorhabens aufzählt.
+
+**Empfohlene Absatzstruktur:**
+1. Geschäftsidee und Angebot (Was ist der Kern deiner Idee? Was bietest du an?)
+2. Zielkunden und Nutzen (Wer sind deine Kunden? Warum wird dein Angebot für deine Kunden nützlich sein?)
+3. Gründerqualifikationen und Team (Wer ist im Gründungsteam und welche relevanten Qualifikationen habt ihr?)
+4. Finanzprognosen (Ab wann wird dein Unternehmen Gewinn machen?)
+5. Finanzierung (Wofür benötigst du fremdes Kapital und wie viel?)
+
+Die folgenden Fragen müssen in den entsprechenden Absätzen beantwortet werden:
 - Was ist der Kern deiner Idee?
 - Was bietest du an?
 - Wer sind deine Kunden?
