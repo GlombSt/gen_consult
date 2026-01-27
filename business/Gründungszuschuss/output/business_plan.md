@@ -1,42 +1,61 @@
-# Businessplan – SharpIntent (Gründungszuschuss)
+---
+title: "Existenzsgründungsvorhaben - SharpIntent"
+author: "Steffen Glomb"
+lang: de-DE
+toc-title: "Inhaltsverzeichnis"
+date: "Feburar 2026"
+abstract: |
+    SharpIntent ist ein digitales Gründungsvorhaben zur effektiveren Nutzung Generativer KI. Ziel ist es, durch strukturierte Aufgabenklärung vor dem KI-Einsatz die versprochenen Vorteile wie höhere Produktivität, bessere Qualität und verlässlichere Ergebnisse im Arbeitsalltag realisierbar zu machen. Der Gründungszuschuss ermöglicht die konzentrierte Umsetzung des Vorhabens in der Anlaufphase und die nachhaltige Etablierung der Selbstständigkeit.
+---
 
-## 1. Executive Summary
 
-Das Unternehmen entwickelt unter dem Namen „SharpIntent“ eine webbasierte Software-as-a-Service-Lösung zur strukturierten Erfassung und Präzisierung von Aufgabenstellungen für Sprachmodelle. Der Dienst unterstützt Nutzer dabei, fachliche Parameter und Anforderungen systematisch zu erfassen, bevor eine Aufgabe an ein Sprachmodell übergeben wird. SharpIntent ist als unterstützendes Werkzeug zur Aufgabenklärung geplant und ersetzt keine fachliche Prüfung der Ergebnisse.
+# 1. Executive Summary
 
-Adressiert werden berufliche Anwender, die Sprachmodelle regelmäßig nutzen oder deren Einsatz planen und bei denen Ergebnisqualität und Verlässlichkeit relevant sind. Zielgruppen sind insbesondere Einzelunternehmer und Freelancer sowie kleine und mittlere Unternehmen und entsprechende Funktionen/Teams in größeren Organisationen. Der Nutzen besteht in der Reduktion von Iterations- und Korrekturaufwand durch eine vollständigere und eindeutigere Aufgabenbeschreibung sowie durch Hinweise auf fehlende Informationen und Risiken.
+Im professionellen Einsatz von Generativer KI entstehen häufig Qualitäts- und Verlässlichkeitsprobleme, wenn Aufgaben unvollständig beschrieben sind, wesentliche Rahmenbedingungen fehlen oder formale Anforderungen nicht eindeutig sind. Das führt zu Korrektur- und Nachrechercheaufwand und erhöht das Risiko fachlicher Fehler, obwohl die Ergebnisse auf den ersten Blick plausibel wirken. SharpIntent adressiert diese vorgelagerte Ursache, indem die Aufgabenstellung vor der Ausführung systematisch geklärt und präzisiert wird.
 
-Das Vorhaben wird in der Anfangsphase als Einzelunternehmen umgesetzt. Der Gründer verfügt über einen Abschluss als Diplom-Informatiker sowie einen Master of Business Administration und über langjährige Erfahrung in leitenden Funktionen im Aufbau und Betrieb softwarebasierter Geschäftsmodelle. In den ersten zwölf Monaten ist die Umsetzung als Einzelunternehmer vorgesehen; externe Leistungen (insbesondere Steuer- und Rechtsberatung) werden situativ hinzugezogen. Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt; der geplante Arbeitsumfang beträgt mindestens 40 Wochenstunden.
+Das Unternehmen entwickelt unter dem Namen „SharpIntent“ eine webbasierte Software-as-a-Service-Lösung zur strukturierten Erfassung und Präzisierung von Aufgabenstellungen für Generative KI. Der Dienst unterstützt Nutzer dabei, relevante fachliche Parameter und Anforderungen (z. B. Zielgruppe, Rahmenbedingungen und Einschränkungen) explizit zu erfassen, bevor eine Aufgabe ausgeführt wird. SharpIntent ist als unterstützendes Werkzeug zur Aufgabenklärung geplant und ersetzt keine fachliche Prüfung der Ergebnisse.
 
-Die Finanzplanung zeigt in der Anlaufphase 2026 ein negatives Betriebsergebnis vor Steuern, bedingt durch Aufbaukosten bei noch geringem Umsatz. Nach Planung wird das Betriebsergebnis vor Steuern ab Februar 2027 positiv ausgewiesen (Break-even vor Entnahmen). Unter Berücksichtigung der geplanten Privatentnahmen wird das Monatsergebnis ab Mai 2027 positiv ausgewiesen.
+Adressiert werden berufliche Anwender, die Generative KI regelmäßig nutzen oder deren Einsatz planen und bei denen Ergebnisqualität geschäftlich relevant ist. Zielgruppen sind insbesondere Einzelunternehmer und Freelancer sowie kleine und mittlere Unternehmen und entsprechende Funktionen oder Teams in größeren Organisationen. Der Nutzen besteht in der Reduktion von Iterations- und Korrekturaufwand durch eine vollständigere und eindeutigere Aufgabenbeschreibung sowie durch Hinweise auf fehlende Informationen und Risiken.
 
-Ein externer Kapitalbedarf ist nach Planung nicht vorgesehen; die Finanzierung erfolgt ohne Bankdarlehen oder Beteiligungskapital. Zur Deckung betrieblicher Ausgaben in der Anlaufphase sind private Einlagen in Höhe von insgesamt 14.000 EUR (03–12/2026) vorgesehen; zusätzlich ist eine Liquiditätsreserve von 2.000 EUR eingeplant. Der Gründungszuschuss sowie private Rücklagen werden zur Absicherung des privaten Lebensunterhalts genutzt und sind nicht Bestandteil der Unternehmensfinanzierung.
+Das Vorhaben wird in der Anfangsphase als Einzelunternehmen umgesetzt. Der Gründer verfügt über einen Abschluss als Diplom-Informatiker sowie einen Master of Business Administration und über langjährige Erfahrung in leitenden Funktionen im Aufbau und Betrieb softwarebasierter Geschäftsmodelle. Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt; der geplante Arbeitsumfang beträgt mindestens 40 Wochenstunden.
 
-## 2. Geschäftsidee
+Die Finanzplanung zeigt für 2026 in der Anlaufphase ein negatives Betriebsergebnis vor Steuern, bedingt durch Aufbaukosten bei noch geringem Umsatz. Gemäß Planung wird das Monatsergebnis vor Entnahmen ab Februar 2027 positiv ausgewiesen (Break-even vor Entnahmen). Unter Berücksichtigung der geplanten Privatentnahmen wird das Monatsergebnis ab Mai 2027 positiv ausgewiesen; Privatentnahmen sind im Jahr 2026 nicht vorgesehen.
 
-### Angebot
+Ein externer Kapitalbedarf ist nach Planung nicht vorgesehen; die Finanzierung erfolgt ohne Bankdarlehen oder Beteiligungskapital. Als Eigenkapital stehen insgesamt 17.000,00 EUR zur Verfügung (davon 15.000,00 EUR Bareinlagen sowie 2.000,00 EUR Sacheinlage). Zur Deckung betrieblicher Ausgaben in der Anlaufphase sind private Einlagen in Höhe von insgesamt 15.000,00 EUR (03–12/2026) vorgesehen; zusätzlich ist eine Liquiditätsreserve von 2.983,34 EUR eingeplant. Der Gründungszuschuss sowie private Rücklagen dienen der Absicherung des privaten Lebensunterhalts und sind nicht Bestandteil der Unternehmensfinanzierung.
 
-Das Unternehmen entwickelt unter dem Namen „SharpIntent“ eine webbasierte Software-as-a-Service-Lösung zur strukturierten Erfassung und Präzisierung von Aufgabenstellungen für Sprachmodelle. Der Dienst unterstützt Nutzer dabei, fachliche Parameter (z. B. Jurisdiktion, Zielgruppe und Einschränkungen) systematisch zu erfassen, bevor eine Aufgabe an ein Sprachmodell übergeben wird.
+# 2. Geschäftsidee
 
-SharpIntent versteht sich nicht als System, das Ergebnisse von Sprachmodellen „prüfbar“ macht. Der Zweck besteht darin, die Aufgabenstellung vorab zu konkretisieren, fehlende oder widersprüchliche Angaben sichtbar zu machen und die Eignung eines Sprachmodells für eine konkrete Aufgabe sachlich einzuordnen. Zusätzlich generiert der Dienst im Hintergrund eine optimierte textuelle Anweisung (Prompt/Instruction), ohne dass Nutzer diese Anweisung manuell ausformulieren müssen.
+## Problem
+
+Im beruflichen Einsatz werden Ergebnisse Generativer KI häufig als stark schwankend wahrgenommen. In der Praxis entsteht dadurch Unsicherheit: Auch wenn die Technologie grundsätzlich leistungsfähig ist, ist für Nutzer nicht verlässlich vorhersagbar, ob ein konkreter Durchlauf die fachlichen und formalen Anforderungen erfüllt.
+
+Typische Ursachen liegen weniger in der Ausführung selbst als in der vorgelagerten Aufgabenklärung. Häufig sind Aufgaben unvollständig beschrieben, relevante Rahmenbedingungen fehlen (z. B. juristische Zuständigkeiten) oder Anforderungen sind mehrdeutig. Zusätzlich treten wiederkehrende Muster auf, etwa überzeugend formulierte, aber falsche Inhalte, logische Widersprüche sowie die Nichtbeachtung konkreter Formatvorgaben (z. B. Nummerierungen oder Platzhalter), was zu manueller Nacharbeit führt.
+
+Für Gelegenheitsnutzer besteht das Risiko, Fehler nicht zu erkennen und Ergebnisse ungeprüft zu übernehmen. Erfahrene Nutzer investieren dagegen Zeit in iterative Korrektur- und Prüfzyklen, wodurch der erwartete Produktivitätsgewinn teilweise kompensiert wird. In der Summe kann dies zu einem negativen Verhältnis von Nutzen zu Aufwand führen, insbesondere wenn zusätzliche Lizenz- und Prüfkosten anfallen.
+
+## Angebot
+
+Das Unternehmen entwickelt unter dem Namen „SharpIntent“ eine webbasierte Software-as-a-Service-Lösung zur strukturierten Erfassung und Präzisierung von Aufgabenstellungen für Generative KI. Der Dienst unterstützt Nutzer dabei, die Intention sowie relevante fachliche Rahmenbedingungen einer Aufgabe systematisch zu erfassen, bevor eine Aufgabe an ein KI-System übergeben wird.
+
+SharpIntent versteht sich nicht als System, das Ergebnisse „garantiert“ oder fachliche Prüfung ersetzt. Der Zweck besteht darin, die Aufgabenstellung vorab zu konkretisieren, fehlende oder widersprüchliche Angaben sichtbar zu machen und die Eignung eines KI-Systems für eine konkrete Aufgabe sachlich einzuordnen. Zusätzlich wird im Hintergrund eine optimierte textuelle Anweisung (Prompt/Instruction) abgeleitet, ohne dass Nutzer diese Anweisung manuell ausformulieren müssen.
 
 Zur Anbindung an bestehende Arbeitsweisen ermöglicht SharpIntent den Export der erzeugten Anweisung zur Nutzung in externen Umgebungen sowie alternativ die Ausführung direkt innerhalb des Produkts.
 
-### Nutzen
+## Nutzen
 
-Professionelle Anwender erleben Sprachmodelle in der Praxis häufig als in der Qualität schwankend. Typische Ursachen sind unvollständige Aufgabenstellungen, fehlender Kontext, formale Anforderungen (z. B. Nummerierungen oder Platzhalter) sowie logische Inkonsistenzen oder erfundene Inhalte in ansonsten überzeugender Darstellung.
+SharpIntent reduziert Iterations- und Korrekturaufwand, indem die Aufgabenstellung vor der Ausführung strukturiert wird. Nutzer erhalten Hinweise auf fehlende Informationen und Mehrdeutigkeiten sowie eine Risikoeinschätzung der Aufgabenstellung. Zusätzlich werden Hinweise gegeben, wenn ein KI-System für eine Aufgabe voraussichtlich nicht geeignet ist oder wenn alternative Vorgehensweisen in Betracht kommen.
 
-SharpIntent zielt darauf ab, den Aufwand für Korrektur, Nachrecherche und Iteration zu reduzieren, indem die Aufgabenstellung vor der Ausführung strukturiert wird. Nutzer erhalten Hinweise auf fehlende Informationen und Mehrdeutigkeiten, eine Risikoeinschätzung der Aufgabenstellung sowie Hinweise, wenn ein Sprachmodell für die Aufgabe voraussichtlich nicht geeignet ist oder Alternativen in Betracht kommen.
+Dadurch sinkt der Aufwand für nachgelagerte Fehlersuche und manuelle Nacharbeit. Gleichzeitig werden Erwartungen an die Leistungsfähigkeit und Grenzen Generativer KI im konkreten Einzelfall realistischer eingeordnet, was die verlässliche Nutzung im Arbeitsalltag unterstützt.
 
-### Kernfähigkeiten
+## Kernfähigkeiten
 
-Die Kernleistung beruht auf einem spezialisierten Datenmodell zur strukturierten Aufgabenbeschreibung („Intent“). Darauf aufbauend werden Nutzer durch einen assistierten Prozess geführt, der notwendige Parameter explizit abfragt und Unklarheiten adressiert. Ergänzend werden Metriken und Heuristiken zur Bewertung der Definitionsgüte eingesetzt, um die Erfolgsaussichten der Aufgabe im Rahmen der Planung einzuschätzen.
+Die Kernleistung beruht auf einem spezialisierten Datenmodell zur strukturierten Aufgabenbeschreibung („Intent“). Darauf aufbauend führt eine Benutzerführung durch die Erfassung der erforderlichen Parameter und unterstützt dabei, Unklarheiten frühzeitig zu erkennen und zu beheben. Ergänzend werden Metriken und Heuristiken zur Bewertung der Definitionsgüte eingesetzt, um Risiken und Erfolgsaussichten einer Aufgabenstellung im Rahmen der Planung einzuordnen.
 
-Ein wesentlicher Entwicklungsbestandteil ist der Aufbau einer industrie- und domänenspezifischen Referenzdatenbank mit Aufgabenbeschreibungen und Qualitätskriterien. Diese Daten dienen dazu, Vollständigkeits- und Konsistenzprüfungen zu unterstützen und typische Risikomuster je Anwendungsbereich abzuleiten. Zudem werden Verfahren zur automatisierten Ableitung konsistenter Anweisungen an unterschiedliche Sprachmodelle sowie zur iterativen Optimierung dieser Anweisungen entwickelt.
+Ein wesentlicher Entwicklungsbestandteil ist der Aufbau einer industrie- und domänenspezifischen Referenzdatenbank mit Aufgabenbeschreibungen und Qualitätskriterien. Diese Daten dienen dazu, Vollständigkeits- und Konsistenzprüfungen zu unterstützen und typische Risikomuster je Anwendungsbereich abzuleiten. Zudem werden Verfahren zur automatisierten Ableitung konsistenter Anweisungen an unterschiedliche KI-Systeme sowie zur iterativen Optimierung dieser Anweisungen entwickelt.
 
-## 3. Vertrieb & Wettbewerb
+# 3. Vertrieb & Wettbewerb
 
-### Kunden
+## Kunden
 
 SharpIntent adressiert berufliche Anwender, die regelmäßig mit Sprachmodellen arbeiten oder deren Nutzung planen und bei denen die Ergebnisqualität relevant ist. Dazu zählen Einzelunternehmer und Freelancer sowie kleine und mittlere Unternehmen (ca. 10–500 Mitarbeitende) und entsprechende Funktionen/Teams in größeren Unternehmen.
 
@@ -44,7 +63,7 @@ Aus Nutzersicht stehen Zeitersparnis und höhere Verlässlichkeit im Vordergrund
 
 Zur Segmentierung werden u. a. folgende Rollen adressiert: Fachkräfte in unterschiedlichen Funktionen (z. B. Marketing, Legal, HR, Consulting, Produktmanagement) sowie Team-Leads und Verantwortliche, die die KI-Nutzung in Teams steuern.
 
-### Vertrieb und Kommunikation
+## Vertrieb und Kommunikation
 
 Der Marktzugang ist als überwiegend digitaler, selbstbedienter Ansatz geplant. Als Einzelunternehmer ohne Vertriebsteam ist ein ressourcenschonender Prozess vorgesehen. In der Anfangsphase wird auf bezahlte Werbung verzichtet. Stattdessen wird ein produktgetriebener Ansatz (Freemium mit Upgrade-Pfad) mit begleitendem Content genutzt. Das geplante Zeitbudget für Marketing beträgt circa zehn Stunden pro Woche neben der Produktentwicklung.
 
@@ -91,7 +110,7 @@ Table: Akquise-Kanäle (03/2026–02/2027)
 
 Legende: PE = Persönlicher Kontakt und Events; LI = LinkedIn (3500 Kontakte); WOM = Word-of-Mouth; PH = Product Hunt; DIR = SaaS Service Directories; COMM = Communities/Foren; X = Twitter (Build in Public); SEO = Content/SEO.
 
-### Markt & Wettbewerb
+## Markt & Wettbewerb
 
 Der Markt für Lösungen rund um den traditionellen Begriff „Prompt Engineering“ wird in Marktstudien als dynamisch wachsend beschrieben.[^fbi] Für den globalen Markt wird ein Anstieg von ca. 0,85 Mrd. USD (2024) auf rund 3,5 Mrd. USD (2029) erwartet.[^fbi] Die prognostizierte jährliche Wachstumsrate (CAGR) wird in Analystenberichten in einer Größenordnung von etwa 32–33% eingeordnet.[^ram] Innerhalb des Gesamtmarkts werden insbesondere Prompt-Optimization-Tools als wachsendes Segment beschrieben; hierfür wird für 2024 ein Marktanteil von ca. 31% genannt.[^mord]
 
@@ -110,9 +129,9 @@ Im Wettbewerbsumfeld existieren sowohl Endnutzer-Tools als auch Entwicklerwerkze
 
 SharpIntent setzt vor der eigentlichen Ausführung an. Der Schwerpunkt liegt auf der strukturierten Klärung der Aufgabenstellung, dem Sichtbarmachen fehlender oder widersprüchlicher Angaben sowie einer sachlichen Eignungs- und Risikoeinordnung, bevor eine Anweisung an ein Sprachmodell abgeleitet wird. Damit adressiert das Produkt eine vorgelagerte Ursache vieler Qualitätsprobleme: unklare oder unvollständige Aufgabenstellungen, nicht „schlechte Prompts“. Die Ableitung einer konsistenten Anweisung ist nachgeordnet und dient der standardisierten Ausführung; perspektivisch drängt das eigentliche „Prompting“ in den Hintergrund.
 
-## 4. Team & Partner
+# 4. Team & Partner
 
-### Gründer*innen & Team
+## Gründer*innen & Team
 
 In den ersten zwölf Monaten ist das Vorhaben als Einzelunternehmen geplant. Der Gründer übernimmt Produktentwicklung, Betrieb sowie Marketing und Vertrieb in der Anfangsphase. Perspektivisch ist bei positiver Entwicklung eine Erweiterung durch Unterstützung in Marketing und Softwareentwicklung vorgesehen. Rechts- und Steuerberatung werden situativ extern hinzugezogen.
 
@@ -130,7 +149,7 @@ Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Be
 
 Vor diesem Hintergrund stellt die geplante Selbstständigkeit für den Gründer die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das den Lebensunterhalt des Gründers sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
 
-### Werte
+## Werte
 
 Als Leitprinzip gilt „Klarheit vor Automatisierung“. Das Unternehmen richtet die Produktentwicklung darauf aus, Anwender und Teams beim bewussteren, reflektierten und wirksameren Einsatz von Sprachmodellen zu unterstützen, insbesondere durch explizite Formulierung von Zielen, Annahmen und Anforderungen.
 
@@ -148,7 +167,7 @@ Nicht im Vordergrund stehen:
 - Abkürzungen, die langfristig Vertrauen beeinträchtigen.
 - Abhängigkeit von einzelnen Experten oder implizitem Wissen.
 
-### Partner
+## Partner
 
 Für den operativen Betrieb werden insbesondere externe Schlüsselpartner in folgenden Bereichen eingesetzt:
 
@@ -161,9 +180,9 @@ Der Nutzen der Partner besteht in der vergüteten Erbringung der jeweiligen Leis
 
 Aus der beruflichen Laufbahn des Gründers bestehen Kontakte zu erfahrenen Experten aus unterschiedlichen Funktionen, die für Feedback, Validierung und punktuelle Unterstützung nutzbar sind.
 
-## 5. Unternehmen
+# 5. Unternehmen
 
-### Produktion (Kernaktivitäten)
+## Produktion (Kernaktivitäten)
 
 Die Leistungserstellung umfasst die Entwicklung und den Betrieb einer webbasierten SaaS-Anwendung zur strukturierten Aufgabendeklaration. Wesentliche Tätigkeiten sind:
 
@@ -178,19 +197,19 @@ Der Gründer übernimmt die Produktentwicklung und den operativen Aufbau. Partne
 
 Im Vergleich zu Wettbewerbern, die häufig nachträglich Ergebnisse optimieren oder Prompt-Templates bereitstellen, fokussiert das Unternehmen auf die vorgelagerte Klärung von Kontext und Anforderungen. Ergänzend ist der Aufbau wiederverwendbarer Aufgabenstrukturen und Risikomuster als Wissensbestand vorgesehen.
 
-### Standort
+## Standort
 
 Der Aufbau des Unternehmens ist in Offenburg und Durbach geplant. In der Anfangsphase wird ein Arbeitszimmer im privaten Wohnhaus genutzt. Mittelfristig ist ein Büro in einem Co-Working-Space in Offenburg (Flow1986) vorgesehen.
 
 Der Standort bietet eine ausreichende Internetanbindung sowie eine Anbindung an das Bahnnetz für erforderliche Reisen. Anpassungen an den Räumlichkeiten sind nach Planung nicht erforderlich.
 
-### Rechtsform & Vorschriften
+## Rechtsform & Vorschriften
 
 Die Gründung ist initial als Einzelunternehmen vorgesehen. Als geplanter Gründungstermin ist der 01.03.2026 genannt. Mittelfristig ist eine Umstellung auf eine UG bzw. GmbH vorgesehen.
 
 Als relevante regulatorische Rahmenbedingung wird der EU AI Act berücksichtigt.
 
-### Risiken
+## Risiken
 
 Risiko Finanzielle Reichweite
 Risikobeschreibung: Verzögerter Break-Even durch langsamere Kundenakquise bei gleichzeitig anfallenden Infrastrukturkosten sowie möglichem Druck auf Entnahmen für den Lebensunterhalt.
@@ -227,13 +246,13 @@ Gegenmaßnahmen:
 - Integration statt Standalone: Entwicklung von Integrationen (Plugins/API), um als Governance-Layer in bestehende Workflows eingebunden zu werden.
 - Compliance-Fokus: Positionierung als unabhängige Instanz zur Risikobewertung und Qualitätssicherung (Vier-Augen-Prinzip), die aus Compliance-Gründen nicht von der generierenden KI selbst stammen darf.
 
-## 6. Finanzen
+# 6. Finanzen
 
-### Ertragsquellen/Umsatz
+## Ertragsquellen/Umsatz
 
 Die Erlöse des Unternehmens entstehen aus der Nutzung eines digitalen Dienstes, der über wiederkehrende Entgeltmodelle sowie nutzungsabhängige Zusatzleistungen abgerechnet wird.
 
-#### Art der Ertragsquellen
+### Art der Ertragsquellen
 Die Einnahmen setzen sich aus folgenden Komponenten zusammen:
 	1.	Abonnementbasierte Entgelte
 Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnements nutzen. Die Abonnements beinhalten jeweils ein definiertes Nutzungsvolumen.
@@ -241,7 +260,7 @@ Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnemen
 Zusätzlich zu den Abonnements besteht die Möglichkeit, Guthabenpunkte (Credits) zu erwerben. Diese Guthabenpunkte ermöglichen eine über das im Abonnement enthaltene Nutzungsvolumen hinausgehende Nutzung.
 Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider. Die nutzungsabhängigen Zusatzentgelte stellen insbesondere in der Wachstumsphase einen ergänzenden Erlösbeitrag dar.
 
-#### Nutzergruppen und Preismodell
+### Nutzergruppen und Preismodell
 Zur Strukturierung der Nachfrage werden drei Nutzergruppen unterschieden:
 	•	Trial-/Freemium-Nutzer
 Diese Nutzer erhalten einen kostenlosen, funktional begrenzten Zugang zum Dienst. Die Nutzung ist mengenmäßig beschränkt. Nach Erreichen der Obergrenze ist für eine weitere Nutzung der Abschluss eines kostenpflichtigen Abonnements erforderlich.
@@ -253,168 +272,156 @@ Premium-Nutzer zahlen ein monatliches Entgelt von 100 Euro. Dieses Abonnement be
 Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann. Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
 Der überwiegende Teil der Umsätze wird mit Standard-Nutzern erzielt (80%); Premium-Nutzer und nutzungsabhängige Zusatzentgelte gewinnen mit zunehmender Reife des Produkts an Bedeutung.
 
-#### Zahlungszeitpunkt
+### Zahlungszeitpunkt
 Die Abrechnung der Abonnements erfolgt im Voraus.
 Auch der Erwerb von Guthabenpunkten erfolgt vor der Nutzung. Dadurch entstehen keine Forderungsausfälle aus laufender Nutzung.
 
-#### Preisfindung und Markteinordnung
-Die initiale Preisstruktur orientiert sich an vergleichbaren marktüblichen Preismodellen sowie an den zugrunde gelegten Kostenannahmen.
+### Preisfindung und Markteinordnung
+Die initiale Preisstruktur orientiert sich an, vergleichbaren marktüblichen Preismodellen, sowie den zugrunde gelegten Kostenannahmen.
 
-In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob geringfügige Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
+In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
 Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
 
-#### Umsatzplan
+### Umsatzplan
 Der nachfolgende Umsatzplan bildet die geplanten Umsätze für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
 
 Table: Umsatzentwicklung (Jahreswerte, EUR)
 
-+------+-------------+
++------+--------------+
 | Jahr | Umsatz (EUR) |
-+======+============:+
-| 2026 | 7.793,00    |
-+------+-------------+
-| 2027 | 117.469,00  |
-+------+-------------+
-| 2028 | 408.788,50  |
-+------+-------------+
++======+=============:+
+| 2026 | 7.793,00     |
++------+--------------+
+| 2027 | 115.174,50   |
++------+--------------+
+| 2028 | 395.781,50   |
++------+--------------+
 
-
-
-### Kosten
+## Kosten
 
 Die Kostenplanung umfasst ausschließlich betriebsnotwendige Aufwendungen. Die Kostenstruktur weist einen hohen Anteil variabler oder kurzfristig beeinflussbarer Kosten auf. Die einzelnen Kostenpositionen sind im Excel-Sheet „Kosten“ detailliert dargestellt.
+
+Hinweis zur Abgrenzung: Die nachfolgenden Kostentabellen bilden ausschließlich die laufenden betrieblichen Kosten (03–12/2026) ab. Einmalige Gründungskosten (z. B. Gewerbeanmeldung, Rechts-/Datenschutzberatung, Markenschutz, Berufshaftpflicht) werden nicht in den laufenden Kosten ausgewiesen, sondern separat im Abschnitt „Kapitalbedarf & Finanzierung“ dargestellt. In der Rentabilitätsübersicht sind die Fixkosten des Jahres 2026 entsprechend inkl./exkl. Gründungskosten ausgewiesen (siehe Kennzeichnung).
 
 Kostenstruktur und Kostenarten
 Die betrieblichen Ausgaben setzen sich aus folgenden Kostenblöcken zusammen:
 
-#### Marketing
+### Marketing
 Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots. Der Fokus liegt im ersten Jahr auf organischem Wachstum und direkter Ansprache; kostenintensive Marketingmaßnahmen sind nicht vorgesehen.
 
-Table: Marketingkosten 2026 (03–12)
+Table: Marketingkosten 2026 (03–12, EUR)
 
-+--------------------------------------+--------------+
-| Position                             | Betrag (EUR) |
-+======================================+==============+
-| Marketing-Tool (LinkedIn)            | 693,00       |
-+--------------------------------------+--------------+
-| E-Mail-Marketing-Tool (Instantly.ai) | 500,00       |
-+--------------------------------------+--------------+
-| **Summe Marketing**                  | **1.193,00** |
-+--------------------------------------+--------------+
++-------------------------------------+--------------+
+| Position                            | Betrag (EUR) |
++=====================================+=============:+
+| ChatGPT                             | 200,00       |
++-------------------------------------+--------------+
+| Gemini                              | 200,00       |
++-------------------------------------+--------------+
+| Website Hosting                     | 200,00       |
++-------------------------------------+--------------+
+| Marketing Tool for LinkedIn         | 693,00       |
++-------------------------------------+--------------+
+| Email Marketing Tool (Instantly.ai) | 500,00       |
++-------------------------------------+--------------+
+| SEO Tool                            | 1.000,00     |
++-------------------------------------+--------------+
+| **Summe Marketingkosten**           | **2.793,00** |
++-------------------------------------+--------------+
 
-
-#### Direkte Kosten
+### Direkte Kosten
 Direkte Kosten entstehen im Zusammenhang mit der Leistungserbringung für Kunden.
 
-
-Table: Direkte Kosten 2026 (03–12)
+Table: Direkte Kosten 2026 (03–12, EUR)
 
 +------------------------------------------------------------+--------------+
 | Position                                                   | Betrag (EUR) |
-+============================================================+==============+
-| Kosten von Free Accounts, fixe Kosten pro Account          | 2.684,00     |
++============================================================+=============:+
+| Kosten von Free Accounts, fixe Kosten pro Account          | 2.694,00     |
 +------------------------------------------------------------+--------------+
-| Kosten von Paid Accounts als Prozent vom Verkaufspreis     | 1.013,40     |
+| Kosten von Paid Accounts als Prozent vom Verkaufspreis     | 848,25       |
 +------------------------------------------------------------+--------------+
-| Kosten von Premium Accounts als Prozent vom Verkaufspreis  | 860,00       |
+| Kosten von Premium Accounts als Prozent vom Verkaufspreis  | 880,00       |
 +------------------------------------------------------------+--------------+
-| Verkaufs- & Steuerabwicklungsgebühren (Merchant of Record) | 383,90       |
+| Verkaufs- & Steuerabwicklungsgebühren (Merchant of Record) | 545,51       |
 +------------------------------------------------------------+--------------+
-| **Summe Direkte Kosten**                                   | **4.941,30** |
+| **Summe Direkte Kosten**                                   | **4.967,76** |
 +------------------------------------------------------------+--------------+
 
-
-#### Kosten der Produktentwicklung
+### Kosten der Produktentwicklung
 Diese Kosten betreffen die Weiterentwicklung und Pflege des digitalen Produkts. Die höheren Aufwendungen für Produktentwicklung im Jahr 2026 dienen dem Aufbau der technischen Grundlage und sind Voraussetzung für die Skalierung in den Folgejahren.
 
-Table: Produktentwicklung 2026 (03–12)
+Table: Produktentwicklung 2026 (03–12, EUR)
 
 +----------------------------------------------------+--------------+
 | Position                                           | Betrag (EUR) |
-+====================================================+==============+
-| Coding-Agent (Claude Code)                         | 1.000,00     |
++====================================================+=============:+
+| Coding Agent: Claude Code                          | 1.000,00     |
 +----------------------------------------------------+--------------+
-| IDE (Cursor)                                       | 600,00       |
+| Coding IDE: Cursor                                 | 600,00       |
 +----------------------------------------------------+--------------+
-| KI-Prototyping (Lovable)                           | 200,00       |
+| KI Protoyping: Lovable                             | 200,00       |
 +----------------------------------------------------+--------------+
 | Rechenleistung für KI Training und Datenbankaufbau | 5.000,00     |
 +----------------------------------------------------+--------------+
 | **Summe Produktentwicklung**                       | **6.800,00** |
 +----------------------------------------------------+--------------+
 
-
-#### Administrative Kosten
+### Administrative Kosten
 Administrative Kosten umfassen unter anderem Buchhaltung, rechtliche Grundlagen und sonstige betriebliche Verwaltungsaufwendungen.
 
+Table: Administrative Kosten 2026 (03–12, EUR)
 
-Table: Administrative Kosten 2026 (03–12)
++---------------------------------+--------------+
+| Position                        | Betrag (EUR) |
++=================================+=============:+
+| Kontoführung                    | 100,00       |
++---------------------------------+--------------+
+| Buchhaltung Lexoffice           | 219,00       |
++---------------------------------+--------------+
+| Reisen und Events               | 1.100,00     |
++---------------------------------+--------------+
+| **Summe Administrative Kosten** | **1.419,00** |
++---------------------------------+--------------+
+
+### IT-Infrastrukturkosten
+IT-Kosten entstehen insbesondere durch Hosting, Rechenleistung und technische Basisdienste.
+
+Table: IT-Infrastruktur 2026 (03–12, EUR)
 
 +------------------------------------------+--------------+
 | Position                                 | Betrag (EUR) |
-+==========================================+==============+
-| Kontoführung                             | 100,00       |
++==========================================+=============:+
+| Email & Office (Google Workspace)        | 136,00       |
 +------------------------------------------+--------------+
-| Rechtsberatung                           | 500,00       |
+| Internet / Telefon anteilig, betrieblich | 500,00       |
 +------------------------------------------+--------------+
-| Markenschutz Deutschland                 | 290,00       |
+| Hosting (Hetzner, AWS)                   | 1.500,00     |
 +------------------------------------------+--------------+
-| Datenschutzberatung                      | 500,00       |
+| Sentry (Application Monitoring)          | 120,00       |
 +------------------------------------------+--------------+
-| Berufshaftpflichtversicherung (exali.de) | 321,00       |
+| Quellcode Verwaltung Github              | 200,00       |
 +------------------------------------------+--------------+
-| Buchhaltung Lexoffice                    | 219,00       |
+| Email sending                            | 200,00       |
 +------------------------------------------+--------------+
-| Gewerbeanmeldung                         | 60,00        |
-+------------------------------------------+--------------+
-| **Summe Administration**                 | **1.990,00** |
+| **Summe IT-Infrastruktur**               | **2.656,00** |
 +------------------------------------------+--------------+
 
-#### IT-Infrastrukturkosten
-IT-Kosten entstehen insbesondere durch Hosting, Rechenleistung und technische Basisdienste.
+### Flexibilität der Kostenstruktur
+Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Ein wesentlicher Teil der als Fixkosten ausgewiesenen Positionen ist technisch nutzungs- oder zeitabhängig und kann bei Bedarf kurzfristig reduziert oder pausiert werden. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden.
 
-
-Table: IT-Infrastruktur 2026 (03–12)
-
-+------------------------------------+--------------+
-| Position                           | Betrag (EUR) |
-+====================================+==============+
-| E-Mail & Office (Google Workspace) | 136,00       |
-+------------------------------------+--------------+
-| Hosting (Hetzner/AWS)              | 1.500,00     |
-+------------------------------------+--------------+
-| Monitoring (Sentry)                | 120,00       |
-+------------------------------------+--------------+
-| Quellcode-Verwaltung (GitHub)      | 200,00       |
-+------------------------------------+--------------+
-| E-Mail-Versand                     | 200,00       |
-+------------------------------------+--------------+
-| **Summe IT-Infrastruktur**         | **2.156,00** |
-+------------------------------------+--------------+
-
-#### Flexibilität der Kostenstruktur
-Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden. Ein wesentlicher Teil der als Fixkosten ausgewiesenen Positionen ist technisch nutzungs- oder zeitabhängig und kann bei Bedarf kurzfristig reduziert oder pausiert werden.
-
-#### Umsatzabhängige (variable) Kosten
+### Umsatzabhängige (variable) Kosten
 Variable Kosten entstehen im Wesentlichen im Rahmen der Wertschöpfung für Kunden. Diese sind insbesondere abhängig von der Nutzung generativer KI-Dienste externer Anbieter. Weitere variable Kosten sind im Vergleich hierzu von untergeordneter Bedeutung.
 
-#### Personalkosten
-Zum Zeitpunkt der Planung ist keine Einstellung von Mitarbeitenden vorgesehen.
-Sollte sich das Unternehmen positiv entwickeln, kann perspektivisch die Anstellung von Mitarbeitenden in den Bereichen Marketing oder Softwareentwicklung sinnvoll werden. Diese Annahme ist nicht Bestandteil der aktuellen Kostenplanung.
+### Personalkosten
+Zum Zeitpunkt der Planung ist keine Einstellung von Mitarbeitenden vorgesehen. Sollte sich das Unternehmen positiv entwickeln, kann perspektivisch die Anstellung von Mitarbeitenden in den Bereichen Marketing oder Softwareentwicklung sinnvoll werden. Diese Annahme ist nicht Bestandteil der aktuellen Kostenplanung.
 
-#### Fixe Betriebsausgaben
-Klassische fixe Betriebsausgaben (z. B. Büro-Miete oder Energiekosten) fallen nur in geringem Umfang an.
-Als wesentliche laufende Betriebskosten sind insbesondere Aufwendungen für Rechenleistung zu nennen, die in den Bereichen Produktentwicklung, Marketing, IT-Infrastruktur und Administration anfallen.
-(Aufstellung gemäß Excel-Sheet „Kosten“)
+### Fixe Betriebsausgaben
+Klassische fixe Betriebsausgaben (z. B. Büro-Miete oder Energiekosten) fallen nur in geringem Umfang an. Als wesentliche laufende Betriebskosten sind insbesondere Aufwendungen für Rechenleistung zu nennen, die in den Bereichen Produktentwicklung, Marketing, IT-Infrastruktur und Administration anfallen.
 
 Die Fixkosten fallen überwiegend im Bereich der Produktentwicklung an und können bei Bedarf reduziert oder zeitlich verschoben werden.
 
-
-
-
-
-
-### Privatentnahme
+## Privatentnahme
 
 Der Gründer lebt in einem Vier-Personen-Haushalt (Ehepaar mit zwei Kindern im Alter von 3 und 6 Jahren). Die Ehepartnerin ist als Beamtin (Juristin) in der JVA Offenburg tätig und erzielt ein dauerhaftes, planbares Einkommen.
 
@@ -427,6 +434,8 @@ Dies erfolgt durch eine Kombination aus:
 - sowie vorhandenen privaten Rücklagen.
 
 Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt und dienen als Grundlage der Entnahmeplanung. Exemplarisch sind hier die Werte für 2026 dargestellt.
+
+Bereits ab dem ersten Jahr der Selbständigkeit wird eine moderate freiwillige private Altersvorsorge berücksichtigt. Die Beiträge sind bewusst niedrig angesetzt und werden ab dem zweiten Jahr schrittweise erhöht.
 
 Table: Private Einnahmen außerhalb der Selbständigkeit (2026, EUR/Monat)
 
@@ -457,7 +466,7 @@ Table: Privater Finanzbedarf (typischer Monat 2026, EUR/Monat)
 +--------------------------------------------------------------+------------------+
 | Position                                                     | 2026 (EUR/Monat) |
 +==============================================================+=================:+
-| Gesamtsumme                                                  | 8.430,25         |
+| Gesamtsumme                                                  | 8.380,25         |
 +--------------------------------------------------------------+------------------+
 | Private Wohnkosten (inkl. Nebenkosten und Strom)             | 150,00           |
 +--------------------------------------------------------------+------------------+
@@ -471,7 +480,7 @@ Table: Privater Finanzbedarf (typischer Monat 2026, EUR/Monat)
 +--------------------------------------------------------------+------------------+
 | Kranken- und Pflegeversicherung                              | 810,00           |
 +--------------------------------------------------------------+------------------+
-| Rentenversicherung/Altersvorsorge                            | 200,00           |
+| Rentenversicherung/Altersvorsorge                            | 150,00           |
 +--------------------------------------------------------------+------------------+
 | Sonstige Versicherungen                                      | 100,00           |
 +--------------------------------------------------------------+------------------+
@@ -490,7 +499,7 @@ Table: Privater Finanzbedarf (typischer Monat 2026, EUR/Monat)
 | Unterhaltszahlungen an andere                                | 0,00             |
 +--------------------------------------------------------------+------------------+
 
-#### Rolle des Gründungszuschusses
+### Rolle des Gründungszuschusses
 
 Der Gründungszuschuss wird in der Anlaufphase ausschließlich zur Deckung der privaten Lebenshaltungskosten eingesetzt. In der Anfangsphase wird bewusst auf Privatentnahmen aus dem Unternehmen verzichtet.
 
@@ -498,7 +507,7 @@ Für die ersten sechs Monate wird ein Zuschuss in Höhe von ca. 20.000 EUR berü
 
 Der Gründungszuschuss ist nicht Bestandteil der Unternehmensfinanzierung und keine Voraussetzung für die wirtschaftliche Tragfähigkeit des Vorhabens.
 
-#### Private Rücklagen und Entnahme
+### Private Rücklagen und Entnahme
 
 Zusätzlich stehen private Rücklagen in Höhe von 35.000 EUR für die Gründung zur Verfügung. Diese dienen ausschließlich der privaten Liquiditätssicherung in der Anlaufphase.
 
@@ -506,9 +515,9 @@ Einlagen in das Unternehmen erfolgen hiervon unabhängig ausschließlich aus ges
 
 Da der private Lebensunterhalt in der Anfangsphase außerhalb des Unternehmens abgesichert ist, wird das Unternehmen in der Aufbauphase nicht durch private Entnahmen belastet.
 
-#### Entnahmeplanung
+### Entnahmeplanung
 
-Für das Jahr 2026 sind keine Privatentnahmen aus dem Unternehmen vorgesehen. Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen geplant. Ab 2028 sind konstante monatliche Entnahmen vorgesehen und der private Bedarf wird vollständig gedeckt.
+Für das Jahr 2026 sind keine Privatentnahmen aus dem Unternehmen vorgesehen. Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen geplant. Ab 2028 sind konstante monatlichen Entnahmen vorgesehen und der private Bedarf wird vollständig gedeckt.
 
 Die Höhe der Entnahmen orientiert sich an:
 
@@ -516,67 +525,42 @@ Die Höhe der Entnahmen orientiert sich an:
 - der privaten Finanzplanung,
 - sowie der einkommensteuerlichen Belastung.
 
-#### Einkommensteuer
+### Einkommensteuer
 
-Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt. Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt. Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet. 
+Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt. Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
 
+Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet. Die Höhe der privaten Entnahmen richtet sich nach dem privaten Finanzbedarf in den Jahren 2027 und 2028 und ist aus den Ausgaben abgeleitet. Sie beinhaltet eine Schätzung der Einkommensteuer auf Monatsbasis basierend auf einer Steuerquote von 30%.
 
-Die folgende Tabelle stellt die geplanten Entnahmen insgesamt und zusammenfassend dar.
+Die folgende Tabelle stellt die berücksichtigten Einkommensteuerbeträge dar.
 
-Table: Entnahmeplanung (2026–2028, EUR)
+Table: Einkommensteuer (monatlich; 2026–2028, EUR)
 
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Position                                                                                 | Annahme (EUR) | 2026 (EUR) | 2027 (EUR) | 2028 (EUR) |
-+==========================================================================================+==============:+===========:+===========:+===========:+
-| Private Einnahmen außerhalb der Selbständigkeit (monatlich)                              |               | 5.300,00   | 5.300,00   | 5.300,00   |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Privater Finanzbedarf (monatlich, typischer Monat)                                       |               | 8.430,25   | 8.883,00   | 10.052,00  |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Benötigtes Netto Einkommen für Lebensunterhalt (monatlich) (Ausgaben - Einnahmen)        |               | 3.130,25   | 3.583,00   | 4.752,00   |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Benötigtes Netto Einkommen für Lebensunterhalt (jährlich) (Ausgaben - Einnahmen)         |               | 37.563,00  | 42.996,00  | 57.024,00  |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Annahme Gründungszuschuss                                                                | 22.700,00     |            |            |            |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Private Rücklagen für Gründung                                                           | 35.000,00     |            |            |            |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Finanzielle Mittel aus Gründungszuschuss und privaten Rücklagen (jährlich)               | 57.700,00     |            |            |            |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Eingesetzte Mittel pro Jahr                                                              |               | -37.563,00 | -20.137,00 | 0,00       |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Verbleibende Private Rücklagen für Selbständigkeit am Jahresende                         |               | 20.137,00  | 0,00       | 0,00       |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Verbleibender privater Einkommensbedarf nach privaten Mitteln (jährlich)                 |               | 0,00       | 22.859,00  | 57.024,00  |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Verbleibender privater Einkommensbedarf nach privaten Mitteln (monatlich)                |               | 0,00       | 1.904,92   | 4.752,00   |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Einkommensteuer (monatlich, Annahme 25% Steuern)                                         |               | 0,00       | 680,33     | 2.036,57   |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Soli (monatlich)                                                                         |               | 0,00       | 0,00       | 28,92      |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Kirchensteuer 8%  (monatlich)                                                            |               | 0,00       | 54,43      | 162,93     |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Resultierendes benötigtes Jahresbrutto                                                   |               | 0,00       | 31.676,04  | 83.764,95  |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
-| Benötigte Privatentnahme aus der Unternehmung (monatlich, falls über 12 Monate verteilt) |               | 0,00       | 2.639,67   | 6.980,41   |
-+------------------------------------------------------------------------------------------+---------------+------------+------------+------------+
++------+-------------------------------+
+| Jahr | Einkommensteuer / Monat (EUR) |
++======+==============================:+
+| 2026 | 0,00                          |
++------+-------------------------------+
+| 2027 | 794,96                        |
++------+-------------------------------+
+| 2028 | 2.036,57                      |
++------+-------------------------------+
 
-### Kapitalbedarf & Finanzierung
+## Kapitalbedarf & Finanzierung
 
 Der Kapitalbedarf des Unternehmens ergibt sich aus den einmaligen Gründungskosten, den laufenden Betriebskosten in der Anlaufphase sowie einer angemessenen Liquiditätsreserve. Ziel der Finanzierung ist es, den Geschäftsbetrieb in der Startphase ohne Abhängigkeit von kurzfristigen Einnahmen aufrechterhalten zu können.
 
-#### Notwendige Investitionen
+### Notwendige Investitionen
 Für den Geschäftsbetrieb sind keine physischen Anlagegüter wie Maschinen, Fahrzeuge oder Gebäude erforderlich. Zu Beginn der Selbständigkeit liegt der Schwerpunkt auf dem Zeitaufwand für die Entwicklung des Produkts sowie dem Aufbau der Online-Präsenz. Diese Tätigkeiten sind kapitalarm und verursachen überwiegend laufende, variable Kosten, jedoch keine hohen Anfangsinvestitionen.
 
 Die erforderliche Hardware (High-End-Laptop für Softwareentwicklung) ist bereits vorhanden und wird als Sacheinlage in das Unternehmen eingebracht.
 
 Table: Investitionen (Sacheinlage, EUR)
 
-+----------+-----------------------------------------------+------------+--------------+
-| Kategorie | Bezeichnung                                    | Herkunft   | Betrag (EUR) |
-+==========+===============================================+============+=============:+
-| Hardware  | Laptop, Apple MacBook Pro 14.2  (Zeitwert)     | Sacheinlage | 2.000,00     |
-+----------+-----------------------------------------------+------------+--------------+
++-----------+--------------------------------------------+-------------+--------------+
+| Kategorie | Bezeichnung                                | Herkunft    | Betrag (EUR) |
++===========+============================================+=============+=============:+
+| Hardware  | Laptop, Apple MacBook Pro 14.2  (Zeitwert) | Sacheinlage | 2.000,00     |
++-----------+--------------------------------------------+-------------+--------------+
 
 ### Sacheinlagen
 Private IT-Ausrüstung (insbesondere Laptop) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt. Es handelt sich um bereits vorhandene Arbeitsmittel. Eine gesonderte Finanzierung oder Ersatzbeschaffung ist hierfür nicht vorgesehen.
@@ -584,38 +568,38 @@ Private IT-Ausrüstung (insbesondere Laptop) wird in das Unternehmen eingebracht
 Weitere vorhandene Arbeitsmittel (Drucker, Monitor, Desktop PC) sind technisch veraltet und wurden daher nicht als bewertete Sacheinlage aufgeführt.
 
 ### Einmalige Gründungskosten
-Im Rahmen der Unternehmensgründung fallen einmalige Kosten an, insbesondere für Gebühren im Zusammenhang mit der Gewerbeanmeldung, Markenschutz, die Erstellung von AGB und Datenschutzrichtlinien sowie den Abschluss einer Berufshaftpflichtversicherung. Diese Kosten sind im Excel-Sheet „Kosten“ berücksichtigt.
+Im Rahmen der Unternehmensgründung fallen einmalige Kosten an, insbesondere für Gebühren im Zusammenhang mit der Gewerbeanmeldung, Markenschutz, die Erstellung von AGB und Datenschutzrichtlinien sowie den Abschluss einer Berufshaftpflichtversicherung. Diese Kosten sind einmalig und im Excel-Sheet „Kosten“ berücksichtigt.
 
-Table: Einmalige Gründungskosten (EUR)
+Table: Einmalige Gründungskosten (03–12/2026, EUR)
 
-+-------------------------------------+--------------+
-| Position                            | Betrag (EUR) |
-+=====================================+=============:+
-| Markenschutz Deutschland            | 290,00       |
-+-------------------------------------+--------------+
-| Steuerberater                       | 1.000,00     |
-+-------------------------------------+--------------+
-| Datenschutzberatung für Gründung    | 500,00       |
-+-------------------------------------+--------------+
-| Rechtsberatung für Gründung         | 500,00       |
-+-------------------------------------+--------------+
-| Berufshaftpflichtversicherung (exali.de) | 321,00   |
-+-------------------------------------+--------------+
-| Gewerbeanmeldung                    | 60,00        |
-+-------------------------------------+--------------+
-| **Summe einmalige Gründungskosten** | **2.671,00** |
-+-------------------------------------+--------------+
++------------------------------------------+--------------+
+| Position                                 | Betrag (EUR) |
++==========================================+=============:+
+| Markenschutz Deutschland                 | 290,00       |
++------------------------------------------+--------------+
+| Steuerberater                            | 1.000,00     |
++------------------------------------------+--------------+
+| Datenschutzberatung für Gründung         | 500,00       |
++------------------------------------------+--------------+
+| Rechtsberatung für Gründung              | 500,00       |
++------------------------------------------+--------------+
+| Berufshaftpflichtversicherung (exali.de) | 321,00       |
++------------------------------------------+--------------+
+| Gewerbeanmeldung                         | 60,00        |
++------------------------------------------+--------------+
+| **Summe einmalige Gründungskosten**      | **2.671,00** |
++------------------------------------------+--------------+
 
 ### Kapitalbedarf für den laufenden Betrieb (Anlaufphase)
 Zur Sicherstellung des laufenden Geschäftsbetriebs in der Anlaufphase werden Mittel zur Deckung der monatlichen Betriebskosten benötigt. Die Kostenstruktur ist so ausgestaltet, dass der Geschäftsbetrieb bei Bedarf mit reduziertem Kostenumfang fortgeführt werden kann. Die geplanten monatlichen Kosten für das Jahr 2026 sind im Excel-Sheet „Kosten“ detailliert aufgeschlüsselt. Die kumulierten Anlaufverluste bis zum Erreichen des Break-even betragen insgesamt 9.345,66 EUR (exklusive einmaliger Gründungskosten).
 
 ### Liquiditätsreserve
-Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von ca. 3000 Euro eingeplant. Diese dient dazu, kurzfristige zeitliche Verschiebungen zwischen Aus- und Einzahlungen auszugleichen, unvorhergesehene, einmalige Ausgaben abzufedern sowie die Zahlungsfähigkeit des Unternehmens auch bei schwankenden Einnahmen sicherzustellen.
+Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von rund 3000 Euro eingeplant. Diese dient dazu, kurzfristige zeitliche Verschiebungen zwischen Aus- und Einzahlungen auszugleichen, unvorhergesehene, einmalige Ausgaben abzufedern sowie die Zahlungsfähigkeit des Unternehmens auch bei schwankenden Einnahmen sicherzustellen.
 
 ### Eigene Mittel (Geldeinlagen)
 Der Gründer bringt eigene finanzielle Mittel in das Unternehmen ein. Die geplanten privaten Einlagen erfolgen monatlich und sind im Excel-Sheet „Liquidität“ nachvollziehbar dargestellt. Diese Einlagen dienen der Deckung des laufenden Kapitalbedarfs in der Anlaufphase.
 
-Table: Private Einlagen (monatlich, 03–12/2026, EUR)
+Table: Private Einlagen (03–12/2026, EUR)
 
 +---------+------------------------+
 | Monat   | Private Einlagen (EUR) |
@@ -648,61 +632,59 @@ Neben den eigenen Einlagen greift der Gründer auf den Gründungszuschuss sowie 
 
 Table: Finanzierungsplan (Kapital & Bedarf, EUR)
 
-+-----------------------------------------------+-------------+
-| Position                                      | Betrag (EUR) |
-+===============================================+============:+
-| **Eigenkapital (Summe)**                      | **17.000,00** |
-+-----------------------------------------------+-------------+
-| Bareinlagen                                   | 15.000,00   |
-+-----------------------------------------------+-------------+
-| Sacheinlagen                                  | 2.000,00    |
-+-----------------------------------------------+-------------+
-| **Fremdkapital (Summe)**                      | **0,00**    |
-+-----------------------------------------------+-------------+
-| **Gesamtkapital (Eigenkapital + Fremdkapital)** | **17.000,00** |
-+-----------------------------------------------+-------------+
-| **Bedarf (Summe)**                            | **-17.000,00** |
-+-----------------------------------------------+-------------+
-| Gründungskosten                               | 2.671,00    |
-+-----------------------------------------------+-------------+
-| Anlaufverluste bis Break-Even (excl. Gründungskosten) | 9.345,66 |
-+-----------------------------------------------+-------------+
-| Investitionen                                 | 2.000,00    |
-+-----------------------------------------------+-------------+
-| Zusätzliche Liquiditätsreserve                | 2.983,34    |
-+-----------------------------------------------+-------------+
-| Summe                                         | 0,00        |
-+-----------------------------------------------+-------------+
++-------------------------------------------------------+---------------+
+| Position                                              | Betrag (EUR)  |
++=======================================================+==============:+
+| **Eigenkapital (Summe)**                              | **17.000,00** |
++-------------------------------------------------------+---------------+
+| Bareinlagen                                           | 15.000,00     |
++-------------------------------------------------------+---------------+
+| Sacheinlagen                                          | 2.000,00      |
++-------------------------------------------------------+---------------+
+| **Fremdkapital (Summe)**                              | **0,00**      |
++-------------------------------------------------------+---------------+
+| **Gesamtkapital (Eigenkapital + Fremdkapital)**       | **17.000,00** |
++-------------------------------------------------------+---------------+
+| **Bedarf (Summe)**                                    | **17.000,00** |
++-------------------------------------------------------+---------------+
+| Gründungskosten                                       | 2.671,00      |
++-------------------------------------------------------+---------------+
+| Anlaufverluste bis Break-Even (excl. Gründungskosten) | 9.345,66      |
++-------------------------------------------------------+---------------+
+| Investitionen                                         | 2.000,00      |
++-------------------------------------------------------+---------------+
+| Zusätzliche Liquiditätsreserve                        | 2.983,34      |
++-------------------------------------------------------+---------------+
 
-### Rentabilität
+## Rentabilität
 
 Die Rentabilitätsvorschau basiert auf der vorliegenden Finanzplanung und stellt die geplante wirtschaftliche Entwicklung des Einzelunternehmens dar. Dargestellt wird ausschließlich die betriebliche Ergebnislage vor Steuern.
 
-#### Jahresübersicht (gemäß Finanzplanung)
+### Jahresübersicht (gemäß Finanzplanung)
 
-Table: Rentabilität (2026–2028)
+Table: Rentabilität (2026–2028, EUR)
 
 +------+--------------+-----------------------+-----------------+------------------------------------+
 | Jahr | Umsatz (EUR) | Variable Kosten (EUR) | Fixkosten (EUR) | Betriebsergebnis vor Steuern (EUR) |
-+======+=============:+======================:+================:+====================================+
-| 2026 | 7.678,00     | 4.941,30              | 13.339,00       | -10.602,30                         |
++======+=============:+======================:+================:+===================================:+
+| 2026 | 7.793,00     | 4.967,76              | 14.839,00       | -12.013,76                         |
 +------+--------------+-----------------------+-----------------+------------------------------------+
-| 2027 | 116.919,00   | 60.395,65             | 16.855,00       | 39.668,35                          |
+| 2027 | 115.174,50   | 58.992,84             | 17.955,00       | 38.226,66                          |
 +------+--------------+-----------------------+-----------------+------------------------------------+
-| 2028 | 408.788,50   | 193.903,97            | 18.955,00       | 195.929,53                         |
+| 2028 | 395.781,50   | 187.231,08            | 17.855,00       | 190.695,42                         |
 +------+--------------+-----------------------+-----------------+------------------------------------+
 
-#### Einordnung der Ergebnisse
+### Einordnung der Ergebnisse
 
 In der Anlaufphase im Jahr 2026 weist das Unternehmen ein negatives Betriebsergebnis vor Steuern aus. Ursache hierfür sind die fixen Aufbaukosten bei gleichzeitig noch geringem Umsatzniveau.
 
-Gemäß Planung wird ab Februar 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab Mai 2027 positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
+Gemäß Planung wird ab dem Jahr 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab Februar 2027 positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
 
 Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten steigen im Planungszeitraum nur moderat an. Ab dem Jahr 2027 decken die Erlöse sowohl die variablen Kosten als auch die laufenden Fixkosten.
 
 Der deutliche Umsatzanstieg im Jahr 2028 ergibt sich aus dem vollständigen Jahresbetrieb, der Skalierbarkeit des digitalen Geschäftsmodells sowie der Ausweitung der Kundenbasis.
 
-#### Verhältnis von Kosten zu Erlösen (Kennzahlen)
+### Verhältnis von Kosten zu Erlösen (Kennzahlen)
 
 Zur Darstellung des Kosten-Erlös-Verhältnisses werden die Bruttomarge sowie die Fixkostenquote herangezogen. Die Kennzahlen basieren ausschließlich auf der vorliegenden Finanzplanung und sind auch im Reiter "Rentabilität" aufgeführt.
 
@@ -713,106 +695,104 @@ Table: Kosten-Erlös-Kennzahlen (2026–2028)
 +------+-------------+----------------+
 | Jahr | Bruttomarge | Fixkostenquote |
 +======+=============+================+
-| 2026 | 35.6 %      | 173.7 %        |
+| 2026 | 36,3 %      | 190,4 %        |
 +------+-------------+----------------+
-| 2027 | 48.3 %      | 14.4 %         |
+| 2027 | 48,8 %      | 15,6 %         |
 +------+-------------+----------------+
-| 2028 | 52.6 %      | 4.6 %          |
+| 2028 | 52,7 %      | 4,5 %          |
 +------+-------------+----------------+
 
-Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Die Bruttomarge ergibt sich aus dem Verhältnis von Umsatz abzüglich variabler Kosten zum Umsatz. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich. Die hohe Fixkostenquote im Jahr 2026 ist ausschließlich auf das sehr niedrige Umsatzniveau in der Anlaufphase zurückzuführen und besitzt keine Aussagekraft für den Regelbetrieb. 
+Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Die Bruttomarge ergibt sich aus dem Verhältnis von Umsatz abzüglich variabler Kosten zum Umsatz. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich. Die hohe Fixkostenquote im Jahr 2026 ist ausschließlich auf das sehr niedrige Umsatzniveau in der Anlaufphase zurückzuführen und besitzt keine Aussagekraft für den Regelbetrieb.
 
-#### Einordnung des Unternehmerlohns
+### Einordnung des Unternehmerlohns
 
 Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitts "Privatentnahme" separat dargestellt.
 
-
-
-
-### Liquidität
+## Liquidität
 
 Im Jahr 2026 werden neben den ersten Umsätzen private Einlagen berücksichtigt. In diesem Zeitraum erfolgen keine Privatentnahmen, um den Aufbau des Unternehmens nicht durch laufende Entnahmen zu belasten. Die privaten Einlagen sind zeitlich begrenzt und dienen ausschließlich der Sicherstellung der Zahlungsfähigkeit in der Anlaufphase.
 
 Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen vorgesehen. Die Entnahmen orientieren sich an der Entwicklung der Umsätze und werden so angesetzt, dass die Liquidität des Unternehmens durchgehend positiv bleibt. Ab dem Jahr 2028 wird eine konstante monatliche Privatentnahme zugrunde gelegt.
 
-Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand 6.288,70, zum Jahresende 2027  26.810,26 und zum Jahresende 2028  148.079,13. 
+Die Liquidität entwickelt sich im gesamten Planungszeitraum positiv. Zum Jahresende 2026 beträgt der Liquiditätsbestand 3.877,24, zum Jahresende 2027 49.312,16 und zum Jahresende 2028 263.232,84.
 
 Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau bei gleichzeitig konstant angesetzten Privatentnahmen und dient dem Aufbau eines finanziellen Puffers zur Absicherung des laufenden Geschäftsbetriebs.
 
-Table: Liquiditätsplan (03/2026–12/2028)
+Der nachfolgende Auszug zeigt den monatlichen Liquiditätsverlauf für den Zeitraum 03/2026 bis 12/2028. Die vollständige Liquiditätsplanung ist im Excel-Sheet „Liquidität“ dargestellt.
 
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| Monat   | Liquidität Monatsanfang (EUR) | Einzahlungen / Umsatz netto (EUR) | Private Einlagen (EUR) | Gesamtkosten (EUR) | Entnahmen (EUR) | Liquidität Monatsende (EUR) |
-+=========+==============================:+==================================:+=======================:+===================:+================:+============================:+
-| 03/2026 | 0,00                          | 15,00                             | 3.000,00               | 2.157,75           | 0,00            | 1.057,25                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 04/2026 | 1.057,25                      | 30,00                             | 2.000,00               | 998,00             | 0,00            | 2.289,25                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 05/2026 | 2.289,25                      | 45,00                             | 2.000,00               | 1.015,25           | 0,00            | 3.519,00                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 06/2026 | 3.519,00                      | 75,00                             | 1.000,00               | 1.658,75           | 0,00            | 3.135,25                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 07/2026 | 3.135,25                      | 335,00                            | 1.000,00               | 1.313,75           | 0,00            | 3.356,50                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 08/2026 | 3.356,50                      | 510,00                            | 1.000,00               | 1.557,72           | 0,00            | 3.670,78                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 09/2026 | 3.670,78                      | 875,00                            | 1.000,00               | 1.984,20           | 0,00            | 3.923,57                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 10/2026 | 3.923,57                      | 1.340,00                          | 1.000,00               | 2.257,68           | 0,00            | 4.367,90                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 11/2026 | 4.367,90                      | 1.835,00                          | 1.000,00               | 2.504,38           | 0,00            | 5.222,52                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 12/2026 | 5.222,52                      | 2.375,00                          | 1.000,00               | 2.832,82           | 0,00            | 6.288,70                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 01/2027 | 6.288,70                      | 3.145,00                          | 0,00                   | 3.636,50           | 357,59          | 6.125,61                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 02/2027 | 6.125,61                      | 3.860,00                          | 0,00                   | 3.648,93           | 715,17          | 6.307,51                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 03/2027 | 6.307,51                      | 4.805,00                          | 0,00                   | 4.463,57           | 1.072,76        | 6.424,18                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 04/2027 | 6.424,18                      | 5.795,00                          | 0,00                   | 4.655,98           | 1.430,35        | 6.980,85                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 05/2027 | 6.980,85                      | 6.815,00                          | 0,00                   | 5.194,60           | 1.787,94        | 7.823,32                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 06/2027 | 7.823,32                      | 8.080,00                          | 0,00                   | 5.820,98           | 2.145,52        | 8.946,82                    |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 07/2027 | 8.946,82                      | 9.275,00                          | 0,00                   | 6.449,57           | 2.503,11        | 10.441,14                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 08/2027 | 10.441,14                     | 10.700,00                         | 0,00                   | 7.145,40           | 2.860,70        | 12.631,04                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 09/2027 | 12.631,04                     | 12.170,00                         | 0,00                   | 7.868,98           | 3.218,28        | 15.209,78                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 10/2027 | 15.209,78                     | 13.670,00                         | 0,00                   | 8.621,77           | 3.575,87        | 18.340,14                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 11/2027 | 18.340,14                     | 15.400,00                         | 0,00                   | 9.453,80           | 3.933,46        | 22.334,88                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 12/2027 | 22.334,88                     | 17.075,00                         | 0,00                   | 10.290,58          | 4.291,04        | 26.810,26                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 01/2028 | 26.810,26                     | 18.995,00                         | 0,00                   | 13.615,83          | 7.788,60        | 26.706,84                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 02/2028 | 26.706,84                     | 20.930,00                         | 0,00                   | 12.267,05          | 7.788,60        | 30.049,19                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 03/2028 | 30.049,19                     | 22.995,00                         | 0,00                   | 13.493,50          | 7.788,60        | 34.554,10                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 04/2028 | 34.554,10                     | 25.105,00                         | 0,00                   | 14.218,42          | 7.788,60        | 40.606,07                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 05/2028 | 40.606,07                     | 27.360,00                         | 0,00                   | 15.329,83          | 7.788,60        | 48.125,65                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 06/2028 | 48.125,65                     | 29.760,00                         | 0,00                   | 16.504,70          | 7.788,60        | 57.032,36                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 07/2028 | 57.032,36                     | 32.305,00                         | 0,00                   | 17.745,05          | 7.788,60        | 67.567,71                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 08/2028 | 67.567,71                     | 35.010,00                         | 0,00                   | 19.058,12          | 7.788,60        | 79.980,99                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 09/2028 | 79.980,99                     | 37.745,00                         | 0,00                   | 20.415,15          | 7.788,60        | 94.096,24                   |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 10/2028 | 94.096,24                     | 40.740,00                         | 0,00                   | 21.869,90          | 7.788,60        | 110.075,75                  |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 11/2028 | 110.075,75                    | 43.780,00                         | 0,00                   | 23.371,12          | 7.788,60        | 128.080,03                  |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
-| 12/2028 | 128.080,03                    | 47.050,00                         | 0,00                   | 24.970,30          | 7.788,60        | 148.079,13                  |
-+---------+-------------------------------+-----------------------------------+------------------------+--------------------+-----------------+-----------------------------+
+Table: Liquiditätsplan (03/2026–12/2028, EUR)
 
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| Monat   | Liquidität Monatsanfang (EUR) | Einzahlungen / Umsatz (EUR) | Private Einlagen (EUR) | Gesamtkosten (EUR) | Entnahmen (EUR) | Liquidität Monatsende (EUR) |
++=========+==============================:+============================:+=======================:+===================:+================:+============================:+
+| 03/2026 | 0,00                          | 15,00                       | 4.000,00               | 2.707,30           | 0,00            | 1.307,70                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 04/2026 | 1.307,70                      | 30,00                       | 2.000,00               | 1.547,10           | 0,00            | 1.790,60                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 05/2026 | 1.790,60                      | 45,00                       | 2.000,00               | 1.063,90           | 0,00            | 2.771,70                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 06/2026 | 2.771,70                      | 75,00                       | 2.000,00               | 1.206,50           | 0,00            | 3.640,20                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 07/2026 | 3.640,20                      | 335,00                      | 2.000,00               | 1.363,70           | 0,00            | 4.611,50                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 08/2026 | 4.611,50                      | 672,00                      | 1.000,00               | 1.607,02           | 0,00            | 4.676,48                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 09/2026 | 4.676,48                      | 1.037,00                    | 1.000,00               | 2.032,14           | 0,00            | 4.681,34                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 10/2026 | 4.681,34                      | 1.502,00                    | 1.000,00               | 2.806,26           | 0,00            | 4.377,08                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 11/2026 | 4.377,08                      | 2.159,00                    | 0,00                   | 2.552,30           | 0,00            | 3.983,78                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 12/2026 | 3.983,78                      | 2.814,00                    | 0,00                   | 2.920,54           | 0,00            | 3.877,24                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 01/2027 | 3.877,24                      | 3.646,00                    | 0,00                   | 3.297,90           | 0,00            | 4.225,34                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 02/2027 | 4.225,34                      | 4.461,00                    | 0,00                   | 3.724,66           | 0,00            | 4.961,68                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 03/2027 | 4.961,68                      | 5.468,00                    | 0,00                   | 4.912,34           | -592,03         | 4.925,31                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 04/2027 | 4.925,31                      | 6.458,00                    | 0,00                   | 5.203,42           | -1.184,06       | 4.995,83                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 05/2027 | 4.995,83                      | 7.740,00                    | 0,00                   | 5.266,42           | -1.776,09       | 5.693,31                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 06/2027 | 5.693,31                      | 8.890,00                    | 0,00                   | 5.835,02           | -2.368,13       | 6.380,16                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 07/2027 | 6.380,16                      | 10.202,00                   | 0,00                   | 6.387,94           | -2.960,16       | 7.234,07                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 08/2027 | 7.234,07                      | 11.659,00                   | 0,00                   | 7.008,26           | -3.552,19       | 8.332,62                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 09/2027 | 8.332,62                      | 13.146,00                   | 0,00                   | 7.684,50           | -4.144,22       | 9.649,90                    |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 10/2027 | 9.649,90                      | 14.763,00                   | 0,00                   | 8.413,66           | -4.736,25       | 11.262,98                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 11/2027 | 11.262,98                     | 16.525,00                   | 0,00                   | 9.198,22           | -5.328,28       | 13.261,48                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 12/2027 | 13.261,48                     | 18.332,00                   | 0,00                   | 10.015,50          | -5.920,32       | 15.657,66                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 01/2028 | 15.657,66                     | 20.431,00                   | 0,00                   | 11.087,70          | -6.980,41       | 18.020,55                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 02/2028 | 18.020,55                     | 22.498,00                   | 0,00                   | 11.918,82          | -6.980,41       | 21.619,32                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 03/2028 | 21.619,32                     | 24.757,00                   | 0,00                   | 13.100,86          | -6.980,41       | 26.295,04                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 04/2028 | 26.295,04                     | 27.014,00                   | 0,00                   | 14.307,42          | -6.980,41       | 32.021,21                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 05/2028 | 32.021,21                     | 29.563,00                   | 0,00                   | 14.895,90          | -6.980,41       | 39.707,90                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 06/2028 | 39.707,90                     | 31.995,00                   | 0,00                   | 16.023,10          | -6.980,41       | 48.699,39                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 07/2028 | 48.699,39                     | 34.834,00                   | 0,00                   | 17.243,02          | -6.980,41       | 59.309,95                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 08/2028 | 59.309,95                     | 37.718,00                   | 0,00                   | 18.501,66          | -6.980,41       | 71.545,88                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 09/2028 | 71.545,88                     | 40.747,00                   | 0,00                   | 19.828,02          | -6.980,41       | 85.484,45                   |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 10/2028 | 85.484,45                     | 43.936,00                   | 0,00                   | 21.228,90          | -6.980,41       | 101.211,14                  |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 11/2028 | 101.211,14                    | 47.417,00                   | 0,00                   | 22.701,02          | -6.980,41       | 118.946,70                  |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
+| 12/2028 | 118.946,70                    | 50.896,00                   | 0,00                   | 24.249,66          | -6.980,41       | 138.612,63                  |
++---------+-------------------------------+-----------------------------+------------------------+--------------------+-----------------+-----------------------------+
 
 [^fbi]: Fortune Business Insights: https://www.fortunebusinessinsights.com/prompt-engineering-market-109382
 [^ram]: Research and Markets: https://www.researchandmarkets.com/reports/6103820/prompt-engineering-global-market-report

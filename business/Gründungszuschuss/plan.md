@@ -169,6 +169,7 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 - follow the instructions in XML Tags precisely.
 - if a paragraph from the input is already of high quality, only make minimal changes to it.
 - Don't state common knowledge, Bad: "Die Liquiditätsplanung stellt Ein- und Auszahlungen sowie die Entwicklung der Liquidität auf Monatsbasis dar."
+- Prefer term "Generative KI" over "Sprachmodelle"
 
 ### Example Transformation
 
@@ -201,9 +202,11 @@ This file (`business_plan.md`) is the single source of truth and is intended for
 Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with stable tables, headings, and page breaks.
 
 #### Headings & Structure
-- Chapters must be **H1** (`## 1. ...`, `## 2. ...` ...), sub-sections **H2**, sub-sub-sections **H3**
+- Use **Variante B**: document metadata via **YAML frontmatter** (Pandoc), and the content structure starts with chapter headings.
+- Chapters must be **H1** (e.g. `# Executive Summary`, `# Geschäftsidee`, ...), sub-sections **H2**, sub-sub-sections **H3**.
+- If numbering is desired, include it **in the heading text** consistently (e.g. `# 1. Executive Summary`, `# 2. Geschäftsidee`, ...).
 - Do not “jump” heading levels (e.g. H2 → H4)
-- Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. (The template may contain `---`; do not carry them over—use headings and/or explicit page breaks instead.)
+- Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. Exception: the YAML frontmatter delimiters (`---`) at the very top of the file are allowed.
 
 #### Tables (most important for audit)
 Grid tables only. Caption required above each table (`Table: Caption text`), blank line before table. 

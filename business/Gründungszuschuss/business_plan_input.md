@@ -1,21 +1,39 @@
+---
+title: "Existenzsgründungsvorhaben - SharpIntent"
+author: "Steffen Glomb"
+lang: de-DE
+toc-title: "Inhaltsverzeichnis"
+date: "Feburar 2026"
+abstract: |
+    SharpIntent ist ein digitales Gründungsvorhaben zur effektiveren Nutzung Generativer KI. Ziel ist es, durch strukturierte Aufgabenklärung vor dem KI-Einsatz die versprochenen Vorteile wie höhere Produktivität, bessere Qualität und verlässlichere Ergebnisse im Arbeitsalltag realisierbar zu machen. Der Gründungszuschuss ermöglicht die konzentrierte Umsetzung des Vorhabens in der Anlaufphase und die nachhaltige Etablierung der Selbstständigkeit.
+---
+
+
+
 # Executive Summary
 
-
-
-
 <formulierung: nicht technisch, Fliesstext ohne Stickpunkte>
+Style:
+- Non-technical language
+- Continuous prose (no bullet points, no lists)
+- Neutral, factual, concise
+- Written for non-expert readers (e.g. funding bodies)
 
 Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und knapp die wichtigsten Aspekte deines Vorhabens aufzählt.
+- What problem exists and why it matters in professional use of generative AI
 - Was ist der Kern deiner Idee?
 - Was bietest du an?
-- Wer sind deine Kunden?
+- Wer sind deine Kunden? (generalize here, e.g. "berufliche Anwender, die regelmäßig mit text- oder wissensintensiven Aufgaben in Generativer KI arbeiten und für die Ergebnisqualität geschäftskritisch ist.")
 - Warum wird dein Angebot für deine Kunden nützlich sein?
 - Wer ist im Gründungsteam und welche relevanten Qualifikationen habt ihr?
 - Ab wann wird dein Unternehmen Gewinn machen?
 - Wofür benötigst du fremdes Kapital und wie viel?
 
+- Die Leistung wird als abonnementbasiertes SaaS-Produkt vermarktet und richtet sich an berufliche Anwender und Unternehmen, bei denen Ergebnisqualität, Verlässlichkeit und Zeitersparnis wirtschaftlich relevant sind. Kunden zahlen für die Reduktion von Korrekturaufwand, die höhere Planbarkeit von KI-Ergebnissen sowie für eine risikoärmere Nutzung im Arbeitsalltag.
+
 <finanzielles für Exec Summary>
-- wann ist der break even vor entnahmen
+- Erlösmodell (sehr wichtig, damit der Leser weiß wie Geld verdient wird) - Zahlungsbereitschaft durch Qualität und Zeitersparnis. 
+- wann ist der break even vor entnahmen, Sagen: Branchenüblich für SaaS vorhaben mit Produktentwicklung, konservativ geplant
 - ab wann kann der Gründer seinen Lebensunterhalt bestreiten, rentabilität nach entnahmen
 - wieviel investiert der Unternehmer selbst (siehe "Finanzielle MIttel aus Grüngungszuschuss und privaten Rücklagen (jährlich)" aus excel)
 - Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt. Der geplante Arbeitsumfang beträgt mind. 40 Wochenstunden.
@@ -25,6 +43,9 @@ Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und kn
 # Geschäftsidee
 
 ## Problem
+- Welche Problem bestehen, die Dein Angebot lösen will?
+- Wie empfinden Nutzer das Problem (so beschrieben, dass Leute aus der Zielgruppe sofort sagen: "Ja stimmmt!")
+
 
 Sprachmodell fühlen sich für Nutzer "unzuverlässig genial" an. Man weiß, dass sie es kann, aber man weiß nie, ob sie es dieses Mal richtig gemacht hat und wie man sie zuverlässig dazu kriegt. 
 
@@ -46,15 +67,18 @@ Limitierendes Chatformat: Chat-Interfaces produzieren Text über eine Aufgabe, a
 Bestehende Anbieter sind nicht kritisch gegenüber ihrem eingenen Angebot. Sie weisen nur allgemein auf das Fehlverhalten hin. Nicht jedoch in konkreten Fällen.
 
 
-Das führt zu:
+Das führt dazu dass:
 - Qualitäts-Blindheit bei Gelegenheitsnutzern, ein grosses Problem für Führungskräfte, wenn das für Mitarbeiter zutrifft. 
 - Profis sich ausgebremst fühlen. Sie erkennen das Potenzial, aber es bleibt für sie eher ein Spielzeug
 - Negativem ROI bei der Verwendung einer Technologie, z.B. durch Kosten für KI Lizenzen und extra Prüfungsaufwand
 
+Beispiele:
+Typische Praxisbeispiele sind etwa die Erstellung fachlicher Marketingtexte mit unklarer Zielgruppendefinition, juristische Vorprüfungen ohne eindeutige Zuständigkeitsangaben oder HR-Stellenanzeigen ohne präzise Rollenabgrenzung. In solchen Fällen wirken KI-Ergebnisse zunächst plausibel, erweisen sich jedoch bei näherer Prüfung als unvollständig oder fachlich problematisch, was zu zusätzlichem Korrekturaufwand führt.
+
 ## Angebot
 
 <meta: formuliere nicht technisch>
-WICHTIG: Sharpintent ist nich perfekt. Es macht Ergebnisse nicht prüfbar, es unterstützt bei der Präzisierung, das muss bei der Formula
+WICHTIG: Sharpintent ist nich perfekt. Es gibt keine Garantie, aber es unterstützt bei der Schärfung von Gedanken und reduziert damit Fehlerquellen.
 </meta: formuliere nicht technisch>
 
 SharpIntent unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen indem es die Intention des Menschen strukturiet und mit maximaler Unterstützung erfasst, bevor die Sprachmodell die Aufgabe angehen.
@@ -69,11 +93,15 @@ SharpIntent unterstützt Menschen Sprachmodelle effektiv und effizient zu nutzen
 
 SharpIntent wird als web-basierte SAAS Lösung angeboten.
 
+Agrenzung: 
+SharpIntent ist ausdrücklich als standardisiertes Softwareprodukt konzipiert und nicht als Beratungs-, Schulungs- oder Projektleistung. Die Nutzung erfolgt als Self-Service ohne individuelle Projektverantwortung oder kundenspezifische Werkverträge. Die Leistung ist skalierbar und unabhängig von der persönlichen Arbeitszeit des Gründers nutzbar, was die wirtschaftliche Tragfähigkeit des Modells unterstützt.
 
 
 ## Nutzen
 
-Benutzer sparen massive Zeit bei der Verwendung von Sprachmodellen. Erwartungen an die Technologie werden angepasst. Berührungsängste und Bedenken werden reduziert. Menschen und Unternehmen können Produktivität verlässlicher steigern. Riskio der Verwendung von Sprachmodellen reduziert sich.
+Benutzer sparen massive Zeit bei der Verwendung von Generativer KI. Erwartungen an die Technologie werden angepasst. Berührungsängste und Bedenken werden reduziert und führen zu einer besseren Einführung und effektiverer Nutzung von Generativer KI. Menschen und Unternehmen können Produktivität verlässlicher steigern. Riskio der Verwendung von Sprachmodellen reduziert sich. 
+
+In der Praxis können dadurch mehrere iterative Korrekturschleifen vermieden werden. Je nach Komplexität der Aufgabe ist von einer Zeitersparnis im Bereich von etwa 30 bis 120 Minuten pro Aufgabe auszugehen. Gleichzeitig sinkt das Risiko fachlicher Fehler oder formaler Nacharbeiten, was insbesondere bei geschäftskritischen Anwendungen relevant ist.
 
 ## Kernfähigkeiten
 
@@ -133,6 +161,8 @@ Wie erreichst du deine Kunden?**
 Go-to-Market-Strategie: Produktgetriebenes Wachstum mit Content-Unterstützung
 
 Als Solopreneur ohne Vertriebsteam ist ein skalierbarer, low-touch Ansatz zwingend. Der Vertrieb erfolgt primär digital und selbstbedient. Anstatt budgetintensiver Werbeanzeigen (Paid Ads) wird das bestehende Netzwerk (3.500 Kontakte auf LinkedIn) als initialer Hebel genutzt. 
+
+Ein klassischer, personalintensiver Vertrieb ist nicht vorgesehen. Aufgrund der niedrigen Einstiegshürde, der digitalen Bereitstellung und des klar abgegrenzten Nutzens eignet sich das Produkt für einen selbstbedienten SaaS-Ansatz. Dies ermöglicht eine wirtschaftliche Marktbearbeitung auch ohne eigenes Vertriebsteam.
 
 * **Kanäle:** Wie erreicht das Angebot den Kunden (Online/Offline, Direct Sales)?
 
@@ -194,6 +224,8 @@ Ab dem zweiten Jahr soll ein signifikanter Anteil neuer Nutzer durch Empfehlunge
 **Phase 2 – Launch (Monat 5–7):** Erhöhung der öffentlichen Präsenz durhc Foren und Launch auf Product Hunt. Validierung des Conversion-Funnels und Gewinnung der ersten zahlenden Kunden.
 
 **Phase 3 – Skalierung (Monat 8–36):** SEO wird zum dominanten Kanal. Word-of-Mouth setzt ein. LinkedIn und Community-Engagement laufen in stabiler Routine.
+
+Die nachfolgende Übersicht stellt keine absoluten Kundenzahlen dar, sondern beschreibt die geplanten relativen Schwerpunkte und Intensitäten der einzelnen Akquise-Kanäle im Zeitverlauf. Sie dient der strukturierten Planung des Marktzugangs und berücksichtigt typische Anlaufzeiten insbesondere für Content- und SEO-basierte Kanäle.
 
 <Tabelle>
   <title>Akquise Kanäle erste 12 Monate</title>
@@ -350,7 +382,8 @@ Die geplante Selbstständigkeit ermöglicht es dem Gründer, die in den letzten 
 
 Gleichzeitig eröffnen aktuelle technologische Entwicklungen, insbesondere im Bereich der generativen künstlichen Intelligenz, neue Möglichkeiten zur effizienten Entwicklung und Bereitstellung digitaler Dienstleistungen. Diese Technologien ermöglichen es, mit überschaubarem Ressourceneinsatz hochwertige Softwarelösungen wirtschaftlich zu entwickeln und zu betreiben, ohne den Aufbau eines großen Teams vorauszusetzen.
 
-Vor diesem Hintergrund stellt die geplante Selbstständigkeit für den Gründer die konsequente und wirtschaftlich sinnvolle Alternative zur abhängigen Beschäftigung dar. Ziel der Gründung ist der Aufbau eines nachhaltigen digitalen Unternehmens, das den Lebensunterhalt des Gründers sichert und perspektivisch digitale Dienstleistungen für Unternehmen bereitstellt, auch mit Blick auf den regionalen Bedarf an Digitalisierungskompetenz.
+Vor diesem Hintergrund stellt die geplante Selbstständigkeit die nachhaltigste und wirtschaftlich sinnvollste Form der beruflichen Integration dar. Sie ermöglicht die Nutzung der vorhandenen Qualifikation und Berufserfahrung ohne strukturelle Nachteile durch regionale Arbeitsmarkteinschränkungen und schafft die Grundlage für eine langfristig tragfähige Erwerbstätigkeit.
+
 </take literally>
 
 
@@ -555,6 +588,7 @@ Gegenmaßnahmen
 
 </struktur der risiken beibehalten, gut formatieren>
 
+Ein Überschuldungsrisiko besteht nicht, da keine Fremdfinanzierung vorgesehen ist und klare Abbruch- und Anpassungskriterien definiert sind. Durch die ausschließliche Finanzierung aus Eigenmitteln sowie die Nutzung des Gründungszuschusses zur privaten Absicherung bleibt die wirtschaftliche Handlungsfähigkeit des Unternehmens jederzeit gewährleistet.
 
 
 # Finanzen
@@ -595,10 +629,9 @@ Die Abrechnung der Abonnements erfolgt im Voraus.
 Auch der Erwerb von Guthabenpunkten erfolgt vor der Nutzung. Dadurch entstehen keine Forderungsausfälle aus laufender Nutzung.
 
 ### Preisfindung und Markteinordnung
-Die initiale Preisstruktur orientiert sich an, vergleichbaren marktüblichen Preismodellen, sowie den zugrunde gelegten Kostenannahmen.
+Die initiale Preisstruktur orientiert sich an vergleichbaren marktüblichen Preismodellen, sowie den zugrunde gelegten Kostenannahmen.
 
-In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind.
-Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
+In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und Nachfrageverhalten beobachtet und ausgewertet. Auf dieser Basis wird geprüft, ob geringfügige Anpassungen der Preisstruktur oder der Nutzungsgrenzen erforderlich sind. Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
 
 ### Umsatzplan
 Der nachfolgende Umsatzplan bildet die geplanten Umsätze für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
@@ -643,28 +676,27 @@ Kostenstruktur und Kostenarten
 Die betrieblichen Ausgaben setzen sich aus folgenden Kostenblöcken zusammen:
 
 ### Marketing
-Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots.
-(Zusammenfassung der Marketingkosten aus dem Excel-Sheet „Kosten“)
-<Zusammenfassung Marketing kosten 2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
+Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots. Die geplanten Marketingausgaben im ersten Geschäftsjahr umfassen insbesondere Maßnahmen zur Nutzergewinnung und Sichtbarkeit des Angebots. Der Fokus liegt im ersten Jahr auf organischem Wachstum und direkter Ansprache; kostenintensive Marketingmaßnahmen sind nicht vorgesehen.
+<Tabelle Marketing kosten 2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
 ### Direkte Kosten
 Direkte Kosten entstehen im Zusammenhang mit der Leistungserbringung für Kunden.
-<Zusammenfassung Direkte Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
+<Tabelle Direkte Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
 ### Kosten der Produktentwicklung
-Diese Kosten betreffen die Weiterentwicklung und Pflege des digitalen Produkts.
-<Zusammenfassung Kosten Produktentwicklung  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
+Diese Kosten betreffen die Weiterentwicklung und Pflege des digitalen Produkts. Die höheren Aufwendungen für Produktentwicklung im Jahr 2026 dienen dem Aufbau der technischen Grundlage und sind Voraussetzung für die Skalierung in den Folgejahren.
+<Tabelle Kosten Produktentwicklung  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
 ### Administrative Kosten
 Administrative Kosten umfassen unter anderem Buchhaltung, rechtliche Grundlagen und sonstige betriebliche Verwaltungsaufwendungen.
-<Zusammenfassung Administratve Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
+<Tabelle Administratve Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
 ### IT-Infrastrukturkosten
 IT-Kosten entstehen insbesondere durch Hosting, Rechenleistung und technische Basisdienste.
-<Zusammenfassung IT Infrastruktur Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
+<Tabelle IT Infrastruktur Kosten  2026 ab März, Positionen einzelnm listen, aggregiert auf Jahr aus excel sheet Kosten/>
 
 ### Flexibilität der Kostenstruktur
-Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden.
+Die Kostenstruktur ist so ausgelegt, dass der laufende Betrieb des Unternehmens zeitweise mit Fixkosten von unter 1.000 Euro pro Monat aufrechterhalten werden kann. Ein wesentlicher Teil der als Fixkosten ausgewiesenen Positionen ist technisch nutzungs- oder zeitabhängig und kann bei Bedarf kurzfristig reduziert oder pausiert werden. Es sind keine langfristigen vertraglichen Zahlungsverpflichtungen vorgesehen. Die meisten Kostenpositionen können bei Bedarf kurzfristig angepasst oder reduziert werden. 
 
 ### Umsatzabhängige (variable) Kosten
 Variable Kosten entstehen im Wesentlichen im Rahmen der Wertschöpfung für Kunden. Diese sind insbesondere abhängig von der Nutzung generativer KI-Dienste externer Anbieter. Weitere variable Kosten sind im Vergleich hierzu von untergeordneter Bedeutung.
@@ -966,7 +998,7 @@ Der Anstieg der Liquidität ab 2028 ergibt sich aus dem geplanten Umsatzniveau b
 </take literally>
 
 Der nachfolgende Auszug zeigt den monatlichen Liquiditätsverlauf für den Zeitraum 03/2026 bis 12/2028. Die vollständige Liquiditätsplanung ist im Excel-Sheet „Liquidität“ dargestellt.
-<table: Monat | Liquidität Monatsanfang | Einzahlungen / Umsatz (EUR) | Private Einlagen | Gesamtkosten (EUR) [von Kosten Sheet] | Entnahmen | Liquidität Monatsende / >
+<table: Monat | Liquidität Monatsanfang | Einzahlungen / Umsatz (EUR) | Private Einlagen | Gesamtkosten (EUR) [von Kosten Sheet] | Entnahmen [as a positive amount, e.g. ABS()] | Liquidität Monatsende / >
 
 
 

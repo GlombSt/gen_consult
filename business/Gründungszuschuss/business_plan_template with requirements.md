@@ -1,3 +1,4 @@
+
 # Executive Summary
 
 Schreibe am Ende deiner Überlegungen eine Zusammenfassung, die hier kurz und knapp die wichtigsten Aspekte deines Vorhabens aufzählt.
@@ -20,6 +21,10 @@ Die folgenden Fragen müssen in den entsprechenden Absätzen beantwortet werden:
 
 
 # Geschäftsidee
+
+## Problem
+- Welche Problem bestehen, die Dein Angebot lösen will?
+- Wie empfinden Nutzer das Problem (so beschrieben, dass Leute aus der Zielgruppe sofort sagen: "Ja stimmmt!")
 
 ## Angebot
 
@@ -160,8 +165,6 @@ Wie erreichst du deine Kunden?
 ## Privatentnahme
 
 **Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?**
-
-
 - Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
 - Wie viel Einkommenssteuer musst du zahlen?
 - Privater Finanzbedarf (private monatliche Kosten als Tabelle), typisch für einen Monat im ersten Jahr (nach der Gründung). Bitte beachten Sie die Kranken- und Pflegepflichtversicherungen ab der Gründung, sowie die Einkommenssteuer und die Altersvorsorge

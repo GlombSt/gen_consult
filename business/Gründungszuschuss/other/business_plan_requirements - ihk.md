@@ -16,7 +16,7 @@
 
 * Businessplan (Textteil) und Finanzierungspläne (Zahlenteil als Tabelle) mit:
   * Aussagefähige Beschreibung des Existenzgründungsvorhabens zur Erläuterung der Geschäftsidee
-  * Privater Finanzbedarf (private monatliche Kosten als Tabelle), typisch für einen Monat im ersten Jahr (nach der Gründung). Bitte beachten Sie die Kranken- und Pflegepflichtversicherungen ab der Gründung, sowie die Einkommenssteuer und die Altersvorsorge
+    * Privater Finanzbedarf (private monatliche Kosten als Tabelle), typisch für einen Monat im ersten Jahr (nach der Gründung). Bitte beachten Sie die Kranken- und Pflegepflichtversicherungen ab der Gründung, sowie die Einkommenssteuer und die Altersvorsorge
   * Kapitalbedarfsplan als Tabelle (Aufstellung über die erforderlichen Anschaffungen für die Gründung)
   * Finanzierungsplan als Tabelle (Aufstellung über die vorgesehene Finanzierung ohne Gründungszuschuss)
   * Detaillierter Umsatzplan auf Monatsbasis mit Erläuterung als Tabelle für 3 Jahre (Rumpfjahr + 2 Jahre auf Monatsbasis)
