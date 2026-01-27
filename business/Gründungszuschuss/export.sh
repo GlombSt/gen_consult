@@ -14,7 +14,7 @@ OUTDIR="$DIR/output"
 MD="$OUTDIR/business_plan.md"
 REF="$OUTDIR/reference.docx"
 OUT_DOCX="$OUTDIR/business_plan.docx"
-TOC_FILTER_HOST="${REPO_ROOT}/${OUTDIR}/_pandoc_unlist_title.lua"
+PANDOC_INPUT_HOST="${REPO_ROOT}/${OUTDIR}/_pandoc_input.md"
 
 if [[ ! -f "${REPO_ROOT}/${MD}" ]]; then
   echo "ERROR: Missing input Markdown: ${MD}" >&2
@@ -45,24 +45,33 @@ else
   esac
 fi
 
-# We want a 2-level TOC of the document content (# + ##).
-# Pandoc's toc-depth counts absolute heading levels, so we set toc-depth=2 and
-# exclude the first level-1 header (the document title) from the TOC.
-cat > "${TOC_FILTER_HOST}" <<'LUA'
-local seen_title = false
+SOURCE_MD_HOST="${REPO_ROOT}/${MD}"
+TITLE_LINE="$(head -n 1 "${SOURCE_MD_HOST}" || true)"
+TITLE=""
+if [[ "${TITLE_LINE}" =~ ^#[[:space:]]+(.+) ]]; then
+  TITLE="${BASH_REMATCH[1]}"
+fi
 
-function Header(el)
-  if el.level == 1 and not seen_title then
-    seen_title = true
-    el.classes:insert('unlisted') -- exclude from TOC
-    return el
-  end
-  return nil
-end
-LUA
+# Generate a Pandoc input file without the Markdown title header.
+# We pass the title via metadata so Word uses the reference.docx "Title" style.
+if [[ -n "${TITLE}" ]]; then
+  awk '
+    NR==1 { next }              # drop the first line ("# Title")
+    NR==2 && $0=="" { next }    # drop one empty line after it (cosmetic)
+    { print }
+  ' "${SOURCE_MD_HOST}" > "${PANDOC_INPUT_HOST}"
+else
+  cp "${SOURCE_MD_HOST}" "${PANDOC_INPUT_HOST}"
+fi
+
+FIRST_HASHES="$(awk '/^#+[[:space:]]/{print $1; exit}' "${PANDOC_INPUT_HOST}" || true)"
+SHIFT_ARGS=()
+if [[ -n "${FIRST_HASHES}" && ${#FIRST_HASHES} -ge 2 ]]; then
+  SHIFT_ARGS=( --shift-heading-level-by=-1 )
+fi
 
 cleanup() {
-  rm -f "${TOC_FILTER_HOST}" || true
+  rm -f "${PANDOC_INPUT_HOST}" || true
 }
 trap cleanup EXIT
 
@@ -71,10 +80,12 @@ echo "Generating DOCX (pandoc): ${OUT_DOCX}"
   -v "${REPO_ROOT}/${DIR}:/proj" \
   -w /proj \
   "${PANDOC_IMAGE}" \
-  "/proj/output/business_plan.md" \
+  "/proj/output/_pandoc_input.md" \
     --from=markdown \
     --toc --toc-depth=2 \
-    --lua-filter="/proj/output/_pandoc_unlist_title.lua" \
+    --standalone \
+    ${SHIFT_ARGS[@]+"${SHIFT_ARGS[@]}"} \
+    ${TITLE:+-M "title=${TITLE}"} \
     --reference-doc="/proj/output/reference.docx" \
     -o "/proj/output/business_plan.docx"
 

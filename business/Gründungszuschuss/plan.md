@@ -206,20 +206,48 @@ Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with sta
 - Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. (The template may contain `---`; do not carry them over—use headings and/or explicit page breaks instead.)
 
 #### Tables (most important for audit)
-- Use **pipe tables** only.
-- Every table must have a caption (short and precise, 3-5 words).
-  - Put the caption on its own line **directly above** the table.
-  - Keep it factual and specific (e.g. what + period). Avoid long sentences.
-  - Example:
+Grid tables only. Caption required above each table (`Table: Caption text`), blank line before table.
 
-    Tabelle: Liquiditätsplan (03/2026–12/2028)
-    +-----+-----+
-    | ... | ... |
-    +-----+-----+
-- right aline currency values in columns
-- Never split a single logical table into “table + loose lines below”. If something does not fit, create a second table or add a paragraph.
-- Avoid `|` inside cells; if needed, escape as `\|`.
-- Keep number formats consistent (German: thousands `.` and decimal `,`, e.g. `7.004,00`).
+**Alignment** (colons in `=====` header separator):
+- Right: `+========:+` — use for numbers/currency
+- Left: `+:========+` — default for labels
+- Centered: `+:=======:+`
+
+**Rules:**
+- No leading spaces in cells (causes font issues), BAD: "|  2 |", Good: "|2   |"
+- No indentation
+- German numbers: `7.004,00`
+- Escape pipes: `\|`
+- Keep `n. Z.` and `-` verbatim
+
+**Example:**
+```
+Table: Beispiel (2026–2028)
+
++----------+=========:+=========:+=========:+
+| Position |     2026 |     2027 |     2028 |
++==========+=========:+=========:+=========:+
+| Summe    | 7.004,00 | 7.004,00 | 304,00   |
++----------+----------+----------+----------+
+```
+
+#### Citations
+
+Never inline URLs in prose. Use footnotes.
+
+**Syntax:**
+```
+Statement with source.[^id]
+
+[^id]: Source Name: https://example.com/path
+```
+
+**Rules:**
+- Short unique IDs: `[^fbi]`, `[^mck1]`
+- Footnote format: `Name: URL`
+- Multiple sources: `[^1][^2]`
+- Collect all footnote definitions at document end
+- No bare URLs in text
 
 #### Lists & paragraphs
 - Keep one blank line between block elements (headings, lists, tables, paragraphs).
