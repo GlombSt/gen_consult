@@ -206,7 +206,7 @@ Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with sta
 - Do not use horizontal rules (`---`) in the generated output (`output/business_plan.md`) to simulate structure. (The template may contain `---`; do not carry them over—use headings and/or explicit page breaks instead.)
 
 #### Tables (most important for audit)
-Grid tables only. Caption required above each table (`Table: Caption text`), blank line before table.
+Grid tables only. Caption required above each table (`Table: Caption text`), blank line before table. 
 
 **Alignment** (colons in `=====` header separator):
 - Right: `+========:+` — use for numbers/currency
@@ -219,6 +219,7 @@ Grid tables only. Caption required above each table (`Table: Caption text`), bla
 - German numbers: `7.004,00`
 - Escape pipes: `\|`
 - Keep `n. Z.` and `-` verbatim
+- Table caption text names unit of values
 
 **Example:**
 ```

@@ -305,7 +305,7 @@ Bestehende Tools optimieren den Output nachträglich oder bieten fertige Templat
 
 # Team & Partner
 
-## Gründer\*innen & Team
+## Gründer & Team
 
 **Wer ist in deinem Team?**
 
@@ -576,7 +576,7 @@ Die Einnahmen setzen sich aus folgenden Komponenten zusammen:
 Nutzer können den Dienst im Rahmen eines monatlichen oder jährlichen Abonnements nutzen. Die Abonnements beinhalten jeweils ein definiertes Nutzungsvolumen.
 	2.	Nutzungsabhängige Zusatzentgelte („Pay as you go“)
 Zusätzlich zu den Abonnements besteht die Möglichkeit, Guthabenpunkte (Credits) zu erwerben. Diese Guthabenpunkte ermöglichen eine über das im Abonnement enthaltene Nutzungsvolumen hinausgehende Nutzung.
-Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider.
+Die Guthabenpunkte spiegeln die tatsächliche Nutzung des Dienstes näherungsweise wider. Die nutzungsabhängigen Zusatzentgelte stellen insbesondere in der Wachstumsphase einen ergänzenden Erlösbeitrag dar.
 
 ### Nutzergruppen und Preismodell
 Zur Strukturierung der Nachfrage werden drei Nutzergruppen unterschieden:
@@ -587,8 +587,8 @@ Standard-Nutzer zahlen ein monatliches Entgelt von 15 Euro. Das Abonnement enth�
 	•	Premium-Nutzer
 Premium-Nutzer zahlen ein monatliches Entgelt von 100 Euro. Dieses Abonnement beinhaltet ein höheres Nutzungsvolumen sowie erweiterte Nutzungsmöglichkeiten.
 
-Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann.
-Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
+Für zahlende Nutzer gelten festgelegte Grundpreise, die jeweils ein Nutzungsvolumen enthalten. Die enthaltenen Nutzungsgrenzen werden so festgelegt, dass bei durchschnittlicher Nutzung eine wirtschaftlich tragfähige Marge erzielt werden kann. Zusätzliche Guthabenpunkte können optional erworben werden. Die Preisgestaltung der Guthabenpunkte erfolgt ebenfalls kostendeckend und margenorientiert.
+Der überwiegende Teil der Umsätze wird mit Standard-Nutzern erzielt (80%); Premium-Nutzer und nutzungsabhängige Zusatzentgelte gewinnen mit zunehmender Reife des Produkts an Bedeutung.
 
 ### Zahlungszeitpunkt
 Die Abrechnung der Abonnements erfolgt im Voraus.
@@ -601,8 +601,26 @@ In den ersten vier Monaten nach Marktstart wird das tatsächliche Nutzungs- und 
 Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedarf im Businessplan fortgeschrieben werden.
 
 ### Umsatzplan
-Der nachfolgende Umsatzplan bildet die geplanten Umsätze auf Monatsbasis für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
-<Tabelle Monat, Total Revenue from Umsatz from March 2026 to end of 2028/>
+Der nachfolgende Umsatzplan bildet die geplanten Umsätze für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
+
+<Tabelle: Umsatzentwicklung (Jahreswerte)>
+  <source sheet="Rentabilität"/>
+  <columns>
+    Jahr | Umsatz (EUR)
+  </columns>
+  <rows include="all" order="as_listed">
+    - years 2026-2028
+  </rows>
+  <value_rules>
+    - Werte aus dem Sheet „Rentabilität“ ableiten: Zeile "Umsatz" als Grundlage.
+    - 2026 ist ein Rumpfjahr (03/2026–12/2026): Umsatz = Summe der Monatswerte 03–12.
+    - 2027: Umsatz = Summe der Monatswerte 01–12.
+    - 2028: Umsatz = Summe der Monatswerte 01–12.
+    - Keine Schätzung/Umrechnung außerhalb dieser Summenbildung.
+    - Zahlenformat deutsch: Tausender "." und Dezimal ","; Währung "€" nicht in Zellen (Spaltenkopf ist EUR).
+  </value_rules>
+</Tabelle>
+
 </take literally without changes>
 
 
@@ -683,7 +701,9 @@ Dies erfolgt durch eine Kombination aus:
 - sowie vorhandenen privaten Rücklagen.
 
 
-Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt und dienen als Grundlage der Entnahmeplanung. Exemplarisch sind hier die Werte für 2026 dargestellt.
+Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt und dienen als Grundlage der Entnahmeplanung. Exemplarisch sind hier die Werte für 2026 dargestellt. 
+
+Bereits ab dem ersten Jahr der Selbständigkeit wird eine moderate freiwillige private Altersvorsorge berücksichtigt. Die Beiträge sind bewusst niedrig angesetzt und werden ab dem zweiten Jahr schrittweise erhöht.
 
 
 <Tabelle: Private Einnahmen außerhalb der Selbständigkeit (monatlich)>
@@ -772,29 +792,20 @@ Die Höhe der Entnahmen orientiert sich an:
 
 Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt. Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
 
-Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet. Die Höhe der privaten Entnahmen richtet sich nach dem privaten Finanzbedarf in den Jahren 2027 und 2028 und ist aus den Ausgaben abgeleitet. Sie beinhaltet eine Schätzung der Einkommensteuer auf Monatsbasis. Für 2027 ist das monatlich <einsetzen: sheet: Private Finanzen, Zeile: "Einkommensteuer (monatlich, angenähert)" , Spalte: 2027 > für 2028 monatlich <einsetzen: sheet: Private Finanzen, Zeile: "Einkommensteuer (monatlich, angenähert)" , Spalte: 2028 >
+Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet. Die Höhe der privaten Entnahmen richtet sich nach dem privaten Finanzbedarf in den Jahren 2027 und 2028 und ist aus den Ausgaben abgeleitet. Sie beinhaltet eine Schätzung der Einkommensteuer auf Monatsbasis. 
 
-Die folgende Tabelle stellt die geplanten Entnahmen insgesamt und zusammenfassend dar.
+Die folgende Tabelle stellt die berücksichtigten Einkommensteuerbeträge dar.
+
 
 </take literally>
 
-Tabelle: Entnahmeplanung>
+<Tabelle: Einkommensteuer>
   <source sheet="Private Finanzen"/>
   <columns>
-    Position | 2026 (EUR) | 2027 (EUR) | 2028 (EUR)
+    Jahr | Einkommensteuer / Monat (EUR)
   </columns>
   <rows include="all" order="as_listed">
-    - "Private Einnahmen außerhalb der Selbständigkeit (monatlich)"
-    - "Privater Finanzbedarf (monatlich, typischer Monat)"
-    - "Benötigtes Netto Einkommen für Lebensunterhalt (monatlich) (Ausgaben - Einnahmen)"
-    - "Finanzielle Mittel aus Gründungszuschuss und privaten Rücklagen (jährlich)"
-    - "Eingesetzte Mittel pro Jahr"
-    - "Verbleibender privater Einkommensbedarf nach privaten Mitteln (monatlich)"
-    - "Einkommensteuer (monatlich, Annahme 25% Steuern)"
-    - "Soli (monatlich)"
-    - "Kirchensteuer 8%  (monatlich)"
-    - "Resultierendes benötigtes Jahresbrutto"
-    - "Benötigte Privatentnahme aus der Unternehmung (monatlich, falls über 12 Monate verteilt)"
+    - years 2026-2028
   </rows>
   <value_rules>
     - Werte exakt aus dem Sheet übernehmen (inkl. "-" und ggf. leere Zellen), keine Umrechnung/Schätzung.
@@ -837,9 +848,8 @@ Die erforderliche Hardware (High-End-Laptop für Softwareentwicklung) ist bereit
 
 
 ### Sacheinlagen
-Private IT-Ausrüstung (insbesondere Laptop, Desktop-Computer und Monitor) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt.
+PrPrivate IT-Ausrüstung (insbesondere Laptop) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt.
 Es handelt sich um bereits vorhandene Arbeitsmittel. Eine gesonderte Finanzierung oder Ersatzbeschaffung ist hierfür nicht vorgesehen.
-
 
 
 ### Einmalige Gründungskosten
@@ -853,22 +863,16 @@ Diese Kosten sind einmalig und im Excel-Sheet „Kosten“ berücksichtigt.
 
 
 ### Kapitalbedarf für den laufenden Betrieb (Anlaufphase)
-Zur Sicherstellung des laufenden Geschäftsbetriebs in der Anlaufphase werden Mittel zur Deckung der monatlichen Betriebskosten benötigt.
-Die geplanten monatlichen Kosten für das Jahr 2026 sind im Excel-Sheet „Kosten“ detailliert aufgeschlüsselt.
+Zur Sicherstellung des laufenden Geschäftsbetriebs in der Anlaufphase werden Mittel zur Deckung der monatlichen Betriebskosten benötigt. Die Kostenstruktur ist so ausgestaltet, dass der Geschäftsbetrieb bei Bedarf mit reduziertem Kostenumfang fortgeführt werden kann. Die geplanten monatlichen Kosten für das Jahr 2026 sind im Excel-Sheet „Kosten“ detailliert aufgeschlüsselt. Die kumulierten Anlaufverluste bis zum Erreichen des Break-even betragen insgesamt <wert aus Sheet: "Finanzierung", "Anlaufverluste bis Break-Even (excl. Gründungskosten)" > (exklusive einmaliger Gründungskosten). 
 
-<Berechne und stelle als Tabelle dar: monatliche kosten in 2026 ab März from sheet Kosten, line: Total/>
-
-Die Kostenstruktur ist so ausgestaltet, dass der Geschäftsbetrieb bei Bedarf mit reduziertem Kostenumfang fortgeführt werden kann.
 
 
 ### Liquiditätsreserve
-Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von 2000 Euro eingeplant.
+Zusätzlich zum laufenden Kapitalbedarf wird eine Liquiditätsreserve von rund 3000 Euro eingeplant.
 Diese dient dazu,
 	•	kurzfristige zeitliche Verschiebungen zwischen Aus- und Einzahlungen auszugleichen,
 	•	unvorhergesehene, einmalige Ausgaben abzufedern,
 	•	sowie die Zahlungsfähigkeit des Unternehmens auch bei schwankenden Einnahmen sicherzustellen.
-
-Die Liquiditätsreserve ist konservativ bemessen und im Liquiditätsplan berücksichtigt.
 
 
 ### Eigene Mittel (Geldeinlagen)
@@ -881,6 +885,31 @@ Die geplanten privaten Einlagen erfolgen monatlich und sind im Excel-Sheet „Li
 Zur Deckung des Kapitalbedarfs werden keine externen Finanzierungsinstrumente wie Bankdarlehen oder Beteiligungskapital eingesetzt.
 
 Neben den eigenen Einlagen greift der Gründer auf den Gründungszuschuss sowie private Rücklagen zurück, um den privaten Lebensunterhalt während der Anlaufphase sicherzustellen. Der Gründungszuschuss und die privaten Rücklagen sind nicht Bestandteil der Unternehmensfinanzierung und werden nicht zur Deckung betrieblicher Ausgaben verwendet.
+
+
+<Tabelle: Finanzierungsplan (Kapital & Bedarf)>
+  <source sheet="Finanzierung"/>
+  <columns>
+    Position | Betrag (EUR)
+  </columns>
+  <rows include="all" order="as_listed">
+    - "Eigenkapital (Summe)" BOLD
+    - "Bareinlagen"
+    - "Sacheinlagen"
+    - "Fremdkapital" BOLD
+    - "Gesamtkapital (Eigenkapital + Fremdkapital)" BOLD
+    - "Bedarf (Summe)" BOLD
+    - "Gründungskosten"
+    - "Anlaufverluste bis Break-Even (excl. Gründungskosten)"
+    - "Investitionen"
+    - "Zusätzliche Liquiditätsreserve"
+  </rows>
+  <value_rules>
+    - Werte exakt aus dem Sheet übernehmen (inkl. "-" und ggf. leere Zellen), keine Umrechnung/Schätzung.
+    - Zahlenformat deutsch: Tausender "." und Dezimal ","; Währung "€" nicht in Zellen (Spaltenkopf ist EUR).
+  </value_rules>
+</Tabelle>
+
 
 </take literally>
 
@@ -900,7 +929,10 @@ In der Anlaufphase im Jahr 2026 weist das Unternehmen ein negatives Betriebserge
 
 Gemäß Planung wird ab Februar 2027 auf Jahresbasis ein positives Betriebsergebnis vor Steuern erzielt. Das Monatsergebnis wird ab <berechne Monat für positive Rentabilität - Zeile Monatsergerbnis> positiv ausgewiesen. Für das Gesamtjahr 2027 ergibt sich ein positives Betriebsergebnis.
 
-Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten steigen im Planungszeitraum nur moderat an. Ab dem Jahr 2027 decken die Erlöse sowohl die variablen Kosten als auch die laufenden Fixkosten.
+Die variablen Kosten entwickeln sich proportional zum Umsatz. Die Fixkosten steigen im Planungszeitraum nur moderat an. Ab dem Jahr 2027 decken die Erlöse sowohl die variablen Kosten als auch die laufenden Fixkosten. 
+
+Der deutliche Umsatzanstieg im Jahr 2028 ergibt sich aus dem vollständigen Jahresbetrieb, der Skalierbarkeit des digitalen Geschäftsmodells sowie der Ausweitung der Kundenbasis.
+
 
 #### Verhältnis von Kosten zu Erlösen (Kennzahlen)
 
@@ -909,11 +941,12 @@ Zur Darstellung des Kosten-Erlös-Verhältnisses werden die Bruttomarge sowie di
 Kennzahlenübersicht (gemäß Finanzplanung)
 <Tabelle "Kosten zu Erlösen" erstellen basiered auf Zahlen in sheet Rentabilität, Spalten: Jahr | Bruttomarge | Fixkostenquote  >
 
-Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich.
+Die Kennzahlen zeigen, dass sich das Verhältnis von Kosten zu Erlösen mit zunehmendem Umsatz verbessert. Die Bruttomarge ergibt sich aus dem Verhältnis von Umsatz abzüglich variabler Kosten zum Umsatz. Ab dem Jahr 2027 liegen die Fixkosten deutlich unterhalb der Erlöse, während die Bruttomarge ausreichend zur Deckung der Fixkosten und zur Ergebnisbildung beiträgt. Die dargestellten Werte stellen eine Planrechnung dar. Abweichungen vom geplanten Verlauf sind möglich. Die hohe Fixkostenquote im Jahr 2026 ist ausschließlich auf das sehr niedrige Umsatzniveau in der Anlaufphase zurückzuführen und besitzt keine Aussagekraft für den Regelbetrieb. 
 
-### Einordnung des Unternehmerlohns
+#### Einordnung des Unternehmerlohns
 
-Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitte "Entnahmen" separat dargestellt.
+Bei dem Unternehmen handelt es sich um ein Einzelunternehmen. Das ausgewiesene Betriebsergebnis vor Steuern stellt die Grundlage für die private Entnahme des Unternehmers dar. Die konkrete Höhe der privaten Entnahmen ist nicht Bestandteil der Rentabilitätsrechnung und wird im Rahmen des Abschnitts "Privatentnahme" separat dargestellt.
+
 </take literally>
 
 
