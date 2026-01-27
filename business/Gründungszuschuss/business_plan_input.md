@@ -191,11 +191,25 @@ Ab dem zweiten Jahr soll ein signifikanter Anteil neuer Nutzer durch Empfehlunge
 
 **Phase 1 – Beta-Aufbau (Monat 1–4):** Gewinnung von zwanzig Beta-Nutzern über LinkedIn und persönliches Netzwerk. Paralleler Aufbau des Content-Fundaments für SEO.
 
-**Phase 2 – Launch (Monat 5–7):** Öffentlicher Launch mit Product Hunt. Validierung des Conversion-Funnels und Gewinnung der ersten zahlenden Kunden.
+**Phase 2 – Launch (Monat 5–7):** Erhöhung der öffentlichen Präsenz durhc Foren und Launch auf Product Hunt. Validierung des Conversion-Funnels und Gewinnung der ersten zahlenden Kunden.
 
 **Phase 3 – Skalierung (Monat 8–36):** SEO wird zum dominanten Kanal. Word-of-Mouth setzt ein. LinkedIn und Community-Engagement laufen in stabiler Routine.
 
-<Tabelle: Akquise Kanäle erste 12 Monate, from excel sheet Wachstum: for March 26 to Feb 27, Monthly new users by channel: Persönlicher Kontakt und Events, LinkedIn (3500 Kontakte), WOM, Product Hunt,SAAS Service Directories, Communities / Foren, Twitter build in public, Content / SEO>
+<Tabelle>
+  <title>Akquise Kanäle erste 12 Monate</title>
+  <source sheet="Wachstum" range="March 2026 to Feb 2027"/>
+  <columns>
+    Persönlicher Kontakt und Events
+    LinkedIn (3500 Kontakte)
+    WOM
+    Product Hunt
+    SAAS Service Directories
+    Communities / Foren
+    Twitter build in public
+    Content / SEO
+  </columns>
+  <format short_names="true" legendTextBelowTable="true"/>
+</Tabelle>
 
 
 ---
@@ -553,7 +567,7 @@ Gegenmaßnahmen
 *- Zu welchen Zeitpunkten fließt das Geld?*
 *- Wie kalkulierst du deine Preise und wie verhalten sich diese zu den derzeitigen Marktpreisen?*
 
-
+<take literally without changes>
 Die Erlöse des Unternehmens entstehen aus der Nutzung eines digitalen Dienstes, der über wiederkehrende Entgeltmodelle sowie nutzungsabhängige Zusatzleistungen abgerechnet wird.
 
 ### Art der Ertragsquellen
@@ -589,6 +603,9 @@ Etwaige Anpassungen erfolgen schrittweise und datenbasiert und können bei Bedar
 ### Umsatzplan
 Der nachfolgende Umsatzplan bildet die geplanten Umsätze auf Monatsbasis für das Rumpfjahr 2026 sowie die Jahre 2027 und 2028 ab:
 <Tabelle Monat, Total Revenue from Umsatz from March 2026 to end of 2028/>
+</take literally without changes>
+
+
 
 ## Kosten
 
@@ -650,50 +667,141 @@ Die Fixkosten fallen überwiegend im Bereich der Produktentwicklung an und könn
 
 ## Privatentnahme
 Wie viel Geld entnimmst du deinem Unternehmen für private Zwecke?
-•	Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
-•	Wie viel Einkommenssteuer musst du zahlen? 
+- Welche Lebenshaltungskosten fallen an (z.B. private Miete, Krankenversicherung, Verpflegung)?
+- Wie viel Einkommenssteuer musst du zahlen?
+- Privater Finanzbedarf (private monatliche Kosten als Tabelle), typisch für einen Monat im ersten Jahr (nach der Gründung). Bitte beachten Sie die Kranken- und Pflegepflichtversicherungen ab der Gründung, sowie die Einkommenssteuer und die Altersvorsorge
 
 
 <take literally>
-Der Gründer lebt in einem Vier-Personen-Haushalt (Ehepaar mit zwei Kindern im Alter von 3 und 6 Jahren). Die Ehepartnerin ist als Beamtin (Juristin) in der JVA Offenburg tätig. Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ nachvollziehbar dargestellt.
+Der Gründer lebt in einem Vier-Personen-Haushalt (Ehepaar mit zwei Kindern im Alter von 3 und 6 Jahren). Die Ehepartnerin ist als Beamtin (Juristin) in der JVA Offenburg tätig und erzielt ein dauerhaftes, planbares Einkommen.
 
-Für die Aufnahme der Selbständigkeit wurden die monatlichen privaten Lebenshaltungskosten realistisch und konservativ kalkuliert. Die Sicherstellung des privaten Lebensunterhalts in der Anlaufphase erfolgt außerhalb der Unternehmensfinanzen durch eine Kombination aus dauerhaften privaten Einnahmen, dem Gründungszuschuss sowie privaten Rücklagen.
+Für die Aufnahme der Selbständigkeit wurden die monatlichen privaten Lebenshaltungskosten realistisch und konservativ kalkuliert. Der private Lebensunterhalt ist in der Anlaufphase vollständig außerhalb der Unternehmensfinanzen abgesichert.
 
-Der Gründungszuschuss wird in der Anlaufphase zur Deckung der laufenden privaten Lebenshaltungskosten verwendet, um vorübergehend auf Privatentnahmen aus dem Unternehmen verzichten zu können. Zusätzlich zufließende, einmalige Einkünfte aus der vorherigen abhängigen Beschäftigung werden nicht zur laufenden Finanzierung der Lebenshaltungskosten herangezogen, sondern separat behandelt und nicht in die monatliche Entnahmeplanung einbezogen. Auf Basis des bewilligten Anspruchs wird für die ersten sechs Monate ein Zuschuss in Höhe von ca. 20.000 € sowie für weitere neun Monate eine Pauschale von 9 × 300 € berücksichtigt. Der Gründungszuschuss ist nicht Bestandteil der Unternehmensfinanzierung und keine Voraussetzung für die wirtschaftliche Tragfähigkeit des Vorhabens.
+Dies erfolgt durch eine Kombination aus:
+- dem laufenden Einkommen der Ehepartnerin,
+- dem bewilligten Gründungszuschuss,
+- sowie vorhandenen privaten Rücklagen.
 
-Zusätzlich stehen private Rücklagen in Höhe von 45.000 € zur Verfügung. Diese dienen der privaten Liquiditätssicherung in der Anlaufphase. Einlagen in das Unternehmen erfolgen hiervon unabhängig ausschließlich aus gesondert vorgesehenem Kapital.
 
-Da der private Lebensunterhalt in der Anfangsphase außerhalb des Unternehmens abgesichert ist, wird das Unternehmen in der Aufbauphase nicht durch private Entnahmen belastet. Dies reduziert den finanziellen Druck und unterstützt einen sachgerechten und nachhaltigen Unternehmensaufbau.
+Die regelmäßigen privaten Einnahmen und Ausgaben eines typischen Monats sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt und dienen als Grundlage der Entnahmeplanung. Exemplarisch sind hier die Werte für 2026 dargestellt.
 
-Beantwortung der Leitfragen
 
-Wie viel Geld wird dem Unternehmen für private Zwecke entnommen?
+<Tabelle: Private Einnahmen außerhalb der Selbständigkeit (monatlich)>
+  <source sheet="Private Finanzen"/>
+  <columns>
+    Position | 2026 (EUR/Monat)
+  </columns>
+  <rows include="all">
+    - Gesamtsumme: "Einnahmen außerhalb der Selbständigkeit (monatlich)"
+    - "Nettogehalt Ehe- bzw. Lebenspartner/in"
+    - "Anderer Nettolohn/-gehaltseinnahmen"
+    - "Einkommen aus Kapitalerträgen"
+    - "Einnahmen aus Vermietung und Verpachtung"
+    - "Kindergeld"
+    - "Erziehungsgeld"
+    - "Unterhalt"
+    - "Sonstige Einnahmen außerhalb der Selbständigkeit"
+  </rows>
+  <value_rules>
+    - Werte exakt aus dem Sheet übernehmen (inkl. "n. Z."), keine Umrechnung/Schätzung.
+    - Zahlenformat deutsch: Tausender "." und Dezimal ","; Währung "€" weglassen (Spaltenkopf ist EUR).
+  </value_rules>
+</Tabelle>
+
+
+<Tabelle: Privater Finanzbedarf (monatlich, typischer Monat)>
+  <source sheet="Private Finanzen"/>
+  <columns>
+    Position | 2026 (EUR/Monat)
+  </columns>
+  <rows include="all">
+    - Gesamtsumme: "Privatausgaben (monatlich)"
+    - "Private Wohnkosten (inkl. Nebenkosten und Strom)"
+    - "Telefon/Fernsehen/Radio/Internet (anteilig privat)"
+    - "Kita Gebühren"
+    - "Private Kfz-Kosten"
+    - "Beiträge (Vereine etc.)"
+    - "Kranken- und Pflegeversicherung"
+    - "Rentenversicherung/Altersvorsorge"
+    - "Sonstige Versicherungen"
+    - "Haushaltsnahe Dienstleistungen"
+    - "Kosten des täglichen Bedarfs (Essen, Trinken, Kleidung etc.)"
+    - "Anschaffungen Haus"
+    - "Urlaub"
+    - "Wohnhaus: Tilgung und Zinsen"
+    - "Arbeitslosenversicherung"
+    - "Unterhaltszahlungen an andere"
+  </rows>
+  <value_rules>
+    - Werte exakt aus dem Sheet übernehmen (inkl. "n. Z." und "-" wie im Sheet), keine Umrechnung/Schätzung.
+    - Zahlenformat deutsch: Tausender "." und Dezimal ","; Währung "€" nicht in Zellen (Spaltenkopf ist EUR).
+  </value_rules>
+</Tabelle>
+
+#### Rolle des Gründungszuschusses
+
+Der Gründungszuschuss wird in der Anlaufphase ausschließlich zur Deckung der privaten Lebenshaltungskosten eingesetzt. In der Anfangsphase bewusst auf Privatentnahmen aus dem Unternehmen verzichtet werden.
+
+Für die ersten sechs Monate wird ein Zuschuss in Höhe von ca. 20.000 EUR berücksichtigt, anschließend für weitere neun Monate eine Pauschale von 9 × 300 EUR.
+
+Der Gründungszuschuss ist nicht Bestandteil der Unternehmensfinanzierung und keine Voraussetzung für die wirtschaftliche Tragfähigkeit des Vorhabens.
+
+
+#### Private Rücklagen und Entnahme
+
+Zusätzlich stehen private Rücklagen in Höhe von 35.000 EUR für die Gründung zur Verfügung.
+Diese dienen ausschließlich der privaten Liquiditätssicherung in der Anlaufphase.
+
+Einlagen in das Unternehmen erfolgen hiervon unabhängig ausschließlich aus gesondert vorgesehenem Kapital.
+
+Da der private Lebensunterhalt in der Anfangsphase außerhalb des Unternehmens abgesichert ist, wird das Unternehmen in der Aufbauphase nicht durch private Entnahmen belastet.
+
+
+#### Entnahmeplanung
+
 Für das Jahr 2026 sind keine Privatentnahmen aus dem Unternehmen vorgesehen.
-Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen geplant. Die konkrete Höhe orientiert sich an der Entwicklung der Unternehmenserträge. Ziel ist es, den privaten Lebensunterhalt bis Ende 2027 vollständig aus der Selbständigkeit zu decken.
+Ab dem Jahr 2027 sind schrittweise steigende Privatentnahmen geplant. Ab 2028 sind konstante monatlichen Entnahmen vorgesehen und der private Bedarf wird vollständig gedeckt.
 
-Welche Lebenshaltungskosten fallen an?
-Die privaten Lebenshaltungskosten umfassen insbesondere:
-	•	Wohnkosten (inkl. Nebenkosten),
-	•	Kranken- und Versicherungsbeiträge,
-	•	Kosten für Verpflegung,
-	•	laufende Kosten des Vier-Personen-Haushalts,
-	•	sonstige regelmäßige private Ausgaben.
-
-Die Kosten wurden realistisch und konservativ kalkuliert und sind im Excel-Sheet „Private Finanzen“ detailliert dargestellt.
+Die Höhe der Entnahmen orientiert sich an:
+- der Entwicklung der Unternehmenserträge,
+- der privaten Finanzplanung,
+- sowie der einkommensteuerlichen Belastung.
 
 
+#### Einkommensteuer
 
-Wie viel Einkommensteuer fällt an?
-Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt.
-Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
-Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet.
+Die Einkommensteuer ergibt sich aus der jeweiligen Gesamteinkommenssituation des Haushalts und wird im Rahmen der privaten Finanzplanung berücksichtigt. Für die Anlaufphase der Selbständigkeit wird aufgrund ausbleibender Privatentnahmen im Jahr 2026 keine einkommensteuerliche Belastung aus der Selbständigkeit angesetzt.
 
+Ab dem Jahr 2027 wird die Steuerbelastung entsprechend der geplanten Entnahmen berücksichtigt und ist in der privaten Finanzübersicht abgebildet. Die Höhe der privaten Entnahmen richtet sich nach dem privaten Finanzbedarf in den Jahren 2027 und 2028 und ist aus den Ausgaben abgeleitet. Sie beinhaltet eine Schätzung der Einkommensteuer auf Monatsbasis. Für 2027 ist das monatlich <einsetzen: sheet: Private Finanzen, Zeile: "Einkommensteuer (monatlich, angenähert)" , Spalte: 2027 > für 2028 monatlich <einsetzen: sheet: Private Finanzen, Zeile: "Einkommensteuer (monatlich, angenähert)" , Spalte: 2028 >
+
+Die folgende Tabelle stellt die geplanten Entnahmen insgesamt und zusammenfassend dar.
 
 </take literally>
 
-<Tabelle Einnahmen außerhalb der Selbständigkeit: From "Private Finanzen",  take values under "Einnahmen außerhalb der Selbständigkeit (monatlich)" for years 2026-2028. />
-
-<Tabelle Private Ausgagen From "Private Finanzen",  take values under "Privatausgaben (monatlich)" for years 2026-2028. />
+Tabelle: Entnahmeplanung>
+  <source sheet="Private Finanzen"/>
+  <columns>
+    Position | 2026 (EUR) | 2027 (EUR) | 2028 (EUR)
+  </columns>
+  <rows include="all" order="as_listed">
+    - "Private Einnahmen außerhalb der Selbständigkeit (monatlich)"
+    - "Privater Finanzbedarf (monatlich, typischer Monat)"
+    - "Benötigtes Netto Einkommen für Lebensunterhalt (monatlich) (Ausgaben - Einnahmen)"
+    - "Finanzielle Mittel aus Gründungszuschuss und privaten Rücklagen (jährlich)"
+    - "Eingesetzte Mittel pro Jahr"
+    - "Verbleibender privater Einkommensbedarf nach privaten Mitteln (monatlich)"
+    - "Einkommensteuer (monatlich, Annahme 25% Steuern)"
+    - "Soli (monatlich)"
+    - "Kirchensteuer 8%  (monatlich)"
+    - "Resultierendes benötigtes Jahresbrutto"
+    - "Benötigte Privatentnahme aus der Unternehmung (monatlich, falls über 12 Monate verteilt)"
+  </rows>
+  <value_rules>
+    - Werte exakt aus dem Sheet übernehmen (inkl. "-" und ggf. leere Zellen), keine Umrechnung/Schätzung.
+    - Zahlenformat deutsch: Tausender "." und Dezimal ","; Währung "€" nicht in Zellen (Spaltenkopf ist EUR).
+    - Negative Werte mit führendem "-" wie im Sheet übernehmen.
+  </value_rules>
+</Tabelle>
 
 
 
@@ -710,12 +818,23 @@ Wofür benötigst du Geld und wie viel? Woher soll das Geld kommen?
 •	Woher kommen die zusätzlichen Mittel, um deinen Kapitalbedarf decken zu können?
 
 
+
+Weitere vorhandene Arbeitsmittel (Drucker, Monitor, Desktop PC) sind technisch veraltet und wurden daher nicht als bewertete Sacheinlage aufgeführt.
+
+
+
 <take literally, don't omit anything>
 Der Kapitalbedarf des Unternehmens ergibt sich aus den einmaligen Gründungskosten, den laufenden Betriebskosten in der Anlaufphase sowie einer angemessenen Liquiditätsreserve. Ziel der Finanzierung ist es, den Geschäftsbetrieb in der Startphase ohne Abhängigkeit von kurzfristigen Einnahmen aufrechterhalten zu können.
+
 
 #### Notwendige Investitionen
 Für den Geschäftsbetrieb sind keine physischen Anlagegüter wie Maschinen, Fahrzeuge oder Gebäude erforderlich.
 Zu Beginn der Selbständigkeit liegt der Schwerpunkt auf dem Zeitaufwand für die Entwicklung des Produkts sowie dem Aufbau der Online-Präsenz. Diese Tätigkeiten sind kapitalarm und verursachen überwiegend laufende, variable Kosten, jedoch keine hohen Anfangsinvestitionen.
+
+Die erforderliche Hardware (High-End-Laptop für Softwareentwicklung) ist bereits vorhanden und wird als Sacheinlage in das Unternehmen eingebracht.
+
+<Tabelle: Investitionen >
+
 
 ### Sacheinlagen
 Private IT-Ausrüstung (insbesondere Laptop, Desktop-Computer und Monitor) wird in das Unternehmen eingebracht und für die operative Tätigkeit genutzt.
