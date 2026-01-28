@@ -17,7 +17,6 @@ from app.shared.database import get_session_factory
 from app.shared.logging_config import logger
 
 from . import service
-from .models import Intent
 from .repository import IntentRepository
 from .schemas import (
     FactAddRequest,
