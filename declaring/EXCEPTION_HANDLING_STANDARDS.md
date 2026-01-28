@@ -9,7 +9,7 @@ For detailed examples and explanations, see [EXCEPTION_HANDLING_GUIDE.md](./EXCE
 
 **Related Documentation:**
 - [ARCHITECTURE_STANDARDS.md](./ARCHITECTURE_STANDARDS.md) - Hexagonal architecture rules
-- [Frontend Architecture](../reacting/ARCHITECTURE.md) - How frontend handles errors
+- [Frontend Architecture](../customer-ux/ARCHITECTURE.md) - How frontend handles errors
 
 ---
 

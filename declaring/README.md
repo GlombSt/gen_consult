@@ -658,7 +658,7 @@ Start with what you need:
 ### Related Documentation
 - **[Root README](../README.md)** - Full-stack project overview
 - **[CLAUDE.md](../CLAUDE.md)** - Architecture guidance for AI assistants
-- **[Frontend README](../reacting/README.md)** - React frontend documentation
+- **[Frontend README](../customer-ux/README.md)** - React frontend documentation
 
 ## Development Workflow
 

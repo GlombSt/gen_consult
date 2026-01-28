@@ -29,7 +29,7 @@ gen_consult/
 │   ├── *_ARCHITECTURE.md      # Architecture docs
 │   └── app/[domain]/
 │       └── *_DOMAIN.md        # Domain-specific documentation
-└── reacting/                  # Frontend docs (README.md, ARCHITECTURE.md)
+└── customer-ux/               # Frontend docs (README.md, ARCHITECTURE.md)
 ```
 
 ## Naming Conventions
@@ -71,7 +71,7 @@ All documentation files use a consistent suffix pattern based on purpose:
 1. **Where?**
    - Project-wide → root directory
    - Backend-specific → `declaring/`
-   - Frontend-specific → `reacting/`
+   - Frontend-specific → `customer-ux/`
    - Domain-specific → `declaring/app/[domain]/`
 
 2. **What type?**
@@ -84,7 +84,7 @@ All documentation files use a consistent suffix pattern based on purpose:
 
 ### Checklist
 
-- [ ] Correct location (root, `declaring/`, `reacting/`, or domain folder)
+- [ ] Correct location (root, `declaring/`, `customer-ux/`, or domain folder)
 - [ ] Proper naming (`*_STANDARDS.md`, `*_GUIDE.md`, etc.)
 - [ ] Document header with audience and related docs
 - [ ] Cross-reference related documentation
