@@ -228,10 +228,13 @@ class IntentRepository:
                 db_facts = db_intent.facts
                 if db_facts is not None:
                     facts = [self._to_fact_domain_model(db_fact) for db_fact in db_facts]
-        except (AttributeError, KeyError):
+        except AttributeError:
             # If inspection or relationship access fails, use empty list
             # Only catch specific exceptions related to relationship access
             # Let other exceptions (database errors, programming errors) bubble up
+            facts = []
+        except KeyError:
+            # If inspection fails with KeyError, use empty list
             facts = []
 
         return Intent(
