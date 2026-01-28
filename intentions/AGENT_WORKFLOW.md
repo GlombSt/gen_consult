@@ -9,7 +9,7 @@
 
 ## Overview
 
-This document defines the **mandatory completion criteria** for coding agents working on the `declaring/` backend. Agents must NOT mark work as complete until ALL criteria are met.
+This document defines the **mandatory completion criteria** for coding agents working on the `intentions/` backend. Agents must NOT mark work as complete until ALL criteria are met.
 
 ## Critical Completion Criteria
 
@@ -40,7 +40,7 @@ An agent MUST NOT say work is finished until:
 
 3. **Run local validation frequently**
    ```bash
-   cd declaring
+   cd intentions
    ./lint.sh --fix  # Auto-fix formatting issues
    ./lint.sh        # Verify all linting passes
    pytest           # Verify all tests pass
@@ -51,7 +51,7 @@ An agent MUST NOT say work is finished until:
 **MANDATORY:** Before committing, run:
 
 ```bash
-cd declaring
+cd intentions
 
 # Step 1: Auto-fix formatting issues
 ./lint.sh --fix
@@ -159,7 +159,7 @@ Before saying "I'm finished" or "The work is complete", verify:
 
 **Solution:**
 1. Verify code is pushed to a branch (not just committed locally)
-2. Check that files changed are in `declaring/` directory
+2. Check that files changed are in `intentions/` directory
 3. Verify workflow file exists: `.github/workflows/backend-ci.yml`
 
 ---
@@ -168,7 +168,7 @@ Before saying "I'm finished" or "The work is complete", verify:
 
 ```bash
 # Full validation (run before committing)
-cd declaring
+cd intentions
 ./lint.sh --fix && ./lint.sh && pytest
 
 # Check git status

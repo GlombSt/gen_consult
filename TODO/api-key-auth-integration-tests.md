@@ -2,7 +2,7 @@
 
 ## Problem Description
 
-Six API integration tests for API key authentication are currently failing in the test suite. These tests are located in `declaring/tests/api/test_api_key_auth.py` in the `TestApiKeyAuthenticationEnabled` class.
+Six API integration tests for API key authentication are currently failing in the test suite. These tests are located in `intentions/tests/api/test_api_key_auth.py` in the `TestApiKeyAuthenticationEnabled` class.
 
 ### Failing Tests
 
@@ -43,8 +43,8 @@ However, the dependency overrides are not being properly applied when the router
 
 ### Related Files
 
-- `declaring/tests/api/test_api_key_auth.py` - Contains the failing tests
-- `declaring/app/shared/dependencies.py` - Contains the `verify_api_key` function
-- `declaring/app/main.py` - Shows how routers are included with dependencies in the main app
-- `declaring/tests/conftest.py` - Contains shared test fixtures including `test_db_session`
+- `intentions/tests/api/test_api_key_auth.py` - Contains the failing tests
+- `intentions/app/shared/dependencies.py` - Contains the `verify_api_key` function
+- `intentions/app/main.py` - Shows how routers are included with dependencies in the main app
+- `intentions/tests/conftest.py` - Contains shared test fixtures including `test_db_session`
 

@@ -7,7 +7,7 @@
 
 ## Problem Statement
 
-The development flow in `declaring/` did not work well with coding agents like Cursor:
+The development flow in `intentions/` did not work well with coding agents like Cursor:
 - Agents would mark work as complete without pushing to branches
 - Agents would not verify CI status before completion
 - CI would fail with linting errors that weren't caught locally
@@ -33,7 +33,7 @@ The development flow in `declaring/` did not work well with coding agents like C
 - Manually installed individual packages
 
 **After:**
-- Runs on any branch when `declaring/**` files change
+- Runs on any branch when `intentions/**` files change
 - Runs complete `./lint.sh` script (all linting tools)
 - Installs from `requirements-dev.txt` (all dev dependencies)
 
@@ -82,7 +82,7 @@ The development flow in `declaring/` did not work well with coding agents like C
 
 **Usage:**
 ```bash
-cd declaring
+cd intentions
 ./validate.sh        # Full validation including push check
 ./validate.sh --skip-push  # Skip push check (for local validation only)
 ```
@@ -99,8 +99,8 @@ cd declaring
 
 ### Before Starting Work
 
-1. Read `declaring/AGENT_WORKFLOW.md`
-2. Read `declaring/DEVELOPMENT_STANDARDS.md`
+1. Read `intentions/AGENT_WORKFLOW.md`
+2. Read `intentions/DEVELOPMENT_STANDARDS.md`
 
 ### During Development
 
@@ -113,7 +113,7 @@ cd declaring
 
 1. **Run validation script:**
    ```bash
-   cd declaring
+   cd intentions
    ./validate.sh
    ```
 
@@ -175,7 +175,7 @@ cd declaring
 
 1. Run validation:
    ```bash
-   cd declaring
+   cd intentions
    ./validate.sh
    ```
 
@@ -190,9 +190,9 @@ cd declaring
 ## Files Changed
 
 1. `.github/workflows/backend-ci.yml` - Updated CI workflow
-2. `declaring/AGENT_WORKFLOW.md` - **NEW** - Agent workflow document
-3. `declaring/DEVELOPMENT_STANDARDS.md` - Updated with agent workflow
-4. `declaring/validate.sh` - **NEW** - Validation script
+2. `intentions/AGENT_WORKFLOW.md` - **NEW** - Agent workflow document
+3. `intentions/DEVELOPMENT_STANDARDS.md` - Updated with agent workflow
+4. `intentions/validate.sh` - **NEW** - Validation script
 5. `CLAUDE.md` - Updated to reference agent workflow
 
 ---

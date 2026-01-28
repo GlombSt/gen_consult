@@ -1,4 +1,4 @@
-# Declaring - Backend API
+# Intentions - Backend API
 
 **FastAPI backend implementing hexagonal architecture** - the business core of the Gen Consult project. This backend serves as the hexagon containing all business logic, domain models, and event-driven workflows. The frontend (React) acts as a thin adapter that consumes this API.
 
@@ -15,7 +15,7 @@
 ### Setup
 
 ```bash
-cd declaring
+cd intentions
 
 # Create virtual environment
 python3 -m venv venv
@@ -166,7 +166,7 @@ ngrok config add-authtoken YOUR_AUTHTOKEN
 
 1. **Start your FastAPI server:**
 ```bash
-cd declaring
+cd intentions
 uvicorn main:app --reload
 ```
 
@@ -285,7 +285,7 @@ python -c "import secrets; print(secrets.token_urlsafe(32))"
 ## Project Structure
 
 ```
-declaring/
+intentions/
 ├── app/
 │   ├── items/              # Domain: Product/inventory management
 │   ├── users/              # Domain: User management
@@ -419,7 +419,7 @@ The MCP server is integrated into the FastAPI application and uses **Streamable 
 
 1. Start the FastAPI server:
    ```bash
-   cd declaring
+   cd intentions
    uvicorn app.main:app --reload
    ```
 
@@ -456,7 +456,7 @@ Claude Desktop supports HTTP transport for MCP servers. To use the intents MCP s
 
 1. **Start the FastAPI server:**
    ```bash
-   cd declaring
+   cd intentions
    uvicorn app.main:app --reload
    ```
 
@@ -520,7 +520,7 @@ For backwards compatibility with stdio-based clients, you can still use the depr
   "mcpServers": {
     "intents": {
       "command": "python",
-      "args": ["/absolute/path/to/gen_consult/declaring/mcp_server.py"]
+      "args": ["/absolute/path/to/gen_consult/intentions/mcp_server.py"]
     }
   }
 }

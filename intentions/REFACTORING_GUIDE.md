@@ -7,7 +7,7 @@ Your FastAPI application has been refactored from a single `main.py` file into a
 ## New Project Structure
 
 ```
-declaring/
+intentions/
 ├── app/
 │   ├── __init__.py              # Package initialization
 │   ├── main.py                  # Application factory & configuration

@@ -2,7 +2,7 @@
 
 **Created:** 2025-10-28
 **Status:** In Progress
-**Goal:** Align architecture documentation between `declaring/` (backend) and `customer-ux/` (frontend) projects
+**Goal:** Align architecture documentation between `intentions/` (backend) and `customer-ux/` (frontend) projects
 
 ---
 
@@ -10,8 +10,8 @@
 
 ### ✅ Task 1: Align Terminology in Both Docs ✅ COMPLETED
 **Files to update:**
-- `declaring/ARCHITECTURE_STANDARDS.md`
-- `declaring/ARCHITECTURE_GUIDE.md`
+- `intentions/ARCHITECTURE_STANDARDS.md`
+- `intentions/ARCHITECTURE_GUIDE.md`
 - `customer-ux/ARCHITECTURE.md`
 
 **Changes:**
@@ -68,7 +68,7 @@ Timeline: Before implementing Task 2
 
 ### ✅ Task 3: Add Event Strategy Note to Both Docs
 **Files to update:**
-- `declaring/ARCHITECTURE_STANDARDS.md` (add section)
+- `intentions/ARCHITECTURE_STANDARDS.md` (add section)
 - `customer-ux/ARCHITECTURE.md` (add section)
 
 <!-- TODO: DECISION NEEDED
@@ -137,7 +137,7 @@ Timeline: Before implementing Task 4
 
 ### ✅ Task 5: Document Error Handling Contract
 **Files to update:**
-- `declaring/ARCHITECTURE_GUIDE.md` (add section on error responses)
+- `intentions/ARCHITECTURE_GUIDE.md` (add section on error responses)
 - `customer-ux/ARCHITECTURE.md` (add section on error handling)
 
 **Changes:**

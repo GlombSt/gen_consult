@@ -13,7 +13,7 @@ Workflow files are located in `.github/workflows/`:
 The CI/CD workflows are configured to run based on changed files:
 
 **Backend CI runs when:**
-- Files in `declaring/` change
+- Files in `intentions/` change
 - Backend workflow file changes
 - Push to `main` or `develop`
 - Pull request to `main` or `develop`

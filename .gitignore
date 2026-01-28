@@ -2,48 +2,48 @@
 # This gitignore covers both backend (Python) and frontend (Node.js)
 
 # ===================================
-# Backend (declaring/) - Python
+# Backend (intentions/) - Python
 # ===================================
 
 # Virtual environments
-declaring/venv/
-declaring/env/
-declaring/.venv/
-declaring/ENV/
+intentions/venv/
+intentions/env/
+intentions/.venv/
+intentions/ENV/
 
 # Python
-declaring/__pycache__/
-declaring/**/__pycache__/
-declaring/*.py[cod]
-declaring/*$py.class
-declaring/*.so
-declaring/.Python
+intentions/__pycache__/
+intentions/**/__pycache__/
+intentions/*.py[cod]
+intentions/*$py.class
+intentions/*.so
+intentions/.Python
 
 # Testing
-declaring/.pytest_cache/
-declaring/.coverage
-declaring/htmlcov/
-declaring/.tox/
-declaring/coverage.xml
-declaring/*.cover
+intentions/.pytest_cache/
+intentions/.coverage
+intentions/htmlcov/
+intentions/.tox/
+intentions/coverage.xml
+intentions/*.cover
 
 # Distribution / packaging
-declaring/.Python
-declaring/build/
-declaring/develop-eggs/
-declaring/dist/
-declaring/downloads/
-declaring/eggs/
-declaring/.eggs/
-declaring/lib/
-declaring/lib64/
-declaring/parts/
-declaring/sdist/
-declaring/var/
-declaring/wheels/
-declaring/*.egg-info/
-declaring/.installed.cfg
-declaring/*.egg
+intentions/.Python
+intentions/build/
+intentions/develop-eggs/
+intentions/dist/
+intentions/downloads/
+intentions/eggs/
+intentions/.eggs/
+intentions/lib/
+intentions/lib64/
+intentions/parts/
+intentions/sdist/
+intentions/var/
+intentions/wheels/
+intentions/*.egg-info/
+intentions/.installed.cfg
+intentions/*.egg
 
 # ===================================
 # Frontend (customer-ux/) - Node.js

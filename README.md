@@ -28,7 +28,7 @@ This repository follows **hexagonal (ports and adapters) architecture** with a f
 
 ```
 gen_consult/
-├── declaring/              # Backend - FastAPI (Python)
+├── intentions/              # Backend - FastAPI (Python)
 │   ├── app/
 │   │   ├── intents/       # Domain: Intents
 │   │   ├── users/         # Domain: Users
@@ -62,7 +62,7 @@ gen_consult/
 
 ### Backend Setup
 
-**See [declaring/README.md](./declaring/README.md) for complete backend setup, database configuration, and development workflow.**
+**See [intentions/README.md](./intentions/README.md) for complete backend setup, database configuration, and development workflow.**
 
 ### Frontend Setup
 
@@ -74,18 +74,18 @@ gen_consult/
 - **[CLAUDE.md](./CLAUDE.md)** - Complete architecture guidance and development workflows
 - **[TODO.md](./TODO.md)** - Current tasks and architectural decisions needed
 - **[CI.md](./CI.md)** - CI/CD workflow triggers and configuration
-- **[Backend Docs](./declaring/)** - FastAPI backend documentation
-  - [Architecture Standards](./declaring/ARCHITECTURE_STANDARDS.md)
-  - [Architecture Guide](./declaring/ARCHITECTURE_GUIDE.md)
-  - [Backend Development Standards](./declaring/DEVELOPMENT_STANDARDS.md)
-  - [Testing Standards](./declaring/TESTING_STANDARDS.md)
+- **[Backend Docs](./intentions/)** - FastAPI backend documentation
+  - [Architecture Standards](./intentions/ARCHITECTURE_STANDARDS.md)
+  - [Architecture Guide](./intentions/ARCHITECTURE_GUIDE.md)
+  - [Backend Development Standards](./intentions/DEVELOPMENT_STANDARDS.md)
+  - [Testing Standards](./intentions/TESTING_STANDARDS.md)
 - **[Frontend Docs](./customer-ux/)** - React frontend documentation
   - [README](./customer-ux/README.md) - Getting started and quick reference
   - [Architecture](./customer-ux/ARCHITECTURE.md) - Comprehensive architectural guidelines
 
 ## 🛠️ Development Workflow
 ###Detailed guides:
-- Backend: [declaring/DEVELOPMENT_STANDARDS.md](./declaring/DEVELOPMENT_STANDARDS.md)
+- Backend: [intentions/DEVELOPMENT_STANDARDS.md](./intentions/DEVELOPMENT_STANDARDS.md)
 - Frontend: [customer-ux/README.md](./customer-ux/README.md)
 - Full-stack: [CLAUDE.md](./CLAUDE.md)
 

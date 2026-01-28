@@ -30,7 +30,7 @@ FAILED=0
 
 # Check if we're in the right directory
 if [ ! -f "lint.sh" ]; then
-    echo -e "${RED}✗ Error: Must run from declaring/ directory${NC}"
+    echo -e "${RED}✗ Error: Must run from intentions/ directory${NC}"
     exit 1
 fi
 
