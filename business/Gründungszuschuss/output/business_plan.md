@@ -11,17 +11,18 @@ abstract: |
 
 # 1. Executive Summary
 
-Im professionellen Einsatz von Generativer KI entstehen häufig Qualitäts- und Verlässlichkeitsprobleme, wenn Aufgaben unvollständig beschrieben sind, wesentliche Rahmenbedingungen fehlen oder formale Anforderungen nicht eindeutig sind. Das führt zu Korrektur- und Nachrechercheaufwand und erhöht das Risiko fachlicher Fehler, obwohl Ergebnisse auf den ersten Blick plausibel wirken. SharpIntent adressiert diese vorgelagerte Ursache, indem die Aufgabenstellung vor der Ausführung systematisch geklärt und präzisiert wird.
+Im professionellen Einsatz Generativer KI treten häufig Qualitäts- und Verlässlichkeitsprobleme auf, wenn Aufgaben unvollständig oder ungeschickt beschrieben sind. Dies führt zu erhöhtem Korrektur- und Rechercheaufwand sowie zu fachlichen Risiken, obwohl Ergebnisse zunächst plausibel erscheinen. „SharpIntent“ setzt an dieser vorgelagerten Ursache an. 
 
-Das Unternehmen entwickelt unter dem Namen „SharpIntent“ eine webbasierte Software, die im Abonnementmodell angeboten wird und die strukturierte Aufgabenklärung vor dem Einsatz Generativer KI unterstützt. Nutzer werden angeleitet, relevante fachliche Parameter und Anforderungen (z. B. Zielgruppe, Rahmenbedingungen und Einschränkungen) explizit zu erfassen, bevor eine Aufgabe an ein KI-System übergeben wird. SharpIntent ersetzt keine fachliche Prüfung der Ergebnisse und versteht sich nicht als Garantie für inhaltliche Richtigkeit, sondern als Unterstützung zur Reduktion typischer Fehlerquellen.
+Das Unternehmen eine webbasierte Software, die im Abonnementmodell (im Voraus bezahlt) angeboten wird und die strukturierte Aufgabenklärung vor dem Einsatz Generativer KI unterstützt. Nutzer werden angeleitet, relevante fachliche Parameter und Anforderungen – etwa Zielgruppe, Rahmenbedingungen oder Einschränkungen – explizit zu erfassen oder zu präzisieren, bevor eine Aufgabe an ein KI-System übergeben wird. SharpIntent ersetzt keine fachliche Prüfung der Ergebnisse und stellt keine Garantie für inhaltliche Richtigkeit dar, sondern dient der Reduktion typischer Fehlerquellen.
 
-Adressiert werden berufliche Anwender und Unternehmen, bei denen Ergebnisqualität, Verlässlichkeit und Zeitersparnis wirtschaftlich relevant sind. Zielgruppen sind insbesondere Einzelunternehmer und Freelancer sowie kleine und mittlere Unternehmen und entsprechende Funktionen oder Teams in größeren Organisationen. Der Nutzen liegt in geringerer Iteration und Nacharbeit durch vollständigere Aufgabenbeschreibungen, Hinweise auf fehlende Informationen sowie eine sachliche Einordnung, wann Generative KI für eine Aufgabe voraussichtlich nicht geeignet ist.
+Adressiert werden berufliche Anwender und Unternehmen, für die Ergebnisqualität, Verlässlichkeit und Zeitersparnis wirtschaftlich relevant sind. Zielgruppen sind insbesondere Einzelunternehmer und Freelancer sowie kleine und mittlere Unternehmen und entsprechende Funktionen oder Teams in größeren Organisationen. Der Nutzen liegt in geringerer Iteration und Nacharbeit durch vollständigere Aufgabenbeschreibungen, Hinweise auf fehlende Informationen sowie eine sachliche Einordnung, wann Generative KI für eine Aufgabe voraussichtlich nicht geeignet ist.
 
-Das Vorhaben wird in der Anfangsphase als Einzelunternehmen umgesetzt. Der Gründer verfügt über einen Abschluss als Diplom-Informatiker sowie einen Master of Business Administration und über langjährige Erfahrung in leitenden Funktionen im Aufbau und Betrieb softwarebasierter Geschäftsmodelle. Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt; der geplante Arbeitsumfang beträgt mindestens 40 Wochenstunden.
+Das Vorhaben wird in der Anfangsphase als Einzelunternehmen umgesetzt. Der Gründer verfügt über einen Abschluss als Diplom-Informatiker sowie einen Master of Business Administration und über langjährige Erfahrung im Aufbau und Betrieb softwarebasierter Geschäftsmodelle. Die selbstständige Tätigkeit wird ab Gründung hauptberuflich ausgeübt.
 
-Die Finanzplanung zeigt für 2026 in der Anlaufphase ein negatives Betriebsergebnis vor Steuern, bedingt durch Aufbaukosten bei noch geringem Umsatzniveau. Gemäß Planung wird das Monatsergebnis vor Entnahmen ab Februar 2027 positiv ausgewiesen (Break-even vor Entnahmen); unter Berücksichtigung geplanter Privatentnahmen wird das Monatsergebnis ab Mai 2027 positiv ausgewiesen. Ein externer Kapitalbedarf ist nach Planung nicht vorgesehen; die Finanzierung erfolgt ohne Bankdarlehen oder Beteiligungskapital.
+Die Finanzplanung weist für 2026 in der Anlaufphase ein negatives Betriebsergebnis vor Steuern aus, bedingt durch Aufbaukosten bei noch geringem Umsatz. Gemäß Planung wird das Monatsergebnis vor Entnahmen ab Februar 2027 positiv ausgewiesen (Break-even vor Entnahmen). Ein externer Kapitalbedarf ist nicht vorgesehen; die Finanzierung erfolgt ohne Bankdarlehen oder Beteiligungskapital.
 
-Als Eigenkapital stehen insgesamt 17.000,00 EUR zur Verfügung (davon 15.000,00 EUR Bareinlagen sowie 2.000,00 EUR Sacheinlage). Zur Deckung betrieblicher Ausgaben in der Anlaufphase sind private Einlagen in Höhe von insgesamt 15.000,00 EUR (03–12/2026) vorgesehen; zusätzlich ist eine Liquiditätsreserve von 2.983,34 EUR eingeplant. Der Gründungszuschuss sowie private Rücklagen dienen der Absicherung des privaten Lebensunterhalts und sind nicht Bestandteil der Unternehmensfinanzierung.
+Als Eigenkapital stehen insgesamt 17.000,00 EUR zur Verfügung, bestehend aus 15.000,00 EUR Bareinlagen und 2.000,00 EUR Sacheinlage. Zur Deckung betrieblicher Ausgaben in der Anlaufphase sind private Einlagen in Höhe von insgesamt 15.000,00 EUR vorgesehen; zusätzlich ist eine Liquiditätsreserve eingeplant. Der private Lebensunterhalt wird während der Anlaufphase außerhalb der Unternehmensfinanzierung abgesichert.
+
 
 # 2. Geschäftsidee
 
@@ -45,13 +46,39 @@ Zur Anbindung an bestehende Arbeitsweisen ermöglicht SharpIntent den Export der
 
 SharpIntent reduziert Iterations- und Korrekturaufwand, indem die Aufgabenstellung vor der Ausführung strukturiert wird. Nutzer erhalten Hinweise auf fehlende Informationen und Mehrdeutigkeiten sowie eine Risikoeinschätzung der Aufgabenstellung. Zusätzlich werden Hinweise gegeben, wenn ein KI-System für eine Aufgabe voraussichtlich nicht geeignet ist oder wenn alternative Vorgehensweisen in Betracht kommen.
 
-Dadurch sinkt der Aufwand für nachgelagerte Fehlersuche und manuelle Nacharbeit. Gleichzeitig werden Erwartungen an die Leistungsfähigkeit und Grenzen Generativer KI im konkreten Einzelfall realistischer eingeordnet, was die verlässliche Nutzung im Arbeitsalltag unterstützt.
+Dadurch sinkt der Aufwand für nachgelagerte Fehlersuche und manuelle Nacharbeit. Gleichzeitig werden Erwartungen an die Leistungsfähigkeit und Grenzen Generativer KI im konkreten Einzelfall realistischer eingeordnet, was die verlässliche Nutzung im Arbeitsalltag unterstützt und die Einführung von KI in Organisationen planbarer und effektiver macht. Unternehmen sind damit in der Lage die Vorteile von Generativer KI (z.B. Produktivität und besser Angebote) zu nutzen.
 
 ## Kernfähigkeiten
 
-Die Kernleistung beruht auf einem spezialisierten Datenmodell zur strukturierten Aufgabenbeschreibung („Intent“). Darauf aufbauend führt eine Benutzerführung durch die Erfassung der erforderlichen Parameter und unterstützt dabei, Unklarheiten frühzeitig zu erkennen und zu beheben. Ergänzend werden Metriken und Heuristiken zur Bewertung der Definitionsgüte eingesetzt, um Risiken und Erfolgsaussichten einer Aufgabenstellung im Rahmen der Planung einzuordnen.
 
-Ein wesentlicher Entwicklungsbestandteil ist der Aufbau einer industrie- und domänenspezifischen Referenzdatenbank mit Aufgabenbeschreibungen und Qualitätskriterien. Diese Daten dienen dazu, Vollständigkeits- und Konsistenzprüfungen zu unterstützen und typische Risikomuster je Anwendungsbereich abzuleiten. Zudem werden Verfahren zur automatisierten Ableitung konsistenter Anweisungen an unterschiedliche KI-Systeme sowie zur iterativen Optimierung dieser Anweisungen entwickelt.
+Die zentrale Kernfähigkeit von SharpIntent liegt in der systematischen Klärung und Präzisierung von Aufgabenstellungen für den Einsatz Generativer KI. Das Unternehmen verbindet technisches Verständnis von Sprachmodellen mit nutzerzentrierter Gestaltung und methodischer Strukturierung.
+
+Konkret umfasst dies:
+	•	Strukturierte Aufgaben- und Intent-Deklaration
+Entwicklung und Nutzung eines spezialisierten Datenmodells zur expliziten Erfassung fachlicher Anforderungen, Ziele, Randbedingungen und Einschränkungen. Die Benutzerführung ist so gestaltet, dass sie aktiv unterstützt und den initialen Klärungsaufwand für Nutzer minimiert.
+	•	Intelligente Nutzerführung und Klärungslogik
+Einsatz regelbasierter und heuristischer Algorithmen, die fehlende Informationen identifizieren, gezielte Rückfragen auslösen und eine schnelle, explizite Aufgabenklärung ermöglichen, ohne den Nutzer zu überfordern.
+	•	Qualitätsbewertung und Erfolgsabschätzung
+Entwicklung von Metriken zur Bewertung der Vollständigkeit und Konsistenz einer Aufgabenbeschreibung sowie zur Abschätzung der Erfolgswahrscheinlichkeit eines qualitativ geeigneten KI-Ergebnisses.
+	•	Automatisierte Ableitung robuster LLM-Anweisungen
+Übersetzung strukturierter Aufgabenbeschreibungen in konsistente, modellgerechte Anweisungen (Prompts/Instructions), die reproduzierbare und vergleichbare Ergebnisse ermöglichen.
+	•	Anweisungsoptimierung
+Algorithmen zur iterativen Verbesserung von Anweisungen an Sprachmodelle mit dem Ziel, Modellleistung, Ergebnisqualität und Stabilität zu maximieren.
+
+Diese Fähigkeiten schaffen für Kunden einen direkten Mehrwert, indem sie Iterationen reduzieren, Fehlanwendungen vermeiden und den produktiven Einsatz Generativer KI planbarer und nachvollziehbarer machen.
+
+Welche Fähigkeiten weiter aufgebaut werden müssen
+
+Zur langfristigen Skalierung und Differenzierung werden folgende Fähigkeiten systematisch weiterentwickelt:
+	•	Aufbau einer proprietären Referenz- und Wissensbasis
+Erweiterung einer domänenspezifischen Datenbank mit hochwertigen Aufgabenbeschreibungen und Referenzergebnissen, um Vollständigkeit, Konsistenz und Branchenadäquanz weiter zu erhöhen.
+	•	Empirische Validierung und kontinuierliches Lernen
+Systematische Auswertung realer Nutzungsdaten zur Verbesserung von Qualitätsmetriken, Erfolgsprognosen und Nutzerführung.
+	•	Produkt- und UX-Feinschliff
+Weiterentwicklung der Benutzerführung, um auch komplexe Aufgabenstellungen intuitiv, effizient und mit minimalem Reibungsverlust erfassbar zu machen.
+	•	Skalierbare Systemarchitektur
+Technische Weiterentwicklung der Plattform zur Unterstützung steigender Nutzerzahlen, zusätzlicher Anwendungsfälle und zukünftiger Team- oder Unternehmensfunktionen.
+
 
 # 3. Vertrieb & Wettbewerb
 
