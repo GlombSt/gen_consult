@@ -39,9 +39,8 @@ jobs:
       run: npm run lint || echo "No lint script configured - skipping"
       continue-on-error: true
 
-    - name: Run tests (if configured)
-      run: npm test || echo "No tests configured yet - skipping"
-      continue-on-error: true
+    - name: Run tests
+      run: npm test
 
     - name: Build application
       run: npm run build
