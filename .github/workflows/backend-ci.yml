@@ -3,11 +3,11 @@ name: Backend CI
 on:
   push:
     paths:
-      - 'declaring/**'
+      - 'intentions/**'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     paths:
-      - 'declaring/**'
+      - 'intentions/**'
       - '.github/workflows/backend-ci.yml'
   workflow_dispatch:
 
@@ -17,7 +17,7 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ./declaring
+        working-directory: ./intentions
 
     steps:
     - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
       with:
         python-version: '3.13'  # Using 3.13 until 3.14 is available in GitHub Actions
         cache: 'pip'
-        cache-dependency-path: declaring/requirements.txt
+        cache-dependency-path: intentions/requirements.txt
 
     - name: Install dependencies
       run: |
@@ -50,7 +50,7 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
       with:
-        files: ./declaring/coverage.xml
+        files: ./intentions/coverage.xml
         flags: backend
         name: backend-coverage
         fail_ci_if_error: false

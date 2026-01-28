@@ -270,7 +270,7 @@ FastAPI automatically generates OpenAPI documentation from Pydantic `Field` desc
 **Example: Matching Domain Model to Schema**
 
 ```python
-# declaring/app/intents/INTENTS_DOMAIN.md defines:
+# intentions/app/intents/INTENTS_DOMAIN.md defines:
 # output_structure (string, optional): The organization and composition 
 # of the result's content, independent of its technical format 
 # (e.g., bullet points vs. paragraphs, table with specific columns, 
