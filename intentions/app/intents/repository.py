@@ -114,7 +114,8 @@ class IntentRepository:
 
         result = await self.db.execute(sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id))
         await self.db.flush()
-        return bool(result.rowcount > 0)  # type: ignore[no-any-return,attr-defined]  
+        rowcount = result.rowcount  # type: ignore[attr-defined]
+        return bool(rowcount > 0)  # type: ignore[no-any-return]  
 
     async def add_fact(self, intent_id: int, fact: Fact) -> Fact:
         """

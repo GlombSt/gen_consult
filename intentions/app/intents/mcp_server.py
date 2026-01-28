@@ -359,12 +359,12 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
 
         elif name == "update_intent_name":
             intent_id = arguments.get("intent_id")
-            name = arguments.get("name")
-            if intent_id is None or name is None:
+            name_arg = arguments.get("name")
+            if intent_id is None or name_arg is None:
                 raise ValueError("intent_id and name are required")
             # Type narrowing: name is not None here (already checked above)
-            assert name is not None
-            name_str = str(name)
+            assert name_arg is not None
+            name_str = str(name_arg)
             intent_result = await service.update_intent_name(intent_id, name_str, repository)
             if intent_result is None:
                 # Not found - no changes to commit
