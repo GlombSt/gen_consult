@@ -113,7 +113,7 @@ class UserRepository:
 
         result = await self.db.execute(sql_delete(UserDBModel).where(UserDBModel.id == user_id))
         await self.db.flush()
-        return result.rowcount > 0
+        return bool(result.rowcount > 0)  # type: ignore[no-any-return,attr-defined]
 
     def _to_domain_model(self, db_user: UserDBModel) -> User:
         """Convert DB model to domain model."""
