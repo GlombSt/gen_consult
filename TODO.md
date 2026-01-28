@@ -2,7 +2,7 @@
 
 **Created:** 2025-10-28
 **Status:** In Progress
-**Goal:** Align architecture documentation between `declaring/` (backend) and `reacting/` (frontend) projects
+**Goal:** Align architecture documentation between `declaring/` (backend) and `customer-ux/` (frontend) projects
 
 ---
 
@@ -12,7 +12,7 @@
 **Files to update:**
 - `declaring/ARCHITECTURE_STANDARDS.md`
 - `declaring/ARCHITECTURE_GUIDE.md`
-- `reacting/ARCHITECTURE.md`
+- `customer-ux/ARCHITECTURE.md`
 
 **Changes:**
 - [x] Use "hexagonal architecture" consistently in both projects
@@ -37,7 +37,7 @@
 
 ### ✅ Task 2: Clarify Type Mapping in Frontend Docs
 **Files to update:**
-- `reacting/ARCHITECTURE.md`
+- `customer-ux/ARCHITECTURE.md`
 
 <!-- TODO: DECISION NEEDED
 Question: Should we enforce strict TypeScript usage in the frontend?
@@ -69,7 +69,7 @@ Timeline: Before implementing Task 2
 ### ✅ Task 3: Add Event Strategy Note to Both Docs
 **Files to update:**
 - `declaring/ARCHITECTURE_STANDARDS.md` (add section)
-- `reacting/ARCHITECTURE.md` (add section)
+- `customer-ux/ARCHITECTURE.md` (add section)
 
 <!-- TODO: DECISION NEEDED
 Question: What is the real-time update strategy for the frontend?
@@ -104,7 +104,7 @@ Dependencies: Relates to Task 8 (Real-time updates architecture)
 
 ### ✅ Task 4: Add Testing Documentation to Frontend
 **Files to create:**
-- `reacting/TESTING.md` (new file)
+- `customer-ux/TESTING.md` (new file)
 
 <!-- TODO: DECISION NEEDED
 Question: What testing approach should the frontend use?
@@ -138,7 +138,7 @@ Timeline: Before implementing Task 4
 ### ✅ Task 5: Document Error Handling Contract
 **Files to update:**
 - `declaring/ARCHITECTURE_GUIDE.md` (add section on error responses)
-- `reacting/ARCHITECTURE.md` (add section on error handling)
+- `customer-ux/ARCHITECTURE.md` (add section on error handling)
 
 **Changes:**
 - [ ] Backend: Document standard error response format

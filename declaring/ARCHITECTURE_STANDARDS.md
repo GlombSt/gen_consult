@@ -8,7 +8,7 @@
 For detailed examples and explanations, see [ARCHITECTURE_GUIDE.md](./ARCHITECTURE_GUIDE.md)
 
 **Related Documentation:**
-- [Frontend Architecture](../../reacting/ARCHITECTURE.md) - How the React frontend acts as a primary adapter
+- [Frontend Architecture](../../customer-ux/ARCHITECTURE.md) - How the React frontend acts as a primary adapter
 - [Root CLAUDE.md](../../CLAUDE.md) - Full-stack architecture overview
 
 ---

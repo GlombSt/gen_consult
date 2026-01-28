@@ -43,7 +43,7 @@ This is a **multi-project repository** (NOT a formal monorepo):
 ```
 gen_consult/
 ├── declaring/          # FastAPI backend (the hexagon)
-├── reacting/           # React frontend (primary adapter)
+├── customer-ux/        # React frontend (primary adapter)
 ├── TODO.md            # Architecture alignment tasks
 └── CLAUDE.md          # This file
 ```
@@ -58,8 +58,8 @@ gen_consult/
 - `declaring/TESTING_STANDARDS.md` - Testing requirements
 
 ### Frontend Documentation
-- `reacting/ARCHITECTURE.md` - Frontend architecture guide
-- `reacting/README.md` - Getting started
+- `customer-ux/ARCHITECTURE.md` - Frontend architecture guide
+- `customer-ux/README.md` - Getting started
 
 ### Project Documentation
 - `TODO.md` - Current architecture alignment tasks
@@ -88,7 +88,7 @@ gen_consult/
 - `declaring/README.md` - Quick start, development commands, testing requirements
 - `declaring/TESTING_STANDARDS.md` - Coverage requirements and test patterns
 
-## Frontend (`reacting/`) - The Primary Adapter
+## Frontend (`customer-ux/`) - The Primary Adapter
 
 **The frontend IS a primary adapter** - it drives the backend hexagon through HTTP. No business logic in frontend.
 
@@ -101,10 +101,10 @@ gen_consult/
 - **Development pattern** - API client → Hook → Component
 
 **For detailed architecture rules, see:**
-- `reacting/ARCHITECTURE.md` - **MANDATORY** - Complete layer responsibilities, patterns, and anti-patterns
+- `customer-ux/ARCHITECTURE.md` - **MANDATORY** - Complete layer responsibilities, patterns, and anti-patterns
 
 **For setup, commands, and workflow:**
-- `reacting/README.md` - Quick start, development commands, feature development workflow
+- `customer-ux/README.md` - Quick start, development commands, feature development workflow
 
 ## Hexagonal Architecture Principles
 
@@ -123,13 +123,13 @@ gen_consult/
 
 **For step-by-step feature development:**
 - Backend: `declaring/ARCHITECTURE_STANDARDS.md` + `declaring/DEVELOPMENT_STANDARDS.md`
-- Frontend: `reacting/ARCHITECTURE.md` + `reacting/README.md`
+- Frontend: `customer-ux/ARCHITECTURE.md` + `customer-ux/README.md`
 
 ## Anti-Patterns
 
 **For comprehensive anti-patterns and what to avoid:**
 - Backend: `declaring/ARCHITECTURE_STANDARDS.md` and `declaring/ARCHITECTURE_GUIDE.md`
-- Frontend: `reacting/ARCHITECTURE.md` (Anti-Patterns section)
+- Frontend: `customer-ux/ARCHITECTURE.md` (Anti-Patterns section)
 
 ## API Integration
 

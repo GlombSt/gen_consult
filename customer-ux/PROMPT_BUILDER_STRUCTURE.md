@@ -5,13 +5,13 @@ Based on the GenPlus - Declarative Prompt Builder UI, here's where this feature 
 ## Feature Location
 
 ```
-reacting/src/features/prompt-builder/
+customer-ux/src/features/prompt-builder/
 ```
 
 ## Component Hierarchy
 
 ### Main Entry Point
-**Location:** `reacting/src/features/prompt-builder/components/PromptBuilder/PromptBuilder.jsx`
+**Location:** `customer-ux/src/features/prompt-builder/components/PromptBuilder/PromptBuilder.jsx`
 
 This is the main container component that orchestrates the three-column layout:
 - Header bar
@@ -22,7 +22,7 @@ This is the main container component that orchestrates the three-column layout:
 ### Component Structure
 
 ```
-reacting/src/features/prompt-builder/
+customer-ux/src/features/prompt-builder/
 ├── components/
 │   ├── PromptBuilder/
 │   │   ├── PromptBuilder.jsx          # Main container (3-column layout)
@@ -119,7 +119,7 @@ function App() {
 
 ### Routing Consideration
 If you plan to have multiple views later, consider:
-- `reacting/src/pages/PromptBuilderPage.jsx` → wraps `PromptBuilder` component
+- `customer-ux/src/pages/PromptBuilderPage.jsx` → wraps `PromptBuilder` component
 - Use React Router if needed for navigation
 
 ## Shared Components
@@ -127,7 +127,7 @@ If you plan to have multiple views later, consider:
 Components that might be reused across features:
 
 ```
-reacting/src/shared/
+customer-ux/src/shared/
 ├── components/
 │   ├── Button/                       # Standardized button component
 │   ├── Textarea/                     # Enhanced textarea with labels
@@ -147,7 +147,7 @@ reacting/src/shared/
 Use React Context + custom hooks for state management:
 
 ```
-reacting/src/features/prompt-builder/
+customer-ux/src/features/prompt-builder/
 └── context/
     └── PromptBuilderContext.jsx     # Shared state for all prompt builder components
 ```
@@ -180,7 +180,7 @@ reacting/src/features/prompt-builder/
 ## Styling Strategy
 
 1. **Component-level CSS**: Each component has its own `.css` file
-2. **Global styles**: Update `reacting/src/index.css` for dark theme foundation
+2. **Global styles**: Update `customer-ux/src/index.css` for dark theme foundation
 3. **CSS Variables**: Define theme variables in `index.css`:
    ```css
    :root {
