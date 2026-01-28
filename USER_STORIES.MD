@@ -1,4 +1,4 @@
-User stories build on the domain concepts described in the ./declaring/app/* directories, e.g. INTENTS_DOMAIN.MD
+User stories build on the domain concepts described in the ./intentions/app/* directories, e.g. INTENTS_DOMAIN.MD
 
 
 Increment 1: Declaration

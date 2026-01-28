@@ -42,7 +42,7 @@ This is a **multi-project repository** (NOT a formal monorepo):
 
 ```
 gen_consult/
-├── declaring/          # FastAPI backend (the hexagon)
+├── intentions/          # FastAPI backend (the hexagon)
 ├── customer-ux/        # React frontend (primary adapter)
 ├── TODO.md            # Architecture alignment tasks
 └── CLAUDE.md          # This file
@@ -51,11 +51,11 @@ gen_consult/
 ## Important Reference Files
 
 ### Backend Documentation
-- `declaring/ARCHITECTURE_STANDARDS.md` - Mandatory rules
-- `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
-- `declaring/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
-- `declaring/AGENT_WORKFLOW.md` - **MANDATORY for coding agents** - Completion criteria and workflow
-- `declaring/TESTING_STANDARDS.md` - Testing requirements
+- `intentions/ARCHITECTURE_STANDARDS.md` - Mandatory rules
+- `intentions/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
+- `intentions/DEVELOPMENT_STANDARDS.md` - Development workflow requirements
+- `intentions/AGENT_WORKFLOW.md` - **MANDATORY for coding agents** - Completion criteria and workflow
+- `intentions/TESTING_STANDARDS.md` - Testing requirements
 
 ### Frontend Documentation
 - `customer-ux/ARCHITECTURE.md` - Frontend architecture guide
@@ -68,7 +68,7 @@ gen_consult/
 
 
 
-## Backend (`declaring/`) - The Hexagon
+## Backend (`intentions/`) - The Hexagon
 
 **The backend IS the hexagon** - it contains all business logic. The frontend is a thin adapter.
 
@@ -81,12 +81,12 @@ gen_consult/
 - **Event system:** All business actions publish domain events (service layer only)
 
 **For detailed architecture rules, see:**
-- `declaring/ARCHITECTURE_STANDARDS.md` - **MANDATORY** - Complete layer rules and structure requirements
-- `declaring/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
+- `intentions/ARCHITECTURE_STANDARDS.md` - **MANDATORY** - Complete layer rules and structure requirements
+- `intentions/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
 
 **For setup, commands, and testing:**
-- `declaring/README.md` - Quick start, development commands, testing requirements
-- `declaring/TESTING_STANDARDS.md` - Coverage requirements and test patterns
+- `intentions/README.md` - Quick start, development commands, testing requirements
+- `intentions/TESTING_STANDARDS.md` - Coverage requirements and test patterns
 
 ## Frontend (`customer-ux/`) - The Primary Adapter
 
@@ -116,25 +116,25 @@ gen_consult/
 - **Communication** = Through service ports (synchronous) or events (asynchronous)
 
 **For detailed patterns and examples, see:**
-- `declaring/ARCHITECTURE_STANDARDS.md` - Ports, adapters, decomposition rules
-- `declaring/ARCHITECTURE_GUIDE.md` - Communication patterns, examples
+- `intentions/ARCHITECTURE_STANDARDS.md` - Ports, adapters, decomposition rules
+- `intentions/ARCHITECTURE_GUIDE.md` - Communication patterns, examples
 
 ## Development Workflows
 
 **For step-by-step feature development:**
-- Backend: `declaring/ARCHITECTURE_STANDARDS.md` + `declaring/DEVELOPMENT_STANDARDS.md`
+- Backend: `intentions/ARCHITECTURE_STANDARDS.md` + `intentions/DEVELOPMENT_STANDARDS.md`
 - Frontend: `customer-ux/ARCHITECTURE.md` + `customer-ux/README.md`
 
 ## Anti-Patterns
 
 **For comprehensive anti-patterns and what to avoid:**
-- Backend: `declaring/ARCHITECTURE_STANDARDS.md` and `declaring/ARCHITECTURE_GUIDE.md`
+- Backend: `intentions/ARCHITECTURE_STANDARDS.md` and `intentions/ARCHITECTURE_GUIDE.md`
 - Frontend: `customer-ux/ARCHITECTURE.md` (Anti-Patterns section)
 
 ## API Integration
 
 **For endpoints, ports, and configuration:**
-- `declaring/README.md` - API endpoints, ports, CORS configuration
+- `intentions/README.md` - API endpoints, ports, CORS configuration
 
 ## Working with This Codebase
 

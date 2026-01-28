@@ -21,7 +21,7 @@ Documentation lives where the code lives:
 ```
 gen_consult/
 ├── [root]/                    # Project-wide docs (README.md, TODO.md, CLAUDE.md)
-├── declaring/                 # Backend docs
+├── intentions/                 # Backend docs
 │   ├── *_STANDARDS.md         # Mandatory rules
 │   ├── *_GUIDE.md             # Detailed explanations
 │   ├── *_REFERENCE.md         # Quick lookup
@@ -70,9 +70,9 @@ All documentation files use a consistent suffix pattern based on purpose:
 
 1. **Where?**
    - Project-wide → root directory
-   - Backend-specific → `declaring/`
+   - Backend-specific → `intentions/`
    - Frontend-specific → `customer-ux/`
-   - Domain-specific → `declaring/app/[domain]/`
+   - Domain-specific → `intentions/app/[domain]/`
 
 2. **What type?**
    - Mandatory rules → `*_STANDARDS.md` (+ consider companion `*_GUIDE.md`)
@@ -84,7 +84,7 @@ All documentation files use a consistent suffix pattern based on purpose:
 
 ### Checklist
 
-- [ ] Correct location (root, `declaring/`, `customer-ux/`, or domain folder)
+- [ ] Correct location (root, `intentions/`, `customer-ux/`, or domain folder)
 - [ ] Proper naming (`*_STANDARDS.md`, `*_GUIDE.md`, etc.)
 - [ ] Document header with audience and related docs
 - [ ] Cross-reference related documentation

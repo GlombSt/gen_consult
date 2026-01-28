@@ -5,7 +5,7 @@ A React-based frontend that serves as a **primary adapter** to the Gen Consult b
 ## Prerequisites
 
 - **Node.js** 18+ and npm
-- **Backend** must be running at `http://localhost:8000` (see [declaring/](../declaring/))
+- **Backend** must be running at `http://localhost:8000` (see [intentions/](../intentions/))
 
 ## Quick Start
 
@@ -102,7 +102,7 @@ For detailed patterns and architectural guidelines, see [ARCHITECTURE.md](./ARCH
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Comprehensive architectural guidelines, layer responsibilities, patterns, and anti-patterns
 - **[PROMPT_BUILDER_STRUCTURE.md](./PROMPT_BUILDER_STRUCTURE.md)** - Feature structure planning document
 - **[../CLAUDE.md](../CLAUDE.md)** - Full-stack architecture overview
-- **[../declaring/](../declaring/)** - Backend documentation and API reference
+- **[../intentions/](../intentions/)** - Backend documentation and API reference
 
 ## Common Tasks
 
@@ -134,7 +134,7 @@ npm run test:e2e
 
 **CORS errors:**
 - Ensure backend is running on port 8000
-- Check backend CORS configuration in `declaring/app/main.py`
+- Check backend CORS configuration in `intentions/app/main.py`
 
 **API connection refused:**
 - Verify backend is running: `http://localhost:8000/health`

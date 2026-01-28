@@ -1,8 +1,8 @@
 # Frontend Architecture Guidelines
 
 **Related Documentation:**
-- [Backend Architecture Standards](../declaring/ARCHITECTURE_STANDARDS.md) - The hexagon's mandatory rules
-- [Backend Architecture Guide](../declaring/ARCHITECTURE_GUIDE.md) - Detailed backend patterns
+- [Backend Architecture Standards](../intentions/ARCHITECTURE_STANDARDS.md) - The hexagon's mandatory rules
+- [Backend Architecture Guide](../intentions/ARCHITECTURE_GUIDE.md) - Detailed backend patterns
 - [Root CLAUDE.md](../CLAUDE.md) - Full-stack architecture overview
 
 ---
