@@ -144,4 +144,3 @@ class TestVerifyApiKey:
 
             assert exc_info.value.status_code == status.HTTP_401_UNAUTHORIZED
             assert "Invalid Authorization header format" in exc_info.value.detail
-

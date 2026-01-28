@@ -59,7 +59,7 @@ def _pydantic_to_json_schema(pydantic_model: type) -> dict[str, Any]:
         JSON Schema dictionary
     """
     # Type ignore: Pydantic models have model_json_schema method
-    return pydantic_model.model_json_schema(mode="serialization")  # type: ignore[attr-defined]
+    return pydantic_model.model_json_schema(mode="serialization")  # type: ignore[no-any-return,attr-defined]
 
 
 def _get_function_docstring(func) -> str:
@@ -351,7 +351,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Read operation - no commit needed, just close in finally
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             # Read operation - no commit needed, just close in finally
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -360,11 +361,14 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             name = arguments.get("name")
             if intent_id is None or name is None:
                 raise ValueError("intent_id and name are required")
-            intent = await service.update_intent_name(intent_id, name, repository)
+            # Type narrowing: name is not None here (already checked above)
+            name_str: str = name  # type: ignore[assignment]
+            intent = await service.update_intent_name(intent_id, name_str, repository)
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -377,7 +381,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -390,7 +395,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -403,7 +409,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -416,7 +423,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 
@@ -429,7 +437,8 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             if intent is None:
                 # Not found - no changes to commit
                 return [types.TextContent(type="text", text="Intent not found")]
-            result_dict = _intent_to_dict(intent)
+            # Type narrowing: intent is not None here (already checked above)
+            result_dict = _intent_to_dict(intent)  # type: ignore[arg-type]
             await session.commit()
             return [types.TextContent(type="text", text=json.dumps(result_dict, indent=2))]
 

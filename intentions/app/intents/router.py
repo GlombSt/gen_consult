@@ -4,7 +4,7 @@ HTTP router for intents domain.
 Defines HTTP endpoints and handles request/response serialization.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, Path, status
+from fastapi import APIRouter, Body, Depends, HTTPException, Path, status
 
 from app.shared import ErrorResponse
 from app.shared.dependencies import get_intent_repository
@@ -82,7 +82,7 @@ async def get_intent(
 )
 async def update_intent_name(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateNameRequest = ...,
+    request: IntentUpdateNameRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's name (US-001)."""
@@ -105,7 +105,7 @@ async def update_intent_name(
 )
 async def update_intent_description(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateDescriptionRequest = ...,
+    request: IntentUpdateDescriptionRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's description (US-002)."""
@@ -128,7 +128,7 @@ async def update_intent_description(
 )
 async def update_intent_output_format(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateOutputFormatRequest = ...,
+    request: IntentUpdateOutputFormatRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's output format (US-003)."""
@@ -151,7 +151,7 @@ async def update_intent_output_format(
 )
 async def update_intent_output_structure(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateOutputStructureRequest = ...,
+    request: IntentUpdateOutputStructureRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's output structure (US-004)."""
@@ -174,7 +174,7 @@ async def update_intent_output_structure(
 )
 async def update_intent_context(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateContextRequest = ...,
+    request: IntentUpdateContextRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's context (US-005)."""
@@ -197,7 +197,7 @@ async def update_intent_context(
 )
 async def update_intent_constraints(
     intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateConstraintsRequest = ...,
+    request: IntentUpdateConstraintsRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's constraints (US-006)."""
@@ -221,7 +221,7 @@ async def update_intent_constraints(
 )
 async def add_fact_to_intent(
     intent_id: int = Path(..., description="The unique identifier of the intent to add the fact to"),
-    request: FactAddRequest = ...,
+    request: FactAddRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Add a new fact to an intent (US-008)."""
@@ -244,7 +244,7 @@ async def add_fact_to_intent(
 async def update_fact_value(
     intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
     fact_id: int = Path(..., description="The unique identifier of the fact to update"),
-    request: FactUpdateValueRequest = ...,
+    request: FactUpdateValueRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update a fact's value (US-007)."""

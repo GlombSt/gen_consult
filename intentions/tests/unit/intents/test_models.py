@@ -132,13 +132,13 @@ class TestIntent:
     def test_intent_facts_default_to_empty_list_not_shared(self):
         """
         Test that each Intent instance gets its own empty facts list.
-        
+
         This test prevents the mutable default argument bug where all Intent
         instances would share the same list object if facts parameter used
         a default value of [].
         """
         # Arrange
-        from app.intents.models import Intent, Fact
+        from app.intents.models import Fact, Intent
 
         # Act - Create two intents without explicitly passing facts
         intent1 = Intent(

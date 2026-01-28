@@ -5,14 +5,12 @@ Tests the MCP server HTTP transport integration at /mcp endpoint.
 """
 
 import json
-from typing import Any
 from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.intents.mcp_server import _get_repository
 from app.intents.repository import IntentRepository
 from app.main import app
 from app.shared.dependencies import get_intent_repository
@@ -223,4 +221,3 @@ class TestMCPHTTPEndpoint:
         assert "error" in data
         assert data["error"]["code"] == -32602  # Invalid params
         assert "Tool name is required" in data["error"]["message"]
-

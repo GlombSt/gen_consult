@@ -12,7 +12,6 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, Request, Response, status
 from fastapi.responses import JSONResponse
 from mcp.server.lowlevel import NotificationOptions
-from mcp.server.models import InitializationOptions
 from pydantic import ValidationError
 
 from app.shared.logging_config import logger
@@ -72,7 +71,7 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
     try:
         if method == "initialize":
             # Return server capabilities
-            capabilities = server.get_capabilities(
+            server.get_capabilities(
                 notification_options=NotificationOptions(),
                 experimental_capabilities={},
             )
@@ -152,7 +151,7 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
 
         elif method == "notifications/initialized":
             # Notification - no response needed
-            return None
+            return {"jsonrpc": "2.0", "id": request_id, "result": {}}
 
         else:
             return {
@@ -227,4 +226,3 @@ async def mcp_endpoint(request: Request) -> Response:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
     return JSONResponse(content=response)
-

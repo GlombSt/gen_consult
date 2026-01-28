@@ -55,6 +55,8 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     created_intent = await repository.create(intent)
 
     # Publish domain event (MANDATORY)
+    # After creation, ID is guaranteed to be set
+    assert created_intent.id is not None, "Intent ID should be set after creation"
     await event_bus.publish(
         IntentCreatedEvent(
             intent_id=created_intent.id,
@@ -259,6 +261,8 @@ async def add_fact_to_intent(intent_id: int, value: str, repository: IntentRepos
     created_fact = await repository.add_fact(intent_id, fact)
 
     # Publish domain event (MANDATORY)
+    # After creation, ID is guaranteed to be set
+    assert created_fact.id is not None, "Fact ID should be set after creation"
     await event_bus.publish(FactAddedEvent(intent_id=intent_id, fact_id=created_fact.id, value=created_fact.value))
 
     logger.info("Fact added successfully", extra={"intent_id": intent_id, "fact_id": created_fact.id})

@@ -14,7 +14,6 @@ from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
 from app.shared.exception_handlers import (
     authentication_exception_handler,
-    http_exception_handler,
     validation_exception_handler,
 )
 from app.shared.logging_config import logger

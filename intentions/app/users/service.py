@@ -77,6 +77,8 @@ async def create_user(request: UserCreateRequest, repository: UserRepository) ->
     created_user = await repository.create(user)
 
     # Publish domain event (MANDATORY)
+    # After creation, ID is guaranteed to be set
+    assert created_user.id is not None, "User ID should be set after creation"
     await event_bus.publish(
         UserCreatedEvent(
             user_id=created_user.id,
@@ -121,6 +123,8 @@ async def update_user(user_id: int, request: UserUpdateRequest, repository: User
 
     # Publish domain event (MANDATORY)
     if updated_user:
+        # After update, ID is guaranteed to be set
+        assert updated_user.id is not None, "User ID should be set after update"
         await event_bus.publish(
             UserUpdatedEvent(
                 user_id=updated_user.id,

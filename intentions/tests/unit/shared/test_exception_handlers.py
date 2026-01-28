@@ -5,7 +5,7 @@ Tests custom exception handlers including authentication error handling.
 """
 
 import pytest
-from fastapi import HTTPException, Request, status
+from fastapi import HTTPException, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -92,9 +92,7 @@ class TestAuthenticationExceptionHandler:
                 "server": ("localhost", 8000),
             }
         )
-        exc = HTTPException(
-            status_code=401, detail="Authorization header is required", headers={"WWW-Authenticate": "Bearer"}
-        )
+        exc = HTTPException(status_code=401, detail="Authorization header is required", headers={"WWW-Authenticate": "Bearer"})
 
         # Act
         response = await authentication_exception_handler(request, exc)
@@ -142,4 +140,3 @@ class TestValidationExceptionHandler:
         assert "instance" in content
         assert "Request validation failed" in content
         assert "username" in content
-
