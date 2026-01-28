@@ -151,7 +151,7 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
 
         elif method == "notifications/initialized":
             # Notification - no response needed
-            return {"jsonrpc": "2.0", "id": request_id, "result": {}}
+            return None
 
         else:
             return {
