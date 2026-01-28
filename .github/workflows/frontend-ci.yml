@@ -4,12 +4,12 @@ on:
   push:
     branches: [ main, develop ]
     paths:
-      - 'reacting/**'
+      - 'customer-ux/**'
       - '.github/workflows/frontend-ci.yml'
   pull_request:
     branches: [ main, develop ]
     paths:
-      - 'reacting/**'
+      - 'customer-ux/**'
       - '.github/workflows/frontend-ci.yml'
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ jobs:
     runs-on: self-hosted
     defaults:
       run:
-        working-directory: ./reacting
+        working-directory: ./customer-ux
 
     steps:
     - name: Checkout code
@@ -30,7 +30,7 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: reacting/package-lock.json
+        cache-dependency-path: customer-ux/package-lock.json
 
     - name: Install dependencies
       run: npm ci
@@ -55,5 +55,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: frontend-build-${{ github.sha }}
-        path: reacting/dist/
+        path: customer-ux/dist/
         retention-days: 7

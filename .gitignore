@@ -46,36 +46,36 @@ declaring/.installed.cfg
 declaring/*.egg
 
 # ===================================
-# Frontend (reacting/) - Node.js
+# Frontend (customer-ux/) - Node.js
 # ===================================
 
 # Dependencies
-reacting/node_modules/
-reacting/.pnp
-reacting/.pnp.js
+customer-ux/node_modules/
+customer-ux/.pnp
+customer-ux/.pnp.js
 
 # Testing
-reacting/coverage/
+customer-ux/coverage/
 
 # Production build
-reacting/dist/
-reacting/build/
+customer-ux/dist/
+customer-ux/build/
 
 # Environment files (local only)
-reacting/.env.local
-reacting/.env.development.local
-reacting/.env.test.local
-reacting/.env.production.local
+customer-ux/.env.local
+customer-ux/.env.development.local
+customer-ux/.env.test.local
+customer-ux/.env.production.local
 
 # Logs
-reacting/npm-debug.log*
-reacting/yarn-debug.log*
-reacting/yarn-error.log*
-reacting/pnpm-debug.log*
-reacting/lerna-debug.log*
+customer-ux/npm-debug.log*
+customer-ux/yarn-debug.log*
+customer-ux/yarn-error.log*
+customer-ux/pnpm-debug.log*
+customer-ux/lerna-debug.log*
 
 # Vite
-reacting/.vite/
+customer-ux/.vite/
 
 # ===================================
 # IDEs and Editors

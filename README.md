@@ -37,7 +37,7 @@ gen_consult/
 │   ├── requirements.txt
 │   └── README.md          # Backend documentation
 │
-├── reacting/              # Frontend - React (JavaScript)
+├── customer-ux/           # Frontend - React (JavaScript)
 │   ├── src/
 │   │   ├── features/      # Feature-based (mirrors backend domains)
 │   │   └── shared/
@@ -66,7 +66,7 @@ gen_consult/
 
 ### Frontend Setup
 
-**See [reacting/README.md](./reacting/README.md) for complete frontend setup, configuration, and development workflow.**
+**See [customer-ux/README.md](./customer-ux/README.md) for complete frontend setup, configuration, and development workflow.**
 
 ## 📚 Documentation
 
@@ -79,14 +79,14 @@ gen_consult/
   - [Architecture Guide](./declaring/ARCHITECTURE_GUIDE.md)
   - [Backend Development Standards](./declaring/DEVELOPMENT_STANDARDS.md)
   - [Testing Standards](./declaring/TESTING_STANDARDS.md)
-- **[Frontend Docs](./reacting/)** - React frontend documentation
-  - [README](./reacting/README.md) - Getting started and quick reference
-  - [Architecture](./reacting/ARCHITECTURE.md) - Comprehensive architectural guidelines
+- **[Frontend Docs](./customer-ux/)** - React frontend documentation
+  - [README](./customer-ux/README.md) - Getting started and quick reference
+  - [Architecture](./customer-ux/ARCHITECTURE.md) - Comprehensive architectural guidelines
 
 ## 🛠️ Development Workflow
 ###Detailed guides:
 - Backend: [declaring/DEVELOPMENT_STANDARDS.md](./declaring/DEVELOPMENT_STANDARDS.md)
-- Frontend: [reacting/README.md](./reacting/README.md)
+- Frontend: [customer-ux/README.md](./customer-ux/README.md)
 - Full-stack: [CLAUDE.md](./CLAUDE.md)
 
 ## 🔑 Key Principles

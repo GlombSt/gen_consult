@@ -7,7 +7,7 @@
 
 **Related Documentation:**
 - [Architecture Standards](./ARCHITECTURE_STANDARDS.md) - Mandatory rules (read first!)
-- [Frontend Architecture](../../reacting/ARCHITECTURE.md) - How React acts as a primary adapter
+- [Frontend Architecture](../../customer-ux/ARCHITECTURE.md) - How React acts as a primary adapter
 - [Root CLAUDE.md](../../CLAUDE.md) - Full-stack overview
 
 ---

@@ -19,7 +19,7 @@ The CI/CD workflows are configured to run based on changed files:
 - Pull request to `main` or `develop`
 
 **Frontend CI runs when:**
-- Files in `reacting/` change
+- Files in `customer-ux/` change
 - Frontend workflow file changes
 - Push to `main` or `develop`
 - Pull request to `main` or `develop`

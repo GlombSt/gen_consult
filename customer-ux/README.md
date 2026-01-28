@@ -1,4 +1,4 @@
-# Reacting - Frontend Application
+# Customer UX - Frontend Application
 
 A React-based frontend that serves as a **primary adapter** to the Gen Consult backend hexagon. This is a thin client focused on presentation and user experience, with all business logic residing in the backend.
 
