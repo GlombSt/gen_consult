@@ -1,38 +1,60 @@
-# Stellungnahme zur Tragfähigkeit des Gründungsvorhabens  
-**SharpIntent – Webbasierte SaaS-Lösung zur strukturierten Aufgabenklärung für den Einsatz Generativer KI**
+# Anlage zu D.16  
+## Ausführliche Begründung der Tragfähigkeitsbeurteilung  
+**Gründungsvorhaben „SharpIntent“**
 
-## 1. Gegenstand der Stellungnahme
+Diese Anlage ergänzt die zusammenfassende Beurteilung der Tragfähigkeit im Formular  
+**BA GZ 04 (01/2025), Abschnitt D.16**.
 
-Gegenstand dieser Stellungnahme ist die Beurteilung der wirtschaftlichen Tragfähigkeit des Gründungsvorhabens „SharpIntent“. Das Vorhaben zielt auf den Aufbau eines digitalen Software-as-a-Service-Unternehmens ab, das eine webbasierte Anwendung zur strukturierten Klärung von Aufgabenstellungen für den professionellen Einsatz Generativer KI bereitstellt.
+---
 
-Die Stellungnahme ergänzt den vorgelegten Businessplan und fasst die wesentlichen Argumente zur Tragfähigkeit, Umsetzbarkeit und Nachhaltigkeit des Vorhabens zusammen.
+## 1. Gegenstand der Beurteilung
+
+Gegenstand dieser Anlage ist die weitergehende Begründung der wirtschaftlichen Tragfähigkeit des Gründungsvorhabens „SharpIntent“. Das Vorhaben zielt auf den Aufbau eines digitalen Software-as-a-Service-Unternehmens ab, das eine webbasierte Anwendung zur strukturierten Klärung von Aufgabenstellungen für den professionellen Einsatz Generativer KI bereitstellt.
+
+Die Ausführungen basieren auf den vorgelegten Unterlagen, insbesondere der Beschreibung des Existenzgründungsvorhabens, der Finanzplanung sowie der Umsatz- und Rentabilitätsvorschau.
+
+---
 
 ## 2. Plausibilität der Geschäftsidee
 
-Die Geschäftsidee adressiert ein klar identifiziertes und in der Praxis verbreitetes Problem: die mangelnde Verlässlichkeit von Ergebnissen Generativer KI infolge unklarer oder unvollständiger Aufgabenstellungen. Dieses Problem ist insbesondere im beruflichen Kontext relevant, da fehlerhafte oder unpräzise Ergebnisse zu zusätzlichem Prüf- und Korrekturaufwand sowie zu fachlichen Risiken führen können.
+Die Geschäftsidee adressiert ein klar identifiziertes und praxisrelevantes Problem: die unzureichende Verlässlichkeit von Ergebnissen Generativer KI infolge unklarer oder unvollständiger Aufgabenstellungen. Dies führt im beruflichen Einsatz regelmäßig zu zusätzlichem Prüf- und Korrekturaufwand.
 
-SharpIntent setzt an der vorgelagerten Klärung von Intention, Kontext und Anforderungen an und ist damit klar vom Marktsegment der nachträglichen Prompt-Optimierung abgegrenzt. Die angebotene Leistung ist als standardisiertes, skalierbares Softwareprodukt konzipiert und nicht als Beratungs- oder Schulungsleistung.
+Das Vorhaben setzt an der vorgelagerten Klärung von Intention, Kontext und Anforderungen an und grenzt sich damit klar von reinen Prompt-Bibliotheken oder nachträglicher Ergebnisoptimierung ab. Die angebotene Leistung ist als standardisiertes und skalierbares Softwareprodukt konzipiert und nicht als Beratungs- oder Schulungsleistung.
+
+---
 
 ## 3. Markt- und Nachfrageeinschätzung
 
-Die Nutzung Generativer KI nimmt im beruflichen Umfeld weiter zu. Parallel steigt der Bedarf an Werkzeugen, die Qualität, Verlässlichkeit und Risikominimierung unterstützen. Der adressierte Markt ist groß, wachsend und fachlich plausibel abgegrenzt.
+Die Nutzung Generativer KI im beruflichen Umfeld nimmt weiter zu. Parallel steigt der Bedarf an Werkzeugen, die Qualität, Verlässlichkeit und Risikominimierung unterstützen. Der adressierte Markt ist fachlich plausibel abgegrenzt und weist ein nachhaltiges Nachfragepotenzial auf.
 
-Die Zielgruppe – berufliche Anwender, Einzelunternehmer, Freelancer sowie kleine und mittlere Unternehmen – ist klar definiert. Die geplante Marktbearbeitung über digitale, organische Kanäle ist für ein Einzelgründungsvorhaben angemessen und ressourcenschonend.
+Die Zielgruppe – berufliche Anwender, Einzelunternehmer, Freelancer sowie kleine und mittlere Unternehmen – ist klar definiert. Die geplante Marktbearbeitung über digitale und organische Kanäle ist für ein Einzelgründungsvorhaben angemessen und ressourcenschonend.
 
-## 4. Unternehmerische Eignung
+---
 
-Der Gründer verfügt über eine sehr hohe fachliche und unternehmerische Eignung. Neben einer fundierten technischen Ausbildung (Diplom-Informatiker) besitzt er betriebswirtschaftliche Qualifikation (MBA) sowie mehr als zehn Jahre Erfahrung in leitenden Funktionen beim Aufbau und Betrieb softwarebasierter Geschäftsmodelle.
+## 4. Unternehmerische Voraussetzungen
 
-Die geplante selbstständige Tätigkeit wird hauptberuflich ausgeübt; ein Arbeitsumfang von mindestens 40 Wochenstunden ist vorgesehen.
+Der Gründer verfügt über eine fundierte technische Ausbildung (Diplom-Informatiker) sowie betriebswirtschaftliche Qualifikation (MBA). Darüber hinaus besteht langjährige Erfahrung in leitenden Funktionen beim Aufbau und Betrieb digitaler, softwarebasierter Geschäftsmodelle.
+
+Die selbstständige Tätigkeit wird hauptberuflich ausgeübt; ein Arbeitsumfang von mindestens 40 Wochenstunden ist vorgesehen. Die fachlichen und unternehmerischen Voraussetzungen zur Umsetzung des Vorhabens sind gegeben.
+
+---
 
 ## 5. Finanzielle Tragfähigkeit
 
-Die Finanzplanung ist konservativ und realistisch aufgebaut. Für die Anlaufphase ist ein negatives Betriebsergebnis eingeplant, was für SaaS-Gründungsvorhaben branchenüblich ist. Der Break-even ist innerhalb eines realistischen Zeitraums vorgesehen.
+Die Finanzplanung ist konservativ und realistisch aufgebaut. Für die Anlaufphase ist ein negatives Betriebsergebnis eingeplant, was für SaaS-Gründungsvorhaben branchenüblich ist. Der geplante Break-even liegt innerhalb eines nachvollziehbaren und realistischen Zeitraums.
 
 Ein externer Kapitalbedarf besteht nicht. Das Vorhaben wird vollständig aus Eigenmitteln finanziert. Fremdfinanzierungen oder laufende Rückzahlungsverpflichtungen sind nicht vorgesehen.
 
+---
+
 ## 6. Risikobetrachtung
 
-Die wesentlichen Risiken sind identifiziert und mit konkreten Gegenmaßnahmen hinterlegt. Besonders hervorzuheben sind die niedrigen Fixkosten, vorhandene Eigenmittel sowie klar definierte Controlling- und Abbruchkriterien.
+Die wesentlichen Risiken des Vorhabens sind identifiziert und mit geeigneten Maßnahmen hinterlegt. Hervorzuheben sind die bewusst niedrig gehaltenen Fixkosten, vorhandene Eigenmittel sowie klar definierte Controlling- und Abbruchkriterien.
 
-Ein Überschuldungsrisiko besteht nicht.
+Ein Überschuldungsrisiko ist nicht erkennbar.
+
+---
+
+## 7. Gesamteinschätzung
+
+Auf Grundlage der vorgelegten Unterlagen erscheint das Gründungsvorhaben wirtschaftlich tragfähig. Die Geschäftsidee ist plausibel, die Planung realistisch und die persönlichen Voraussetzungen des Gründers sind gegeben.
