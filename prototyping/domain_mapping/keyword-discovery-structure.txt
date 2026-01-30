@@ -1,0 +1,188 @@
+parameters:
+
+  # ============================================
+  # CONTEXT PARAMETERS
+  # ============================================
+  
+  product_description:
+    id: {{PRODUCT_DESCRIPTION}}
+    type: string
+    required: true
+    description: "What the product does in one or two sentences"
+    example: "A tool that helps users structure and optimize prompts for AI models"
+  
+  business_type:
+    id: {{BUSINESS_TYPE}}
+    type: enum
+    options: [SaaS, e-commerce, marketplace, agency, media, local_service, B2B_service]
+    required: true
+    description: "Primary business model"
+    example: "SaaS"
+  
+  target_audience:
+    id: {{TARGET_AUDIENCE}}
+    type: list[string]
+    required: true
+    description: "Who uses the product — roles, skill levels, characteristics"
+    example: ["Marketing professionals", "content creators", "non-technical business users"]
+  
+  geographic_market:
+    id: {{GEOGRAPHIC_MARKET}}
+    type: string
+    required: true
+    description: "Primary and secondary markets, language considerations"
+    example: "Global English (secondary: DACH region)"
+  
+  competitors:
+    id: {{COMPETITORS}}
+    type: list[string]
+    required: false
+    default: []
+    description: "Known competitor domains or product names"
+    example: ["promptbase.com", "promptperfect.ai"]
+
+  # ============================================
+  # SCOPE PARAMETERS
+  # ============================================
+  
+  keyword_count:
+    id: {{KEYWORD_COUNT}}
+    type: integer
+    required: false
+    default: 50
+    min: 10
+    max: 100
+    description: "Total number of keywords to generate"
+  
+  keyword_length_min:
+    id: {{KEYWORD_LENGTH_MIN}}
+    type: integer
+    required: false
+    default: 2
+    min: 1
+    max: 5
+    description: "Minimum words per keyword"
+  
+  keyword_length_max:
+    id: {{KEYWORD_LENGTH_MAX}}
+    type: integer
+    required: false
+    default: 7
+    min: 3
+    max: 10
+    description: "Maximum words per keyword"
+  
+  topic_focus:
+    id: {{TOPIC_FOCUS}}
+    type: list[string]
+    required: true
+    description: "Core topic areas the keywords should relate to"
+    example: ["prompt engineering", "AI writing", "LLM prompt optimization"]
+
+  # ============================================
+  # FILTER PARAMETERS
+  # ============================================
+  
+  exclude_terms:
+    id: {{EXCLUDE_TERMS}}
+    type: list[string]
+    required: false
+    default: []
+    description: "Terms that should NOT appear in any keyword"
+    example: ["free", "open source", "API", "developer"]
+  
+  exclude_audience_signals:
+    id: {{EXCLUDE_AUDIENCE_SIGNALS}}
+    type: list[string]
+    required: false
+    default: []
+    description: "Audience types to avoid attracting"
+    example: ["highly technical users", "developer-focused searches"]
+
+  # ============================================
+  # FUNNEL PARAMETERS
+  # ============================================
+  
+  funnel_awareness_pct:
+    id: {{FUNNEL_AWARENESS_PCT}}
+    type: integer
+    required: false
+    default: 40
+    min: 0
+    max: 100
+    description: "Percentage of keywords for awareness stage"
+  
+  funnel_consideration_pct:
+    id: {{FUNNEL_CONSIDERATION_PCT}}
+    type: integer
+    required: false
+    default: 40
+    min: 0
+    max: 100
+    description: "Percentage of keywords for consideration stage"
+  
+  funnel_decision_pct:
+    id: {{FUNNEL_DECISION_PCT}}
+    type: integer
+    required: false
+    default: 20
+    min: 0
+    max: 100
+    description: "Percentage of keywords for decision stage"
+    validation: "Sum of all funnel percentages must equal 100"
+
+  # ============================================
+  # CONTENT TYPE PARAMETERS
+  # ============================================
+  
+  available_content_types:
+    id: {{AVAILABLE_CONTENT_TYPES}}
+    type: list[enum]
+    options: [blog_post, how_to_guide, landing_page, comparison_page, tool_page, case_study, glossary_entry]
+    required: true
+    description: "Content formats you can realistically produce"
+    example: ["blog_post", "how_to_guide", "landing_page", "comparison_page"]
+
+  # ============================================
+  # DISCOVERY MODE PARAMETERS
+  # ============================================
+  
+  include_messy_keywords:
+    id: {{INCLUDE_MESSY_KEYWORDS}}
+    type: boolean
+    required: false
+    default: true
+    description: "Whether to include pre-category, unpolished, frustration-driven searches"
+  
+  cognitive_expansion_types:
+    id: {{COGNITIVE_EXPANSION_TYPES}}
+    type: list[enum]
+    options:
+      - pre_category_language
+      - frustration_complaints
+      - ungrammatical_realistic
+      - emerging_terminology
+      - adjacent_mental_models
+    required: false
+    default: [pre_category_language, frustration_complaints, ungrammatical_realistic, emerging_terminology, adjacent_mental_models]
+    description: "Types of non-obvious keywords to actively seek"
+  
+  example_messy_keywords:
+    id: {{EXAMPLE_MESSY_KEYWORDS}}
+    type: list[string]
+    required: false
+    default: []
+    description: "Domain-specific examples of messy but valuable keywords to prime the LLM"
+    example: ["why is chatgpt giving bad answers", "AI won't follow my brief", "how to make AI write what I want"]
+
+  # ============================================
+  # OUTPUT PARAMETERS
+  # ============================================
+  
+  cluster_name_hints:
+    id: {{CLUSTER_NAME_HINTS}}
+    type: list[string]
+    required: false
+    default: []
+    description: "Suggested cluster names to guide thematic grouping"
+    example: ["prompt basics", "tool comparison", "user frustrations", "use cases"]

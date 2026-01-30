@@ -1,0 +1,1 @@
+take the task described in @prototyping/task-research.md  and assess how the information in there can be mapped against the model in @intentions/app/intents/INTENTS_DOMAIN.md. For every piece of information in @prototyping/task-research.md state whether it can be mapped or not and how intuitive the mapping is.
