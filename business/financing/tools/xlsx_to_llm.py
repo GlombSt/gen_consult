@@ -476,7 +476,7 @@ def main() -> int:
     p.add_argument(
         "--out",
         required=True,
-        help="Output directory (will be created). Recommended: business/Gründungszuschuss/llm_exports/business-case-sheet/",
+        help="Output directory (will be created). Recommended: business/financing/Gründungszuschuss/llm_exports/business-case-sheet/",
     )
     args = p.parse_args()
 
@@ -511,7 +511,7 @@ def main() -> int:
         },
         "export": {
             "exported_at_utc": exported_at,
-            "tool": "business/tools/xlsx_to_llm.py",
+            "tool": "business/financing/tools/xlsx_to_llm.py",
             "format_version": 1,
         },
         "sheets": sheet_metas,

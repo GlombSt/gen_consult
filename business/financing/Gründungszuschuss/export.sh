@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 
 DOCKER="${DOCKER:-docker}"
 PANDOC_IMAGE="${PANDOC_IMAGE:-pandoc/core:3.1.13}"
@@ -9,7 +9,7 @@ PANDOC_IMAGE="${PANDOC_IMAGE:-pandoc/core:3.1.13}"
 #   DOCKER_PLATFORM=linux/amd64 ./export.sh
 DOCKER_PLATFORM="${DOCKER_PLATFORM:-}"
 
-DIR="business/Gründungszuschuss"
+DIR="business/financing/Gründungszuschuss"
 OUTDIR="$DIR/output"
 MD="$OUTDIR/business_plan.md"
 REF="$OUTDIR/reference.docx"

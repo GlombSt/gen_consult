@@ -4,11 +4,11 @@ set -euo pipefail
 # Regenerate LLM-friendly exports for business-case-sheet.xlsx
 #
 # Usage:
-#   ./business/Gründungszuschuss/export_business_case_sheet.sh
-#   ./business/Gründungszuschuss/export_business_case_sheet.sh --clean
+#   ./business/financing/Gründungszuschuss/export_business_case_sheet.sh
+#   ./business/financing/Gründungszuschuss/export_business_case_sheet.sh --clean
 #
 # Env overrides:
-#   PYTHON_BIN=python3 ./business/Gründungszuschuss/export_business_case_sheet.sh
+#   PYTHON_BIN=python3 ./business/financing/Gründungszuschuss/export_business_case_sheet.sh
 
 usage() {
   cat <<'USAGE'
@@ -43,12 +43,12 @@ if [[ $# -ne 0 ]]; then
   exit 2
 fi
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 
-XLSX_REL="business/Gründungszuschuss/business-case-sheet.xlsx"
-OUT_REL="business/Gründungszuschuss/llm_exports/business-case-sheet"
-TOOL_REL="business/tools/xlsx_to_llm.py"
+XLSX_REL="business/financing/Gründungszuschuss/business-case-sheet.xlsx"
+OUT_REL="business/financing/Gründungszuschuss/llm_exports/business-case-sheet"
+TOOL_REL="business/financing/tools/xlsx_to_llm.py"
 
 XLSX="${REPO_ROOT}/${XLSX_REL}"
 OUTDIR="${REPO_ROOT}/${OUT_REL}"
@@ -73,7 +73,7 @@ fi
 if [[ "${CLEAN}" == "true" && -d "${OUTDIR}" ]]; then
   # Safety check: only allow deleting the expected directory.
   case "${OUTDIR}" in
-    "${REPO_ROOT}/business/Gründungszuschuss/llm_exports/business-case-sheet") ;;
+    "${REPO_ROOT}/business/financing/Gründungszuschuss/llm_exports/business-case-sheet") ;;
     *)
       echo "ERROR: Refusing to delete unexpected OUTDIR: ${OUTDIR}" >&2
       exit 1
