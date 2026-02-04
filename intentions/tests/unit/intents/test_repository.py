@@ -8,7 +8,7 @@ from datetime import datetime
 
 import pytest
 
-from app.intents.models import Aspect, Input, Prompt
+from app.intents.models import Aspect, Choice, Input, Pitfall, Prompt
 from app.intents.repository import IntentRepository
 from tests.fixtures.intents import create_test_intent
 
@@ -273,3 +273,97 @@ class TestPromptRepository:
 
         version2 = await repo.get_next_prompt_version(created_intent.id)
         assert version2 == 2
+
+
+@pytest.mark.unit
+class TestChoiceRepository:
+    """Test Choice repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_choice_to_intent_assigns_id(self, test_db_session):
+        """Test adding a choice to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Choice(
+            id=None,
+            intent_id=created_intent.id,
+            name="Format",
+            description="Output format",
+            options='["markdown", "plain"]',
+        )
+        result = await repo.add_choice(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert result.name == "Format"
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_choices_by_intent_id(self, test_db_session):
+        """Test listing choices by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Choice(
+            id=None,
+            intent_id=created_intent.id,
+            name="Choice 1",
+            description="First choice",
+        )
+        await repo.add_choice(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_choices_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].name == "Choice 1"
+
+
+@pytest.mark.unit
+class TestPitfallRepository:
+    """Test Pitfall repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_pitfall_to_intent_assigns_id(self, test_db_session):
+        """Test adding a pitfall to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Pitfall(
+            id=None,
+            intent_id=created_intent.id,
+            description="Output may be too verbose",
+            mitigation="Add max length constraint",
+        )
+        result = await repo.add_pitfall(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "verbose" in result.description
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_pitfalls_by_intent_id(self, test_db_session):
+        """Test listing pitfalls by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Pitfall(
+            id=None,
+            intent_id=created_intent.id,
+            description="Pitfall one",
+        )
+        await repo.add_pitfall(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_pitfalls_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].description == "Pitfall one"
