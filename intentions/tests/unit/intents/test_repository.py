@@ -417,6 +417,26 @@ class TestChoiceRepository:
         assert len(result) == 1
         assert result[0].name == "Choice 1"
 
+    @pytest.mark.asyncio
+    async def test_find_choice_by_id_when_exists(self, test_db_session):
+        """Test finding a choice by id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        entity = Choice(
+            id=None,
+            intent_id=created_intent.id,
+            name="FindMe",
+            description="Choice to find",
+        )
+        added = await repo.add_choice(created_intent.id, entity)
+        await test_db_session.commit()
+
+        found = await repo.find_choice_by_id(created_intent.id, added.id)
+        assert found is not None
+        assert found.name == "FindMe"
+
 
 @pytest.mark.unit
 class TestPitfallRepository:
@@ -462,6 +482,25 @@ class TestPitfallRepository:
         result = await repo.list_pitfalls_by_intent_id(created_intent.id)
         assert len(result) == 1
         assert result[0].description == "Pitfall one"
+
+    @pytest.mark.asyncio
+    async def test_find_pitfall_by_id_when_exists(self, test_db_session):
+        """Test finding a pitfall by id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        entity = Pitfall(
+            id=None,
+            intent_id=created_intent.id,
+            description="FindMe pitfall",
+        )
+        added = await repo.add_pitfall(created_intent.id, entity)
+        await test_db_session.commit()
+
+        found = await repo.find_pitfall_by_id(created_intent.id, added.id)
+        assert found is not None
+        assert "FindMe" in found.description
 
 
 @pytest.mark.unit
