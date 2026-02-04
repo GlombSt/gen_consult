@@ -12,7 +12,7 @@ A unified domain model for capturing, sharpening, and executing user intents. Co
 - **Intent** — the user's goal
 
 ### Structuring Entity
-- **Aspect** — a domain/area of consideration that guides knowledge extraction and groups articulation
+- **Aspect** — a domain/area of consideration that guides knowledge extraction (articulation entities may relate to an Aspect but belong to Intent)
 
 ### Articulation Entities
 What needs to be made explicit for reliable execution:
@@ -37,52 +37,31 @@ The generate-execute-learn cycle:
                          ┌─────────────────────────────────────┐
                          │              INTENT                 │
                          │   (the sharpened goal/task)         │
-                         └─────────────────┬───────────────────┘
-                                           │
-                         ┌─────────────────┼─────────────────┐
-                         │                 │                 │
-                         ▼                 ▼                 ▼
-                   ┌───────────┐     ┌───────────┐     ┌───────────┐
-                   │  ASPECT   │     │  ASPECT   │     │  ASPECT   │
-                   │ (domain 1)│     │ (domain 2)│     │ (domain n)│
-                   └─────┬─────┘     └─────┬─────┘     └─────┬─────┘
-                         │                 │                 │
-          ┌──────────────┼──────────────┐  │                 │
-          │              │              │  │                 │
-          ▼              ▼              ▼  ▼                 ▼
-     ┌─────────┐  ┌──────────┐  ┌─────────┐    (articulation entities
-     │  INPUT  │  │  CHOICE  │  │ PITFALL │     grouped by aspect)
-     └─────────┘  └──────────┘  └─────────┘
-     ┌──────────────┐  ┌─────────┐  ┌─────────┐
-     │  ASSUMPTION  │  │ QUALITY │  │ EXAMPLE │
-     └──────────────┘  └─────────┘  └─────────┘
-
-                                           │
-                    ┌──────────────────────┴──────────────────────┐
-                    │                                             │
-                    │  ┌───────────────┐                          │
-                    │  │    INSIGHT    │ ◄────────────────────────┤
-                    │  │ (from sharpening                         │
-                    │  │  or execution)│                          │
-                    │  └───────┬───────┘                          │
-                    │          │ feeds back                       │
-                    │          ▼                                  │
-                    │     to INTENT                               │
-                    │                                             │
-                    │                      generates              │
-                    │                          │                  │
-                    │                          ▼                  │
-                    │                  ┌───────────────┐          │
-                    │                  │    PROMPT     │          │
-                    │                  │  (versioned)  │          │
-                    │                  └───────┬───────┘          │
-                    │                          │ produces         │
-                    │                          ▼                  │
-                    │                  ┌───────────────┐          │
-                    │                  │    OUTPUT     │──────────┘
-                    │                  └───────────────┘   yields
-                    │                                     insights
-                    └─────────────────────────────────────────────┘
+                         └───────────────────┬─────────────────┘
+                                             │
+               ┌─────────────────────────────┼─────────────────────────────┐
+               │                             │                             │
+               ▼                             ▼                             ▼
+     ┌───────────────────┐         ┌─────────────────┐           ┌─────────────────┐
+     │      ASPECT       │         │  ARTICULATION   │           │   EXECUTION &   │
+     │  (structuring)    │         │    ENTITIES     │           │    LEARNING     │
+     └─────────┬─────────┘         └────────┬────────┘           └────────┬────────┘
+               │                            │                             │
+               │ discovered for      ┌──────┴──────┐              ┌───────┴───────┐
+               │ (optional)          │             │              │               │
+               │                     ▼             ▼              ▼               ▼
+               │              ┌─────────┐   ┌──────────┐   ┌───────────┐   ┌────────┐
+               └─ ─ ─ ─ ─ ─ ─▶│  INPUT  │   │  CHOICE  │   │  PROMPT   │   │ INSIGHT│
+                              └─────────┘   └──────────┘   │(versioned)│   └────────┘
+                              ┌─────────┐   ┌──────────┐   └─────┬─────┘        │
+                              │ PITFALL │   │ASSUMPTION│         │              │
+                              └─────────┘   └──────────┘         ▼              │
+                              ┌─────────┐   ┌──────────┐   ┌───────────┐        │
+                              │ QUALITY │   │ EXAMPLE  │   │  OUTPUT   │────────┘
+                              └─────────┘   └──────────┘   └───────────┘  yields
+                                    │                                    insights
+                                    │
+                    ─ ─ ─ ─ ─ ─ ─ ─ ┘  (dashed = optional association with Aspect)
 ```
 
 ---
@@ -90,32 +69,29 @@ The generate-execute-learn cycle:
 ## Entities
 
 ### Intent
-**What it is:** The user's goal — what they want to accomplish. The anchor entity that everything else relates to. Intents are reusable across multiple instances/situations, not one-off requests.
+**What it is:** The user's goal — what they want to accomplish,. The anchor entity. Everything else relates to Intent in order to refine, sharpen and disambiguate it.
 
 **Role in the system:** The thing being sharpened. Holds the core description and accumulates the articulation work.
 
 ---
 
 ### Aspect
-**What it is:** A domain or area of consideration relevant to the intent — a bounded scope for knowledge extraction and articulation grouping.
+A domain or area of consideration relevant to the intent — a bounded scope for knowledge extraction.
 
 **Role in the system:** 
 - **Knowledge extraction scaffold:** Tells the LLM "explore this domain for insights" during sharpening
 - **Completeness check:** Ensures all relevant areas are covered ("Have we addressed the SEO aspect?")
-- **Articulation grouping:** Organizes Inputs, Choices, Pitfalls, Assumptions, Quality under meaningful themes
+- **Discovery context:** Articulation entities (Input, Choice, etc.) may be discovered *for* an Aspect, creating an optional association
 - **Prompt domain guidance:** Becomes the "Domain-Specific Guidance" section in the generated prompt
 
-**Where Aspects come from:**
-- **Task templates** — known task types have standard aspects
-- **LLM inference** — LLM suggests aspects based on task description
-- **User addition** — user adds domain-specific aspects the LLM missed
+**Where Aspects come from:** Task templates (known task types), LLM inference (from task description), user addition (domain-specific).
 
 **Example:** For "Create SEO content brief":
-- Aspect: "Audience & Positioning" → contains assumptions about readers, tone choices
-- Aspect: "SEO Constraints" → contains keyword inputs, density choices, stuffing pitfalls
-- Aspect: "Content Structure" → contains quality criteria for length, sections, data points
+- Aspect: "Audience & Positioning" → assumptions about readers, tone choices discovered here
+- Aspect: "SEO Constraints" → keyword inputs, density choices, stuffing pitfalls discovered here
+- Aspect: "Content Structure" → quality criteria for length, sections discovered here
 
-**Why it matters:** Without aspects, the LLM might surface insights randomly or miss entire areas. Aspects provide systematic coverage of the knowledge space relevant to the task.
+Without aspects, the LLM might surface insights randomly or miss entire areas. Aspects provide systematic coverage of the knowledge space.
 
 ---
 
@@ -173,11 +149,13 @@ Readonly after creation, linked to its prompt. Enables comparison, evaluation, a
 ---
 
 ### Insight
-Discoveries surfacing during sharpening or from execution — things the user hadn't considered.
+Discoveries surfacing during sharpening or from execution — things the user hadn't considered. Belongs directly to Intent but may reference a source entity.
 
-**Sources:**
-- **Sharpening** — LLM surfaces questions, gaps, considerations ("Have you considered X?")
-- **Execution** — discoveries from outputs ("This failed because Z")
+**Sources (what triggered the insight):**
+- **Sharpening** — LLM surfaces questions, gaps during articulation ("Have you considered X?")
+- **Output** — discoveries from execution results ("This failed because Z")
+- **Prompt** — learnings about the prompt itself ("This instruction was ambiguous")
+- **Assumption** — challenged or invalidated beliefs ("We assumed X but Y happened")
 
 The engine of improvement: helps articulate what users didn't know they needed to say, captures learnings for future iterations.
 
@@ -187,38 +165,44 @@ The engine of improvement: helps articulate what users didn't know they needed t
 
 ```
 Intent
-├── has many → Aspect
-│             ├── has many → Input
-│             ├── has many → Choice
-│             ├── has many → Pitfall
-│             ├── has many → Assumption
-│             ├── has many → Quality
-│             └── has many → Example
+├── has many → Aspect (structuring)
+├── has many → Input ─────────────┐
+├── has many → Choice            │
+├── has many → Pitfall           ├── may relate to → Aspect (optional)
+├── has many → Assumption ───────┤
+├── has many → Quality           │
+├── has many → Example ──────────┘
 ├── has many → Insight ←─────────────────────────┐
+│             └── may reference source:          │
+│                 • Output (execution result)    │
+│                 • Prompt (instruction issue)   │
+│                 • Assumption (invalidated)     │
 ├── has many → Prompt (versioned)                │
-│             └── produces many → Output         │
-│                                 └── yields ────┘
+│             └── produces many → Output ────────┘
 └── receives feedback from ← Insight
 ```
 
 **Core relationships:**
-- Intent has many Aspects
-- Aspect groups articulation entities (Input, Choice, Pitfall, Assumption, Quality, Example)
-- Articulation entities belong to an Aspect (optional — can exist without aspect for simple intents)
-- Intent has many Insights (from sharpening OR execution)
+- Intent has many Aspects (structuring/discovery scope)
+- Intent has many articulation entities directly (Input, Choice, Pitfall, Assumption, Quality, Example)
+- Articulation entities may relate to an Aspect (optional — discovered *for* an aspect, but belong to Intent)
+- Intent has many Insights (from sharpening, Output, Prompt, or Assumption)
+- Insight may reference its source entity (Output, Prompt, Assumption)
 - Intent has many Prompts (each is a version)
 - Prompt produces many Outputs
-- Output can yield Insights (which attach to Intent)
 - Insight feeds back to Intent (closing the loop)
 
 **Aspect role in extraction:**
 - LLM uses Aspects to systematically probe for articulation entities
-- Each Aspect defines a bounded domain for knowledge extraction
+- Articulation entities discovered during Aspect exploration get associated with that Aspect
 - Aspects ensure completeness: "Have we covered all relevant areas?"
+- Association is optional: simple intents may have articulation without aspects
 
 **Insight sources:**
 - Sharpening phase → Insight (LLM surfaces considerations during articulation)
-- Output → Insight (discoveries from actual execution results)
+- Output → Insight (discoveries from execution results)
+- Prompt → Insight (learnings about instruction clarity/effectiveness)
+- Assumption → Insight (challenged or invalidated beliefs)
 
 **Example sources:**
 - User-provided (from past work)
@@ -239,14 +223,14 @@ Intent
          Content Structure, Brand Voice..."
        └── Creates Aspects (can be from templates, LLM inference, or user)
 
-3. SERVICE EXTRACTS KNOWLEDGE PER ASPECT (iterative)
+3. SERVICE EXTRACTS KNOWLEDGE (iterative, guided by Aspects)
    └── For each Aspect, LLM probes systematically:
-       • What inputs are needed for this aspect? → Input
-       • What decisions must be made? → Choice
-       • What typically goes wrong here? → Pitfall
-       • What's assumed but not stated? → Assumption
-       • How will we know this aspect is done well? → Quality
-       • Can you show me an example? → Example
+       • What inputs are needed? → Input (belongs to Intent, discovered for Aspect)
+       • What decisions must be made? → Choice (belongs to Intent, discovered for Aspect)
+       • What typically goes wrong? → Pitfall (belongs to Intent, discovered for Aspect)
+       • What's assumed but not stated? → Assumption (belongs to Intent, discovered for Aspect)
+       • How will we know it's done well? → Quality (belongs to Intent, discovered for Aspect)
+       • Can you show me an example? → Example (belongs to Intent, discovered for Aspect)
        
    └── LLM generates Insights during conversation:
        • "Have you considered X?"
@@ -257,11 +241,11 @@ Intent
 4. SYSTEM GENERATES PROMPT
    └── Translates sharpened intent into executable instruction:
        • Task Overview ← from Intent
-       • Domain-Specific Guidance ← from Aspects (name + grouped content)
-       • Key Requirements ← from Choices
-       • Input Format ← from Inputs
-       • Common Pitfalls ← from Pitfalls
-       • Output Format ← from Quality
+       • Domain-Specific Guidance ← from Aspects (grouping associated articulation entities)
+       • Key Requirements ← from Choices (all, optionally organized by Aspect)
+       • Input Format ← from Inputs (all, optionally organized by Aspect)
+       • Common Pitfalls ← from Pitfalls (all, optionally organized by Aspect)
+       • Output Format ← from Quality (all, optionally organized by Aspect)
        • Examples ← from Examples (few-shot demonstrations)
        └── Creates Prompt (versioned)
 
@@ -269,9 +253,11 @@ Intent
    └── Executes prompt, produces result
        └── Creates Output
 
-6. USER/SYSTEM DISCOVERS INSIGHTS FROM OUTPUT
-   └── "This worked" / "This failed" / "Output missed X"
-       └── Creates Insight → feeds back to Intent (may surface new Aspects)
+6. USER/SYSTEM DISCOVERS INSIGHTS
+   └── From Output: "This worked" / "This failed" / "Output missed X"
+   └── From Prompt: "This instruction was unclear" / "Phrasing caused confusion"
+   └── From Assumption: "We assumed X but Y happened"
+       └── Creates Insight (referencing source) → feeds back to Intent
 
 7. INTENT IMPROVES
    └── Incorporates insights, sharpens further, generates better prompt
@@ -280,13 +266,13 @@ Intent
 
 **Aspect role in the flow:**
 - **Step 2:** Aspects define the knowledge extraction scope
-- **Step 3:** Each Aspect guides systematic probing
-- **Step 4:** Aspects become "Domain-Specific Guidance" sections in prompt
+- **Step 3:** Each Aspect guides systematic probing; discovered entities belong to Intent but associate with Aspect
+- **Step 4:** Aspects become "Domain-Specific Guidance" sections in prompt (grouping associated entities)
 - **Step 6:** Insights may reveal missing Aspects
 
 **Two insight loops:**
 - **Inner loop (sharpening):** Insights emerge as user articulates → immediately incorporated
-- **Outer loop (execution):** Insights emerge from outputs → feed back for next iteration
+- **Outer loop (execution):** Insights emerge from Output, Prompt, or Assumption → feed back for next iteration
 
 ---
 
@@ -313,7 +299,7 @@ Intent
 | Prompt | **Kept** | Valuable for versioning and tracking |
 | Output | **Kept** | Enables evaluation and learning |
 | Insight | **Kept** | Critical for feedback loop |
-| (none) | **Added: Aspect** | Knowledge extraction scaffold, domain grouping |
+| (none) | **Added: Aspect** | Knowledge extraction scaffold, optional grouping for articulation |
 | (none) | **Added: Input** | Explicit input requirements |
 | (none) | **Added: Choice** | Explicit decisions/trade-offs |
 | (none) | **Added: Pitfall** | Explicit failure modes |
@@ -323,5 +309,154 @@ Intent
 
 **Key insights:** 
 - "Fact" was doing too much work. Breaking it into purpose-specific entities (Input, Choice, Pitfall, Assumption, Quality, Example) provides structure for the sharpening process.
-- "Aspect" provides bounded domains for systematic knowledge extraction and maps directly to prompt structure (Domain-Specific Guidance sections per GEPA research).
+- "Aspect" guides knowledge extraction but doesn't own articulation entities — they belong to Intent and may optionally associate with the Aspect they were discovered for. This keeps the model flat while enabling organized discovery.
 - "Example" enables few-shot learning in prompts — concrete demonstrations often communicate intent more effectively than abstract descriptions.
+
+---
+
+## Data Definitions
+
+### Intent
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the intent |
+| name | string | yes | Short, recognizable label for the intent |
+| description | text | yes | Full articulation of what the user wants to accomplish |
+| created_at | timestamp | yes | When the intent was first created |
+| updated_at | timestamp | yes | When the intent was last modified |
+
+---
+
+### Aspect
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the aspect |
+| intent_id | integer | yes | The intent this aspect belongs to (FK to Intent) |
+| name | string | yes | Domain or area of consideration (e.g., "SEO", "Audience") |
+| description | text | no | Explanation of what this aspect covers |
+| created_at | timestamp | yes | When the aspect was first created |
+| updated_at | timestamp | yes | When the aspect was last modified |
+
+---
+
+### Input
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the input |
+| intent_id | integer | yes | The intent this input belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this input was discovered for (FK to Aspect) |
+| name | string | yes | Short label identifying the input (e.g., "Source document") |
+| description | text | yes | What this input is and why it's needed |
+| format | string | no | Expected structure or encoding (e.g., "JSON", "PDF", "plain text") |
+| required | boolean | yes | Whether the input is mandatory for execution (default: true) |
+| created_at | timestamp | yes | When the input was first created |
+| updated_at | timestamp | yes | When the input was last modified |
+
+---
+
+### Choice
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the choice |
+| intent_id | integer | yes | The intent this choice belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this choice was discovered for (FK to Aspect) |
+| name | string | yes | Short label for the decision point (e.g., "Tone selection") |
+| description | text | yes | The decision that needs to be made and why it matters |
+| options | text | no | Available alternatives with trade-offs (JSON array or prose) |
+| selected_option | string | no | The chosen approach from the options |
+| rationale | text | no | Justification for the selected option |
+| created_at | timestamp | yes | When the choice was first created |
+| updated_at | timestamp | yes | When the choice was last modified |
+
+---
+
+### Pitfall
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the pitfall |
+| intent_id | integer | yes | The intent this pitfall belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this pitfall was discovered for (FK to Aspect) |
+| description | text | yes | The failure mode, mistake, or anti-pattern to avoid |
+| mitigation | text | no | How to prevent or handle this pitfall |
+| created_at | timestamp | yes | When the pitfall was first created |
+| updated_at | timestamp | yes | When the pitfall was last modified |
+
+---
+
+### Assumption
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the assumption |
+| intent_id | integer | yes | The intent this assumption belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this assumption was discovered for (FK to Aspect) |
+| description | text | yes | The implicit belief being made explicit |
+| confidence | enum | no | Certainty level: `verified`, `likely`, `uncertain` |
+| created_at | timestamp | yes | When the assumption was first created |
+| updated_at | timestamp | yes | When the assumption was last modified |
+
+---
+
+### Quality
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the quality criterion |
+| intent_id | integer | yes | The intent this quality belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this quality was discovered for (FK to Aspect) |
+| criterion | text | yes | The standard or condition that defines success |
+| measurement | text | no | How to verify or evaluate whether the criterion is met |
+| priority | enum | no | Importance level: `must_have`, `should_have`, `nice_to_have` |
+| created_at | timestamp | yes | When the quality was first created |
+| updated_at | timestamp | yes | When the quality was last modified |
+
+---
+
+### Example
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the example |
+| intent_id | integer | yes | The intent this example belongs to (FK to Intent) |
+| aspect_id | integer | no | The aspect this example was discovered for (FK to Aspect) |
+| sample | text | yes | Textual representation of a an example incl. good or bad  |
+| explanation | text | no | Why this example is instructive or what it demonstrates |
+| source | enum | no | Origin: `user_provided`, `llm_generated`, `from_output` |
+| created_at | timestamp | yes | When the example was first created |
+| updated_at | timestamp | yes | When the example was last modified |
+
+---
+
+### Prompt
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the prompt |
+| intent_id | integer | yes | The intent this prompt was generated from (FK to Intent) |
+| content | text | yes | The complete instruction text for the AI executor |
+| version | integer | yes | Sequence number within the intent (increments with each generation) |
+| created_at | timestamp | yes | When the prompt was generated |
+| updated_at | timestamp | yes | Set once at creation (prompt is immutable after generation) |
+
+---
+
+### Output
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the output |
+| prompt_id | integer | yes | The prompt that produced this output (FK to Prompt) |
+| content | text | yes | The AI executor's response |
+| created_at | timestamp | yes | When the output was produced |
+| updated_at | timestamp | yes | Set once at creation (output is immutable after production) |
+
+---
+
+### Insight
+| Attribute | Type | Required | Definition |
+|-----------|------|----------|------------|
+| id | integer | yes | Unique identifier for the insight |
+| intent_id | integer | yes | The intent this insight feeds back to (FK to Intent) |
+| content | text | yes | The discovery or learning being captured |
+| source_type | enum | no | What triggered the insight: `sharpening`, `output`, `prompt`, `assumption` |
+| source_output_id | integer | no | The output that surfaced this insight (FK to Output) |
+| source_prompt_id | integer | no | The prompt that surfaced this insight (FK to Prompt) |
+| source_assumption_id | integer | no | The assumption that was challenged (FK to Assumption) |
+| status | enum | no | Processing state: `pending`, `incorporated`, `dismissed` |
+| created_at | timestamp | yes | When the insight was first captured |
+| updated_at | timestamp | yes | When the insight was last modified |

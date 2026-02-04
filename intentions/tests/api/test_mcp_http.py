@@ -83,21 +83,22 @@ class TestMCPHTTPEndpoint:
         assert "tools" in data["result"]
         assert len(data["result"]["tools"]) > 0
 
-        # Verify tool structure
+        # Verify tool structure (V2)
         tool_names = [tool["name"] for tool in data["result"]["tools"]]
         assert "create_intent" in tool_names
         assert "get_intent" in tool_names
-        assert "add_fact_to_intent" in tool_names
+        assert "update_intent_name" in tool_names
+        assert "update_intent_description" in tool_names
+        assert "add_fact_to_intent" not in tool_names
 
     def test_tools_call_request(self, client: TestClient) -> None:
         """Test MCP tools/call request."""
-        # Arrange - first create an intent via API
+        # Arrange - first create an intent via API (V2)
         create_response = client.post(
             "/intents",
             json={
                 "name": "Test Intent",
                 "description": "Test description",
-                "output_format": "JSON",
             },
         )
         assert create_response.status_code == 201

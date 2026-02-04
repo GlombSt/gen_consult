@@ -1,5 +1,5 @@
 """
-HTTP router for intents domain.
+HTTP router for intents domain (V2).
 
 Defines HTTP endpoints and handles request/response serialization.
 """
@@ -12,17 +12,10 @@ from app.shared.dependencies import get_intent_repository
 from . import service
 from .repository import IntentRepository
 from .schemas import (
-    FactAddRequest,
-    FactResponse,
-    FactUpdateValueRequest,
     IntentCreateRequest,
     IntentResponse,
-    IntentUpdateConstraintsRequest,
-    IntentUpdateContextRequest,
     IntentUpdateDescriptionRequest,
     IntentUpdateNameRequest,
-    IntentUpdateOutputFormatRequest,
-    IntentUpdateOutputStructureRequest,
 )
 
 router = APIRouter(
@@ -42,10 +35,12 @@ router = APIRouter(
         422: {"model": ErrorResponse, "description": "Validation Error"},
     },
 )
-async def create_intent(request: IntentCreateRequest, repository: IntentRepository = Depends(get_intent_repository)):
-    """Create a new intent (US-000)."""
+async def create_intent(
+    request: IntentCreateRequest,
+    repository: IntentRepository = Depends(get_intent_repository),
+):
+    """Create a new intent (V2)."""
     intent = await service.create_intent(request, repository)
-
     return _to_intent_response(intent)
 
 
@@ -59,14 +54,15 @@ async def create_intent(request: IntentCreateRequest, repository: IntentReposito
     },
 )
 async def get_intent(
-    intent_id: int = Path(..., description="The unique identifier of the intent to retrieve"),
+    intent_id: int = Path(
+        ..., description="The unique identifier of the intent to retrieve"
+    ),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
-    """Get a specific intent by ID (US-010)."""
+    """Get a specific intent by ID."""
     intent = await service.get_intent(intent_id, repository)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-
     return _to_intent_response(intent)
 
 
@@ -81,15 +77,16 @@ async def get_intent(
     },
 )
 async def update_intent_name(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
+    intent_id: int = Path(
+        ..., description="The unique identifier of the intent to update"
+    ),
     request: IntentUpdateNameRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
-    """Update an intent's name (US-001)."""
+    """Update an intent's name."""
     intent = await service.update_intent_name(intent_id, request.name, repository)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-
     return _to_intent_response(intent)
 
 
@@ -104,198 +101,36 @@ async def update_intent_name(
     },
 )
 async def update_intent_description(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
+    intent_id: int = Path(
+        ..., description="The unique identifier of the intent to update"
+    ),
     request: IntentUpdateDescriptionRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
-    """Update an intent's description (US-002)."""
-    intent = await service.update_intent_description(intent_id, request.description, repository)
+    """Update an intent's description."""
+    intent = await service.update_intent_description(
+        intent_id, request.description, repository
+    )
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
-
     return _to_intent_response(intent)
-
-
-@router.patch(
-    "/{intent_id}/output-format",
-    response_model=IntentResponse,
-    operation_id="updateIntentOutputFormat",
-    responses={
-        404: {"model": ErrorResponse, "description": "Intent not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def update_intent_output_format(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateOutputFormatRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Update an intent's output format (US-003)."""
-    intent = await service.update_intent_output_format(intent_id, request.output_format, repository)
-    if not intent:
-        raise HTTPException(status_code=404, detail="Intent not found")
-
-    return _to_intent_response(intent)
-
-
-@router.patch(
-    "/{intent_id}/output-structure",
-    response_model=IntentResponse,
-    operation_id="updateIntentOutputStructure",
-    responses={
-        404: {"model": ErrorResponse, "description": "Intent not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def update_intent_output_structure(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateOutputStructureRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Update an intent's output structure (US-004)."""
-    intent = await service.update_intent_output_structure(intent_id, request.output_structure, repository)
-    if not intent:
-        raise HTTPException(status_code=404, detail="Intent not found")
-
-    return _to_intent_response(intent)
-
-
-@router.patch(
-    "/{intent_id}/context",
-    response_model=IntentResponse,
-    operation_id="updateIntentContext",
-    responses={
-        404: {"model": ErrorResponse, "description": "Intent not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def update_intent_context(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateContextRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Update an intent's context (US-005)."""
-    intent = await service.update_intent_context(intent_id, request.context, repository)
-    if not intent:
-        raise HTTPException(status_code=404, detail="Intent not found")
-
-    return _to_intent_response(intent)
-
-
-@router.patch(
-    "/{intent_id}/constraints",
-    response_model=IntentResponse,
-    operation_id="updateIntentConstraints",
-    responses={
-        404: {"model": ErrorResponse, "description": "Intent not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def update_intent_constraints(
-    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
-    request: IntentUpdateConstraintsRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Update an intent's constraints (US-006)."""
-    intent = await service.update_intent_constraints(intent_id, request.constraints, repository)
-    if not intent:
-        raise HTTPException(status_code=404, detail="Intent not found")
-
-    return _to_intent_response(intent)
-
-
-@router.post(
-    "/{intent_id}/facts",
-    response_model=FactResponse,
-    status_code=status.HTTP_201_CREATED,
-    operation_id="addFactToIntent",
-    responses={
-        404: {"model": ErrorResponse, "description": "Intent not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def add_fact_to_intent(
-    intent_id: int = Path(..., description="The unique identifier of the intent to add the fact to"),
-    request: FactAddRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Add a new fact to an intent (US-008)."""
-    fact = await service.add_fact_to_intent(intent_id, request.value, repository)
-    if not fact:
-        raise HTTPException(status_code=404, detail="Intent not found")
-    return _to_fact_response(fact)
-
-
-@router.patch(
-    "/{intent_id}/facts/{fact_id}/value",
-    response_model=FactResponse,
-    operation_id="updateFactValue",
-    responses={
-        404: {"model": ErrorResponse, "description": "Fact not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-        422: {"model": ErrorResponse, "description": "Validation Error"},
-    },
-)
-async def update_fact_value(
-    intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
-    fact_id: int = Path(..., description="The unique identifier of the fact to update"),
-    request: FactUpdateValueRequest = Body(...),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Update a fact's value (US-007)."""
-    fact = await service.update_fact_value(intent_id, fact_id, request.value, repository)
-    if not fact:
-        raise HTTPException(status_code=404, detail="Fact not found")
-    return _to_fact_response(fact)
-
-
-@router.delete(
-    "/{intent_id}/facts/{fact_id}",
-    status_code=status.HTTP_204_NO_CONTENT,
-    operation_id="removeFactFromIntent",
-    responses={
-        404: {"model": ErrorResponse, "description": "Fact not found"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
-    },
-)
-async def remove_fact_from_intent(
-    intent_id: int = Path(..., description="The unique identifier of the intent that owns the fact"),
-    fact_id: int = Path(..., description="The unique identifier of the fact to remove"),
-    repository: IntentRepository = Depends(get_intent_repository),
-):
-    """Remove a fact from an intent (US-009)."""
-    removed = await service.remove_fact_from_intent(intent_id, fact_id, repository)
-    if not removed:
-        raise HTTPException(status_code=404, detail="Fact not found")
 
 
 def _to_intent_response(intent) -> IntentResponse:
-    """Convert domain model to response DTO."""
+    """Convert domain model to response DTO (V2)."""
     return IntentResponse(
         id=intent.id,
         name=intent.name,
         description=intent.description,
-        output_format=intent.output_format,
-        output_structure=intent.output_structure,
-        context=intent.context,
-        constraints=intent.constraints,
         created_at=intent.created_at,
         updated_at=intent.updated_at,
-        facts=[_to_fact_response(fact) for fact in intent.facts],
-    )
-
-
-def _to_fact_response(fact) -> FactResponse:
-    """Convert domain model to response DTO."""
-    return FactResponse(
-        id=fact.id,
-        intent_id=fact.intent_id,
-        value=fact.value,
-        created_at=fact.created_at,
-        updated_at=fact.updated_at,
+        aspects=[{"id": a.id, "name": a.name} for a in intent.aspects],
+        inputs=[{"id": i.id, "name": i.name} for i in intent.inputs],
+        choices=[{"id": c.id, "name": c.name} for c in intent.choices],
+        pitfalls=[{"id": p.id} for p in intent.pitfalls],
+        assumptions=[{"id": a.id} for a in intent.assumptions],
+        qualities=[{"id": q.id, "criterion": q.criterion} for q in intent.qualities],
+        examples=[{"id": e.id} for e in intent.examples],
+        prompts=[{"id": p.id, "version": p.version} for p in intent.prompts],
+        insights=[{"id": i.id} for i in intent.insights],
     )
