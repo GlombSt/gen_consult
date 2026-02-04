@@ -13,7 +13,9 @@ from app.intents.models import (
     Assumption,
     Choice,
     Example,
+    Insight,
     Input,
+    Output,
     Pitfall,
     Prompt,
     Quality,
@@ -514,3 +516,109 @@ class TestExampleRepository:
         result = await repo.list_examples_by_intent_id(created_intent.id)
         assert len(result) == 1
         assert result[0].sample == "Example one"
+
+
+@pytest.mark.unit
+class TestOutputRepository:
+    """Test Output repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_output_to_prompt_assigns_id(self, test_db_session):
+        """Test adding an output to a prompt."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        prompt = Prompt(
+            id=None,
+            intent_id=created_intent.id,
+            content="Summarize the doc.",
+            version=1,
+        )
+        created_prompt = await repo.add_prompt(created_intent.id, prompt)
+        await test_db_session.commit()
+
+        entity = Output(
+            id=None,
+            prompt_id=created_prompt.id,
+            content="This is the summary.",
+        )
+        result = await repo.add_output(created_prompt.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "summary" in result.content
+        assert result.prompt_id == created_prompt.id
+
+    @pytest.mark.asyncio
+    async def test_list_outputs_by_prompt_id(self, test_db_session):
+        """Test listing outputs by prompt_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        prompt = Prompt(
+            id=None,
+            intent_id=created_intent.id,
+            content="Prompt.",
+            version=1,
+        )
+        created_prompt = await repo.add_prompt(created_intent.id, prompt)
+        await test_db_session.commit()
+        entity = Output(
+            id=None,
+            prompt_id=created_prompt.id,
+            content="Output one",
+        )
+        await repo.add_output(created_prompt.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_outputs_by_prompt_id(created_prompt.id)
+        assert len(result) == 1
+        assert result[0].content == "Output one"
+
+
+@pytest.mark.unit
+class TestInsightRepository:
+    """Test Insight repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_insight_to_intent_assigns_id(self, test_db_session):
+        """Test adding an insight to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Insight(
+            id=None,
+            intent_id=created_intent.id,
+            content="Clarify scope with stakeholder",
+            status="pending",
+        )
+        result = await repo.add_insight(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "stakeholder" in result.content
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_insights_by_intent_id(self, test_db_session):
+        """Test listing insights by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Insight(
+            id=None,
+            intent_id=created_intent.id,
+            content="Insight one",
+        )
+        await repo.add_insight(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_insights_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].content == "Insight one"
