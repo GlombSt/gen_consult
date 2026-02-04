@@ -17,6 +17,7 @@ from app.shared.logging_config import logger
 
 from . import service
 from .repository import IntentRepository
+from .router import _to_intent_response
 from .schemas import (
     IntentCreateRequest,
     IntentUpdateDescriptionRequest,
@@ -108,23 +109,9 @@ async def list_tools() -> list[types.Tool]:
 
 
 def _intent_to_dict(intent) -> dict[str, Any]:
-    """Convert domain model intent to dictionary for MCP response (V2)."""
-    return {
-        "id": intent.id,
-        "name": intent.name,
-        "description": intent.description,
-        "created_at": intent.created_at.isoformat() if intent.created_at else None,
-        "updated_at": intent.updated_at.isoformat() if intent.updated_at else None,
-        "aspects": [{"id": a.id, "name": a.name} for a in intent.aspects],
-        "inputs": [{"id": i.id, "name": i.name} for i in intent.inputs],
-        "choices": [{"id": c.id, "name": c.name} for c in intent.choices],
-        "pitfalls": [{"id": p.id} for p in intent.pitfalls],
-        "assumptions": [{"id": a.id} for a in intent.assumptions],
-        "qualities": [{"id": q.id} for q in intent.qualities],
-        "examples": [{"id": e.id} for e in intent.examples],
-        "prompts": [{"id": p.id, "version": p.version} for p in intent.prompts],
-        "insights": [{"id": i.id} for i in intent.insights],
-    }
+    """Convert domain model to API response shape (IntentResponse) and dump to dict for MCP."""
+    response = _to_intent_response(intent)
+    return response.model_dump(mode="json")
 
 
 @server.call_tool()

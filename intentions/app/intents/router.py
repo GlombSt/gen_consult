@@ -12,10 +12,19 @@ from app.shared.dependencies import get_intent_repository
 from . import service
 from .repository import IntentRepository
 from .schemas import (
+    AspectResponse,
+    AssumptionResponse,
+    ChoiceResponse,
+    ExampleResponse,
+    InsightResponse,
     IntentCreateRequest,
     IntentResponse,
     IntentUpdateDescriptionRequest,
     IntentUpdateNameRequest,
+    InputResponse,
+    PitfallResponse,
+    PromptResponse,
+    QualityResponse,
 )
 
 router = APIRouter(
@@ -124,13 +133,45 @@ def _to_intent_response(intent) -> IntentResponse:
         description=intent.description,
         created_at=intent.created_at,
         updated_at=intent.updated_at,
-        aspects=[{"id": a.id, "name": a.name} for a in intent.aspects],
-        inputs=[{"id": i.id, "name": i.name} for i in intent.inputs],
-        choices=[{"id": c.id, "name": c.name} for c in intent.choices],
-        pitfalls=[{"id": p.id} for p in intent.pitfalls],
-        assumptions=[{"id": a.id} for a in intent.assumptions],
-        qualities=[{"id": q.id, "criterion": q.criterion} for q in intent.qualities],
-        examples=[{"id": e.id} for e in intent.examples],
-        prompts=[{"id": p.id, "version": p.version} for p in intent.prompts],
-        insights=[{"id": i.id} for i in intent.insights],
+        aspects=[
+            AspectResponse(id=a.id, name=a.name, description=a.description)
+            for a in intent.aspects
+        ],
+        inputs=[
+            InputResponse(
+                id=i.id, name=i.name, description=i.description
+            )
+            for i in intent.inputs
+        ],
+        choices=[
+            ChoiceResponse(
+                id=c.id, name=c.name, description=c.description
+            )
+            for c in intent.choices
+        ],
+        pitfalls=[
+            PitfallResponse(id=p.id, description=p.description)
+            for p in intent.pitfalls
+        ],
+        assumptions=[
+            AssumptionResponse(id=a.id, description=a.description)
+            for a in intent.assumptions
+        ],
+        qualities=[
+            QualityResponse(
+                id=q.id, criterion=q.criterion, priority=q.priority
+            )
+            for q in intent.qualities
+        ],
+        examples=[
+            ExampleResponse(id=e.id, sample=e.sample) for e in intent.examples
+        ],
+        prompts=[
+            PromptResponse(id=p.id, version=p.version, content=p.content)
+            for p in intent.prompts
+        ],
+        insights=[
+            InsightResponse(id=i.id, content=i.content, status=i.status)
+            for i in intent.insights
+        ],
     )

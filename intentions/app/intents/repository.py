@@ -88,7 +88,19 @@ class IntentRepository:
 
     async def update(self, intent_id: int, intent: Intent) -> Optional[Intent]:
         result = await self.db.execute(
-            select(IntentDBModel).where(IntentDBModel.id == intent_id)
+            select(IntentDBModel)
+            .options(
+                selectinload(IntentDBModel.aspects),
+                selectinload(IntentDBModel.inputs),
+                selectinload(IntentDBModel.choices),
+                selectinload(IntentDBModel.pitfalls),
+                selectinload(IntentDBModel.assumptions),
+                selectinload(IntentDBModel.qualities),
+                selectinload(IntentDBModel.examples),
+                selectinload(IntentDBModel.prompts),
+                selectinload(IntentDBModel.insights),
+            )
+            .where(IntentDBModel.id == intent_id)
         )
         db_intent = result.scalar_one_or_none()
         if not db_intent:
