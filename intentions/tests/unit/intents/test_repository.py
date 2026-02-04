@@ -73,6 +73,70 @@ class TestIntentRepositoryFindById:
         assert any(a.name == "Audience" for a in result.aspects)
 
     @pytest.mark.asyncio
+    async def test_list_aspects_by_intent_id(self, test_db_session):
+        """Test listing aspects by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        await repo.add_aspect(
+            created_intent.id,
+            Aspect(id=None, intent_id=created_intent.id, name="A1", description="D1"),
+        )
+        await test_db_session.commit()
+
+        result = await repo.list_aspects_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].name == "A1"
+
+    @pytest.mark.asyncio
+    async def test_update_aspect_when_exists(self, test_db_session):
+        """Test updating an aspect."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        aspect = Aspect(
+            id=None,
+            intent_id=created_intent.id,
+            name="Old",
+            description="Old desc",
+        )
+        added = await repo.add_aspect(created_intent.id, aspect)
+        await test_db_session.commit()
+        added.name = "New"
+        added.description = "New desc"
+
+        updated = await repo.update_aspect(created_intent.id, added.id, added)
+        await test_db_session.commit()
+
+        assert updated is not None
+        assert updated.name == "New"
+        assert updated.description == "New desc"
+
+    @pytest.mark.asyncio
+    async def test_delete_aspect_when_exists(self, test_db_session):
+        """Test deleting an aspect."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        aspect = Aspect(
+            id=None,
+            intent_id=created_intent.id,
+            name="ToDelete",
+            description="Desc",
+        )
+        added = await repo.add_aspect(created_intent.id, aspect)
+        await test_db_session.commit()
+
+        ok = await repo.delete_aspect(created_intent.id, added.id)
+        await test_db_session.commit()
+        assert ok is True
+        listed = await repo.list_aspects_by_intent_id(created_intent.id)
+        assert len(listed) == 0
+
+    @pytest.mark.asyncio
     async def test_find_by_id_when_not_exists_returns_none(self, test_db_session):
         """Test finding an intent by ID when it doesn't exist."""
         repo = IntentRepository(test_db_session)
@@ -284,6 +348,26 @@ class TestPromptRepository:
 
         version2 = await repo.get_next_prompt_version(created_intent.id)
         assert version2 == 2
+
+    @pytest.mark.asyncio
+    async def test_list_prompts_by_intent_id(self, test_db_session):
+        """Test listing prompts by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        p1 = Prompt(
+            id=None,
+            intent_id=created_intent.id,
+            content="First prompt",
+            version=1,
+        )
+        await repo.add_prompt(created_intent.id, p1)
+        await test_db_session.commit()
+
+        result = await repo.list_prompts_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].content == "First prompt"
 
 
 @pytest.mark.unit
