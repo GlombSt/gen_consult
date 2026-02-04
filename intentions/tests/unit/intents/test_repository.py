@@ -8,7 +8,16 @@ from datetime import datetime
 
 import pytest
 
-from app.intents.models import Aspect, Choice, Input, Pitfall, Prompt
+from app.intents.models import (
+    Aspect,
+    Assumption,
+    Choice,
+    Example,
+    Input,
+    Pitfall,
+    Prompt,
+    Quality,
+)
 from app.intents.repository import IntentRepository
 from tests.fixtures.intents import create_test_intent
 
@@ -367,3 +376,141 @@ class TestPitfallRepository:
         result = await repo.list_pitfalls_by_intent_id(created_intent.id)
         assert len(result) == 1
         assert result[0].description == "Pitfall one"
+
+
+@pytest.mark.unit
+class TestAssumptionRepository:
+    """Test Assumption repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_assumption_to_intent_assigns_id(self, test_db_session):
+        """Test adding an assumption to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Assumption(
+            id=None,
+            intent_id=created_intent.id,
+            description="User has basic domain knowledge",
+            confidence="likely",
+        )
+        result = await repo.add_assumption(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "domain knowledge" in result.description
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_assumptions_by_intent_id(self, test_db_session):
+        """Test listing assumptions by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Assumption(
+            id=None,
+            intent_id=created_intent.id,
+            description="Assumption one",
+        )
+        await repo.add_assumption(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_assumptions_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].description == "Assumption one"
+
+
+@pytest.mark.unit
+class TestQualityRepository:
+    """Test Quality repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_quality_to_intent_assigns_id(self, test_db_session):
+        """Test adding a quality to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Quality(
+            id=None,
+            intent_id=created_intent.id,
+            criterion="Output is under 500 words",
+            priority="must_have",
+        )
+        result = await repo.add_quality(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "500 words" in result.criterion
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_qualities_by_intent_id(self, test_db_session):
+        """Test listing qualities by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Quality(
+            id=None,
+            intent_id=created_intent.id,
+            criterion="Quality one",
+        )
+        await repo.add_quality(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_qualities_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].criterion == "Quality one"
+
+
+@pytest.mark.unit
+class TestExampleRepository:
+    """Test Example repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_example_to_intent_assigns_id(self, test_db_session):
+        """Test adding an example to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Example(
+            id=None,
+            intent_id=created_intent.id,
+            sample="Input: doc.pdf -> Output: summary",
+            source="user_provided",
+        )
+        result = await repo.add_example(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert "doc.pdf" in result.sample
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_examples_by_intent_id(self, test_db_session):
+        """Test listing examples by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Example(
+            id=None,
+            intent_id=created_intent.id,
+            sample="Example one",
+        )
+        await repo.add_example(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_examples_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].sample == "Example one"
