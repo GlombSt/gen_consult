@@ -8,7 +8,7 @@ from datetime import datetime
 
 import pytest
 
-from app.intents.models import Aspect
+from app.intents.models import Aspect, Input, Prompt
 from app.intents.repository import IntentRepository
 from tests.fixtures.intents import create_test_intent
 
@@ -195,3 +195,81 @@ class TestIntentRepositoryDelete:
         repo = IntentRepository(test_db_session)
         result = await repo.delete(999)
         assert result is False
+
+
+@pytest.mark.unit
+class TestInputRepository:
+    """Test Input repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_input_to_intent_assigns_id(self, test_db_session):
+        """Test adding an input to an intent."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Input(
+            id=None,
+            intent_id=created_intent.id,
+            name="Source document",
+            description="The document to summarize",
+        )
+        result = await repo.add_input(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert result.name == "Source document"
+        assert result.intent_id == created_intent.id
+
+    @pytest.mark.asyncio
+    async def test_list_inputs_by_intent_id(self, test_db_session):
+        """Test listing inputs by intent_id."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        entity = Input(
+            id=None,
+            intent_id=created_intent.id,
+            name="Input 1",
+            description="First input",
+        )
+        await repo.add_input(created_intent.id, entity)
+        await test_db_session.commit()
+
+        result = await repo.list_inputs_by_intent_id(created_intent.id)
+        assert len(result) == 1
+        assert result[0].name == "Input 1"
+
+
+@pytest.mark.unit
+class TestPromptRepository:
+    """Test Prompt repository operations (V2)."""
+
+    @pytest.mark.asyncio
+    async def test_add_prompt_and_get_next_version(self, test_db_session):
+        """Test adding a prompt and get_next_prompt_version."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+
+        version = await repo.get_next_prompt_version(created_intent.id)
+        assert version == 1
+
+        entity = Prompt(
+            id=None,
+            intent_id=created_intent.id,
+            content="Do the task.",
+            version=version,
+        )
+        result = await repo.add_prompt(created_intent.id, entity)
+        await test_db_session.commit()
+
+        assert result.id is not None
+        assert result.version == 1
+
+        version2 = await repo.get_next_prompt_version(created_intent.id)
+        assert version2 == 2
