@@ -1,108 +1,124 @@
 """
-API schemas/DTOs for intents domain.
+API schemas/DTOs for intents domain (V2).
 
 These define the API contract for request and response payloads.
+Pydantic models are the semantic source of truth for the API.
 Used by the router layer.
 """
 
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from pydantic import BaseModel, Field
 
 
-class FactResponse(BaseModel):
-    """Response schema for fact data."""
+# --- V2 entity response models (source of truth for API) ---
 
-    id: int
-    intent_id: int
-    value: str = Field(
-        ...,
-        description=(
-            "The actual fact content or data point. Critical, specific "
-            "information that needs to be used for generating the prompt "
-            "(e.g., particular data points, explicit requirements, key details "
-            "that must be incorporated, or concrete values). Facts are "
-            "typically more static and explicit than context."
-        ),
+
+class AspectResponse(BaseModel):
+    """Aspect: domain/area of consideration in an intent."""
+
+    id: int = Field(..., description="Unique identifier of the aspect.")
+    name: str = Field(..., description="Short label for the aspect.")
+    description: Optional[str] = Field(
+        None, description="Optional longer description of the aspect."
     )
-    created_at: datetime
-    updated_at: datetime
 
-    model_config = {
-        "json_schema_extra": {
-            "examples": [
-                {
-                    "id": 1,
-                    "intent_id": 1,
-                    "value": "The document is from 2023",
-                    "created_at": "2025-01-01T12:00:00Z",
-                    "updated_at": "2025-01-01T12:00:00Z",
-                }
-            ]
-        }
-    }
+
+class InputResponse(BaseModel):
+    """Input: what the user provides for execution."""
+
+    id: int = Field(..., description="Unique identifier of the input.")
+    name: str = Field(..., description="Label for the input.")
+    description: Optional[str] = Field(
+        None, description="Description of what this input is for."
+    )
+
+
+class ChoiceResponse(BaseModel):
+    """Choice: decision point with options and selected approach."""
+
+    id: int = Field(..., description="Unique identifier of the choice.")
+    name: str = Field(..., description="Label for the choice.")
+    description: Optional[str] = Field(
+        None, description="Description of the decision point."
+    )
+
+
+class PitfallResponse(BaseModel):
+    """Pitfall: failure mode or anti-pattern to avoid."""
+
+    id: int = Field(..., description="Unique identifier of the pitfall.")
+    description: Optional[str] = Field(
+        None, description="Description of the failure mode to avoid."
+    )
+
+
+class AssumptionResponse(BaseModel):
+    """Assumption: implicit belief made explicit."""
+
+    id: int = Field(..., description="Unique identifier of the assumption.")
+    description: Optional[str] = Field(
+        None, description="The assumption statement."
+    )
+
+
+class QualityResponse(BaseModel):
+    """Quality: success criterion or output standard."""
+
+    id: int = Field(..., description="Unique identifier of the quality.")
+    criterion: str = Field(..., description="The success criterion.")
+    priority: Optional[Literal["must_have", "should_have", "nice_to_have"]] = Field(
+        None, description="Priority of this criterion."
+    )
+
+
+class ExampleResponse(BaseModel):
+    """Example: concrete input→output demonstration."""
+
+    id: int = Field(..., description="Unique identifier of the example.")
+    sample: Optional[str] = Field(
+        None, description="Sample input or input→output pair."
+    )
+
+
+class PromptResponse(BaseModel):
+    """Prompt: generated, versioned instruction for the AI."""
+
+    id: int = Field(..., description="Unique identifier of the prompt.")
+    version: int = Field(..., description="Version number of this prompt.")
+    content: Optional[str] = Field(
+        None, description="The prompt text (may be omitted in list views)."
+    )
+
+
+class InsightResponse(BaseModel):
+    """Insight: discovery that feeds back to the intent."""
+
+    id: int = Field(..., description="Unique identifier of the insight.")
+    content: Optional[str] = Field(
+        None, description="The insight content."
+    )
+    status: Optional[Literal["pending", "incorporated", "dismissed"]] = Field(
+        None, description="Current status of the insight."
+    )
+
+
+# --- Intent (V2) ---
 
 
 class IntentCreateRequest(BaseModel):
-    """Request schema for creating a new intent (US-000)."""
+    """Request schema for creating a new intent (V2)."""
 
     name: str = Field(
         ...,
         min_length=1,
-        description=(
-            "Name of the intent. Used to identify the work that the user " "wants to accomplish through AI interaction."
-        ),
+        description="Short, recognizable label for the intent.",
     )
     description: str = Field(
         ...,
         min_length=1,
-        description=(
-            "A textual description of what is to be accomplished. Work that "
-            "the user wants to accomplish through AI interaction (e.g., "
-            "'summarize this document,' 'extract key dates,' 'generate "
-            "creative alternatives'). The intent is most often used on "
-            "multiple instances and situations. It is not a one-off but the "
-            "starting point of what might be called a programme in software "
-            "engineering."
-        ),
-    )
-    output_format: str = Field(
-        ...,
-        min_length=1,
-        description=(
-            "The technical representation or encoding of the AI's response "
-            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
-        ),
-    )
-    output_structure: Optional[str] = Field(
-        None,
-        description=(
-            "The organization and composition of the result's content, "
-            "independent of its technical format (e.g., bullet points vs. "
-            "paragraphs, table with specific columns, sections with headers, "
-            "or a custom template with particular fields and their "
-            "arrangement). The structure is maintained as text."
-        ),
-    )
-    context: Optional[str] = Field(
-        None,
-        description=(
-            "Broader, dynamic information that may be retrieved from systems "
-            "or external sources to inform prompt generation (e.g., user's "
-            "role and permissions, recent project activity, organizational "
-            "policies, current system state, or relevant historical "
-            "interactions). Context is typically more fluid and situational "
-            "than facts."
-        ),
-    )
-    constraints: Optional[str] = Field(
-        None,
-        description=(
-            "Conditions that further describe how the intent must be achieved "
-            "(e.g., word limits, tone requirements, format specifications, "
-            "excluded topics, or quality criteria)"
-        ),
+        description="Full articulation of what the user wants to accomplish.",
     )
 
     model_config = {
@@ -110,11 +126,7 @@ class IntentCreateRequest(BaseModel):
             "examples": [
                 {
                     "name": "Summarize document",
-                    "description": "Generate a summary of the given document",
-                    "output_format": "plain text",
-                    "output_structure": "Bullet points",
-                    "context": "Academic documents",
-                    "constraints": "Max 500 words",
+                    "description": "Generate a concise summary of the given document.",
                 }
             ]
         }
@@ -122,66 +134,43 @@ class IntentCreateRequest(BaseModel):
 
 
 class IntentResponse(BaseModel):
-    """Response schema for intent data."""
+    """Response schema for intent data (V2)."""
 
     id: int
-    name: str = Field(
-        ...,
-        description=(
-            "Name of the intent. Used to identify the work that the user " "wants to accomplish through AI interaction."
-        ),
-    )
+    name: str = Field(..., description="Short, recognizable label for the intent.")
     description: str = Field(
         ...,
-        description=(
-            "A textual description of what is to be accomplished. Work that "
-            "the user wants to accomplish through AI interaction (e.g., "
-            "'summarize this document,' 'extract key dates,' 'generate "
-            "creative alternatives'). The intent is most often used on "
-            "multiple instances and situations. It is not a one-off but the "
-            "starting point of what might be called a programme in software "
-            "engineering."
-        ),
-    )
-    output_format: str = Field(
-        ...,
-        description=(
-            "The technical representation or encoding of the AI's response "
-            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
-        ),
-    )
-    output_structure: Optional[str] = Field(
-        None,
-        description=(
-            "The organization and composition of the result's content, "
-            "independent of its technical format (e.g., bullet points vs. "
-            "paragraphs, table with specific columns, sections with headers, "
-            "or a custom template with particular fields and their "
-            "arrangement). The structure is maintained as text."
-        ),
-    )
-    context: Optional[str] = Field(
-        None,
-        description=(
-            "Broader, dynamic information that may be retrieved from systems "
-            "or external sources to inform prompt generation (e.g., user's "
-            "role and permissions, recent project activity, organizational "
-            "policies, current system state, or relevant historical "
-            "interactions). Context is typically more fluid and situational "
-            "than facts."
-        ),
-    )
-    constraints: Optional[str] = Field(
-        None,
-        description=(
-            "Conditions that further describe how the intent must be achieved "
-            "(e.g., word limits, tone requirements, format specifications, "
-            "excluded topics, or quality criteria)"
-        ),
+        description="Full articulation of what the user wants to accomplish.",
     )
     created_at: datetime
     updated_at: datetime
-    facts: List[FactResponse] = []
+    aspects: List[AspectResponse] = Field(
+        default_factory=list, description="Aspects (domains of consideration)."
+    )
+    inputs: List[InputResponse] = Field(
+        default_factory=list, description="Inputs the user provides."
+    )
+    choices: List[ChoiceResponse] = Field(
+        default_factory=list, description="Decision points and choices."
+    )
+    pitfalls: List[PitfallResponse] = Field(
+        default_factory=list, description="Failure modes to avoid."
+    )
+    assumptions: List[AssumptionResponse] = Field(
+        default_factory=list, description="Explicit assumptions."
+    )
+    qualities: List[QualityResponse] = Field(
+        default_factory=list, description="Success criteria."
+    )
+    examples: List[ExampleResponse] = Field(
+        default_factory=list, description="Example demonstrations."
+    )
+    prompts: List[PromptResponse] = Field(
+        default_factory=list, description="Versioned prompts."
+    )
+    insights: List[InsightResponse] = Field(
+        default_factory=list, description="Insights feeding back to the intent."
+    )
 
     model_config = {
         "json_schema_extra": {
@@ -189,14 +178,18 @@ class IntentResponse(BaseModel):
                 {
                     "id": 1,
                     "name": "Summarize document",
-                    "description": "Generate a summary of the given document",
-                    "output_format": "plain text",
-                    "output_structure": "Bullet points",
-                    "context": "Academic documents",
-                    "constraints": "Max 500 words",
+                    "description": "Generate a summary of the given document.",
                     "created_at": "2025-01-01T12:00:00Z",
                     "updated_at": "2025-01-01T12:00:00Z",
-                    "facts": [],
+                    "aspects": [],
+                    "inputs": [],
+                    "choices": [],
+                    "pitfalls": [],
+                    "assumptions": [],
+                    "qualities": [],
+                    "examples": [],
+                    "prompts": [],
+                    "insights": [],
                 }
             ]
         }
@@ -204,119 +197,16 @@ class IntentResponse(BaseModel):
 
 
 class IntentUpdateNameRequest(BaseModel):
-    """Request schema for updating intent name (US-001)."""
+    """Request schema for updating intent name."""
 
-    name: str = Field(
-        ...,
-        min_length=1,
-        description=(
-            "Name of the intent. Used to identify the work that the user " "wants to accomplish through AI interaction."
-        ),
-    )
+    name: str = Field(..., min_length=1, description="Short label for the intent.")
 
 
 class IntentUpdateDescriptionRequest(BaseModel):
-    """Request schema for updating intent description (US-002)."""
+    """Request schema for updating intent description."""
 
     description: str = Field(
         ...,
         min_length=1,
-        description=(
-            "A textual description of what is to be accomplished. Work that "
-            "the user wants to accomplish through AI interaction (e.g., "
-            "'summarize this document,' 'extract key dates,' 'generate "
-            "creative alternatives'). The intent is most often used on "
-            "multiple instances and situations. It is not a one-off but the "
-            "starting point of what might be called a programme in software "
-            "engineering."
-        ),
-    )
-
-
-class IntentUpdateOutputFormatRequest(BaseModel):
-    """Request schema for updating intent output format (US-003)."""
-
-    output_format: str = Field(
-        ...,
-        min_length=1,
-        description=(
-            "The technical representation or encoding of the AI's response "
-            "(e.g., JSON, XML, CSV, plain text, Markdown, HTML)"
-        ),
-    )
-
-
-class IntentUpdateOutputStructureRequest(BaseModel):
-    """Request schema for updating intent output structure (US-004)."""
-
-    output_structure: Optional[str] = Field(
-        None,
-        description=(
-            "The organization and composition of the result's content, "
-            "independent of its technical format (e.g., bullet points vs. "
-            "paragraphs, table with specific columns, sections with headers, "
-            "or a custom template with particular fields and their "
-            "arrangement). The structure is maintained as text."
-        ),
-    )
-
-
-class IntentUpdateContextRequest(BaseModel):
-    """Request schema for updating intent context (US-005)."""
-
-    context: Optional[str] = Field(
-        None,
-        description=(
-            "Broader, dynamic information that may be retrieved from systems "
-            "or external sources to inform prompt generation (e.g., user's "
-            "role and permissions, recent project activity, organizational "
-            "policies, current system state, or relevant historical "
-            "interactions). Context is typically more fluid and situational "
-            "than facts."
-        ),
-    )
-
-
-class IntentUpdateConstraintsRequest(BaseModel):
-    """Request schema for updating intent constraints (US-006)."""
-
-    constraints: Optional[str] = Field(
-        None,
-        description=(
-            "Conditions that further describe how the intent must be achieved "
-            "(e.g., word limits, tone requirements, format specifications, "
-            "excluded topics, or quality criteria)"
-        ),
-    )
-
-
-class FactAddRequest(BaseModel):
-    """Request schema for adding a fact to an intent (US-008)."""
-
-    value: str = Field(
-        ...,
-        min_length=1,
-        description=(
-            "The actual fact content or data point. Critical, specific "
-            "information that needs to be used for generating the prompt "
-            "(e.g., particular data points, explicit requirements, key details "
-            "that must be incorporated, or concrete values). Facts are "
-            "typically more static and explicit than context."
-        ),
-    )
-
-
-class FactUpdateValueRequest(BaseModel):
-    """Request schema for updating a fact value (US-007)."""
-
-    value: str = Field(
-        ...,
-        min_length=1,
-        description=(
-            "The actual fact content or data point. Critical, specific "
-            "information that needs to be used for generating the prompt "
-            "(e.g., particular data points, explicit requirements, key details "
-            "that must be incorporated, or concrete values). Facts are "
-            "typically more static and explicit than context."
-        ),
+        description="Full articulation of what the user wants to accomplish.",
     )

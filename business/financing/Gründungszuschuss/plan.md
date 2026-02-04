@@ -24,7 +24,7 @@ Use inputs in the following order of precedence:
 4. `business-case-sheet.xlsx`  
    Provides all financials, assumptions, and calculations (authoritative).  
    **Do not parse the XLSX directly.** Instead, regenerate and use the LLM-friendly exports in:  
-   `business/Gründungszuschuss/llm_exports/business-case-sheet/` (see Phase 2).
+   `business/financing/Gründungszuschuss/llm_exports/business-case-sheet/` (see Phase 2).
 
 5. `writing-style_policy.txt`  
    Governs wording, tone, and language rules.
@@ -119,9 +119,9 @@ To be created or populated as part of the task. May be empty at start.
 
 #### Where the financials can be found
 
-- **Source XLSX (authoritative)**: `business/Gründungszuschuss/business-case-sheet.xlsx`
+- **Source XLSX (authoritative)**: `business/financing/Gründungszuschuss/business-case-sheet.xlsx`
 - **LLM-friendly exports (use these for extraction/charting)**:  
-  `business/Gründungszuschuss/llm_exports/business-case-sheet/`
+  `business/financing/Gründungszuschuss/llm_exports/business-case-sheet/`
   - `workbook.json` = sheet index + used ranges + artifact paths  
   - `sheets/<sheet_slug>/grid.csv` = rectangular values grid (easy for charts)  
   - `sheets/<sheet_slug>/cells.jsonl` = typed values + formulas (best for reasoning)
@@ -131,9 +131,9 @@ To be created or populated as part of the task. May be empty at start.
 From repo root, run:
 
 ```bash
-PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
-  business/Gründungszuschuss/business-case-sheet.xlsx \
-  --out business/Gründungszuschuss/llm_exports/business-case-sheet
+PYTHONPYCACHEPREFIX=./.pycache python3 business/financing/tools/xlsx_to_llm.py \
+  business/financing/Gründungszuschuss/business-case-sheet.xlsx \
+  --out business/financing/Gründungszuschuss/llm_exports/business-case-sheet
 ```
 
 #### Drafting steps
@@ -195,8 +195,8 @@ PYTHONPYCACHEPREFIX=./.pycache python3 business/tools/xlsx_to_llm.py \
 The Businessplan is generated as **Markdown (CommonMark)**.  
 This file (`business_plan.md`) is the single source of truth and is intended for downstream conversion to formatted documents (DOCX, PDF).
 
-**Canonical path:** `business/Gründungszuschuss/output/business_plan.md`  
-**Canonical Word template path:** `business/Gründungszuschuss/output/reference.docx`  
+**Canonical path:** `business/financing/Gründungszuschuss/output/business_plan.md`  
+**Canonical Word template path:** `business/financing/Gründungszuschuss/output/reference.docx`  
 
 ### Export-friendly Markdown Rules (Pandoc-safe subset)
 Goal: keep `business_plan.md` convertible to **auditor-ready** DOCX/PDF with stable tables, headings, and page breaks.
@@ -268,13 +268,13 @@ Statement with source.[^id]
 From repo root, run:
 
 ```bash
-./business/Gründungszuschuss/export.sh
+./business/financing/Gründungszuschuss/export.sh
 ```
 
 This generates:
-- `business/Gründungszuschuss/output/business_plan.docx`
+- `business/financing/Gründungszuschuss/output/business_plan.docx`
 Optional styling template:
-- `business/Gründungszuschuss/output/reference.docx`
+- `business/financing/Gründungszuschuss/output/reference.docx`
 
 PDF should be exported manually from the generated DOCX (Word/LibreOffice), to keep the pipeline minimal.
 

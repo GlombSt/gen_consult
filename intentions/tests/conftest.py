@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import StaticPool
 
-from app.intents.db_models import FactDBModel, IntentDBModel  # noqa: F401
+from app.intents import db_models as _intents_db_models  # noqa: F401 - register all intents tables
 
 # Import all DB models so Base.metadata knows about them
 from app.main import app

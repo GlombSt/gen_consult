@@ -259,7 +259,7 @@ class TestApiKeyAuthenticationEnabled:
         # Act
         response = client_with_auth.post(
             "/intents",
-            json={"name": "Test Intent", "description": "Test description", "output_format": "JSON"},
+            json={"name": "Test Intent", "description": "Test description"},
             headers={"Authorization": f"Bearer {api_key}"},
         )
 

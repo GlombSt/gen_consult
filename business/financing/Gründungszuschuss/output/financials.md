@@ -1,6 +1,6 @@
 # Financials Extract (LLM exports)
 
-Quelle: `business/Gründungszuschuss/llm_exports/business-case-sheet/`.
+Quelle: `business/financing/Gründungszuschuss/llm_exports/business-case-sheet/`.
 
 ## Finanzierung (Sheet: finanzierung)
 
