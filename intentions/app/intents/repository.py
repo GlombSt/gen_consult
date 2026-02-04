@@ -46,7 +46,9 @@ def _safe_relation_list(db_obj, rel_name: str) -> list:
             return []
         rel = getattr(db_obj, rel_name, None)
         return list(rel) if rel is not None else []
-    except (AttributeError, KeyError):
+    except AttributeError:
+        return []
+    except KeyError:
         return []
 
 
