@@ -318,6 +318,53 @@ class TestInputRepository:
         assert len(result) == 1
         assert result[0].name == "Input 1"
 
+    @pytest.mark.asyncio
+    async def test_update_input_when_exists(self, test_db_session):
+        """Test updating an input."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        entity = Input(
+            id=None,
+            intent_id=created_intent.id,
+            name="OldName",
+            description="Old desc",
+        )
+        added = await repo.add_input(created_intent.id, entity)
+        await test_db_session.commit()
+        added.name = "NewName"
+        added.description = "New desc"
+
+        updated = await repo.update_input(
+            created_intent.id, added.id, added
+        )
+        await test_db_session.commit()
+        assert updated is not None
+        assert updated.name == "NewName"
+
+    @pytest.mark.asyncio
+    async def test_delete_input_when_exists(self, test_db_session):
+        """Test deleting an input."""
+        repo = IntentRepository(test_db_session)
+        intent = create_test_intent(id=None, name="Test Intent")
+        created_intent = await repo.create(intent)
+        await test_db_session.commit()
+        entity = Input(
+            id=None,
+            intent_id=created_intent.id,
+            name="ToDelete",
+            description="Desc",
+        )
+        added = await repo.add_input(created_intent.id, entity)
+        await test_db_session.commit()
+
+        ok = await repo.delete_input(created_intent.id, added.id)
+        await test_db_session.commit()
+        assert ok is True
+        listed = await repo.list_inputs_by_intent_id(created_intent.id)
+        assert len(listed) == 0
+
 
 @pytest.mark.unit
 class TestPromptRepository:
