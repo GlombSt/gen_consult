@@ -132,7 +132,7 @@ class TestIntentServiceIntegration:
         async def capture(event):
             published_events.append(event)
 
-        event_bus.subscribe(capture)
+        event_bus.subscribe("intent.created", capture)
 
         with patch("app.intents.service.event_bus", event_bus):
             await create_intent(request, repository=repository)
@@ -155,7 +155,8 @@ class TestIntentServiceIntegration:
         async def capture(event):
             published_events.append(event)
 
-        event_bus.subscribe(capture)
+        event_bus.subscribe("intent.created", capture)
+        event_bus.subscribe("intent.updated", capture)
 
         with patch("app.intents.service.event_bus", event_bus):
             created = await create_intent(request, repository=repository)
