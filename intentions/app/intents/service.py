@@ -237,17 +237,33 @@ async def update_intent_articulation(
     payload: IntentArticulationUpdateRequest,
     repository: IntentRepository,
 ) -> Optional[Intent]:
-    """Replace the full articulation composition for an intent. Omitted fields leave existing data unchanged; empty list clears that entity type."""
+    """Replace the full articulation composition for an intent.
+
+    Omitted fields leave existing data unchanged; empty list clears that entity type.
+    When aspects is supplied, inputs, choices, pitfalls, assumptions, and qualities must
+    also be supplied (all six together). Otherwise deleting aspects would set aspect_id
+    to NULL on existing articulation entities (ON DELETE SET NULL), causing data loss.
+    Delete order: articulation entities first, then aspects, then recreate all.
+    """
     existing = await repository.find_by_id(intent_id)
     if not existing:
         logger.warning("Intent not found for articulation update", extra={"intent_id": intent_id})
         return None
 
-    if payload.aspects is not None:
-        for a in existing.aspects:
-            await repository.delete_aspect(intent_id, a.id)
-        for dto in payload.aspects:
-            await repository.add_aspect(intent_id, _create_aspect_domain(intent_id, dto))
+    if payload.aspects is not None and (
+        payload.inputs is None
+        or payload.choices is None
+        or payload.pitfalls is None
+        or payload.assumptions is None
+        or payload.qualities is None
+    ):
+        raise ValueError(
+            "When aspects is supplied, inputs, choices, pitfalls, assumptions, and qualities "
+            "must also be supplied (full articulation replace). Otherwise aspect_id on "
+            "existing entities would be nulled when aspects are deleted."
+        )
+
+    # Delete articulation entities first (they reference aspect_id), then aspects.
     if payload.inputs is not None:
         for i in existing.inputs:
             await repository.delete_input(intent_id, i.id)
@@ -273,6 +289,11 @@ async def update_intent_articulation(
             await repository.delete_quality(intent_id, q.id)
         for dto in payload.qualities:
             await repository.add_quality(intent_id, _create_quality_domain(intent_id, dto))
+    if payload.aspects is not None:
+        for a in existing.aspects:
+            await repository.delete_aspect(intent_id, a.id)
+        for dto in payload.aspects:
+            await repository.add_aspect(intent_id, _create_aspect_domain(intent_id, dto))
 
     await event_bus.publish(IntentArticulationUpdatedEvent(intent_id=intent_id))
     logger.info("Intent articulation updated", extra={"intent_id": intent_id})
@@ -321,11 +342,40 @@ async def add_insight(
     request: InsightCreateRequest,
     repository: IntentRepository,
 ) -> Optional[Insight]:
-    """Add an insight to an intent. Returns the created insight or None if intent not found."""
+    """Add an insight to an intent. Returns the created insight or None if intent not found.
+    Validates source_prompt_id, source_output_id, source_assumption_id when provided.
+    """
     existing = await repository.find_by_id(intent_id)
     if not existing:
         logger.warning("Intent not found for add_insight", extra={"intent_id": intent_id})
         return None
+
+    if request.source_prompt_id is not None:
+        prompt = await repository.find_prompt_by_id(intent_id, request.source_prompt_id)
+        if prompt is None:
+            raise ValueError(
+                f"source_prompt_id {request.source_prompt_id} not found or does not belong to intent"
+            )
+    if request.source_assumption_id is not None:
+        assumption = await repository.find_assumption_by_id(
+            intent_id, request.source_assumption_id
+        )
+        if assumption is None:
+            raise ValueError(
+                f"source_assumption_id {request.source_assumption_id} not found or does not belong to intent"
+            )
+    if request.source_output_id is not None:
+        output_prompt_id = await repository.get_prompt_id_for_output(
+            request.source_output_id
+        )
+        if output_prompt_id is None:
+            raise ValueError(f"source_output_id {request.source_output_id} not found")
+        intent_prompt_ids = [p.id for p in existing.prompts]
+        if output_prompt_id not in intent_prompt_ids:
+            raise ValueError(
+                f"source_output_id {request.source_output_id} does not belong to this intent"
+            )
+
     insight = Insight(
         id=None,
         intent_id=intent_id,

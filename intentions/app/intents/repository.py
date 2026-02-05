@@ -860,6 +860,14 @@ class IntentRepository:
         )
         return [self._to_output_domain_model(r) for r in result.scalars().all()]
 
+    async def get_prompt_id_for_output(self, output_id: int) -> Optional[int]:
+        """Return the prompt_id for an output, or None if output does not exist."""
+        result = await self.db.execute(
+            select(OutputDBModel.prompt_id).where(OutputDBModel.id == output_id)
+        )
+        row = result.scalar_one_or_none()
+        return int(row[0]) if row else None
+
     def _to_output_domain_model(self, db: OutputDBModel) -> Output:
         return Output(
             id=db.id,

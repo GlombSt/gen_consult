@@ -236,7 +236,7 @@ class TestUpdateIntentArticulation:
 
     @pytest.mark.asyncio
     async def test_update_intent_articulation_when_exists_replaces_and_returns_intent(self):
-        """Test updating articulation when intent exists."""
+        """Test updating articulation when intent exists (full replace: all six fields)."""
         from app.intents.schemas import (
             AspectCreate,
             IntentArticulationUpdateRequest,
@@ -244,8 +244,12 @@ class TestUpdateIntentArticulation:
 
         existing = create_test_intent(id=1, name="X")
         existing.aspects = []
+        existing.inputs = []
+        existing.choices = []
+        existing.pitfalls = []
+        existing.assumptions = []
+        existing.qualities = []
         updated_intent = create_test_intent(id=1, name="X")
-        updated_intent.aspects = []
 
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(side_effect=[existing, updated_intent])
@@ -254,6 +258,11 @@ class TestUpdateIntentArticulation:
 
         payload = IntentArticulationUpdateRequest(
             aspects=[AspectCreate(name="NewAspect", description="D")],
+            inputs=[],
+            choices=[],
+            pitfalls=[],
+            assumptions=[],
+            qualities=[],
         )
 
         with patch("app.intents.service.event_bus") as mock_bus:
@@ -262,6 +271,26 @@ class TestUpdateIntentArticulation:
 
         assert result is updated_intent
         mock_repo.add_aspect.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_update_intent_articulation_when_only_aspects_supplied_raises(self):
+        """Test that supplying only aspects (without other five) raises ValueError."""
+        from app.intents.schemas import (
+            AspectCreate,
+            IntentArticulationUpdateRequest,
+        )
+
+        existing = create_test_intent(id=1, name="X")
+        existing.aspects = []
+        mock_repo = MagicMock()
+        mock_repo.find_by_id = AsyncMock(return_value=existing)
+
+        payload = IntentArticulationUpdateRequest(
+            aspects=[AspectCreate(name="NewAspect", description="D")],
+        )
+
+        with pytest.raises(ValueError, match="When aspects is supplied"):
+            await update_intent_articulation(1, payload, repository=mock_repo)
 
     @pytest.mark.asyncio
     async def test_update_intent_articulation_when_not_exists_returns_none(self):

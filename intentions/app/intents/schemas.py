@@ -340,7 +340,11 @@ class PromptCreateRequest(BaseModel):
 class OutputCreateRequest(BaseModel):
     """Request schema for adding an output to a prompt."""
 
-    content: str = Field(..., description="The AI executor's response content.")
+    content: str = Field(
+        ...,
+        min_length=1,
+        description="The AI executor's response content.",
+    )
 
 
 class InsightCreateRequest(BaseModel):
