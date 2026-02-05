@@ -79,6 +79,26 @@ class IntentRepository:
             return self._to_intent_domain_model(db_intent)
         return None
 
+    async def list_all(self) -> List[Intent]:
+        """List all intents with full composition (aspects, inputs, etc.)."""
+        result = await self.db.execute(
+            select(IntentDBModel)
+            .options(
+                selectinload(IntentDBModel.aspects),
+                selectinload(IntentDBModel.inputs),
+                selectinload(IntentDBModel.choices),
+                selectinload(IntentDBModel.pitfalls),
+                selectinload(IntentDBModel.assumptions),
+                selectinload(IntentDBModel.qualities),
+                selectinload(IntentDBModel.examples),
+                selectinload(IntentDBModel.prompts),
+                selectinload(IntentDBModel.insights),
+            )
+            .order_by(IntentDBModel.id)
+        )
+        rows = result.scalars().all()
+        return [self._to_intent_domain_model(db_intent) for db_intent in rows]
+
     async def create(self, intent: Intent) -> Intent:
         db_intent = self._to_intent_db_model(intent)
         self.db.add(db_intent)
@@ -839,6 +859,14 @@ class IntentRepository:
             select(OutputDBModel).where(OutputDBModel.prompt_id == prompt_id)
         )
         return [self._to_output_domain_model(r) for r in result.scalars().all()]
+
+    async def get_prompt_id_for_output(self, output_id: int) -> Optional[int]:
+        """Return the prompt_id for an output, or None if output does not exist."""
+        result = await self.db.execute(
+            select(OutputDBModel.prompt_id).where(OutputDBModel.id == output_id)
+        )
+        row = result.scalar_one_or_none()
+        return int(row[0]) if row else None
 
     def _to_output_domain_model(self, db: OutputDBModel) -> Output:
         return Output(
