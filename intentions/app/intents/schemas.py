@@ -22,14 +22,14 @@ InsightStatus = Literal["pending", "incorporated", "dismissed"]
 
 
 class AspectCreate(BaseModel):
-    """Create payload for one aspect."""
+    """Aspect: domain/area of consideration in an intent."""
 
     name: str = Field(..., min_length=1, description="Short label for the aspect.")
     description: Optional[str] = Field(None, description="Optional description.")
 
 
 class InputCreate(BaseModel):
-    """Create payload for one input."""
+    """Input: what the user provides for execution."""
 
     name: str = Field(..., min_length=1, description="Label for the input.")
     description: str = Field(..., min_length=1, description="What this input is for.")
@@ -39,7 +39,7 @@ class InputCreate(BaseModel):
 
 
 class ChoiceCreate(BaseModel):
-    """Create payload for one choice."""
+    """Choice: decision point with options and selected approach."""
 
     name: str = Field(..., min_length=1, description="Label for the decision point.")
     description: str = Field(..., min_length=1, description="The decision and why it matters.")
@@ -50,7 +50,7 @@ class ChoiceCreate(BaseModel):
 
 
 class PitfallCreate(BaseModel):
-    """Create payload for one pitfall."""
+    """Pitfall: failure mode or anti-pattern to avoid."""
 
     description: str = Field(..., min_length=1, description="Failure mode or anti-pattern to avoid.")
     aspect_id: Optional[int] = Field(None, description="Aspect this pitfall was discovered for.")
@@ -58,7 +58,7 @@ class PitfallCreate(BaseModel):
 
 
 class AssumptionCreate(BaseModel):
-    """Create payload for one assumption."""
+    """Assumption: implicit belief made explicit."""
 
     description: str = Field(..., min_length=1, description="The implicit belief made explicit.")
     aspect_id: Optional[int] = Field(None, description="Aspect this assumption was discovered for.")
@@ -68,7 +68,7 @@ class AssumptionCreate(BaseModel):
 
 
 class QualityCreate(BaseModel):
-    """Create payload for one quality criterion."""
+    """Quality: success criterion or output standard. Use field 'criterion', not name/description."""
 
     criterion: str = Field(..., min_length=1, description="The standard that defines success.")
     aspect_id: Optional[int] = Field(None, description="Aspect this quality was discovered for.")

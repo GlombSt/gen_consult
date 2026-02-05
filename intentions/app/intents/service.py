@@ -237,33 +237,21 @@ async def update_intent_articulation(
     payload: IntentArticulationUpdateRequest,
     repository: IntentRepository,
 ) -> Optional[Intent]:
-    """Replace the full articulation composition for an intent.
+    """Update the articulation composition for an intent.
 
+    Intent owns all articulation entities; aspect_id on them is optional (discovered-for).
     Omitted fields leave existing data unchanged; empty list clears that entity type.
-    When aspects is supplied, inputs, choices, pitfalls, assumptions, and qualities must
-    also be supplied (all six together). Otherwise deleting aspects would set aspect_id
-    to NULL on existing articulation entities (ON DELETE SET NULL), causing data loss.
-    Delete order: articulation entities first, then aspects, then recreate all.
+    You may supply any subset (e.g. only aspects, or only qualities). When aspects are
+    replaced, articulation entities that referenced a removed aspect get aspect_id set
+    to NULL by the DB (ON DELETE SET NULL); the entities remain.
+    Delete order: articulation entities first (when replacing them), then aspects.
     """
     existing = await repository.find_by_id(intent_id)
     if not existing:
         logger.warning("Intent not found for articulation update", extra={"intent_id": intent_id})
         return None
 
-    if payload.aspects is not None and (
-        payload.inputs is None
-        or payload.choices is None
-        or payload.pitfalls is None
-        or payload.assumptions is None
-        or payload.qualities is None
-    ):
-        raise ValueError(
-            "When aspects is supplied, inputs, choices, pitfalls, assumptions, and qualities "
-            "must also be supplied (full articulation replace). Otherwise aspect_id on "
-            "existing entities would be nulled when aspects are deleted."
-        )
-
-    # Delete articulation entities first (they reference aspect_id), then aspects.
+    # Replace only the entity types that were supplied. Articulation entities are owned by intent; aspect_id is optional.
     if payload.inputs is not None:
         for i in existing.inputs:
             await repository.delete_input(intent_id, i.id)

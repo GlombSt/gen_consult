@@ -171,7 +171,7 @@ async def list_tools() -> list[types.Tool]:
         ),
         types.Tool(
             name="update_intent_articulation",
-            description="Replace the full articulation composition for an intent (aspects, inputs, choices, pitfalls, assumptions, qualities). Omitted fields unchanged; empty array clears that type. No examples.",
+            description="Update articulation for an intent. Intent owns all entities; you may supply any subset (e.g. only aspects or only qualities). Fields: aspects, inputs, choices, pitfalls, assumptions, qualities. Omitted fields unchanged; empty array clears that type. No examples. Quality uses 'criterion' (required), not name/description.",
             inputSchema={
                 "type": "object",
                 "properties": {

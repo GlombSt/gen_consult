@@ -273,8 +273,8 @@ class TestUpdateIntentArticulation:
         mock_repo.add_aspect.assert_called_once()
 
     @pytest.mark.asyncio
-    async def test_update_intent_articulation_when_only_aspects_supplied_raises(self):
-        """Test that supplying only aspects (without other five) raises ValueError."""
+    async def test_update_intent_articulation_when_only_aspects_supplied_succeeds(self):
+        """Intent owns articulation entities; aspect_id is optional. Partial update (only aspects) is allowed."""
         from app.intents.schemas import (
             AspectCreate,
             IntentArticulationUpdateRequest,
@@ -284,13 +284,24 @@ class TestUpdateIntentArticulation:
         existing.aspects = []
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=existing)
+        mock_repo.add_aspect = AsyncMock()
 
         payload = IntentArticulationUpdateRequest(
             aspects=[AspectCreate(name="NewAspect", description="D")],
         )
 
-        with pytest.raises(ValueError, match="When aspects is supplied"):
-            await update_intent_articulation(1, payload, repository=mock_repo)
+        with patch("app.intents.service.event_bus") as mock_bus:
+            mock_bus.publish = AsyncMock()
+            result = await update_intent_articulation(1, payload, repository=mock_repo)
+
+        assert result is existing
+        mock_repo.delete_aspect.assert_not_called()  # no existing aspects
+        mock_repo.add_aspect.assert_called_once()
+        mock_repo.delete_input.assert_not_called()
+        mock_repo.delete_choice.assert_not_called()
+        mock_repo.delete_pitfall.assert_not_called()
+        mock_repo.delete_assumption.assert_not_called()
+        mock_repo.delete_quality.assert_not_called()
 
     @pytest.mark.asyncio
     async def test_update_intent_articulation_when_not_exists_returns_none(self):
