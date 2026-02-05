@@ -273,6 +273,33 @@ class TestIntentRepositoryDelete:
 
 
 @pytest.mark.unit
+class TestIntentRepositoryListAll:
+    """Test IntentRepository.list_all method."""
+
+    @pytest.mark.asyncio
+    async def test_list_all_returns_all_intents_with_composition(self, test_db_session):
+        """Test that list_all returns all intents with full composition."""
+        repo = IntentRepository(test_db_session)
+        intent1 = create_test_intent(id=None, name="First")
+        intent2 = create_test_intent(id=None, name="Second")
+        created1 = await repo.create(intent1)
+        created2 = await repo.create(intent2)
+        await test_db_session.commit()
+
+        result = await repo.list_all()
+
+        assert len(result) >= 2
+        ids = [r.id for r in result]
+        assert created1.id in ids
+        assert created2.id in ids
+        for r in result:
+            assert hasattr(r, "aspects")
+            assert hasattr(r, "inputs")
+            assert hasattr(r, "prompts")
+            assert hasattr(r, "insights")
+
+
+@pytest.mark.unit
 class TestInputRepository:
     """Test Input repository operations (V2)."""
 

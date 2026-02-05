@@ -12,7 +12,7 @@ from mcp.types import TextContent
 
 from app.intents.mcp_server import (
     _get_function_docstring,
-    _intent_to_dict,
+    _intent_to_dict_for_mcp,
     _pydantic_to_json_schema,
     call_tool,
     list_tools,
@@ -27,18 +27,24 @@ class TestIntentsMCPServer:
 
     @pytest.mark.asyncio
     async def test_list_tools_returns_v2_tools(self):
-        """Test that list_tools returns V2 tools only."""
+        """Test that list_tools returns V2 intent-as-composition tools (no separate articulation tools)."""
         tools = await list_tools()
 
         assert len(tools) > 0
         tool_names = [tool.name for tool in tools]
         assert "create_intent" in tool_names
         assert "get_intent" in tool_names
+        assert "list_intents" in tool_names
+        assert "delete_intent" in tool_names
         assert "update_intent_name" in tool_names
         assert "update_intent_description" in tool_names
+        assert "update_intent_articulation" in tool_names
+        assert "add_prompt" in tool_names
+        assert "add_output" in tool_names
+        assert "add_insight" in tool_names
+        assert "add_aspect" not in tool_names
+        assert "add_input" not in tool_names
         assert "add_fact_to_intent" not in tool_names
-        assert "update_fact_value" not in tool_names
-        assert "remove_fact_from_intent" not in tool_names
 
     @pytest.mark.asyncio
     async def test_list_tools_has_descriptions(self):
@@ -83,6 +89,7 @@ class TestIntentsMCPServer:
         assert result_data["description"] == "Test description"
         assert "id" in result_data
         assert "aspects" in result_data
+        assert "examples" not in result_data
         assert "facts" not in result_data
 
         await test_db_session.commit()
@@ -121,6 +128,65 @@ class TestIntentsMCPServer:
         result_data = json.loads(result[0].text)
         assert result_data["id"] == created_intent.id
         assert result_data["name"] == "Test Intent"
+        assert "examples" not in result_data
+
+    @pytest.mark.asyncio
+    async def test_call_tool_list_intents(self, test_db_session):
+        """Test listing intents via MCP tool."""
+        repository = IntentRepository(test_db_session)
+        create_request = IntentCreateRequest(
+            name="List Test Intent",
+            description="For list test",
+        )
+        from app.intents import service
+
+        await service.create_intent(create_request, repository)
+        await test_db_session.commit()
+
+        async def mock_get_repository():
+            return repository, test_db_session
+
+        with patch(
+            "app.intents.mcp_server._get_repository",
+            side_effect=mock_get_repository,
+        ):
+            result = await call_tool("list_intents", {})
+
+        assert len(result) == 1
+        result_data = json.loads(result[0].text)
+        assert isinstance(result_data, list)
+        assert len(result_data) >= 1
+        assert "examples" not in result_data[0]
+
+    @pytest.mark.asyncio
+    async def test_call_tool_delete_intent(self, test_db_session):
+        """Test deleting an intent via MCP tool."""
+        repository = IntentRepository(test_db_session)
+        create_request = IntentCreateRequest(
+            name="To Delete",
+            description="Will be deleted",
+        )
+        from app.intents import service
+
+        created = await service.create_intent(create_request, repository)
+        await test_db_session.commit()
+
+        async def mock_get_repository():
+            return repository, test_db_session
+
+        with patch(
+            "app.intents.mcp_server._get_repository",
+            side_effect=mock_get_repository,
+        ):
+            result = await call_tool("delete_intent", {"intent_id": created.id})
+
+        await test_db_session.commit()
+        assert len(result) == 1
+        result_data = json.loads(result[0].text)
+        assert result_data["deleted"] is True
+        assert result_data["intent_id"] == created.id
+        retrieved = await repository.find_by_id(created.id)
+        assert retrieved is None
 
     @pytest.mark.asyncio
     async def test_call_tool_get_intent_not_found(self, test_db_session):
@@ -245,7 +311,7 @@ class TestIntentsMCPServer:
         )
         await test_db_session.commit()
 
-        result_dict = _intent_to_dict(created_intent)
+        result_dict = _intent_to_dict_for_mcp(created_intent)
 
         assert result_dict["id"] == created_intent.id
         assert result_dict["name"] == "Test Intent"
@@ -254,6 +320,7 @@ class TestIntentsMCPServer:
         assert "updated_at" in result_dict
         assert "aspects" in result_dict
         assert isinstance(result_dict["aspects"], list)
+        assert "examples" not in result_dict
         assert "output_format" not in result_dict
         assert "facts" not in result_dict
 

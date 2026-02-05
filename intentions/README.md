@@ -431,22 +431,21 @@ The MCP server is now available at `http://localhost:8000/mcp` (or your configur
 
 ### Available Tools
 
-The MCP server exposes the following tools for intents operations:
+The MCP server exposes the **Intents Domain V2** with the intent treated as a **composition** of Aspect and articulation entities (Input, Choice, Pitfall, Assumption, Quality). There are no separate tools for articulation entities—they are managed through the intent tools. **Examples** are excluded from the MCP surface (not in create/update payloads or get_intent response). See [INTENTS_DOMAIN_V2.md](app/intents/INTENTS_DOMAIN_V2.md) for the domain model.
 
-**Intent Management:**
-- `create_intent` - Create a new intent
-- `get_intent` - Get intent by ID
-- `update_intent_name` - Update intent name
-- `update_intent_description` - Update intent description
-- `update_intent_output_format` - Update output format
-- `update_intent_output_structure` - Update output structure
-- `update_intent_context` - Update context
-- `update_intent_constraints` - Update constraints
+**Intent (composition):**
+- `create_intent` - Create a new intent with name and description; optionally include nested aspects, inputs, choices, pitfalls, assumptions, qualities (no examples)
+- `get_intent` - Get intent by ID with full composition (aspects, inputs, choices, pitfalls, assumptions, qualities, prompts, insights; examples omitted)
+- `list_intents` - List all intents with full composition (examples omitted)
+- `delete_intent` - Delete an intent by ID
+- `update_intent_name` - Update an intent's name
+- `update_intent_description` - Update an intent's description
+- `update_intent_articulation` - Replace the full articulation composition for an intent (aspects, inputs, choices, pitfalls, assumptions, qualities); omitted fields left unchanged, empty array clears that type; no examples
 
-**Fact Management:**
-- `add_fact_to_intent` - Add a fact to an intent
-- `update_fact_value` - Update a fact's value
-- `remove_fact_from_intent` - Remove a fact from an intent
+**Execution and learning (append-only):**
+- `add_prompt` - Add a versioned prompt to an intent
+- `add_output` - Add an output (AI response) to a prompt
+- `add_insight` - Add an insight to an intent (optional: source_type, source_output_id, source_prompt_id, source_assumption_id, status)
 
 ### MCP Client Configuration
 

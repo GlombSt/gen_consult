@@ -79,6 +79,26 @@ class IntentRepository:
             return self._to_intent_domain_model(db_intent)
         return None
 
+    async def list_all(self) -> List[Intent]:
+        """List all intents with full composition (aspects, inputs, etc.)."""
+        result = await self.db.execute(
+            select(IntentDBModel)
+            .options(
+                selectinload(IntentDBModel.aspects),
+                selectinload(IntentDBModel.inputs),
+                selectinload(IntentDBModel.choices),
+                selectinload(IntentDBModel.pitfalls),
+                selectinload(IntentDBModel.assumptions),
+                selectinload(IntentDBModel.qualities),
+                selectinload(IntentDBModel.examples),
+                selectinload(IntentDBModel.prompts),
+                selectinload(IntentDBModel.insights),
+            )
+            .order_by(IntentDBModel.id)
+        )
+        rows = result.scalars().all()
+        return [self._to_intent_domain_model(db_intent) for db_intent in rows]
+
     async def create(self, intent: Intent) -> Intent:
         db_intent = self._to_intent_db_model(intent)
         self.db.add(db_intent)
