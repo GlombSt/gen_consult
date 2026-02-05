@@ -66,6 +66,9 @@ gen_consult/
 - `README.md` - Project overview
 - `CI.md` - CI/CD workflow triggers and configuration
 
+### Agent skills
+- `.agent/skills/` - Skills for coding agents (e.g. schema/documentation consistency). Load and apply when the task matches a skill's "when to use" criteria.
+
 
 
 ## Backend (`intentions/`) - The Hexagon
