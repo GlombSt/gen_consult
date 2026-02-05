@@ -244,6 +244,8 @@ async def update_intent_articulation(
     You may supply any subset (e.g. only aspects, or only qualities). When aspects are
     replaced, articulation entities that referenced a removed aspect get aspect_id set
     to NULL by the DB (ON DELETE SET NULL); the entities remain.
+    In a single request, aspect_id in inputs/choices/etc. can only reference existing
+    aspect IDs (before this update); newly created aspects get IDs after the call.
     Delete order: articulation entities first (when replacing them), then aspects.
     """
     existing = await repository.find_by_id(intent_id)

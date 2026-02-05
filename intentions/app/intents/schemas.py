@@ -224,7 +224,7 @@ class IntentCreateRequest(BaseModel):
 
 
 class IntentArticulationUpdateRequest(BaseModel):
-    """Request schema for replacing the full articulation composition of an intent. Empty array clears that entity type."""
+    """Update the articulation composition of an intent. Omitted fields leave existing data unchanged; empty array clears that entity type. You may supply any subset (e.g. only aspects or only qualities)."""
 
     aspects: Optional[List[AspectCreate]] = Field(None, description="Replace aspects (omit to leave unchanged).")
     inputs: Optional[List[InputCreate]] = Field(None, description="Replace inputs.")
