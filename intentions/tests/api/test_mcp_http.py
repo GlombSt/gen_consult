@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.intents.repository import IntentRepository
+from app.intents import mcp_sdk_http
 from app.main import app
 from app.shared.dependencies import get_intent_repository
 
@@ -30,6 +31,13 @@ def client(test_db_session: AsyncSession) -> TestClient:
 
     app.dependency_overrides[get_intent_repository] = override_get_intent_repository
     with patch("app.intents.mcp_server._get_repository", side_effect=mock_get_repository):
+        # Fresh manager per test to avoid reusing run() across TestClient lifespans.
+        mcp_sdk_http.mcp_session_manager = mcp_sdk_http.StreamableHTTPSessionManager(
+            app=mcp_sdk_http.server,
+            json_response=True,
+            stateless=True,
+            security_settings=mcp_sdk_http._SECURITY_SETTINGS,
+        )
         with TestClient(app) as test_client:
             yield test_client
     app.dependency_overrides.clear()
@@ -46,7 +54,11 @@ class TestMCPHTTPEndpoint:
             "jsonrpc": "2.0",
             "id": 1,
             "method": "initialize",
-            "params": {},
+            "params": {
+                "protocolVersion": "2025-03-26",
+                "capabilities": {},
+                "clientInfo": {"name": "tests", "version": "0.1"},
+            },
         }
 
         # Act
