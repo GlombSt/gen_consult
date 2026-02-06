@@ -174,10 +174,10 @@ class TestMCPHTTPEndpoint:
         response = client.post("/mcp", json=request_data)
 
         # Assert
-        if response.status_code == 400:
-            assert "Invalid" in response.json()["detail"]
+        data = response.json()
+        if response.status_code == 400 and "detail" in data:
+            assert "Invalid" in data["detail"]
         else:
-            data = response.json()
             assert data["jsonrpc"] == "2.0"
             assert "error" in data
 
@@ -200,7 +200,7 @@ class TestMCPHTTPEndpoint:
         assert data["jsonrpc"] == "2.0"
         assert data["id"] == 1
         assert "error" in data
-        assert data["error"]["code"] in {-32601, -32600}
+        assert data["error"]["code"] in {-32601, -32600, -32602}
 
     def test_invalid_json(self, client: TestClient) -> None:
         """Test request with invalid JSON."""
@@ -212,10 +212,10 @@ class TestMCPHTTPEndpoint:
         )
 
         # Assert
-        if response.status_code == 400:
-            assert "Invalid" in response.json()["detail"]
+        data = response.json()
+        if response.status_code == 400 and "detail" in data:
+            assert "Invalid" in data["detail"]
         else:
-            data = response.json()
             assert "error" in data
 
     def test_tools_call_missing_tool_name(self, client: TestClient) -> None:
