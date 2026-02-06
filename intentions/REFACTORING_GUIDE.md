@@ -20,9 +20,8 @@ intentions/
 │       ├── items.py             # Item CRUD endpoints
 │       └── users.py             # User CRUD endpoints
 ├── main.py                      # Backwards-compatible entry point
-├── Dockerfile                   # Updated for new structure
 ├── docker-compose.yml
-├── requirements.txt
+├── pyproject.toml              # Project metadata and dependencies
 └── README.md
 ```
 

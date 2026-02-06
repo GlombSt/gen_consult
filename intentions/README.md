@@ -4,7 +4,7 @@
 
 ## Tech Stack
 
-- **FastAPI** + Python 3.14+
+- **FastAPI** + Python 3.13+
 - **Pydantic** for validation
 - **Structured JSON logging** with PII protection
 - **Event-driven** domain architecture
@@ -18,11 +18,11 @@
 cd intentions
 
 # Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies (runtime + dev for lint/tests)
+pip install -e ".[dev]"
 
 # Run development server
 uvicorn main:app --reload
@@ -296,8 +296,7 @@ intentions/
 │   ├── unit/               # Unit tests (90%+ coverage for models/service)
 │   ├── integration/        # Integration tests (80%+ for repository)
 │   └── api/                # API endpoint tests
-├── requirements.txt        # Production dependencies
-├── requirements-dev.txt    # Development dependencies
+├── pyproject.toml          # Project metadata and dependencies
 └── pytest.ini              # Test configuration
 ```
 
@@ -509,6 +508,30 @@ For other clients that support HTTP transport, configure the MCP server URL:
 ```
 
 **Note:** Replace `localhost:8000` with your actual server host and port.
+
+#### Using with mcptools (stdio recommended)
+
+[mcptools](https://github.com/f/mcptools) can hit "timeout waiting for endpoint" with Streamable HTTP against this server. Use **stdio transport** instead:
+
+```bash
+cd intentions
+mcp tools uv run python mcp_server.py
+```
+
+Example: list tools, then call one:
+
+```bash
+mcp tools uv run python mcp_server.py
+mcp call create_intent --params '{"name":"My intent","description":"Test"}' uv run python mcp_server.py
+```
+
+Run each command from the `intentions` directory so the app and database are found. To use an alias:
+
+```bash
+cd intentions
+mcp alias add intents uv run python mcp_server.py
+mcp tools intents
+```
 
 #### Stdio Transport Configuration (Deprecated)
 

@@ -5,12 +5,13 @@ Provides Streamable HTTP transport integration for the MCP server,
 allowing it to run alongside FastAPI as an HTTP endpoint.
 """
 
+import asyncio
 import json
 import os
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request, Response, status
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from mcp.server.lowlevel import NotificationOptions
 from pydantic import ValidationError
 
@@ -180,6 +181,45 @@ async def _handle_mcp_request(request: Request, body: dict[str, Any]) -> dict[st
 
 # Create router for MCP HTTP transport
 router = APIRouter()
+
+
+async def _sse_stream():
+    """Yield SSE events so Streamable HTTP clients (e.g. mcptools) get a valid stream."""
+    # Initial event so client sees the endpoint is ready
+    yield "event: endpoint_ready\ndata: {}\n\n"
+    # Keep stream open with heartbeats so clients that wait for an open stream don't timeout
+    for _ in range(12):  # ~60s at 5s interval
+        await asyncio.sleep(5)
+        yield ": heartbeat\n\n"
+
+
+@router.get("")
+async def mcp_endpoint_get(request: Request) -> Response:
+    """
+    Handle GET for MCP endpoint (discovery / session setup).
+
+    If Accept includes text/event-stream (Streamable HTTP), return an SSE stream
+    so clients like mcptools get a valid stream and do not timeout. Otherwise
+    return JSON for simple discovery.
+    """
+    accept = request.headers.get("Accept", "")
+    if "text/event-stream" in accept:
+        return StreamingResponse(
+            _sse_stream(),
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
+        )
+    return JSONResponse(
+        content={
+            "protocol": "mcp",
+            "message": "Use POST with JSON-RPC 2.0 for MCP requests.",
+        },
+        status_code=status.HTTP_200_OK,
+    )
 
 
 @router.post("")

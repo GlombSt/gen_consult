@@ -230,7 +230,7 @@ Configuration is stored in `pyproject.toml` at the project root. The Standards d
 
 ```toml
 [tool.mypy]
-python_version = "3.14"
+python_version = "3.13"
 strict_equality = true
 warn_unused_configs = true
 ignore_missing_imports = true
@@ -392,7 +392,7 @@ repos:
     rev: 24.1.0
     hooks:
       - id: black
-        language_version: python3.14
+        language_version: python3.13
 
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2

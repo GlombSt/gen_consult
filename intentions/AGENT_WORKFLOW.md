@@ -150,7 +150,7 @@ Before saying "I'm finished" or "The work is complete", verify:
 **Solution:**
 1. Run tests in a clean environment
 2. Check CI logs for specific test failures
-3. Ensure all dependencies are in `requirements.txt` or `requirements-dev.txt`
+3. Ensure all dependencies are in `pyproject.toml` (optional `[project.optional-dependencies]` for dev)
 4. Verify test fixtures and mocks work in CI environment
 
 ### Issue: CI doesn't run

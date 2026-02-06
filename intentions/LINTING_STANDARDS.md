@@ -37,7 +37,7 @@ All tools **MUST** pass before code can be merged.
 ```toml
 [tool.black]
 line-length = 127
-target-version = ['py314']
+target-version = ['py313']
 exclude = ['.venv', 'venv', 'htmlcov', '__pycache__']
 ```
 

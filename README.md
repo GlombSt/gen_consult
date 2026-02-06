@@ -34,7 +34,7 @@ gen_consult/
 │   │   ├── users/         # Domain: Users
 │   │   └── shared/        # Cross-cutting concerns
 │   ├── tests/
-│   ├── requirements.txt
+│   ├── pyproject.toml     # Dependencies and project config
 │   └── README.md          # Backend documentation
 │
 ├── customer-ux/           # Frontend - React (JavaScript)
@@ -56,7 +56,7 @@ gen_consult/
 
 ### Prerequisites
 
-- **Backend:** Python 3.14+
+- **Backend:** Python 3.13+
 - **Frontend:** Node.js 18+
 - **Tools:** Git, Docker (optional)
 

@@ -26,15 +26,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.13'  # Using 3.13 until 3.14 is available in GitHub Actions
+        python-version: '3.13'
         cache: 'pip'
-        cache-dependency-path: intentions/requirements.txt
+        cache-dependency-path: intentions/pyproject.toml
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -r requirements-dev.txt
+        pip install -e ".[dev]"
 
     - name: Run full linting (Black, isort, Flake8)
       run: |

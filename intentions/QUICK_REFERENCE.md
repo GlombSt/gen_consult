@@ -146,8 +146,8 @@ uvicorn main:app --reload --port 8001
 
 ### Module not found
 ```bash
-source venv/bin/activate
-pip install -r requirements.txt
+source .venv/bin/activate
+pip install -e ".[dev]"
 ```
 
 ### CORS errors from React
