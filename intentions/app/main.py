@@ -104,8 +104,9 @@ def create_application() -> FastAPI:
     app.include_router(users_router, dependencies=router_dependencies)
     app.include_router(intents_router, dependencies=router_dependencies)
 
-    # Mount MCP server at /mcp using the SDK's Streamable HTTP transport (mcptools-compatible)
-    app.mount("/mcp", mcp_sdk_asgi_app)
+    # MCP Streamable HTTP endpoint. Add explicit routes to avoid 307 redirects on /mcp.
+    app.add_route("/mcp", mcp_sdk_asgi_app, methods=["GET", "POST"])
+    app.add_route("/mcp/", mcp_sdk_asgi_app, methods=["GET", "POST"])
     # Legacy HTTP+SSE transport for older MCP clients (e.g., older mcptools)
     app.include_router(mcp_sse_router)
 
