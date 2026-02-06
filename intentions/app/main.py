@@ -9,11 +9,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.intents.mcp_sdk_http import (
-    mcp_sdk_asgi_app,
-    mcp_sdk_request_handler,
-    mcp_session_manager,
-)
+from app.intents import mcp_sdk_http
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
@@ -58,7 +54,7 @@ async def app_lifespan(app: FastAPI):
     )
     await init_db()
     logger.info("Database initialized")
-    async with mcp_session_manager.run():
+    async with mcp_sdk_http.mcp_session_manager.run():
         logger.info("MCP Streamable HTTP session manager started")
         yield
     await close_db()
@@ -109,8 +105,8 @@ def create_application() -> FastAPI:
 
     # MCP Streamable HTTP endpoint.
     # Handle POST /mcp directly to avoid 307 redirects from mounted sub-app.
-    app.add_api_route("/mcp", mcp_sdk_request_handler, methods=["POST"])
-    app.mount("/mcp", mcp_sdk_asgi_app)
+    app.add_api_route("/mcp", mcp_sdk_http.mcp_sdk_request_handler, methods=["POST"])
+    app.mount("/mcp", mcp_sdk_http.mcp_sdk_asgi_app)
 
     return app
 
