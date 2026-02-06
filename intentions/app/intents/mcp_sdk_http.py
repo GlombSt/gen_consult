@@ -7,6 +7,8 @@ clients like mcptools get the exact transport behavior they expect.
 
 import os
 
+from starlette.requests import Request
+from starlette.responses import Response
 from starlette.types import Receive, Scope, Send
 
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
@@ -69,3 +71,29 @@ async def mcp_sdk_asgi_app(scope: Scope, receive: Receive, send: Send) -> None:
         await response(scope, receive, send)
         return
     await mcp_session_manager.handle_request(_normalize_accept_header(scope), receive, send)
+
+
+async def mcp_sdk_request_handler(request: Request) -> Response:
+    """
+    FastAPI-compatible handler for POST /mcp to avoid redirect slashes.
+
+    This adapts the ASGI handler to a Request/Response interface.
+    """
+    response_status: int | None = None
+    response_headers: list[tuple[bytes, bytes]] = []
+    body_chunks: list[bytes] = []
+
+    async def _send(message: dict) -> None:
+        nonlocal response_status, response_headers
+        if message["type"] == "http.response.start":
+            response_status = message["status"]
+            response_headers = message.get("headers", [])
+        elif message["type"] == "http.response.body":
+            body_chunks.append(message.get("body", b""))
+
+    scope = _normalize_accept_header(request.scope)
+    await mcp_session_manager.handle_request(scope, request.receive, _send)
+
+    status = response_status or 500
+    headers = {k.decode("latin-1"): v.decode("latin-1") for k, v in response_headers}
+    return Response(content=b"".join(body_chunks), status_code=status, headers=headers)

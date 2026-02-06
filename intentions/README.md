@@ -517,11 +517,8 @@ The server exposes **Streamable HTTP** at `/mcp` (official MCP Python SDK). If y
 mcp tools http://localhost:8000/mcp
 ```
 
-If you see `Error: timeout waiting for endpoint`, your mcptools build is likely still using the legacy **HTTP+SSE** transport. Use the SSE endpoint instead:
-
-```bash
-mcp tools http://localhost:8000/sse
-```
+If you see `Error: timeout waiting for endpoint`, your client likely isn’t sending the required
+`Accept: application/json, text/event-stream` header for Streamable HTTP. Upgrade mcptools and retry.
 
 If you prefer **stdio transport** (e.g. for scripting), use:
 
