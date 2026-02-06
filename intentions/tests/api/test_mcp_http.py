@@ -30,7 +30,8 @@ def client(test_db_session: AsyncSession) -> TestClient:
 
     app.dependency_overrides[get_intent_repository] = override_get_intent_repository
     with patch("app.intents.mcp_server._get_repository", side_effect=mock_get_repository):
-        yield TestClient(app)
+        with TestClient(app) as test_client:
+            yield test_client
     app.dependency_overrides.clear()
 
 
