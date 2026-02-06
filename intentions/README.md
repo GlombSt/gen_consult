@@ -511,10 +511,16 @@ For other clients that support HTTP transport, configure the MCP server URL:
 
 #### Using with mcptools
 
-The server uses the **official MCP Python SDK** Streamable HTTP transport at `/mcp` (`app/intents/mcp_sdk_http.py`), so clients like [mcptools](https://github.com/f/mcptools) get the same behavior as with the SDK’s own server. Use:
+The server exposes **Streamable HTTP** at `/mcp` (official MCP Python SDK). If your mcptools version supports Streamable HTTP, use:
 
 ```bash
 mcp tools http://localhost:8000/mcp
+```
+
+If you see `Error: timeout waiting for endpoint`, your mcptools build is likely still using the legacy **HTTP+SSE** transport. Use the SSE endpoint instead:
+
+```bash
+mcp tools http://localhost:8000/sse
 ```
 
 If you prefer **stdio transport** (e.g. for scripting), use:
