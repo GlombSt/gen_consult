@@ -33,6 +33,33 @@ mcp_session_manager = StreamableHTTPSessionManager(
 )
 
 
+def _normalize_accept_header(scope: Scope) -> Scope:
+    if scope["type"] != "http":
+        return scope
+
+    headers = list(scope.get("headers", []))
+    accept_index = None
+    accept_value = None
+    for i, (key, value) in enumerate(headers):
+        if key.lower() == b"accept":
+            accept_index = i
+            accept_value = value.decode(errors="ignore").lower()
+            break
+
+    if accept_value is None:
+        headers.append((b"accept", b"application/json, text/event-stream"))
+    else:
+        has_json = "application/json" in accept_value
+        has_sse = "text/event-stream" in accept_value
+        has_wildcard = "*/*" in accept_value or "application/*" in accept_value
+        if not (has_json and has_sse) and (has_wildcard or has_json or has_sse):
+            headers[accept_index] = (b"accept", b"application/json, text/event-stream")
+
+    new_scope = dict(scope)
+    new_scope["headers"] = headers
+    return new_scope
+
+
 async def mcp_sdk_asgi_app(scope: Scope, receive: Receive, send: Send) -> None:
     """ASGI app that forwards /mcp requests to the SDK's Streamable HTTP handler."""
     if scope["type"] != "http":
@@ -41,4 +68,4 @@ async def mcp_sdk_asgi_app(scope: Scope, receive: Receive, send: Send) -> None:
         response = Response(status_code=404)
         await response(scope, receive, send)
         return
-    await mcp_session_manager.handle_request(scope, receive, send)
+    await mcp_session_manager.handle_request(_normalize_accept_header(scope), receive, send)
