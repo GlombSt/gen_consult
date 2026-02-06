@@ -3,12 +3,13 @@ FastAPI Application Entry Point
 """
 
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.intents.mcp_http import router as mcp_router
+from app.intents.mcp_sdk_http import mcp_sdk_asgi_app, mcp_session_manager
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
@@ -40,6 +41,26 @@ CORS_ORIGINS = [
 ]
 
 
+@asynccontextmanager
+async def app_lifespan(app: FastAPI):
+    """Application lifespan: init DB, run MCP session manager, then cleanup."""
+    logger.info(
+        "Application starting",
+        extra={
+            "environment": os.getenv("ENVIRONMENT", "development"),
+            "log_level": os.getenv("LOG_LEVEL", "DEBUG").upper(),
+            "cors_origins_count": len(CORS_ORIGINS),
+        },
+    )
+    await init_db()
+    logger.info("Database initialized")
+    async with mcp_session_manager.run():
+        logger.info("MCP Streamable HTTP session manager started")
+        yield
+    await close_db()
+    logger.info("Application shutting down")
+
+
 def create_application() -> FastAPI:
     """
     Create and configure the FastAPI application.
@@ -47,7 +68,12 @@ def create_application() -> FastAPI:
     Returns:
         Configured FastAPI application instance
     """
-    app = FastAPI(title="My First FastAPI App", description="A simple FastAPI backend for learning", version="1.0.0")
+    app = FastAPI(
+        title="My First FastAPI App",
+        description="A simple FastAPI backend for learning",
+        version="1.0.0",
+        lifespan=app_lifespan,
+    )
 
     # Configure CORS
     app.add_middleware(
@@ -77,38 +103,14 @@ def create_application() -> FastAPI:
     app.include_router(users_router, dependencies=router_dependencies)
     app.include_router(intents_router, dependencies=router_dependencies)
 
-    # Mount MCP server at /mcp endpoint (no authentication required for MCP protocol)
-    # MCP clients handle their own authentication if needed
-    app.include_router(mcp_router, prefix="/mcp", tags=["mcp"])
+    # Mount MCP server at /mcp using the SDK's Streamable HTTP transport (mcptools-compatible)
+    app.mount("/mcp", mcp_sdk_asgi_app)
 
     return app
 
 
 # Create the application instance
 app = create_application()
-
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize application on startup"""
-    logger.info(
-        "Application starting",
-        extra={
-            "environment": ENVIRONMENT,
-            "log_level": LOG_LEVEL,
-            "cors_origins_count": len(CORS_ORIGINS),
-        },
-    )
-    # Initialize database (create tables for SQLite)
-    await init_db()
-    logger.info("Database initialized")
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Clean up on application shutdown"""
-    await close_db()
-    logger.info("Application shutting down")
 
 
 @app.get("/")
