@@ -7,6 +7,19 @@
 
 ---
 
+## GitHub: use the CLI
+
+**Use the GitHub CLI (`gh`) for all GitHub operations.** Push with git, then use `gh` for PRs and CI:
+
+- Create PRs: `gh pr create --base main --head <branch> --title "..." --body "..."`
+- List runs: `gh run list --workflow=backend-ci.yml --limit 5`
+- Watch a run: `gh run watch <run-id>` (use run ID from `gh run list`)
+- View run details: `gh run view <run-id>` or `gh run view <run-id> --log-failed` if it failed
+
+Do not ask the user to open PRs or check CI in the browser; use `gh` yourself. See also **CLAUDE.md** (§ GitHub: always use the CLI).
+
+---
+
 ## Overview
 
 This document defines the **mandatory completion criteria** for coding agents working on the `intentions/` backend. Agents must NOT mark work as complete until ALL criteria are met.
@@ -29,7 +42,7 @@ An agent MUST NOT say work is finished until:
 ### Phase 1: Development
 
 1. **Understand the task**
-   - Read relevant documentation (CLAUDE.md, DEVELOPMENT_STANDARDS.md)
+   - Read relevant documentation (CLAUDE.md, AGENTS.md (readable code), DEVELOPMENT_STANDARDS.md; for Python style see PYTHON_IDIOM_STANDARDS.md)
    - Understand existing code structure
    - Plan the approach
 
@@ -88,14 +101,24 @@ pytest --cov=app --cov-fail-under=80 -v
 
 **CRITICAL:** The agent MUST push code to a branch. Do NOT mark work as complete without pushing.
 
+4. **Open a pull request (when requested or appropriate)**  
+   The agent **can** open a PR via the GitHub CLI. If the user asks for a PR, or the workflow expects one, run:
+   ```bash
+   gh pr create --base main --head <branch-name> --title "Title" --body "Description"
+   ```
+   Ensure `gh` is authenticated (`gh auth status`). If the user only asked to push a branch, provide the PR link and they can open it in the browser; if they ask to "open a PR" or "create a PR", use `gh pr create`.
+
 ### Phase 4: CI Verification
 
-**MANDATORY:** After pushing, verify CI passes:
+**MANDATORY:** After pushing, verify CI passes. **Use the GitHub CLI** (do not rely on the user checking the browser):
 
-1. **Check GitHub Actions status**
-   - Navigate to: `https://github.com/OWNER/REPO/actions`
-   - Find the workflow run for your branch
-   - Verify all jobs are GREEN (✅)
+1. **List and watch the run**
+   ```bash
+   gh run list --workflow=backend-ci.yml --limit 3
+   # Use the run ID for your branch, then:
+   gh run watch <run-id>
+   ```
+   Or: `gh run view <run-id>` to see status (success/failure, duration).
 
 2. **Verify specific checks passed:**
    - ✅ Lint and Test Backend job completed successfully
@@ -210,6 +233,8 @@ All criteria met. Ready for review.
 
 ## Related Documentation
 
+- [AGENTS.md](../AGENTS.md) - Readable code conventions for coding agents
+- [PYTHON_IDIOM_STANDARDS.md](./PYTHON_IDIOM_STANDARDS.md) - Python idiomatic rules (intentions)
 - [DEVELOPMENT_STANDARDS.md](./DEVELOPMENT_STANDARDS.md) - General development workflow
 - [LINTING_STANDARDS.md](./LINTING_STANDARDS.md) - Linting requirements
 - [TESTING_STANDARDS.md](./TESTING_STANDARDS.md) - Testing requirements
