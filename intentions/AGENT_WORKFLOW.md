@@ -136,6 +136,8 @@ pytest --cov=app --cov-fail-under=80 -v
 
 **CRITICAL:** The agent MUST wait for CI to pass before marking work as complete.
 
+**When CI is red:** Do not stop or hand back to the user. Fix the failure (lint, tests, etc.), commit, push, then re-check CI with `gh run list` / `gh run watch` until the run is **green**. Only then is the work complete.
+
 ---
 
 ## Agent Completion Checklist

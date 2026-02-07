@@ -12,7 +12,6 @@ from sqlalchemy.orm import relationship
 
 from app.shared.database import Base
 
-
 # Enum values stored as strings (DB-agnostic)
 ASSUMPTION_CONFIDENCE_VALUES = ("verified", "likely", "uncertain")
 QUALITY_PRIORITY_VALUES = ("must_have", "should_have", "nice_to_have")

@@ -11,8 +11,8 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.intents.repository import IntentRepository
 from app.intents import mcp_sdk_http
+from app.intents.repository import IntentRepository
 from app.main import app
 from app.shared.dependencies import get_intent_repository
 

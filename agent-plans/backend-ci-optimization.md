@@ -3,7 +3,7 @@
 ## What we look at (from recent runs)
 
 - **Set up Python (~5+ min)** – Largest cost. On self-hosted runners, `actions/setup-python` may download/install Python every run if the version isn’t cached; pip cache only caches packages, not the interpreter.
-- **Run full linting (~2+ min)** – Lint runs twice (`./lint.sh --fix` then `./lint.sh`). CI only needs the check; fix is for local use. Lint tools (Black, isort, Flake8, mypy) run sequentially in one step.
+- **Run full linting (~2+ min)** – Lint runs twice (`./lint.sh --fix` then `./lint.sh`). CI only needs the check; fix is for local use. Lint tools (Black, isort, Flake8, mypy) run **sequentially** in one step. **Why lint duration is high:** (1) **mypy** type-checks the whole codebase and can take 2–3+ minutes on a large repo; (2) **Black** and **isort** each scan all Python files; (3) **Flake8** runs twice (critical select codes, then full). To reduce: run tools in parallel (e.g. separate job steps or background processes), or exclude/skip mypy in CI if optional; keep a single lint run (check only) to avoid doubling time.
 - **Install dependencies (~13 s)** – Uses `pip install -e ".[dev]"` while the repo has `uv.lock`; uv is much faster and benefits from a single lockfile-based cache.
 - **Caching** – Only pip cache with `pyproject.toml`; no uv cache, no shared Python interpreter cache when using uv.
 

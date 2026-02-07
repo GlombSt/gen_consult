@@ -11,12 +11,7 @@ import pytest
 from app.intents.events import IntentCreatedEvent, IntentUpdatedEvent
 from app.intents.repository import IntentRepository
 from app.intents.schemas import IntentCreateRequest
-from app.intents.service import (
-    create_intent,
-    get_intent,
-    update_intent_description,
-    update_intent_name,
-)
+from app.intents.service import create_intent, get_intent, update_intent_description, update_intent_name
 from app.shared.events import EventBus
 
 
@@ -41,9 +36,7 @@ class TestIntentServiceIntegration:
             assert created_intent.name == "Integration Test Intent"
             assert created_intent.description == "Test description"
 
-            retrieved = await get_intent(
-                created_intent.id, repository=repository
-            )
+            retrieved = await get_intent(created_intent.id, repository=repository)
             assert retrieved is not None
             assert retrieved.id == created_intent.id
             assert retrieved.name == "Integration Test Intent"
@@ -61,9 +54,7 @@ class TestIntentServiceIntegration:
             created_intent = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
-            retrieved_intent = await get_intent(
-                created_intent.id, repository=repository
-            )
+            retrieved_intent = await get_intent(created_intent.id, repository=repository)
 
             assert retrieved_intent is not None
             assert retrieved_intent.id == created_intent.id
@@ -73,18 +64,14 @@ class TestIntentServiceIntegration:
     @pytest.mark.asyncio
     async def test_update_intent_name_integration(self, test_db_session):
         """Test updating intent name end-to-end."""
-        request = IntentCreateRequest(
-            name="Original Name", description="Test description"
-        )
+        request = IntentCreateRequest(name="Original Name", description="Test description")
         repository = IntentRepository(test_db_session)
 
         with patch("app.intents.service.event_bus", EventBus()):
             created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
-            updated = await update_intent_name(
-                created.id, "Updated Name", repository=repository
-            )
+            updated = await update_intent_name(created.id, "Updated Name", repository=repository)
             await test_db_session.commit()
 
             assert updated is not None
@@ -98,18 +85,14 @@ class TestIntentServiceIntegration:
     @pytest.mark.asyncio
     async def test_update_intent_description_integration(self, test_db_session):
         """Test updating intent description end-to-end."""
-        request = IntentCreateRequest(
-            name="Test Intent", description="Original description"
-        )
+        request = IntentCreateRequest(name="Test Intent", description="Original description")
         repository = IntentRepository(test_db_session)
 
         with patch("app.intents.service.event_bus", EventBus()):
             created = await create_intent(request, repository=repository)
             await test_db_session.commit()
 
-            updated = await update_intent_description(
-                created.id, "Updated description", repository=repository
-            )
+            updated = await update_intent_description(created.id, "Updated description", repository=repository)
             await test_db_session.commit()
 
             assert updated is not None
@@ -145,9 +128,7 @@ class TestIntentServiceIntegration:
     @pytest.mark.asyncio
     async def test_intent_updated_event_published(self, test_db_session):
         """Test that IntentUpdatedEvent is published when updating intent."""
-        request = IntentCreateRequest(
-            name="Test Intent", description="Test description"
-        )
+        request = IntentCreateRequest(name="Test Intent", description="Test description")
         repository = IntentRepository(test_db_session)
         event_bus = EventBus()
         published_events = []
@@ -161,9 +142,7 @@ class TestIntentServiceIntegration:
         with patch("app.intents.service.event_bus", event_bus):
             created = await create_intent(request, repository=repository)
             await test_db_session.commit()
-            await update_intent_name(
-                created.id, "Updated Intent", repository=repository
-            )
+            await update_intent_name(created.id, "Updated Intent", repository=repository)
             await test_db_session.commit()
 
         assert len(published_events) >= 2
@@ -179,9 +158,7 @@ class TestAspectRepositoryIntegration:
         """Test adding an aspect to an intent end-to-end."""
         from app.intents.models import Aspect
 
-        request = IntentCreateRequest(
-            name="Test Intent", description="Test description"
-        )
+        request = IntentCreateRequest(name="Test Intent", description="Test description")
         repository = IntentRepository(test_db_session)
 
         with patch("app.intents.service.event_bus", EventBus()):

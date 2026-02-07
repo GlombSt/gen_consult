@@ -10,18 +10,13 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents import mcp_sdk_http
-from app.intents.mcp_sse import (
-    router as mcp_sse_router,
-    sse_endpoint as mcp_sse_endpoint,
-    sse_message_endpoint as mcp_sse_message_endpoint,
-)
+from app.intents.mcp_sse import router as mcp_sse_router
+from app.intents.mcp_sse import sse_endpoint as mcp_sse_endpoint
+from app.intents.mcp_sse import sse_message_endpoint as mcp_sse_message_endpoint
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
-from app.shared.exception_handlers import (
-    authentication_exception_handler,
-    validation_exception_handler,
-)
+from app.shared.exception_handlers import authentication_exception_handler, validation_exception_handler
 from app.shared.logging_config import logger
 from app.shared.middleware import log_requests_middleware
 from app.users.router import router as users_router

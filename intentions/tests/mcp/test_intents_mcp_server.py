@@ -107,9 +107,7 @@ class TestIntentsMCPServer:
         )
         from app.intents import service
 
-        created_intent = await service.create_intent(
-            create_request, repository
-        )
+        created_intent = await service.create_intent(create_request, repository)
         await test_db_session.commit()
 
         arguments = {"intent_id": created_intent.id}
@@ -217,9 +215,7 @@ class TestIntentsMCPServer:
         )
         from app.intents import service
 
-        created_intent = await service.create_intent(
-            create_request, repository
-        )
+        created_intent = await service.create_intent(create_request, repository)
         await test_db_session.commit()
 
         arguments = {"intent_id": created_intent.id, "name": "Updated Name"}
@@ -306,9 +302,7 @@ class TestIntentsMCPServer:
         )
         from app.intents import service
 
-        created_intent = await service.create_intent(
-            create_request, repository
-        )
+        created_intent = await service.create_intent(create_request, repository)
         await test_db_session.commit()
 
         result_dict = _intent_to_dict_for_mcp(created_intent)

@@ -36,9 +36,7 @@ class TestCreateIntent:
             name="New Intent",
             description="Test description",
         )
-        created_intent = create_test_intent(
-            id=1, name="New Intent", description="Test description"
-        )
+        created_intent = create_test_intent(id=1, name="New Intent", description="Test description")
 
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_intent)
@@ -61,9 +59,7 @@ class TestCreateIntent:
             name="New Intent",
             description="Test description",
         )
-        created_intent = create_test_intent(
-            id=1, name="New Intent", description="Test description"
-        )
+        created_intent = create_test_intent(id=1, name="New Intent", description="Test description")
 
         mock_repo = MagicMock()
         mock_repo.create = AsyncMock(return_value=created_intent)
@@ -167,9 +163,7 @@ class TestUpdateIntentDescription:
         with patch("app.intents.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
 
-            result = await update_intent_description(
-                1, "Updated", repository=mock_repo
-            )
+            result = await update_intent_description(1, "Updated", repository=mock_repo)
 
             assert result is not None
             assert result.description == "Updated"
@@ -237,10 +231,7 @@ class TestUpdateIntentArticulation:
     @pytest.mark.asyncio
     async def test_update_intent_articulation_when_exists_replaces_and_returns_intent(self):
         """Test updating articulation when intent exists (full replace: all six fields)."""
-        from app.intents.schemas import (
-            AspectCreate,
-            IntentArticulationUpdateRequest,
-        )
+        from app.intents.schemas import AspectCreate, IntentArticulationUpdateRequest
 
         existing = create_test_intent(id=1, name="X")
         existing.aspects = []
@@ -275,10 +266,7 @@ class TestUpdateIntentArticulation:
     @pytest.mark.asyncio
     async def test_update_intent_articulation_when_only_aspects_supplied_succeeds(self):
         """Intent owns articulation entities; aspect_id is optional. Partial update (only aspects) is allowed."""
-        from app.intents.schemas import (
-            AspectCreate,
-            IntentArticulationUpdateRequest,
-        )
+        from app.intents.schemas import AspectCreate, IntentArticulationUpdateRequest
 
         existing = create_test_intent(id=1, name="X")
         existing.aspects = []
@@ -311,9 +299,7 @@ class TestUpdateIntentArticulation:
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        result = await update_intent_articulation(
-            999, IntentArticulationUpdateRequest(), repository=mock_repo
-        )
+        result = await update_intent_articulation(999, IntentArticulationUpdateRequest(), repository=mock_repo)
 
         assert result is None
 
@@ -340,9 +326,7 @@ class TestAddPrompt:
 
         with patch("app.intents.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
-            result = await add_prompt(
-                1, PromptCreateRequest(content="Do something"), repository=mock_repo
-            )
+            result = await add_prompt(1, PromptCreateRequest(content="Do something"), repository=mock_repo)
 
         assert result is mock_prompt
         mock_repo.add_prompt.assert_called_once()
@@ -355,9 +339,7 @@ class TestAddPrompt:
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        result = await add_prompt(
-            999, PromptCreateRequest(content="x"), repository=mock_repo
-        )
+        result = await add_prompt(999, PromptCreateRequest(content="x"), repository=mock_repo)
 
         assert result is None
         mock_repo.add_prompt.assert_not_called()
@@ -381,9 +363,7 @@ class TestAddOutput:
 
         with patch("app.intents.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
-            result = await add_output(
-                1, OutputCreateRequest(content="Result"), repository=mock_repo
-            )
+            result = await add_output(1, OutputCreateRequest(content="Result"), repository=mock_repo)
 
         assert result is mock_output
         mock_repo.add_output.assert_called_once()
@@ -409,9 +389,7 @@ class TestAddInsight:
 
         with patch("app.intents.service.event_bus") as mock_bus:
             mock_bus.publish = AsyncMock()
-            result = await add_insight(
-                1, InsightCreateRequest(content="Discovery"), repository=mock_repo
-            )
+            result = await add_insight(1, InsightCreateRequest(content="Discovery"), repository=mock_repo)
 
         assert result is mock_insight
         mock_repo.add_insight.assert_called_once()
@@ -424,9 +402,7 @@ class TestAddInsight:
         mock_repo = MagicMock()
         mock_repo.find_by_id = AsyncMock(return_value=None)
 
-        result = await add_insight(
-            999, InsightCreateRequest(content="x"), repository=mock_repo
-        )
+        result = await add_insight(999, InsightCreateRequest(content="x"), repository=mock_repo)
 
         assert result is None
         mock_repo.add_insight.assert_not_called()

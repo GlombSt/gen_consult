@@ -62,9 +62,7 @@ class AssumptionCreate(BaseModel):
 
     description: str = Field(..., min_length=1, description="The implicit belief made explicit.")
     aspect_id: Optional[int] = Field(None, description="Aspect this assumption was discovered for.")
-    confidence: Optional[AssumptionConfidence] = Field(
-        None, description="Certainty level: verified, likely, uncertain."
-    )
+    confidence: Optional[AssumptionConfidence] = Field(None, description="Certainty level: verified, likely, uncertain.")
 
 
 class QualityCreate(BaseModel):
@@ -73,9 +71,7 @@ class QualityCreate(BaseModel):
     criterion: str = Field(..., min_length=1, description="The standard that defines success.")
     aspect_id: Optional[int] = Field(None, description="Aspect this quality was discovered for.")
     measurement: Optional[str] = Field(None, description="How to verify the criterion is met.")
-    priority: Optional[QualityPriority] = Field(
-        None, description="Importance: must_have, should_have, nice_to_have."
-    )
+    priority: Optional[QualityPriority] = Field(None, description="Importance: must_have, should_have, nice_to_have.")
 
 
 # --- V2 entity response models (source of truth for API) ---
@@ -86,9 +82,7 @@ class AspectResponse(BaseModel):
 
     id: int = Field(..., description="Unique identifier of the aspect.")
     name: str = Field(..., description="Short label for the aspect.")
-    description: Optional[str] = Field(
-        None, description="Optional longer description of the aspect."
-    )
+    description: Optional[str] = Field(None, description="Optional longer description of the aspect.")
 
 
 class InputResponse(BaseModel):
@@ -96,9 +90,7 @@ class InputResponse(BaseModel):
 
     id: int = Field(..., description="Unique identifier of the input.")
     name: str = Field(..., description="Label for the input.")
-    description: Optional[str] = Field(
-        None, description="Description of what this input is for."
-    )
+    description: Optional[str] = Field(None, description="Description of what this input is for.")
 
 
 class ChoiceResponse(BaseModel):
@@ -106,27 +98,21 @@ class ChoiceResponse(BaseModel):
 
     id: int = Field(..., description="Unique identifier of the choice.")
     name: str = Field(..., description="Label for the choice.")
-    description: Optional[str] = Field(
-        None, description="Description of the decision point."
-    )
+    description: Optional[str] = Field(None, description="Description of the decision point.")
 
 
 class PitfallResponse(BaseModel):
     """Pitfall: failure mode or anti-pattern to avoid."""
 
     id: int = Field(..., description="Unique identifier of the pitfall.")
-    description: Optional[str] = Field(
-        None, description="Description of the failure mode to avoid."
-    )
+    description: Optional[str] = Field(None, description="Description of the failure mode to avoid.")
 
 
 class AssumptionResponse(BaseModel):
     """Assumption: implicit belief made explicit."""
 
     id: int = Field(..., description="Unique identifier of the assumption.")
-    description: Optional[str] = Field(
-        None, description="The assumption statement."
-    )
+    description: Optional[str] = Field(None, description="The assumption statement.")
 
 
 class QualityResponse(BaseModel):
@@ -143,9 +129,7 @@ class ExampleResponse(BaseModel):
     """Example: concrete input→output demonstration."""
 
     id: int = Field(..., description="Unique identifier of the example.")
-    sample: Optional[str] = Field(
-        None, description="Sample input or input→output pair."
-    )
+    sample: Optional[str] = Field(None, description="Sample input or input→output pair.")
 
 
 class PromptResponse(BaseModel):
@@ -153,18 +137,14 @@ class PromptResponse(BaseModel):
 
     id: int = Field(..., description="Unique identifier of the prompt.")
     version: int = Field(..., description="Version number of this prompt.")
-    content: Optional[str] = Field(
-        None, description="The prompt text (may be omitted in list views)."
-    )
+    content: Optional[str] = Field(None, description="The prompt text (may be omitted in list views).")
 
 
 class InsightResponse(BaseModel):
     """Insight: discovery that feeds back to the intent."""
 
     id: int = Field(..., description="Unique identifier of the insight.")
-    content: Optional[str] = Field(
-        None, description="The insight content."
-    )
+    content: Optional[str] = Field(None, description="The insight content.")
     status: Optional[Literal["pending", "incorporated", "dismissed"]] = Field(
         None, description="Current status of the insight."
     )
@@ -245,33 +225,15 @@ class IntentResponse(BaseModel):
     )
     created_at: datetime
     updated_at: datetime
-    aspects: List[AspectResponse] = Field(
-        default_factory=list, description="Aspects (domains of consideration)."
-    )
-    inputs: List[InputResponse] = Field(
-        default_factory=list, description="Inputs the user provides."
-    )
-    choices: List[ChoiceResponse] = Field(
-        default_factory=list, description="Decision points and choices."
-    )
-    pitfalls: List[PitfallResponse] = Field(
-        default_factory=list, description="Failure modes to avoid."
-    )
-    assumptions: List[AssumptionResponse] = Field(
-        default_factory=list, description="Explicit assumptions."
-    )
-    qualities: List[QualityResponse] = Field(
-        default_factory=list, description="Success criteria."
-    )
-    examples: List[ExampleResponse] = Field(
-        default_factory=list, description="Example demonstrations."
-    )
-    prompts: List[PromptResponse] = Field(
-        default_factory=list, description="Versioned prompts."
-    )
-    insights: List[InsightResponse] = Field(
-        default_factory=list, description="Insights feeding back to the intent."
-    )
+    aspects: List[AspectResponse] = Field(default_factory=list, description="Aspects (domains of consideration).")
+    inputs: List[InputResponse] = Field(default_factory=list, description="Inputs the user provides.")
+    choices: List[ChoiceResponse] = Field(default_factory=list, description="Decision points and choices.")
+    pitfalls: List[PitfallResponse] = Field(default_factory=list, description="Failure modes to avoid.")
+    assumptions: List[AssumptionResponse] = Field(default_factory=list, description="Explicit assumptions.")
+    qualities: List[QualityResponse] = Field(default_factory=list, description="Success criteria.")
+    examples: List[ExampleResponse] = Field(default_factory=list, description="Example demonstrations.")
+    prompts: List[PromptResponse] = Field(default_factory=list, description="Versioned prompts.")
+    insights: List[InsightResponse] = Field(default_factory=list, description="Insights feeding back to the intent.")
 
     model_config = {
         "json_schema_extra": {

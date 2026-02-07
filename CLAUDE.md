@@ -162,6 +162,7 @@ When the user asks to push, open a PR, or monitor CI, use `gh` (and git for comm
 10. **Complete workflow** - Read `AGENT_WORKFLOW.md` - MUST push code and verify CI passes before completion
 11. **GitHub = use CLI** - Use **GitHub CLI (`gh`)** for all GitHub operations: push (after git commit), `gh pr create`, `gh run list` / `gh run watch` to monitor CI. Do not ask the user to open PRs or check Actions in the browser.
 12. **Readable code** - Apply conventions in `AGENTS.md`; for backend Python also `intentions/PYTHON_IDIOM_STANDARDS.md`.
+13. **CI red = fix until green** - If CI is red, fix the failure (lint, tests, etc.), commit, push, and re-check CI. Do not mark work complete until the run is green. See `intentions/AGENT_WORKFLOW.md` (Phase 4).
 
 ### Before Making Changes
 
