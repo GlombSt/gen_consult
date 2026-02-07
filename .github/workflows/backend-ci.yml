@@ -48,6 +48,8 @@ jobs:
           mypy-${{ runner.os }}-
 
     - name: Run linting (Black, isort, Flake8)
+      env:
+        FULL_LINT: "true"
       run: |
         chmod +x lint.sh
         uv run ./lint.sh
