@@ -292,6 +292,228 @@ What can we remove from the plan?
 
 ---
 
+## 9. References for Implementation
+
+### Current Implementation Files
+
+**MCP Server Implementation:**
+- `intentions/app/intents/mcp_server.py` - Main MCP server with tool definitions
+  - Implements `@server.list_tools()` and `@server.call_tool()`
+  - Contains tool schema generation and routing logic
+  - Uses service layer as port (hexagonal architecture)
+
+- `intentions/app/intents/mcp_sdk_http.py` - HTTP/SSE transport layer
+  - Wraps `StreamableHTTPSessionManager` from MCP Python SDK
+  - Handles ASGI/FastAPI integration
+  - Implements origin validation and security
+
+- `intentions/app/intents/mcp_http.py` - Legacy HTTP transport (deprecated, for reference)
+
+- `intentions/mcp_server.py` - Stdio transport entry point (deprecated, kept for compatibility)
+
+**Service Layer (The Port):**
+- `intentions/app/intents/service.py` - Business logic functions
+  - All MCP tools call these service functions
+  - Service layer is the single source of truth for operations
+  - Read service docstrings for operation descriptions
+
+**Schemas (API Contract):**
+- `intentions/app/intents/schemas.py` - Pydantic models for all requests/responses
+  - `IntentCreateRequest`, `IntentResponse`, `IntentResponseForMCP`, etc.
+  - Single source of truth for parameter documentation
+  - Use `model_json_schema()` to generate JSON schemas for MCP tools
+
+**Domain Models:**
+- `intentions/app/intents/models.py` - Domain models with business logic
+- `intentions/app/intents/db_models.py` - SQLAlchemy ORM models
+
+**Repository (Data Access):**
+- `intentions/app/intents/repository.py` - Database operations
+
+**FastAPI Integration:**
+- `intentions/app/main.py` - FastAPI app with MCP endpoint at `/mcp`
+  - Mounts `mcp_sdk_asgi_app` for MCP protocol handling
+
+### Domain Documentation
+
+**Core Domain Model:**
+- `intentions/app/intents/INTENTS_DOMAIN_V2.md` - **CRITICAL REFERENCE**
+  - Complete domain model with entity definitions
+  - Relationships between Intent, Aspect, and articulation entities
+  - The 7-step sharpening flow (lines 214-265)
+  - Design principles and rationale
+  - Data definitions for all entities (lines 317-462)
+
+**Domain Implementation Plan:**
+- `intentions/app/intents/IMPLEMENTATION_PLAN_V2.md` - V2 migration notes
+
+**Business Context:**
+- `business/financing/Gründungszuschuss/output/business_plan.md` - Business value proposition
+  - Core capabilities (lines 51-68)
+  - Problem statement (lines 29-36)
+  - User guidance and quality assessment as key features
+
+### Architecture Standards
+
+**Mandatory Reading:**
+- `intentions/ARCHITECTURE_STANDARDS.md` - **MUST FOLLOW**
+  - Hexagonal architecture rules
+  - Layer responsibilities (Router → Service → Repository)
+  - Three model types (DB, Domain, DTO)
+  - Cross-domain communication via service layer
+  - Event publishing requirements
+
+- `intentions/ARCHITECTURE_GUIDE.md` - Detailed examples and patterns
+  - Communication patterns
+  - Service layer design
+  - Domain event usage
+
+**Development Workflow:**
+- `intentions/DEVELOPMENT_STANDARDS.md` - TDD workflow, code quality checklist
+- `intentions/TESTING_STANDARDS.md` - Coverage requirements (80%+), test patterns
+
+**Related Standards:**
+- `intentions/LOGGING_STANDARDS.md` - Structured logging with PII protection
+- `intentions/EXCEPTION_HANDLING_STANDARDS.md` - Error handling patterns
+
+### MCP Specification and Examples
+
+**Official MCP Specification:**
+- **MCP Spec 2025-11-25**: https://modelcontextprotocol.io/specification/2025-11-25
+  - Tools: https://modelcontextprotocol.io/specification/2025-11-25/server/tools
+  - Resources: https://modelcontextprotocol.io/specification/2025-11-25/server/resources
+  - Prompts: https://modelcontextprotocol.io/specification/2025-11-25/server/prompts
+
+- **TypeScript Schema**: https://github.com/modelcontextprotocol/specification/blob/main/schema/2025-11-25/schema.ts
+  - Canonical type definitions for all MCP protocol types
+
+**MCP Python SDK:**
+- **GitHub**: https://github.com/modelcontextprotocol/python-sdk
+- **PyPI**: `mcp` package
+- **Key Imports**:
+  ```python
+  import mcp.types as types  # Protocol types
+  from mcp.server.lowlevel import Server  # Server implementation
+  from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
+  from mcp.server.transport_security import TransportSecuritySettings
+  ```
+
+**Official Reference Servers (Benchmarks):**
+- **Filesystem**: https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
+  - 15 tools, clear categorization, excellent security docs
+
+- **Memory**: https://github.com/modelcontextprotocol/servers/tree/main/src/memory
+  - Knowledge graph, domain model explanation upfront
+
+- **Sequential Thinking**: https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking
+  - Problem/solution framing, detailed parameter docs, use cases
+
+- **Git**: https://github.com/modelcontextprotocol/servers/tree/main/src/git
+  - Read/search/manipulate Git repositories
+
+- **Fetch**: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
+  - Single tool, clear parameter docs, security warnings
+
+**All Official Servers**: https://github.com/modelcontextprotocol/servers
+
+**Documentation Best Practices:**
+- Nordic APIs: https://nordicapis.com/5-examples-of-excellent-mcp-server-documentation/
+  - Analysis of Figma, GitLab, PandaDoc, SmartBear, Webflow MCP docs
+  - What makes excellent documentation
+
+### Testing Infrastructure
+
+**Existing MCP Tests:**
+- `intentions/tests/mcp/test_intents_mcp_server.py` - Current MCP server tests
+  - Examples of tool call testing
+  - Fixtures for MCP client setup
+
+**Test Requirements:**
+- 80%+ coverage overall (see `intentions/TESTING_STANDARDS.md`)
+- Integration tests for all new MCP features
+- Test both success and error cases
+
+**Test Fixtures:**
+- Database: In-memory SQLite (automatic in tests)
+- MCP Client: Mock or real client for integration tests
+
+### Project Context
+
+**Root Documentation:**
+- `CLAUDE.md` - **Project-wide guidance for AI assistants**
+  - Multi-project repository structure
+  - Hexagonal architecture principles
+  - Backend = hexagon, frontend = adapter
+  - GitHub CLI usage requirements
+
+- `AGENTS.md` - Readable code conventions for coding agents
+  - Simplicity, structure, naming conventions
+
+- `intentions/PYTHON_IDIOM_STANDARDS.md` - Python-specific idioms
+
+**CI/CD:**
+- `CI.md` - CI workflow triggers and configuration
+- `.github/workflows/` - GitHub Actions workflows
+
+**Current README:**
+- `intentions/README.md` - Lines 409-664 contain current MCP server documentation
+  - This is what we're improving/replacing
+
+### Key Concepts for Implementation
+
+**Hexagonal Architecture in MCP Context:**
+```
+MCP Server (mcp_server.py) = PRIMARY ADAPTER
+    ↓ calls
+Service Layer (service.py) = PORT (public API)
+    ↓ uses
+Repository (repository.py) = SECONDARY ADAPTER
+    ↓ accesses
+Database
+```
+
+**Three Model Types:**
+1. **DB Models** (`db_models.py`) - SQLAlchemy ORM, database schema
+2. **Domain Models** (`models.py`) - Business logic, rich behavior
+3. **API DTOs** (`schemas.py`) - Request/response, validation, MCP tool schemas
+
+**Critical Design Decisions:**
+- Examples are intentionally omitted from MCP surface (see INTENTS_DOMAIN_V2.md line 24)
+- Intent is a composition: Intent owns Aspects and articulation entities
+- Articulation entities may optionally relate to an Aspect (discovered for)
+- Service layer publishes domain events for all business actions
+
+**MCP-Specific Patterns:**
+- Tool schemas: Use `_pydantic_to_json_schema()` helper in `mcp_server.py`
+- Tool descriptions: Extract from service layer docstrings (single source of truth)
+- Error handling: Rollback transaction, log error, re-raise (see lines 364-372 in `mcp_server.py`)
+
+### External Resources
+
+**Model Context Protocol Community:**
+- Official docs: https://modelcontextprotocol.io/
+- GitHub discussions: https://github.com/modelcontextprotocol/specification/discussions
+- Claude Desktop setup: https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop
+
+**MCP Tools and Clients:**
+- `mcp-remote` (NPX package): HTTP/SSE proxy for stdio MCP servers
+- Claude Desktop: Primary MCP client
+- VS Code Cline: MCP-enabled coding assistant
+- Continue.dev: MCP-enabled AI assistant
+
+### Implementation Checklist References
+
+When implementing, consult:
+1. ✅ `ARCHITECTURE_STANDARDS.md` - Ensure hexagonal architecture compliance
+2. ✅ `INTENTS_DOMAIN_V2.md` - Understand domain model deeply
+3. ✅ `schemas.py` - Use existing schemas, maintain consistency
+4. ✅ MCP Spec (tools/resources/prompts) - Follow protocol correctly
+5. ✅ Official reference servers - Match quality and patterns
+6. ✅ `DEVELOPMENT_STANDARDS.md` - Follow TDD workflow
+7. ✅ `TESTING_STANDARDS.md` - Write comprehensive tests
+
+---
+
 ## Appendix: MCP Specification Summary
 
 **Protocol Features**:
