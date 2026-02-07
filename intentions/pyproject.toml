@@ -30,7 +30,7 @@ dev = [
     "flake8==7.1.1",
     "black==24.10.0",
     "isort==5.13.2",
-    "mypy==1.13.0",
+    "mypy[faster-cache]==1.19.1",
 ]
 
 # Black - Code Formatter

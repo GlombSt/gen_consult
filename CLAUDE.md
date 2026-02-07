@@ -62,11 +62,21 @@ gen_consult/
 - `customer-ux/README.md` - Getting started
 
 ### Project Documentation
+- `AGENTS.md` - Readable code conventions for coding agents (simplicity, structure, naming). Backend Python: see `intentions/PYTHON_IDIOM_STANDARDS.md`
 - `TODO.md` - Current architecture alignment tasks
 - `README.md` - Project overview
 - `CI.md` - CI/CD workflow triggers and configuration
 
+## GitHub: always use the CLI
 
+**Use the GitHub CLI (`gh`) for all GitHub operations.** Do not assume the user will push, open PRs, or check CI in the browser.
+
+- **Push:** `git push -u origin <branch>` (git); use `gh` for anything that talks to GitHub after push.
+- **Pull requests:** `gh pr create --base main --head <branch> --title "..." --body "..."`.
+- **CI / Actions:** `gh run list --workflow=<name>`, `gh run view <run-id>`, `gh run watch <run-id>` to monitor until green.
+- **Repo/branch context:** `gh pr list`, `gh pr view`, `gh run list` as needed.
+
+When the user asks to push, open a PR, or monitor CI, use `gh` (and git for commit/push). See also `intentions/AGENT_WORKFLOW.md` for the full workflow.
 
 ## Backend (`intentions/`) - The Hexagon
 
@@ -150,6 +160,8 @@ gen_consult/
 8. **Test thoroughly** - 80%+ coverage required
 9. **TDD is mandatory** - Read `DEVELOPMENT_STANDARDS.md`
 10. **Complete workflow** - Read `AGENT_WORKFLOW.md` - MUST push code and verify CI passes before completion
+11. **GitHub = use CLI** - Use **GitHub CLI (`gh`)** for all GitHub operations: push (after git commit), `gh pr create`, `gh run list` / `gh run watch` to monitor CI. Do not ask the user to open PRs or check Actions in the browser.
+12. **Readable code** - Apply conventions in `AGENTS.md`; for backend Python also `intentions/PYTHON_IDIOM_STANDARDS.md`.
 
 ### Before Making Changes
 

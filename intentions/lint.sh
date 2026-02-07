@@ -102,10 +102,27 @@ else
     echo -e "${YELLOW}⚠ Flake8 warnings found (non-critical)${NC}"
 fi
 
-# 5. mypy - Type Checking (optional)
+# 5. mypy - Type Checking (optional; -j auto when supported; default: incremental via changed files)
 print_section "5. mypy (Type Checking - Optional)"
 if command -v mypy &> /dev/null; then
-    if mypy app/ --ignore-missing-imports; then
+    MYPY_TARGETS="app/"
+    # Default: run mypy only on changed app/*.py (CI: diff vs base branch; local: diff vs origin/main or HEAD~1)
+    BASE="${GITHUB_BASE_REF:-main}"
+    REF="origin/$BASE"
+    git rev-parse --verify "$REF" &> /dev/null || REF="HEAD~1"
+    CHANGED=$(git diff --name-only "$REF"...HEAD 2>/dev/null | grep '\.py$' | sed 's|^intentions/||' | grep -E '^app/' || true)
+    if [ -n "$CHANGED" ]; then
+        MYPY_TARGETS=$(echo "$CHANGED" | tr '\n' ' ')
+    fi
+    MYPY_OUT=$(mypy $MYPY_TARGETS --ignore-missing-imports -j auto 2>&1)
+    MYPY_RC=$?
+    if [ $MYPY_RC -eq 2 ]; then
+        # -j not supported (e.g. older mypy), run without it
+        MYPY_OUT=$(mypy $MYPY_TARGETS --ignore-missing-imports 2>&1)
+        MYPY_RC=$?
+    fi
+    echo "$MYPY_OUT"
+    if [ $MYPY_RC -eq 0 ]; then
         echo -e "${GREEN}✓ Type checking passed${NC}"
     else
         echo -e "${YELLOW}⚠ Type checking issues found (optional)${NC}"
