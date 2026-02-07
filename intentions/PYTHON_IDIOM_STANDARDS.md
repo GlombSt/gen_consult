@@ -1,7 +1,7 @@
 # Python Idiom Standards
 
 **Version:** 1.0  
-**Last Updated:** February 2025  
+**Last Updated:** February 2026  
 **Status:** MANDATORY - Python code in intentions/ must follow these rules  
 **Audience:** Coding agents and developers
 
@@ -29,7 +29,8 @@ In addition to [AGENTS.md](../AGENTS.md) (readable code) and the standards below
 
 ## Data modeling
 
-- Use `@dataclass` for structured data.
+- **Pydantic in `schemas.py` is the semantic source of truth** for API request/response and field documentation; domain models live in `models.py`. See [ARCHITECTURE_STANDARDS.md](ARCHITECTURE_STANDARDS.md) for the three model types (DB, domain, DTOs).
+- Use `@dataclass` only for internal helpers or non-domain structured data (e.g. config objects); do not replace domain models or Pydantic schemas with dataclasses.
 - Use `Enum` for fixed value sets.
 - Avoid passing loosely structured dictionaries across layers.
 
@@ -66,6 +67,7 @@ In addition to [AGENTS.md](../AGENTS.md) (readable code) and the standards below
 
 **Related Documentation:**
 
+- [ARCHITECTURE_STANDARDS.md](ARCHITECTURE_STANDARDS.md) - Model types (DB, domain, DTOs) and Pydantic as source of truth
 - [AGENTS.md](../AGENTS.md) - Readable code conventions
 - [LINTING_STANDARDS.md](LINTING_STANDARDS.md) - Formatting and lint rules
 - [EXCEPTION_HANDLING_STANDARDS.md](EXCEPTION_HANDLING_STANDARDS.md) - Exception handling
