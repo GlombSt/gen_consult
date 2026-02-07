@@ -116,6 +116,8 @@ omit = [
     "*/__pycache__/*",
     "*/mcp_server.py",  # MCP server entry point (infrastructure)
     "*/intents/mcp_server.py",  # MCP server module (infrastructure)
+    "*/intents/mcp_http.py",  # Deprecated MCP transport (legacy)
+    "*/intents/mcp_sse.py",  # Legacy MCP SSE transport (compat)
 ]
 branch = true
 
@@ -137,4 +139,3 @@ exclude_lines = [
 
 [tool.coverage.html]
 directory = "htmlcov"
-

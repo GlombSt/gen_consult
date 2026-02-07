@@ -509,9 +509,18 @@ For other clients that support HTTP transport, configure the MCP server URL:
 
 **Note:** Replace `localhost:8000` with your actual server host and port.
 
-#### Using with mcptools (stdio recommended)
+#### Using with mcptools
 
-[mcptools](https://github.com/f/mcptools) can hit "timeout waiting for endpoint" with Streamable HTTP against this server. Use **stdio transport** instead:
+The server exposes **Streamable HTTP** at `/mcp` (official MCP Python SDK). If your mcptools version supports Streamable HTTP, use:
+
+```bash
+mcp tools http://localhost:8000/mcp
+```
+
+If you see `Error: timeout waiting for endpoint`, your client likely isn’t sending the required
+`Accept: application/json, text/event-stream` header for Streamable HTTP. Upgrade mcptools and retry.
+
+If you prefer **stdio transport** (e.g. for scripting), use:
 
 ```bash
 cd intentions

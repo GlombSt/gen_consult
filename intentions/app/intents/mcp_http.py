@@ -1,13 +1,15 @@
 """
-HTTP transport wrapper for MCP server.
+Custom HTTP transport for MCP (deprecated in favor of SDK transport).
 
-Provides Streamable HTTP transport integration for the MCP server,
-allowing it to run alongside FastAPI as an HTTP endpoint.
+This module is no longer used: the app mounts the official SDK's Streamable HTTP
+transport at /mcp via app/intents/mcp_sdk_http.py for mcptools compatibility.
+Kept for reference or revert.
 """
 
 import asyncio
 import json
 import os
+import uuid
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Request, Response, status
@@ -185,10 +187,11 @@ router = APIRouter()
 
 async def _sse_stream():
     """Yield SSE events so Streamable HTTP clients (e.g. mcptools) get a valid stream."""
-    # Initial event so client sees the endpoint is ready
-    yield "event: endpoint_ready\ndata: {}\n\n"
-    # Keep stream open with heartbeats so clients that wait for an open stream don't timeout
-    for _ in range(12):  # ~60s at 5s interval
+    # Initial event so client sees the endpoint is ready (Streamable HTTP discovery).
+    # id allows clients to reconnect with Last-Event-ID for resumability.
+    yield "id: 0\nevent: endpoint_ready\ndata: {}\n\n"
+    # Keep stream open indefinitely with heartbeats so clients don't see unexpected EOF
+    while True:
         await asyncio.sleep(5)
         yield ": heartbeat\n\n"
 
@@ -265,4 +268,9 @@ async def mcp_endpoint(request: Request) -> Response:
     if response is None:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
 
-    return JSONResponse(content=response)
+    # Echo or assign Mcp-Session-Id for Streamable HTTP clients (e.g. mcptools)
+    session_id = request.headers.get("Mcp-Session-Id") or str(uuid.uuid4())
+    return JSONResponse(
+        content=response,
+        headers={"Mcp-Session-Id": session_id},
+    )
