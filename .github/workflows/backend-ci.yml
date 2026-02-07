@@ -21,15 +21,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v6.0.2
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v6.2.0
       with:
         python-version: '3.13'
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v7
+      uses: astral-sh/setup-uv@v7.3.0
       with:
         version: "latest"
         enable-cache: false  # Use UV_CACHE_DIR instead of GitHub cloud
@@ -40,7 +40,7 @@ jobs:
         uv sync --frozen --extra dev
 
     - name: Restore mypy cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5.0.3
       with:
         path: intentions/.mypy_cache
         key: mypy-${{ runner.os }}-${{ hashFiles('intentions/pyproject.toml') }}
