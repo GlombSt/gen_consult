@@ -141,18 +141,22 @@ From analysis of top servers:
 
 **Scope**: Improve documentation without code changes
 
+**Standards**: Follow `MCP_DOCUMENTATION_STANDARDS.md` - derive from single sources of truth
+
 **Changes**:
 1. Create `MCP_CLIENT_GUIDE.md` with:
    - "What is SharpIntent MCP Server?"
    - "Why use this?" (problem/solution)
-   - Tool reference with examples
-   - Common workflows
+   - Tool reference with examples (derived from `schemas.py` and `service.py`)
+   - Common workflows (references `INTENTS_DOMAIN_V2.md`)
    - Configuration for multiple clients (Claude Desktop, VS Code, etc.)
    - Troubleshooting guide
 
 2. Update README.md:
    - Link to client guide
    - Simplify MCP section to quick start
+
+**Key Principle**: No duplication - reference schemas, service docstrings, and domain model
 
 **Pros**:
 - Quick to implement (documentation only)
@@ -368,6 +372,15 @@ What can we remove from the plan?
   - Service layer design
   - Domain event usage
 
+**MCP-Specific Standards:**
+- `intentions/MCP_DOCUMENTATION_STANDARDS.md` - **MUST FOLLOW for MCP docs**
+  - Single source of truth principle
+  - Documentation architecture (schemas → service → domain)
+  - How to avoid duplication
+  - Pydantic models as primary source
+  - Service docstrings as operation descriptions
+  - Domain model as conceptual reference
+
 **Development Workflow:**
 - `intentions/DEVELOPMENT_STANDARDS.md` - TDD workflow, code quality checklist
 - `intentions/TESTING_STANDARDS.md` - Coverage requirements (80%+), test patterns
@@ -504,13 +517,14 @@ Database
 ### Implementation Checklist References
 
 When implementing, consult:
-1. ✅ `ARCHITECTURE_STANDARDS.md` - Ensure hexagonal architecture compliance
-2. ✅ `INTENTS_DOMAIN_V2.md` - Understand domain model deeply
-3. ✅ `schemas.py` - Use existing schemas, maintain consistency
-4. ✅ MCP Spec (tools/resources/prompts) - Follow protocol correctly
-5. ✅ Official reference servers - Match quality and patterns
-6. ✅ `DEVELOPMENT_STANDARDS.md` - Follow TDD workflow
-7. ✅ `TESTING_STANDARDS.md` - Write comprehensive tests
+1. ✅ `MCP_DOCUMENTATION_STANDARDS.md` - **Follow single source of truth principle**
+2. ✅ `ARCHITECTURE_STANDARDS.md` - Ensure hexagonal architecture compliance
+3. ✅ `INTENTS_DOMAIN_V2.md` - Understand domain model deeply
+4. ✅ `schemas.py` - Use existing schemas, maintain consistency
+5. ✅ MCP Spec (tools/resources/prompts) - Follow protocol correctly
+6. ✅ Official reference servers - Match quality and patterns
+7. ✅ `DEVELOPMENT_STANDARDS.md` - Follow TDD workflow
+8. ✅ `TESTING_STANDARDS.md` - Write comprehensive tests
 
 ---
 
