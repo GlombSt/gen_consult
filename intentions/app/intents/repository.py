@@ -11,31 +11,19 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from .db_models import (
-    AssumptionDBModel,
     AspectDBModel,
+    AssumptionDBModel,
     ChoiceDBModel,
     ExampleDBModel,
-    InsightDBModel,
     InputDBModel,
+    InsightDBModel,
     IntentDBModel,
     OutputDBModel,
     PitfallDBModel,
     PromptDBModel,
     QualityDBModel,
 )
-from .models import (
-    Assumption,
-    Aspect,
-    Choice,
-    Example,
-    Insight,
-    Input,
-    Intent,
-    Output,
-    Pitfall,
-    Prompt,
-    Quality,
-)
+from .models import Aspect, Assumption, Choice, Example, Input, Insight, Intent, Output, Pitfall, Prompt, Quality
 
 
 def _safe_relation_list(db_obj, rel_name: str) -> list:
@@ -134,9 +122,7 @@ class IntentRepository:
     async def delete(self, intent_id: int) -> bool:
         from sqlalchemy import delete as sql_delete
 
-        result = await self.db.execute(
-            sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id)
-        )
+        result = await self.db.execute(sql_delete(IntentDBModel).where(IntentDBModel.id == intent_id))
         await self.db.flush()
         return bool(result.rowcount and result.rowcount > 0)
 
@@ -186,9 +172,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_aspect_domain_model(db)
 
-    async def find_aspect_by_id(
-        self, intent_id: int, aspect_id: int
-    ) -> Optional[Aspect]:
+    async def find_aspect_by_id(self, intent_id: int, aspect_id: int) -> Optional[Aspect]:
         result = await self.db.execute(
             select(AspectDBModel).where(
                 AspectDBModel.id == aspect_id,
@@ -199,14 +183,10 @@ class IntentRepository:
         return self._to_aspect_domain_model(row) if row else None
 
     async def list_aspects_by_intent_id(self, intent_id: int) -> List[Aspect]:
-        result = await self.db.execute(
-            select(AspectDBModel).where(AspectDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(AspectDBModel).where(AspectDBModel.intent_id == intent_id))
         return [self._to_aspect_domain_model(r) for r in result.scalars().all()]
 
-    async def update_aspect(
-        self, intent_id: int, aspect_id: int, aspect: Aspect
-    ) -> Optional[Aspect]:
+    async def update_aspect(self, intent_id: int, aspect_id: int, aspect: Aspect) -> Optional[Aspect]:
         result = await self.db.execute(
             select(AspectDBModel).where(
                 AspectDBModel.id == aspect_id,
@@ -264,9 +244,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_input_domain_model(db)
 
-    async def find_input_by_id(
-        self, intent_id: int, input_id: int
-    ) -> Optional[Input]:
+    async def find_input_by_id(self, intent_id: int, input_id: int) -> Optional[Input]:
         result = await self.db.execute(
             select(InputDBModel).where(
                 InputDBModel.id == input_id,
@@ -277,14 +255,10 @@ class IntentRepository:
         return self._to_input_domain_model(row) if row else None
 
     async def list_inputs_by_intent_id(self, intent_id: int) -> List[Input]:
-        result = await self.db.execute(
-            select(InputDBModel).where(InputDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(InputDBModel).where(InputDBModel.intent_id == intent_id))
         return [self._to_input_domain_model(r) for r in result.scalars().all()]
 
-    async def update_input(
-        self, intent_id: int, input_id: int, entity: Input
-    ) -> Optional[Input]:
+    async def update_input(self, intent_id: int, input_id: int, entity: Input) -> Optional[Input]:
         result = await self.db.execute(
             select(InputDBModel).where(
                 InputDBModel.id == input_id,
@@ -351,9 +325,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_choice_domain_model(db)
 
-    async def find_choice_by_id(
-        self, intent_id: int, choice_id: int
-    ) -> Optional[Choice]:
+    async def find_choice_by_id(self, intent_id: int, choice_id: int) -> Optional[Choice]:
         result = await self.db.execute(
             select(ChoiceDBModel).where(
                 ChoiceDBModel.id == choice_id,
@@ -364,14 +336,10 @@ class IntentRepository:
         return self._to_choice_domain_model(row) if row else None
 
     async def list_choices_by_intent_id(self, intent_id: int) -> List[Choice]:
-        result = await self.db.execute(
-            select(ChoiceDBModel).where(ChoiceDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(ChoiceDBModel).where(ChoiceDBModel.intent_id == intent_id))
         return [self._to_choice_domain_model(r) for r in result.scalars().all()]
 
-    async def update_choice(
-        self, intent_id: int, choice_id: int, entity: Choice
-    ) -> Optional[Choice]:
+    async def update_choice(self, intent_id: int, choice_id: int, entity: Choice) -> Optional[Choice]:
         result = await self.db.execute(
             select(ChoiceDBModel).where(
                 ChoiceDBModel.id == choice_id,
@@ -441,9 +409,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_pitfall_domain_model(db)
 
-    async def find_pitfall_by_id(
-        self, intent_id: int, pitfall_id: int
-    ) -> Optional[Pitfall]:
+    async def find_pitfall_by_id(self, intent_id: int, pitfall_id: int) -> Optional[Pitfall]:
         result = await self.db.execute(
             select(PitfallDBModel).where(
                 PitfallDBModel.id == pitfall_id,
@@ -454,14 +420,10 @@ class IntentRepository:
         return self._to_pitfall_domain_model(row) if row else None
 
     async def list_pitfalls_by_intent_id(self, intent_id: int) -> List[Pitfall]:
-        result = await self.db.execute(
-            select(PitfallDBModel).where(PitfallDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(PitfallDBModel).where(PitfallDBModel.intent_id == intent_id))
         return [self._to_pitfall_domain_model(r) for r in result.scalars().all()]
 
-    async def update_pitfall(
-        self, intent_id: int, pitfall_id: int, entity: Pitfall
-    ) -> Optional[Pitfall]:
+    async def update_pitfall(self, intent_id: int, pitfall_id: int, entity: Pitfall) -> Optional[Pitfall]:
         result = await self.db.execute(
             select(PitfallDBModel).where(
                 PitfallDBModel.id == pitfall_id,
@@ -513,9 +475,7 @@ class IntentRepository:
         )
 
     # --- Assumption ---
-    async def add_assumption(
-        self, intent_id: int, entity: Assumption
-    ) -> Assumption:
+    async def add_assumption(self, intent_id: int, entity: Assumption) -> Assumption:
         await self._ensure_intent_exists(intent_id)
         db = self._to_assumption_db_model(entity)
         db.intent_id = intent_id
@@ -524,9 +484,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_assumption_domain_model(db)
 
-    async def find_assumption_by_id(
-        self, intent_id: int, assumption_id: int
-    ) -> Optional[Assumption]:
+    async def find_assumption_by_id(self, intent_id: int, assumption_id: int) -> Optional[Assumption]:
         result = await self.db.execute(
             select(AssumptionDBModel).where(
                 AssumptionDBModel.id == assumption_id,
@@ -536,21 +494,11 @@ class IntentRepository:
         row = result.scalar_one_or_none()
         return self._to_assumption_domain_model(row) if row else None
 
-    async def list_assumptions_by_intent_id(
-        self, intent_id: int
-    ) -> List[Assumption]:
-        result = await self.db.execute(
-            select(AssumptionDBModel).where(
-                AssumptionDBModel.intent_id == intent_id
-            )
-        )
-        return [
-            self._to_assumption_domain_model(r) for r in result.scalars().all()
-        ]
+    async def list_assumptions_by_intent_id(self, intent_id: int) -> List[Assumption]:
+        result = await self.db.execute(select(AssumptionDBModel).where(AssumptionDBModel.intent_id == intent_id))
+        return [self._to_assumption_domain_model(r) for r in result.scalars().all()]
 
-    async def update_assumption(
-        self, intent_id: int, assumption_id: int, entity: Assumption
-    ) -> Optional[Assumption]:
+    async def update_assumption(self, intent_id: int, assumption_id: int, entity: Assumption) -> Optional[Assumption]:
         result = await self.db.execute(
             select(AssumptionDBModel).where(
                 AssumptionDBModel.id == assumption_id,
@@ -567,9 +515,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_assumption_domain_model(db)
 
-    async def delete_assumption(
-        self, intent_id: int, assumption_id: int
-    ) -> bool:
+    async def delete_assumption(self, intent_id: int, assumption_id: int) -> bool:
         from sqlalchemy import delete as sql_delete
 
         result = await self.db.execute(
@@ -581,9 +527,7 @@ class IntentRepository:
         await self.db.flush()
         return bool(result.rowcount and result.rowcount > 0)
 
-    def _to_assumption_domain_model(
-        self, db: AssumptionDBModel
-    ) -> Assumption:
+    def _to_assumption_domain_model(self, db: AssumptionDBModel) -> Assumption:
         return Assumption(
             id=db.id,
             intent_id=db.intent_id,
@@ -615,9 +559,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_quality_domain_model(db)
 
-    async def find_quality_by_id(
-        self, intent_id: int, quality_id: int
-    ) -> Optional[Quality]:
+    async def find_quality_by_id(self, intent_id: int, quality_id: int) -> Optional[Quality]:
         result = await self.db.execute(
             select(QualityDBModel).where(
                 QualityDBModel.id == quality_id,
@@ -628,14 +570,10 @@ class IntentRepository:
         return self._to_quality_domain_model(row) if row else None
 
     async def list_qualities_by_intent_id(self, intent_id: int) -> List[Quality]:
-        result = await self.db.execute(
-            select(QualityDBModel).where(QualityDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(QualityDBModel).where(QualityDBModel.intent_id == intent_id))
         return [self._to_quality_domain_model(r) for r in result.scalars().all()]
 
-    async def update_quality(
-        self, intent_id: int, quality_id: int, entity: Quality
-    ) -> Optional[Quality]:
+    async def update_quality(self, intent_id: int, quality_id: int, entity: Quality) -> Optional[Quality]:
         result = await self.db.execute(
             select(QualityDBModel).where(
                 QualityDBModel.id == quality_id,
@@ -699,9 +637,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_example_domain_model(db)
 
-    async def find_example_by_id(
-        self, intent_id: int, example_id: int
-    ) -> Optional[Example]:
+    async def find_example_by_id(self, intent_id: int, example_id: int) -> Optional[Example]:
         result = await self.db.execute(
             select(ExampleDBModel).where(
                 ExampleDBModel.id == example_id,
@@ -712,14 +648,10 @@ class IntentRepository:
         return self._to_example_domain_model(row) if row else None
 
     async def list_examples_by_intent_id(self, intent_id: int) -> List[Example]:
-        result = await self.db.execute(
-            select(ExampleDBModel).where(ExampleDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(ExampleDBModel).where(ExampleDBModel.intent_id == intent_id))
         return [self._to_example_domain_model(r) for r in result.scalars().all()]
 
-    async def update_example(
-        self, intent_id: int, example_id: int, entity: Example
-    ) -> Optional[Example]:
+    async def update_example(self, intent_id: int, example_id: int, entity: Example) -> Optional[Example]:
         result = await self.db.execute(
             select(ExampleDBModel).where(
                 ExampleDBModel.id == example_id,
@@ -787,16 +719,12 @@ class IntentRepository:
         from sqlalchemy import func
 
         result = await self.db.execute(
-            select(func.coalesce(func.max(PromptDBModel.version), 0)).where(
-                PromptDBModel.intent_id == intent_id
-            )
+            select(func.coalesce(func.max(PromptDBModel.version), 0)).where(PromptDBModel.intent_id == intent_id)
         )
         row = result.scalar_one_or_none()
         return (row or 0) + 1
 
-    async def find_prompt_by_id(
-        self, intent_id: int, prompt_id: int
-    ) -> Optional[Prompt]:
+    async def find_prompt_by_id(self, intent_id: int, prompt_id: int) -> Optional[Prompt]:
         result = await self.db.execute(
             select(PromptDBModel).where(
                 PromptDBModel.id == prompt_id,
@@ -807,9 +735,7 @@ class IntentRepository:
         return self._to_prompt_domain_model(row) if row else None
 
     async def list_prompts_by_intent_id(self, intent_id: int) -> List[Prompt]:
-        result = await self.db.execute(
-            select(PromptDBModel).where(PromptDBModel.intent_id == intent_id)
-        )
+        result = await self.db.execute(select(PromptDBModel).where(PromptDBModel.intent_id == intent_id))
         return [self._to_prompt_domain_model(r) for r in result.scalars().all()]
 
     def _to_prompt_domain_model(self, db: PromptDBModel) -> Prompt:
@@ -842,9 +768,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_output_domain_model(db)
 
-    async def find_output_by_id(
-        self, prompt_id: int, output_id: int
-    ) -> Optional[Output]:
+    async def find_output_by_id(self, prompt_id: int, output_id: int) -> Optional[Output]:
         result = await self.db.execute(
             select(OutputDBModel).where(
                 OutputDBModel.id == output_id,
@@ -855,16 +779,12 @@ class IntentRepository:
         return self._to_output_domain_model(row) if row else None
 
     async def list_outputs_by_prompt_id(self, prompt_id: int) -> List[Output]:
-        result = await self.db.execute(
-            select(OutputDBModel).where(OutputDBModel.prompt_id == prompt_id)
-        )
+        result = await self.db.execute(select(OutputDBModel).where(OutputDBModel.prompt_id == prompt_id))
         return [self._to_output_domain_model(r) for r in result.scalars().all()]
 
     async def get_prompt_id_for_output(self, output_id: int) -> Optional[int]:
         """Return the prompt_id for an output, or None if output does not exist."""
-        result = await self.db.execute(
-            select(OutputDBModel.prompt_id).where(OutputDBModel.id == output_id)
-        )
+        result = await self.db.execute(select(OutputDBModel.prompt_id).where(OutputDBModel.id == output_id))
         row = result.scalar_one_or_none()
         return int(row[0]) if row else None
 
@@ -896,9 +816,7 @@ class IntentRepository:
         await self.db.refresh(db)
         return self._to_insight_domain_model(db)
 
-    async def find_insight_by_id(
-        self, intent_id: int, insight_id: int
-    ) -> Optional[Insight]:
+    async def find_insight_by_id(self, intent_id: int, insight_id: int) -> Optional[Insight]:
         result = await self.db.execute(
             select(InsightDBModel).where(
                 InsightDBModel.id == insight_id,
@@ -909,16 +827,10 @@ class IntentRepository:
         return self._to_insight_domain_model(row) if row else None
 
     async def list_insights_by_intent_id(self, intent_id: int) -> List[Insight]:
-        result = await self.db.execute(
-            select(InsightDBModel).where(InsightDBModel.intent_id == intent_id)
-        )
-        return [
-            self._to_insight_domain_model(r) for r in result.scalars().all()
-        ]
+        result = await self.db.execute(select(InsightDBModel).where(InsightDBModel.intent_id == intent_id))
+        return [self._to_insight_domain_model(r) for r in result.scalars().all()]
 
-    async def update_insight(
-        self, intent_id: int, insight_id: int, entity: Insight
-    ) -> Optional[Insight]:
+    async def update_insight(self, intent_id: int, insight_id: int, entity: Insight) -> Optional[Insight]:
         result = await self.db.execute(
             select(InsightDBModel).where(
                 InsightDBModel.id == insight_id,
@@ -979,15 +891,11 @@ class IntentRepository:
         )
 
     async def _ensure_intent_exists(self, intent_id: int) -> None:
-        result = await self.db.execute(
-            select(IntentDBModel).where(IntentDBModel.id == intent_id)
-        )
+        result = await self.db.execute(select(IntentDBModel).where(IntentDBModel.id == intent_id))
         if result.scalar_one_or_none() is None:
             raise ValueError(f"Intent with id {intent_id} not found")
 
     async def _ensure_prompt_exists(self, prompt_id: int) -> None:
-        result = await self.db.execute(
-            select(PromptDBModel).where(PromptDBModel.id == prompt_id)
-        )
+        result = await self.db.execute(select(PromptDBModel).where(PromptDBModel.id == prompt_id))
         if result.scalar_one_or_none() is None:
             raise ValueError(f"Prompt with id {prompt_id} not found")

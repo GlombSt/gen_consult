@@ -7,12 +7,11 @@ clients like mcptools get the exact transport behavior they expect.
 
 import os
 
+from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
+from mcp.server.transport_security import TransportSecuritySettings
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import Receive, Scope, Send
-
-from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
-from mcp.server.transport_security import TransportSecuritySettings
 
 from .mcp_server import server
 

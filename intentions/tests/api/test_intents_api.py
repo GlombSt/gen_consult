@@ -104,9 +104,7 @@ class TestUpdateIntentNameEndpoint:
         created_intent = create_response.json()
 
         payload = {"name": "Updated Name"}
-        response = client.patch(
-            f"/intents/{created_intent['id']}/name", json=payload
-        )
+        response = client.patch(f"/intents/{created_intent['id']}/name", json=payload)
 
         assert response.status_code == 200
         data = response.json()
@@ -132,9 +130,7 @@ class TestUpdateIntentNameEndpoint:
         created_intent = create_response.json()
 
         payload = {"name": ""}
-        response = client.patch(
-            f"/intents/{created_intent['id']}/name", json=payload
-        )
+        response = client.patch(f"/intents/{created_intent['id']}/name", json=payload)
         assert response.status_code == 422
 
 
@@ -155,9 +151,7 @@ class TestUpdateIntentDescriptionEndpoint:
         created_intent = create_response.json()
 
         payload = {"description": "Updated description"}
-        response = client.patch(
-            f"/intents/{created_intent['id']}/description", json=payload
-        )
+        response = client.patch(f"/intents/{created_intent['id']}/description", json=payload)
 
         assert response.status_code == 200
         data = response.json()

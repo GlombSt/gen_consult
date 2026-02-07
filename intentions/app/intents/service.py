@@ -10,30 +10,19 @@ from app.shared.events import event_bus
 from app.shared.logging_config import logger
 
 from .events import (
+    InsightCreatedEvent,
     IntentArticulationUpdatedEvent,
     IntentCreatedEvent,
     IntentDeletedEvent,
     IntentUpdatedEvent,
-    InsightCreatedEvent,
     OutputCreatedEvent,
     PromptCreatedEvent,
 )
-from .models import (
-    Assumption,
-    Aspect,
-    Choice,
-    Input,
-    Insight,
-    Output,
-    Pitfall,
-    Prompt,
-    Quality,
-)
-from .models import Intent
+from .models import Aspect, Assumption, Choice, Input, Insight, Intent, Output, Pitfall, Prompt, Quality
 from .repository import IntentRepository
 from .schemas import (
-    AssumptionCreate,
     AspectCreate,
+    AssumptionCreate,
     ChoiceCreate,
     InputCreate,
     InsightCreateRequest,
@@ -106,9 +95,7 @@ def _create_quality_domain(intent_id: int, dto: QualityCreate) -> Quality:
     )
 
 
-async def create_intent(
-    request: IntentCreateRequest, repository: IntentRepository
-) -> Intent:
+async def create_intent(request: IntentCreateRequest, repository: IntentRepository) -> Intent:
     """Create a new intent (V2) with optional articulation (aspects, inputs, etc.)."""
     logger.info(
         "Creating new intent",
@@ -170,9 +157,7 @@ async def delete_intent(intent_id: int, repository: IntentRepository) -> bool:
     return deleted
 
 
-async def get_intent(
-    intent_id: int, repository: IntentRepository
-) -> Optional[Intent]:
+async def get_intent(intent_id: int, repository: IntentRepository) -> Optional[Intent]:
     """Get a specific intent by ID."""
     logger.info("Looking for intent", extra={"intent_id": intent_id})
     intent = await repository.find_by_id(intent_id)
@@ -186,19 +171,13 @@ async def get_intent(
     return intent
 
 
-async def update_intent_name(
-    intent_id: int, name: str, repository: IntentRepository
-) -> Optional[Intent]:
+async def update_intent_name(intent_id: int, name: str, repository: IntentRepository) -> Optional[Intent]:
     """Update an intent's name."""
     logger.info("Updating intent name", extra={"intent_id": intent_id})
-    return await _update_intent_field(
-        intent_id, "name", lambda i: setattr(i, "name", name), repository
-    )
+    return await _update_intent_field(intent_id, "name", lambda i: setattr(i, "name", name), repository)
 
 
-async def update_intent_description(
-    intent_id: int, description: str, repository: IntentRepository
-) -> Optional[Intent]:
+async def update_intent_description(intent_id: int, description: str, repository: IntentRepository) -> Optional[Intent]:
     """Update an intent's description."""
     logger.info("Updating intent description", extra={"intent_id": intent_id})
     return await _update_intent_field(
@@ -222,9 +201,7 @@ async def _update_intent_field(
     update_func(existing)
     updated = await repository.update(intent_id, existing)
     if updated:
-        await event_bus.publish(
-            IntentUpdatedEvent(intent_id=intent_id, field_updated=field_name)
-        )
+        await event_bus.publish(IntentUpdatedEvent(intent_id=intent_id, field_updated=field_name))
         logger.info(
             "Intent updated successfully",
             extra={"intent_id": intent_id, "field": field_name},
@@ -303,9 +280,7 @@ async def add_prompt(
     version = await repository.get_next_prompt_version(intent_id)
     prompt = Prompt(id=None, intent_id=intent_id, content=request.content, version=version)
     created = await repository.add_prompt(intent_id, prompt)
-    await event_bus.publish(
-        PromptCreatedEvent(intent_id=intent_id, prompt_id=created.id, version=created.version)
-    )
+    await event_bus.publish(PromptCreatedEvent(intent_id=intent_id, prompt_id=created.id, version=created.version))
     logger.info("Prompt added", extra={"intent_id": intent_id, "prompt_id": created.id})
     return created
 
@@ -343,28 +318,18 @@ async def add_insight(
     if request.source_prompt_id is not None:
         prompt = await repository.find_prompt_by_id(intent_id, request.source_prompt_id)
         if prompt is None:
-            raise ValueError(
-                f"source_prompt_id {request.source_prompt_id} not found or does not belong to intent"
-            )
+            raise ValueError(f"source_prompt_id {request.source_prompt_id} not found or does not belong to intent")
     if request.source_assumption_id is not None:
-        assumption = await repository.find_assumption_by_id(
-            intent_id, request.source_assumption_id
-        )
+        assumption = await repository.find_assumption_by_id(intent_id, request.source_assumption_id)
         if assumption is None:
-            raise ValueError(
-                f"source_assumption_id {request.source_assumption_id} not found or does not belong to intent"
-            )
+            raise ValueError(f"source_assumption_id {request.source_assumption_id} not found or does not belong to intent")
     if request.source_output_id is not None:
-        output_prompt_id = await repository.get_prompt_id_for_output(
-            request.source_output_id
-        )
+        output_prompt_id = await repository.get_prompt_id_for_output(request.source_output_id)
         if output_prompt_id is None:
             raise ValueError(f"source_output_id {request.source_output_id} not found")
         intent_prompt_ids = [p.id for p in existing.prompts]
         if output_prompt_id not in intent_prompt_ids:
-            raise ValueError(
-                f"source_output_id {request.source_output_id} does not belong to this intent"
-            )
+            raise ValueError(f"source_output_id {request.source_output_id} does not belong to this intent")
 
     insight = Insight(
         id=None,

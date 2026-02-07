@@ -19,8 +19,8 @@ from app.shared.logging_config import logger
 from . import service
 from .repository import IntentRepository
 from .schemas import (
-    AssumptionResponse,
     AspectResponse,
+    AssumptionResponse,
     ChoiceResponse,
     InputResponse,
     InsightCreateRequest,
@@ -67,38 +67,14 @@ def _intent_to_dict_for_mcp(intent) -> dict[str, Any]:
         description=intent.description,
         created_at=intent.created_at,
         updated_at=intent.updated_at,
-        aspects=[
-            AspectResponse(id=a.id, name=a.name, description=a.description)
-            for a in intent.aspects
-        ],
-        inputs=[
-            InputResponse(id=i.id, name=i.name, description=i.description)
-            for i in intent.inputs
-        ],
-        choices=[
-            ChoiceResponse(id=c.id, name=c.name, description=c.description)
-            for c in intent.choices
-        ],
-        pitfalls=[
-            PitfallResponse(id=p.id, description=p.description)
-            for p in intent.pitfalls
-        ],
-        assumptions=[
-            AssumptionResponse(id=a.id, description=a.description)
-            for a in intent.assumptions
-        ],
-        qualities=[
-            QualityResponse(id=q.id, criterion=q.criterion, priority=q.priority)
-            for q in intent.qualities
-        ],
-        prompts=[
-            PromptResponse(id=p.id, version=p.version, content=p.content)
-            for p in intent.prompts
-        ],
-        insights=[
-            InsightResponse(id=i.id, content=i.content, status=i.status)
-            for i in intent.insights
-        ],
+        aspects=[AspectResponse(id=a.id, name=a.name, description=a.description) for a in intent.aspects],
+        inputs=[InputResponse(id=i.id, name=i.name, description=i.description) for i in intent.inputs],
+        choices=[ChoiceResponse(id=c.id, name=c.name, description=c.description) for c in intent.choices],
+        pitfalls=[PitfallResponse(id=p.id, description=p.description) for p in intent.pitfalls],
+        assumptions=[AssumptionResponse(id=a.id, description=a.description) for a in intent.assumptions],
+        qualities=[QualityResponse(id=q.id, criterion=q.criterion, priority=q.priority) for q in intent.qualities],
+        prompts=[PromptResponse(id=p.id, version=p.version, content=p.content) for p in intent.prompts],
+        insights=[InsightResponse(id=i.id, content=i.content, status=i.status) for i in intent.insights],
     )
     return response.model_dump(mode="json")
 
@@ -108,9 +84,7 @@ async def list_tools() -> list[types.Tool]:
     """List available MCP tools for intents operations (V2). Intent as composition; no separate articulation-entity tools."""
     create_intent_schema = _pydantic_to_json_schema(IntentCreateRequest)
     update_name_schema = _pydantic_to_json_schema(IntentUpdateNameRequest)
-    update_description_schema = _pydantic_to_json_schema(
-        IntentUpdateDescriptionRequest
-    )
+    update_description_schema = _pydantic_to_json_schema(IntentUpdateDescriptionRequest)
     articulation_schema = _pydantic_to_json_schema(IntentArticulationUpdateRequest)
     prompt_create_schema = _pydantic_to_json_schema(PromptCreateRequest)
     output_create_schema = _pydantic_to_json_schema(OutputCreateRequest)
@@ -221,18 +195,12 @@ async def list_tools() -> list[types.Tool]:
 
 
 @server.call_tool()
-async def call_tool(
-    name: str, arguments: dict[str, Any]
-) -> list[types.TextContent]:
+async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextContent]:
     """Handle MCP tool calls by routing to appropriate service functions (V2)."""
     repository, session = await _get_repository()
 
     def _intent_result(intent) -> list[types.TextContent]:
-        return [
-            types.TextContent(
-                type="text", text=json.dumps(_intent_to_dict_for_mcp(intent), indent=2)
-            )
-        ]
+        return [types.TextContent(type="text", text=json.dumps(_intent_to_dict_for_mcp(intent), indent=2))]
 
     try:
         if name == "create_intent":
@@ -253,9 +221,7 @@ async def call_tool(
         elif name == "list_intents":
             intents = await service.list_intents(repository)
             result_list = [_intent_to_dict_for_mcp(i) for i in intents]
-            return [
-                types.TextContent(type="text", text=json.dumps(result_list, indent=2))
-            ]
+            return [types.TextContent(type="text", text=json.dumps(result_list, indent=2))]
 
         elif name == "delete_intent":
             intent_id = arguments.get("intent_id")
@@ -275,9 +241,7 @@ async def call_tool(
             name_arg = arguments.get("name")
             if intent_id is None or name_arg is None:
                 raise ValueError("intent_id and name are required")
-            intent_result = await service.update_intent_name(
-                intent_id, str(name_arg), repository
-            )
+            intent_result = await service.update_intent_name(intent_id, str(name_arg), repository)
             if intent_result is None:
                 return [types.TextContent(type="text", text="Intent not found")]
             await session.commit()
@@ -288,9 +252,7 @@ async def call_tool(
             description = arguments.get("description")
             if intent_id is None or description is None:
                 raise ValueError("intent_id and description are required")
-            intent_result = await service.update_intent_description(
-                intent_id, description, repository
-            )
+            intent_result = await service.update_intent_description(intent_id, description, repository)
             if intent_result is None:
                 return [types.TextContent(type="text", text="Intent not found")]
             await session.commit()
@@ -313,9 +275,7 @@ async def call_tool(
                 if k in arguments
             }
             payload = IntentArticulationUpdateRequest(**payload_dict)
-            intent_result = await service.update_intent_articulation(
-                intent_id, payload, repository
-            )
+            intent_result = await service.update_intent_articulation(intent_id, payload, repository)
             if intent_result is None:
                 return [types.TextContent(type="text", text="Intent not found")]
             await session.commit()

@@ -8,18 +8,7 @@ from datetime import datetime
 
 import pytest
 
-from app.intents.models import (
-    Aspect,
-    Assumption,
-    Choice,
-    Example,
-    Insight,
-    Input,
-    Output,
-    Pitfall,
-    Prompt,
-    Quality,
-)
+from app.intents.models import Aspect, Assumption, Choice, Example, Input, Insight, Output, Pitfall, Prompt, Quality
 from app.intents.repository import IntentRepository
 from tests.fixtures.intents import create_test_intent
 
@@ -187,14 +176,10 @@ class TestIntentRepositoryUpdate:
     """Test IntentRepository.update method."""
 
     @pytest.mark.asyncio
-    async def test_update_intent_when_exists_returns_updated_intent(
-        self, test_db_session
-    ):
+    async def test_update_intent_when_exists_returns_updated_intent(self, test_db_session):
         """Test updating an existing intent."""
         repo = IntentRepository(test_db_session)
-        intent = create_test_intent(
-            id=None, name="Old Name", description="Old description"
-        )
+        intent = create_test_intent(id=None, name="Old Name", description="Old description")
         created = await repo.create(intent)
         await test_db_session.commit()
 
@@ -213,9 +198,7 @@ class TestIntentRepositoryUpdate:
     async def test_update_intent_when_not_exists_returns_none(self, test_db_session):
         """Test updating a non-existent intent."""
         repo = IntentRepository(test_db_session)
-        intent = create_test_intent(
-            id=999, name="Test", description="Test description"
-        )
+        intent = create_test_intent(id=999, name="Test", description="Test description")
 
         result = await repo.update(999, intent)
 
@@ -263,9 +246,7 @@ class TestIntentRepositoryDelete:
         assert found is None
 
     @pytest.mark.asyncio
-    async def test_delete_intent_when_not_exists_returns_false(
-        self, test_db_session
-    ):
+    async def test_delete_intent_when_not_exists_returns_false(self, test_db_session):
         """Test deleting a non-existent intent."""
         repo = IntentRepository(test_db_session)
         result = await repo.delete(999)
@@ -363,9 +344,7 @@ class TestInputRepository:
         added.name = "NewName"
         added.description = "New desc"
 
-        updated = await repo.update_input(
-            created_intent.id, added.id, added
-        )
+        updated = await repo.update_input(created_intent.id, added.id, added)
         await test_db_session.commit()
         assert updated is not None
         assert updated.name == "NewName"

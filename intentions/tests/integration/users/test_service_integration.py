@@ -11,17 +11,8 @@ import pytest
 from app.shared.events import EventBus
 from app.users.events import UserCreatedEvent
 from app.users.repository import UserRepository
-from app.users.service import (
-    create_user,
-    delete_user,
-    get_all_users,
-    get_user,
-    update_user,
-)
-from tests.fixtures.users import (
-    create_test_user_create_request,
-    create_test_user_update_request,
-)
+from app.users.service import create_user, delete_user, get_all_users, get_user, update_user
+from tests.fixtures.users import create_test_user_create_request, create_test_user_update_request
 
 
 @pytest.mark.integration

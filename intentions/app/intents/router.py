@@ -16,12 +16,12 @@ from .schemas import (
     AssumptionResponse,
     ChoiceResponse,
     ExampleResponse,
+    InputResponse,
     InsightResponse,
     IntentCreateRequest,
     IntentResponse,
     IntentUpdateDescriptionRequest,
     IntentUpdateNameRequest,
-    InputResponse,
     PitfallResponse,
     PromptResponse,
     QualityResponse,
@@ -63,9 +63,7 @@ async def create_intent(
     },
 )
 async def get_intent(
-    intent_id: int = Path(
-        ..., description="The unique identifier of the intent to retrieve"
-    ),
+    intent_id: int = Path(..., description="The unique identifier of the intent to retrieve"),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Get a specific intent by ID."""
@@ -86,9 +84,7 @@ async def get_intent(
     },
 )
 async def update_intent_name(
-    intent_id: int = Path(
-        ..., description="The unique identifier of the intent to update"
-    ),
+    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateNameRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
@@ -110,16 +106,12 @@ async def update_intent_name(
     },
 )
 async def update_intent_description(
-    intent_id: int = Path(
-        ..., description="The unique identifier of the intent to update"
-    ),
+    intent_id: int = Path(..., description="The unique identifier of the intent to update"),
     request: IntentUpdateDescriptionRequest = Body(...),
     repository: IntentRepository = Depends(get_intent_repository),
 ):
     """Update an intent's description."""
-    intent = await service.update_intent_description(
-        intent_id, request.description, repository
-    )
+    intent = await service.update_intent_description(intent_id, request.description, repository)
     if not intent:
         raise HTTPException(status_code=404, detail="Intent not found")
     return _to_intent_response(intent)
@@ -133,45 +125,13 @@ def _to_intent_response(intent) -> IntentResponse:
         description=intent.description,
         created_at=intent.created_at,
         updated_at=intent.updated_at,
-        aspects=[
-            AspectResponse(id=a.id, name=a.name, description=a.description)
-            for a in intent.aspects
-        ],
-        inputs=[
-            InputResponse(
-                id=i.id, name=i.name, description=i.description
-            )
-            for i in intent.inputs
-        ],
-        choices=[
-            ChoiceResponse(
-                id=c.id, name=c.name, description=c.description
-            )
-            for c in intent.choices
-        ],
-        pitfalls=[
-            PitfallResponse(id=p.id, description=p.description)
-            for p in intent.pitfalls
-        ],
-        assumptions=[
-            AssumptionResponse(id=a.id, description=a.description)
-            for a in intent.assumptions
-        ],
-        qualities=[
-            QualityResponse(
-                id=q.id, criterion=q.criterion, priority=q.priority
-            )
-            for q in intent.qualities
-        ],
-        examples=[
-            ExampleResponse(id=e.id, sample=e.sample) for e in intent.examples
-        ],
-        prompts=[
-            PromptResponse(id=p.id, version=p.version, content=p.content)
-            for p in intent.prompts
-        ],
-        insights=[
-            InsightResponse(id=i.id, content=i.content, status=i.status)
-            for i in intent.insights
-        ],
+        aspects=[AspectResponse(id=a.id, name=a.name, description=a.description) for a in intent.aspects],
+        inputs=[InputResponse(id=i.id, name=i.name, description=i.description) for i in intent.inputs],
+        choices=[ChoiceResponse(id=c.id, name=c.name, description=c.description) for c in intent.choices],
+        pitfalls=[PitfallResponse(id=p.id, description=p.description) for p in intent.pitfalls],
+        assumptions=[AssumptionResponse(id=a.id, description=a.description) for a in intent.assumptions],
+        qualities=[QualityResponse(id=q.id, criterion=q.criterion, priority=q.priority) for q in intent.qualities],
+        examples=[ExampleResponse(id=e.id, sample=e.sample) for e in intent.examples],
+        prompts=[PromptResponse(id=p.id, version=p.version, content=p.content) for p in intent.prompts],
+        insights=[InsightResponse(id=i.id, content=i.content, status=i.status) for i in intent.insights],
     )
