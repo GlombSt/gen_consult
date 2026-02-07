@@ -105,7 +105,7 @@ def create_application() -> FastAPI:
 
     # MCP Streamable HTTP endpoint.
     # Handle POST /mcp directly to avoid 307 redirects from mounted sub-app.
-    app.add_api_route("/mcp", mcp_sdk_http.mcp_sdk_request_handler, methods=["POST"])
+    app.add_api_route("/mcp", mcp_sdk_http.mcp_sdk_request_handler, methods=["GET", "POST"])
     app.mount("/mcp", mcp_sdk_http.mcp_sdk_asgi_app)
 
     return app
