@@ -23,4 +23,3 @@ The CI/CD workflows are configured to run based on changed files:
 - Frontend workflow file changes
 - Push to `main` or `develop`
 - Pull request to `main` or `develop`
-
