@@ -35,10 +35,19 @@ IN_CI=false
 [ -n "$GITHUB_ACTIONS" ] && IN_CI=true
 [ -n "$CI" ] && IN_CI=true
 
+# Allow forcing full lint in CI (useful for timing/diagnostics)
+FULL_LINT=false
+[ "${FULL_LINT:-}" = "true" ] && FULL_LINT=true
+[ "${CI_FULL_LINT:-}" = "true" ] && FULL_LINT=true
+
 # Resolve list of Python files to lint (run from intentions/).
 # In CI: only changed .py under app/ or tests/; fallback full tree.
 get_py_targets() {
     local files=""
+    if [ "$FULL_LINT" = true ]; then
+        echo "app/ tests/"
+        return
+    fi
     if [ "$IN_CI" = true ]; then
         local base="${GITHUB_BASE_REF:-main}"
         local ref="origin/$base"
