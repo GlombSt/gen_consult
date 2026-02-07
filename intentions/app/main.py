@@ -10,7 +10,11 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.intents import mcp_sdk_http
-from app.intents.mcp_sse import router as mcp_sse_router, sse_endpoint as mcp_sse_endpoint
+from app.intents.mcp_sse import (
+    router as mcp_sse_router,
+    sse_endpoint as mcp_sse_endpoint,
+    sse_message_endpoint as mcp_sse_message_endpoint,
+)
 from app.intents.router import router as intents_router
 from app.shared.database import close_db, init_db
 from app.shared.dependencies import verify_api_key
@@ -106,8 +110,9 @@ def create_application() -> FastAPI:
 
     # MCP Streamable HTTP endpoint.
     # Handle POST /mcp directly to avoid 307 redirects from mounted sub-app.
-    # Route GET /mcp to legacy SSE for mcptools fallback behavior.
+    # Route GET /mcp and POST /mcp/message to legacy SSE for mcptools fallback behavior.
     app.add_api_route("/mcp", mcp_sse_endpoint, methods=["GET"])
+    app.add_api_route("/mcp/message", mcp_sse_message_endpoint, methods=["POST"])
     app.add_api_route("/mcp", mcp_sdk_http.mcp_sdk_request_handler, methods=["POST"])
     app.mount("/mcp", mcp_sdk_http.mcp_sdk_asgi_app)
     app.include_router(mcp_sse_router)
